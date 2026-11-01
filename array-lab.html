@@ -1,0 +1,891 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Python Array Lab</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a notebook on graph paper. One column of lessons, each with a live panel of numbered boxes; steppers split into picture + code. */
+:root {
+  --paper: #EEF2F5; --grid: rgba(20, 60, 110, 0.06);
+  --surface: #FFFFFF; --sunk: #F4F7FA;
+  --ink: #14213A; --muted: #586980; --line: #D3DCE5; --line-strong: #A6B5C5;
+  --accent: #0F766E; --accent-soft: #D3EEEA; --on-accent: #FFFFFF;
+  --hot: #B86F00; --hot-soft: #FCEBC8;
+  --blue: #2F5FD0; --blue-soft: #DCE6FB;
+  --good: #1D8448; --good-soft: #D5EFDF;
+  --bad: #C2413A; --bad-soft: #F8DCDA;
+  --cover: #B4C1CE;
+  --f-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0D141C; --grid: rgba(140, 180, 230, 0.05);
+    --surface: #151F2B; --sunk: #101923;
+    --ink: #E4ECF4; --muted: #93A3B7; --line: #26354A; --line-strong: #40536B;
+    --accent: #3CC2B4; --accent-soft: #123F3B; --on-accent: #04201C;
+    --hot: #F0B547; --hot-soft: #45330F;
+    --blue: #8AABF6; --blue-soft: #1C2C50;
+    --good: #4CC983; --good-soft: #123A25;
+    --bad: #F07A72; --bad-soft: #4A1E1C;
+    --cover: #4A5B70;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0D141C; --grid: rgba(140, 180, 230, 0.05);
+  --surface: #151F2B; --sunk: #101923;
+  --ink: #E4ECF4; --muted: #93A3B7; --line: #26354A; --line-strong: #40536B;
+  --accent: #3CC2B4; --accent-soft: #123F3B; --on-accent: #04201C;
+  --hot: #F0B547; --hot-soft: #45330F;
+  --blue: #8AABF6; --blue-soft: #1C2C50;
+  --good: #4CC983; --good-soft: #123A25;
+  --bad: #F07A72; --bad-soft: #4A1E1C;
+  --cover: #4A5B70;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 24px 24px;
+  color: var(--ink);
+  font: 16px/1.6 var(--f-body);
+}
+.wrap {
+  max-width: 1060px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 40px 80px;
+  display: flex; flex-direction: column; gap: 56px;
+}
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; line-height: 1.1; }
+h1 { font-size: clamp(2.4rem, 6vw, 3.6rem); font-weight: 800; letter-spacing: -0.02em; }
+h2 { font-size: clamp(1.6rem, 3.6vw, 2.1rem); font-weight: 800; letter-spacing: -0.01em; }
+h3 { font-size: 1.1rem; font-weight: 600; }
+p { margin: 0; max-width: 66ch; }
+code, .mono { font-family: var(--f-mono); font-size: 0.9em; }
+p code, li code, .explain code, .out code {
+  background: var(--sunk); border: 1px solid var(--line); border-radius: 5px; padding: 1px 5px;
+}
+a { color: var(--accent); }
+button, input { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+/* Hero */
+.hero { display: flex; flex-direction: column; gap: 18px; }
+.eyebrow { font: 600 12px/1 var(--f-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+.lead { font-size: 1.15rem; color: var(--muted); }
+.lead b { color: var(--ink); }
+.arr-card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+  padding: 18px; display: flex; flex-direction: column; gap: 12px; max-width: 720px;
+  box-shadow: 0 1px 0 var(--line);
+}
+.arr-card label { font: 600 13px var(--f-mono); color: var(--muted); }
+.arr-line { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.arr-line .py { font: 600 18px var(--f-mono); }
+#arr-input {
+  flex: 1 1 220px; min-width: 0; font: 600 18px var(--f-mono);
+  padding: 9px 12px; border: 1.5px solid var(--line-strong); border-radius: 9px; background: var(--sunk);
+}
+.chips { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.chips .hint { font-size: 13px; color: var(--muted); }
+.chip {
+  font: 13px var(--f-mono); padding: 5px 10px; border-radius: 999px;
+  border: 1px solid var(--line-strong); background: var(--surface); cursor: pointer;
+}
+.chip:hover { border-color: var(--accent); color: var(--accent); }
+.err { color: var(--bad); font-size: 14px; min-height: 1.2em; }
+
+/* Route map */
+.route { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; padding: 0; margin: 0; list-style: none; }
+.route a {
+  display: flex; flex-direction: column; gap: 2px; text-decoration: none; color: var(--ink);
+  padding: 10px 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); height: 100%;
+}
+.route a:hover { border-color: var(--accent); }
+.route .n { font: 600 11px var(--f-mono); color: var(--muted); letter-spacing: 0.06em; }
+.route .t { font-weight: 700; line-height: 1.25; }
+
+/* Lessons */
+.lesson { display: flex; flex-direction: column; gap: 18px; scroll-margin-top: 16px; }
+.lhead { display: flex; gap: 14px; align-items: flex-start; }
+.num {
+  font: 800 15px/1 var(--f-mono); color: var(--on-accent); background: var(--accent);
+  border-radius: 8px; padding: 8px 9px; flex: none; margin-top: 4px;
+}
+.level { font: 600 11px/1 var(--f-mono); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 6px; }
+.level.basic { color: var(--blue); }
+.level.core { color: var(--accent); }
+.level.adv { color: var(--hot); }
+.idea { border-left: 3px solid var(--accent); padding: 4px 0 4px 14px; font-size: 1.05rem; }
+.tip { font-size: 14px; color: var(--muted); }
+.tip b { color: var(--ink); }
+
+.panel {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+  padding: 18px; display: flex; flex-direction: column; gap: 14px; min-width: 0;
+}
+.panel-title { font: 600 12px var(--f-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.controls-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.field { display: flex; flex-direction: column; gap: 4px; }
+.field label { font: 12px var(--f-mono); color: var(--muted); }
+.field input[type=text], .field input[type=number] {
+  width: 84px; font: 600 16px var(--f-mono); padding: 6px 8px;
+  border: 1.5px solid var(--line-strong); border-radius: 8px; background: var(--sunk);
+}
+.field input[type=range] { width: 160px; accent-color: var(--accent); }
+.toggle { display: inline-flex; gap: 6px; align-items: center; font-size: 14px; cursor: pointer; }
+.toggle input { accent-color: var(--accent); width: 16px; height: 16px; }
+.out { font: 15px/1.7 var(--f-body); }
+.out .big { font: 600 18px var(--f-mono); }
+.out .ok { color: var(--good); font-weight: 700; }
+.out .no { color: var(--bad); font-weight: 700; }
+
+/* Cells */
+.viz { display: flex; flex-direction: column; gap: 10px; overflow-x: auto; padding: 4px 2px 8px; }
+.row { display: flex; align-items: center; gap: 10px; }
+.rlabel { width: 58px; flex: none; text-align: right; font: 600 12px var(--f-mono); color: var(--muted); }
+.cells { display: flex; gap: 6px; }
+.cell { display: flex; flex-direction: column; align-items: center; gap: 3px; background: none; border: 0; padding: 0; }
+button.cell { cursor: pointer; }
+.cell .top, .cell .idx { font: 11px/14px var(--f-mono); height: 14px; color: var(--muted); white-space: nowrap; }
+.cell .top { color: var(--hot); font-weight: 600; }
+.box {
+  min-width: 46px; height: 46px; padding: 0 8px; display: grid; place-items: center;
+  font: 600 17px var(--f-mono); font-variant-numeric: tabular-nums;
+  border: 1.5px solid var(--line-strong); border-radius: 9px; background: var(--surface);
+  transition: background-color .2s, border-color .2s, transform .2s;
+}
+button.cell:hover .box { border-color: var(--accent); transform: translateY(-2px); }
+.empty .box { border-style: dashed; border-color: var(--line); background: transparent; }
+.dim .box { opacity: 0.35; }
+.span .box { background: var(--accent-soft); border-color: var(--accent); }
+.edge .box { border-width: 2.5px; }
+.hot .box { background: var(--hot-soft); border-color: var(--hot); border-width: 2.5px; }
+.src .box { border-color: var(--accent); border-width: 2.5px; border-style: dashed; }
+.new .box { background: var(--accent); border-color: var(--accent); color: var(--on-accent); animation: pop .35s ease-out; }
+.pick .box { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.left .box { background: var(--blue-soft); border-color: var(--blue); }
+.right .box { background: var(--hot-soft); border-color: var(--hot); }
+.plus .box { background: var(--good-soft); border-color: var(--good); border-width: 2.5px; }
+.minus .box { background: var(--bad-soft); border-color: var(--bad); border-width: 2.5px; }
+.best .box { box-shadow: 0 0 0 3px var(--surface), 0 0 0 5px var(--good); }
+.cover .box {
+  color: var(--muted); text-decoration: line-through; border-style: dashed;
+  background: repeating-linear-gradient(45deg, var(--cover) 0 3px, transparent 3px 8px);
+}
+@keyframes pop { from { transform: scale(0.7); } 60% { transform: scale(1.12); } to { transform: scale(1); } }
+
+/* Key */
+.key { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 13px; color: var(--muted); }
+.key span { display: inline-flex; align-items: center; gap: 6px; }
+.key i { width: 14px; height: 14px; border-radius: 4px; border: 1.5px solid; display: inline-block; }
+.k-span { background: var(--accent-soft); border-color: var(--accent) !important; }
+.k-hot { background: var(--hot-soft); border-color: var(--hot) !important; }
+.k-new { background: var(--accent); border-color: var(--accent) !important; }
+.k-src { border-style: dashed !important; border-color: var(--accent) !important; }
+.k-left { background: var(--blue-soft); border-color: var(--blue) !important; }
+.k-right { background: var(--hot-soft); border-color: var(--hot) !important; }
+.k-cover { background: repeating-linear-gradient(45deg, var(--cover) 0 2px, transparent 2px 5px); border-color: var(--muted) !important; border-style: dashed !important; }
+.k-best { border-color: var(--good) !important; border-width: 2.5px !important; }
+.k-plus { background: var(--good-soft); border-color: var(--good) !important; }
+.k-minus { background: var(--bad-soft); border-color: var(--bad) !important; }
+.t-left { color: var(--blue); font-weight: 700; }
+.t-right { color: var(--hot); font-weight: 700; }
+.t-acc { color: var(--accent); font-weight: 700; }
+.t-good { color: var(--good); font-weight: 700; }
+.t-bad { color: var(--bad); font-weight: 700; }
+
+/* Stepper */
+.stepper {
+  display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); gap: 16px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px;
+}
+.st-main { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.explain {
+  background: var(--sunk); border: 1px solid var(--line); border-radius: 10px;
+  padding: 12px 14px; min-height: 6.5em; line-height: 1.65;
+}
+.st-code { min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.code-head { font: 600 11px var(--f-mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+pre.code {
+  margin: 0; background: var(--sunk); border: 1px solid var(--line); border-radius: 10px;
+  padding: 10px 0; overflow-x: auto; font: 13px/1.75 var(--f-mono);
+}
+.ln { padding: 0 14px 0 11px; border-left: 3px solid transparent; white-space: pre; }
+.ln.cur { background: var(--accent-soft); border-left-color: var(--accent); }
+.kw { color: var(--accent); font-weight: 600; }
+.cm { color: var(--muted); font-style: italic; }
+.controls { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.btn {
+  padding: 8px 14px; border-radius: 9px; border: 1.5px solid var(--line-strong);
+  background: var(--surface); cursor: pointer; font-weight: 700; font-size: 14px;
+}
+.btn:hover { border-color: var(--accent); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.btn:disabled { opacity: 0.4; cursor: default; }
+.controls input[type=range] { flex: 1 1 140px; min-width: 100px; accent-color: var(--accent); }
+.count { font: 13px var(--f-mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+
+.printed { display: flex; flex-wrap: wrap; gap: 6px; }
+.printed span {
+  font: 12px var(--f-mono); padding: 3px 8px; border-radius: 6px;
+  background: var(--sunk); border: 1px solid var(--line);
+}
+.printed span.latest { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+.stats { display: flex; gap: 10px; flex-wrap: wrap; }
+.stats div { display: flex; flex-direction: column; padding: 8px 14px; border-radius: 10px; border: 1px solid var(--line); background: var(--sunk); min-width: 120px; }
+.stats span { font: 11px var(--f-mono); text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+.stats b { font: 700 22px var(--f-mono); }
+.stats small { font: 12px var(--f-mono); color: var(--muted); }
+.stats .g b { color: var(--good); }
+
+table.compare { border-collapse: collapse; width: 100%; font-size: 14px; }
+table.compare th, table.compare td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+table.compare th { font: 600 12px var(--f-mono); color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.scroll-x { overflow-x: auto; }
+
+footer { color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); padding-top: 20px; }
+
+@media (max-width: 760px) {
+  .stepper { grid-template-columns: minmax(0, 1fr); }
+  .wrap { gap: 44px; padding-block: 28px 60px; }
+  .box { min-width: 40px; height: 40px; font-size: 15px; }
+  .rlabel { width: 46px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .box { transition: none; }
+  .new .box { animation: none; }
+  html { scroll-behavior: auto; }
+}
+</style>
+
+<div class="wrap">
+
+  <header class="hero">
+    <p class="eyebrow">Python · lists, from first box to Kadane</p>
+    <h1>Python Array Lab</h1>
+    <p class="lead">Every box on this page is live. <b>Change the array once</b> and all seven lessons redraw with your numbers. Click boxes, drag sliders, and press <b>Next</b> to watch each algorithm run one line at a time.</p>
+    <div class="arr-card">
+      <label for="arr-input">YOUR ARRAY (up to 10 whole numbers)</label>
+      <div class="arr-line">
+        <span class="py">arr =</span>
+        <input id="arr-input" type="text" value="3, 1, 4, 2, 5" spellcheck="false" autocomplete="off">
+        <button class="btn primary" id="arr-apply" type="button">Use this array</button>
+      </div>
+      <div class="chips">
+        <span class="hint">Try:</span>
+        <button class="chip" type="button" data-arr="3, 1, 4, 2, 5">[3, 1, 4, 2, 5]</button>
+        <button class="chip" type="button" data-arr="1, 2, 3, 4">[1, 2, 3, 4]</button>
+        <button class="chip" type="button" data-arr="-2, 1, -3, 4, -1, 2, 1, -5, 4">[-2, 1, -3, 4, -1, 2, 1, -5, 4]</button>
+      </div>
+      <p class="err" id="arr-err" role="alert"></p>
+    </div>
+  </header>
+
+  <nav aria-label="Lessons">
+    <ol class="route">
+      <li><a href="#index"><span class="n">01 · BASIC</span><span class="t">Boxes &amp; index</span></a></li>
+      <li><a href="#slice"><span class="n">02 · BASIC</span><span class="t">Slicing</span></a></li>
+      <li><a href="#subarray"><span class="n">03 · CORE</span><span class="t">Subarray</span></a></li>
+      <li><a href="#prefix"><span class="n">04 · CORE</span><span class="t">Prefix sum</span></a></li>
+      <li><a href="#suffix"><span class="n">05 · CORE</span><span class="t">Suffix sum</span></a></li>
+      <li><a href="#product"><span class="n">06 · ADVANCED</span><span class="t">Product except self</span></a></li>
+      <li><a href="#kadane"><span class="n">07 · ADVANCED</span><span class="t">Max subarray (Kadane)</span></a></li>
+    </ol>
+  </nav>
+
+  <!-- 1 -->
+  <section class="lesson" id="index">
+    <div class="lhead"><span class="num">01</span><div><p class="level basic">Basic</p><h2>Boxes and index numbers</h2></div></div>
+    <p class="idea"><strong>Key idea:</strong> a list is a row of boxes. Each box has a number called its <b>index</b>, and counting starts at <code>0</code>, not 1.</p>
+    <div class="panel">
+      <div class="controls-row">
+        <label class="toggle"><input type="checkbox" id="idx-neg" checked> Show negative index (counts from the end)</label>
+        <div class="field"><label for="idx-try">Try any index</label><input id="idx-try" type="number" placeholder="e.g. -1"></div>
+      </div>
+      <div class="viz" id="idx-viz"></div>
+      <div class="out" id="idx-out" aria-live="polite"></div>
+    </div>
+    <p class="tip"><b>Remember:</b> the first box is <code>arr[0]</code> and the last box is <code>arr[len(arr) - 1]</code>, which you can also write as <code>arr[-1]</code>. Asking for a box that doesn't exist gives <code>IndexError</code>.</p>
+  </section>
+
+  <!-- 2 -->
+  <section class="lesson" id="slice">
+    <div class="lhead"><span class="num">02</span><div><p class="level basic">Basic</p><h2>Slicing: taking a piece</h2></div></div>
+    <p class="idea"><strong>Key idea:</strong> <code>arr[start:stop:step]</code> walks from <code>start</code> and stops <b>before</b> <code>stop</code>. Leave a field empty to use Python's default.</p>
+    <div class="panel">
+      <div class="controls-row">
+        <div class="field"><label for="sl-start">start</label><input id="sl-start" type="text" inputmode="text" value="1" spellcheck="false"></div>
+        <div class="field"><label for="sl-stop">stop</label><input id="sl-stop" type="text" value="4" spellcheck="false"></div>
+        <div class="field"><label for="sl-step">step</label><input id="sl-step" type="text" value="" placeholder="1" spellcheck="false"></div>
+      </div>
+      <div class="chips" id="sl-presets">
+        <span class="hint">Presets:</span>
+        <button class="chip" type="button" data-s="1,4,">[1:4]</button>
+        <button class="chip" type="button" data-s=",3,">[:3]</button>
+        <button class="chip" type="button" data-s="3,,">[3:]</button>
+        <button class="chip" type="button" data-s="-2,,">[-2:]</button>
+        <button class="chip" type="button" data-s=",,2">[::2]</button>
+        <button class="chip" type="button" data-s=",,-1">[::-1]</button>
+      </div>
+      <div class="viz" id="sl-viz"></div>
+      <div class="out" id="sl-out" aria-live="polite"></div>
+    </div>
+    <p class="tip"><b>Remember:</b> a slice never raises <code>IndexError</code>. If <code>stop</code> is past the end, Python just stops at the end. The small orange numbers above the boxes show the order the slice picks them in.</p>
+  </section>
+
+  <!-- 3 -->
+  <section class="lesson" id="subarray">
+    <div class="lhead"><span class="num">03</span><div><p class="level core">Core</p><h2>Subarray: a piece with no gaps</h2></div></div>
+    <p class="idea"><strong>Key idea:</strong> a subarray is a <b>continuous</b> run of boxes. Skip even one box in the middle and it stops being a subarray.</p>
+    <div class="panel">
+      <p class="panel-title">Pick boxes and see what you made</p>
+      <div class="viz" id="sub-viz"></div>
+      <div class="out" id="sub-out" aria-live="polite"></div>
+      <div><button class="btn" type="button" id="sub-clear">Clear selection</button></div>
+    </div>
+    <div class="scroll-x">
+      <table class="compare">
+        <thead><tr><th>Term</th><th>No gaps?</th><th>Same order?</th><th>Example from [1, 2, 3, 4]</th></tr></thead>
+        <tbody>
+          <tr><td><b>Subarray</b></td><td>Yes</td><td>Yes</td><td><code>[2, 3]</code></td></tr>
+          <tr><td><b>Subsequence</b></td><td>Gaps allowed</td><td>Yes</td><td><code>[1, 3]</code></td></tr>
+          <tr><td><b>Subset</b></td><td>Gaps allowed</td><td>Order doesn't matter</td><td><code>{3, 1}</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h3>Watch the nested loop list every subarray</h3>
+    <p>The outer loop picks where the piece <b>starts</b>. The inner loop stretches the <b>end</b> one box at a time.</p>
+    <div class="stepper" id="st-all"></div>
+  </section>
+
+  <!-- 4 -->
+  <section class="lesson" id="prefix">
+    <div class="lhead"><span class="num">04</span><div><p class="level core">Core</p><h2>Prefix sum: running total from the left</h2></div></div>
+    <p class="idea"><strong>Key idea:</strong> <code>prefix[i]</code> is the sum of <code>arr[0]</code> up to <code>arr[i]</code>. Build each one from the one before it: <code>prefix[i] = prefix[i-1] + arr[i]</code>.</p>
+    <div class="key">
+      <span><i class="k-span"></i>boxes added so far</span>
+      <span><i class="k-hot"></i>box being added now</span>
+      <span><i class="k-src"></i>previous total we reuse</span>
+      <span><i class="k-new"></i>value just computed</span>
+    </div>
+    <div class="stepper" id="st-prefix"></div>
+
+    <h3>The superpower: any range sum in one subtraction</h3>
+    <p>Put a <code>0</code> in front to get <code>P</code>. Then <code>P[k]</code> means "sum of the first k boxes", and the sum of <code>arr[l..r]</code> is <code>P[r+1] − P[l]</code>. Move the sliders.</p>
+    <div class="panel">
+      <div class="controls-row">
+        <div class="field"><label for="rq-l">l (from) = <span id="rq-lv"></span></label><input id="rq-l" type="range" min="0" value="1"></div>
+        <div class="field"><label for="rq-r">r (to) = <span id="rq-rv"></span></label><input id="rq-r" type="range" min="0" value="3"></div>
+      </div>
+      <div class="key">
+        <span><i class="k-span"></i>the range you want</span>
+        <span><i class="k-plus"></i>P[r+1]: everything up to r</span>
+        <span><i class="k-minus"></i>P[l]: the part before l, which you throw away</span>
+      </div>
+      <div class="viz" id="rq-viz"></div>
+      <div class="out" id="rq-out" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section class="lesson" id="suffix">
+    <div class="lhead"><span class="num">05</span><div><p class="level core">Core</p><h2>Suffix sum: running total from the right</h2></div></div>
+    <p class="idea"><strong>Key idea:</strong> the mirror image of prefix. <code>suffix[i]</code> is the sum from <code>arr[i]</code> to the <b>end</b>, so you fill it walking backwards: <code>suffix[i] = suffix[i+1] + arr[i]</code>.</p>
+    <div class="key">
+      <span><i class="k-span"></i>boxes added so far</span>
+      <span><i class="k-hot"></i>box being added now</span>
+      <span><i class="k-src"></i>previous total we reuse</span>
+      <span><i class="k-new"></i>value just computed</span>
+    </div>
+    <div class="stepper" id="st-suffix"></div>
+  </section>
+
+  <!-- 6 -->
+  <section class="lesson" id="product">
+    <div class="lhead"><span class="num">06</span><div><p class="level adv">Advanced</p><h2>Product of array except self</h2></div></div>
+    <p class="idea"><strong>Key idea:</strong> cover one box. Everything left over is a <span class="t-left">left group</span> and a <span class="t-right">right group</span>. So <code>answer[i] = left[i] × right[i]</code>, where <code>left</code> is a prefix product and <code>right</code> is a suffix product.</p>
+    <div class="key">
+      <span><i class="k-cover"></i>covered box (left out)</span>
+      <span><i class="k-left"></i>numbers on the left</span>
+      <span><i class="k-right"></i>numbers on the right</span>
+      <span><i class="k-src"></i>value we reuse</span>
+      <span><i class="k-new"></i>value just computed</span>
+    </div>
+    <div class="stepper" id="st-product"></div>
+    <p class="tip"><b>Why 1 for "nothing"?</b> Multiplying by 1 changes nothing, the same way adding 0 changes nothing. So the empty left side of box 0 and the empty right side of the last box both count as 1.</p>
+  </section>
+
+  <!-- 7 -->
+  <section class="lesson" id="kadane">
+    <div class="lhead"><span class="num">07</span><div><p class="level adv">Advanced</p><h2>Maximum subarray sum (Kadane's algorithm)</h2></div></div>
+    <p class="idea"><strong>Key idea:</strong> walk left to right with a running sum called <code>current</code>. If the old running sum is negative it can only drag you down, so <b>throw it away and start fresh</b>. Keep the biggest value you ever see in <code>best</code>.</p>
+    <p class="tip">This one is most interesting with negative numbers. Load <button class="chip" type="button" data-arr="-2, 1, -3, 4, -1, 2, 1, -5, 4">[-2, 1, -3, 4, -1, 2, 1, -5, 4]</button></p>
+    <div class="key">
+      <span><i class="k-span"></i>current subarray</span>
+      <span><i class="k-hot"></i>box being looked at</span>
+      <span><i class="k-best"></i>best subarray so far (green ring)</span>
+    </div>
+    <div class="stepper" id="st-kadane"></div>
+  </section>
+
+  <footer>
+    Practice order that works: read the key idea, press <b>Next</b> through a lesson, then close this page and write the code from memory. Change the array and predict the answer before you press Next.
+  </footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  let ARR = [3, 1, 4, 2, 5];
+
+  const $ = (s) => document.querySelector(s);
+  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const cl = (n, f) => Array.from({ length: n }, (_, j) => f(j));
+  const fmt = (v) => (Number(v) < 0 ? `(${v})` : `${v}`);
+  const list = (xs) => `[${xs.join(", ")}]`;
+
+  function rowHTML(r) {
+    const n = r.values.length;
+    const cells = r.values.map((v, i) => {
+      const cls = (r.cls && r.cls[i]) || "";
+      const empty = v === null || v === undefined;
+      const top = r.top ? (r.top[i] ?? "") : r.neg ? i - n : "";
+      const tag = r.click ? "button" : "div";
+      const attrs = r.click
+        ? ` type="button" data-i="${i}" aria-label="${esc(r.label)}[${i}] equals ${esc(v)}" aria-pressed="${/\b(pick|hot)\b/.test(cls)}"`
+        : "";
+      return `<${tag} class="cell ${cls}${empty ? " empty" : ""}"${attrs}><span class="top">${esc(top)}</span><span class="box">${empty ? "" : esc(v)}</span><span class="idx">${r.noIdx ? "" : i}</span></${tag}>`;
+    }).join("");
+    return `<div class="row"><span class="rlabel">${esc(r.label)}</span><div class="cells">${cells}</div></div>`;
+  }
+
+  function codeHTML(line) {
+    let e = esc(line);
+    const k = e.indexOf("#");
+    let body = k < 0 ? e : e.slice(0, k);
+    const comment = k < 0 ? "" : `<span class="cm">${e.slice(k)}</span>`;
+    body = body.replace(/\b(for|in|range|len|max|print)\b/g, '<span class="kw">$1</span>');
+    return (body + comment) || " ";
+  }
+
+  /* ---------- generic stepper ---------- */
+  const steppers = [];
+  function stepper(id, code, build) {
+    const root = document.getElementById(id);
+    root.innerHTML = `
+      <div class="st-main"><div class="viz"></div><div class="explain" aria-live="polite"></div></div>
+      <div class="st-code"><div class="code-head">Python · highlighted line is running</div><pre class="code"></pre></div>
+      <div class="controls">
+        <button class="btn" type="button" data-act="reset">Restart</button>
+        <button class="btn" type="button" data-act="prev">Back</button>
+        <button class="btn primary" type="button" data-act="next">Next</button>
+        <button class="btn" type="button" data-act="play">Play</button>
+        <input type="range" id="${id}-range" min="0" value="0" aria-label="Jump to step">
+        <span class="count"></span>
+      </div>`;
+    const viz = root.querySelector(".viz"), ex = root.querySelector(".explain"), pre = root.querySelector("pre");
+    const range = root.querySelector("input[type=range]"), count = root.querySelector(".count");
+    const btn = (a) => root.querySelector(`[data-act=${a}]`);
+    pre.innerHTML = code.map((l, i) => `<div class="ln" data-l="${i}">${codeHTML(l)}</div>`).join("");
+    let steps = [], k = 0, timer = null;
+
+    function show() {
+      const s = steps[k];
+      viz.innerHTML = s.rows.map(rowHTML).join("") + (s.extra || "");
+      ex.innerHTML = s.text;
+      pre.querySelectorAll(".ln").forEach((el) => el.classList.toggle("cur", s.line !== null && s.line !== undefined && +el.dataset.l === s.line));
+      range.max = steps.length - 1;
+      range.value = k;
+      count.textContent = `Step ${k + 1} / ${steps.length}`;
+      btn("prev").disabled = k === 0;
+      btn("next").disabled = k === steps.length - 1;
+    }
+    function stop() { clearInterval(timer); timer = null; btn("play").textContent = "Play"; }
+    function go(n) { k = Math.max(0, Math.min(steps.length - 1, n)); show(); }
+    function reset() { stop(); steps = build(ARR); k = 0; show(); }
+
+    btn("next").addEventListener("click", () => { stop(); go(k + 1); });
+    btn("prev").addEventListener("click", () => { stop(); go(k - 1); });
+    btn("reset").addEventListener("click", reset);
+    btn("play").addEventListener("click", () => {
+      if (timer) return stop();
+      if (k === steps.length - 1) k = -1;
+      btn("play").textContent = "Pause";
+      go(k + 1);
+      timer = setInterval(() => { if (k >= steps.length - 1) stop(); else go(k + 1); }, 1300);
+    });
+    range.addEventListener("input", () => { stop(); go(+range.value); });
+    steppers.push(reset);
+  }
+
+  /* ---------- 1. index ---------- */
+  let idxSel = null;
+  function renderIndex() {
+    const n = ARR.length;
+    $("#idx-viz").innerHTML = rowHTML({ label: "arr", values: ARR, neg: $("#idx-neg").checked, click: true, cls: cl(n, (j) => (j === idxSel ? "hot" : "")) });
+    const out = $("#idx-out");
+    if (idxSel === null) {
+      out.innerHTML = `Click any box. This list has <code>len(arr) = ${n}</code> boxes, so valid indexes are <code>0</code> to <code>${n - 1}</code> (or <code>-${n}</code> to <code>-1</code>).`;
+    } else if (idxSel === "err") {
+      out.innerHTML = `<span class="big">arr[${esc($("#idx-try").value)}]</span> → <span class="no">IndexError: list index out of range</span><br>There is no box there. Valid indexes are <code>0</code> to <code>${n - 1}</code> or <code>-${n}</code> to <code>-1</code>.`;
+    } else {
+      const i = idxSel;
+      out.innerHTML = `<span class="big">arr[${i}] → ${ARR[i]}</span> &nbsp;and&nbsp; <span class="big">arr[${i - n}] → ${ARR[i]}</span><br>Both names point to the same box. A negative index is just <code>index − len(arr)</code> = ${i} − ${n} = ${i - n}.`;
+    }
+  }
+  $("#idx-viz").addEventListener("click", (e) => {
+    const c = e.target.closest("[data-i]");
+    if (!c) return;
+    idxSel = +c.dataset.i;
+    $("#idx-try").value = "";
+    renderIndex();
+  });
+  $("#idx-neg").addEventListener("change", renderIndex);
+  $("#idx-try").addEventListener("input", () => {
+    const raw = $("#idx-try").value.trim(), n = ARR.length;
+    if (raw === "") { idxSel = null; return renderIndex(); }
+    const v = Number(raw);
+    if (!Number.isInteger(v)) return;
+    idxSel = v >= -n && v < n ? (v + n) % n : "err";
+    renderIndex();
+  });
+
+  /* ---------- 2. slicing ---------- */
+  function readSliceField(id) {
+    const raw = $(id).value.trim();
+    if (raw === "") return null;
+    const v = Number(raw);
+    if (!Number.isInteger(v)) throw `"${raw}" is not a whole number.`;
+    return v;
+  }
+  function pySliceIdx(n, start, stop, step) {
+    if (step === 0) throw "step cannot be 0. Python raises ValueError.";
+    const st = step === null ? 1 : step;
+    const fix = (v, isStart) => {
+      if (v === null) return st > 0 ? (isStart ? 0 : n) : isStart ? n - 1 : -1;
+      if (v < 0) { v += n; if (v < 0) v = st > 0 ? 0 : -1; }
+      else if (v >= n) v = st > 0 ? n : n - 1;
+      return v;
+    };
+    const s = fix(start, true), e = fix(stop, false), out = [];
+    for (let i = s; st > 0 ? i < e : i > e; i += st) out.push(i);
+    return out;
+  }
+  function renderSlice() {
+    const n = ARR.length, out = $("#sl-out");
+    let a, b, c, idx;
+    try {
+      a = readSliceField("#sl-start"); b = readSliceField("#sl-stop"); c = readSliceField("#sl-step");
+      idx = pySliceIdx(n, a, b, c);
+    } catch (msg) {
+      $("#sl-viz").innerHTML = rowHTML({ label: "arr", values: ARR, neg: true });
+      out.innerHTML = `<span class="no">${esc(msg)}</span>`;
+      return;
+    }
+    const order = {};
+    idx.forEach((i, k) => (order[i] = k + 1));
+    const expr = `arr[${a ?? ""}:${b ?? ""}${c === null ? "" : ":" + c}]`;
+    $("#sl-viz").innerHTML =
+      rowHTML({ label: "arr", values: ARR, top: cl(n, (j) => (order[j] ? `${order[j]}` : "")), cls: cl(n, (j) => (order[j] ? "span" : "dim")) }) +
+      rowHTML({ label: "result", values: idx.length ? idx.map((i) => ARR[i]) : [null], cls: idx.map(() => "pick"), noIdx: true });
+    const st = c === null ? 1 : c;
+    let how;
+    if (!idx.length) how = "No box matches, so you get an empty list. With a positive step, start must be before stop.";
+    else if (st > 0) how = `Start at index <code>${idx[0]}</code>, move ${st} box${st > 1 ? "es" : ""} right each time, and stop before index <code>${b === null ? n + " (the end)" : b}</code>.`;
+    else how = `A negative step walks <b>backwards</b>: start at index <code>${idx[0]}</code> and move ${-st} box${st < -1 ? "es" : ""} left each time.`;
+    out.innerHTML = `<span class="big">${esc(expr)} → ${list(idx.map((i) => ARR[i]))}</span><br>${how}`;
+  }
+  ["#sl-start", "#sl-stop", "#sl-step"].forEach((id) => $(id).addEventListener("input", renderSlice));
+  $("#sl-presets").addEventListener("click", (e) => {
+    const b = e.target.closest("[data-s]");
+    if (!b) return;
+    const [s, t, p] = b.dataset.s.split(",");
+    $("#sl-start").value = s; $("#sl-stop").value = t; $("#sl-step").value = p;
+    renderSlice();
+  });
+
+  /* ---------- 3. subarray checker ---------- */
+  let picked = new Set();
+  function renderSub() {
+    const n = ARR.length;
+    $("#sub-viz").innerHTML = rowHTML({ label: "arr", values: ARR, click: true, cls: cl(n, (j) => (picked.has(j) ? "pick" : "")) });
+    const out = $("#sub-out");
+    const ids = [...picked].sort((x, y) => x - y);
+    if (!ids.length) { out.innerHTML = "Click boxes to pick them. Try <b>2, 3, 4</b> next to each other, then try <b>1 and 3</b> with a gap."; return; }
+    const vals = list(ids.map((i) => ARR[i]));
+    const lo = ids[0], hi = ids[ids.length - 1];
+    if (hi - lo + 1 === ids.length) {
+      out.innerHTML = `<span class="big">${vals}</span> <span class="ok">is a subarray.</span><br>The boxes touch, with no gaps. In Python that's <code>arr[${lo}:${hi + 1}]</code>. Every subarray is also a subsequence.`;
+    } else {
+      const gaps = [];
+      for (let i = lo; i <= hi; i++) if (!picked.has(i)) gaps.push(i);
+      out.innerHTML = `<span class="big">${vals}</span> <span class="no">is not a subarray.</span><br>You skipped index ${gaps.join(", ")}. It is still a <b>subsequence</b>, because the order is kept.`;
+    }
+  }
+  $("#sub-viz").addEventListener("click", (e) => {
+    const c = e.target.closest("[data-i]");
+    if (!c) return;
+    const i = +c.dataset.i;
+    picked.has(i) ? picked.delete(i) : picked.add(i);
+    renderSub();
+  });
+  $("#sub-clear").addEventListener("click", () => { picked.clear(); renderSub(); });
+
+  /* ---------- 3b. all subarrays ---------- */
+  stepper("st-all", [
+    "for start in range(n):",
+    "    for end in range(start, n):",
+    "        print(arr[start:end + 1])",
+  ], (a) => {
+    const n = a.length, S = [], printed = [];
+    const chips = () => `<div class="printed">${printed.map((p, i) => `<span class="${i === printed.length - 1 ? "latest" : ""}">${esc(p)}</span>`).join("")}</div>`;
+    S.push({ line: null, rows: [{ label: "arr", values: a }], text: `This array has n = ${n} boxes. Press <b>Next</b> to watch the loops pick every start and every end.`, extra: "" });
+    for (let s = 0; s < n; s++) {
+      for (let e = s; e < n; e++) {
+        printed.push(list(a.slice(s, e + 1)));
+        const first = e === s;
+        S.push({
+          line: first ? 1 : 2,
+          rows: [{
+            label: "arr", values: a,
+            top: cl(n, (j) => (j === s && j === e ? "start=end" : j === s ? "start" : j === e ? "end" : "")),
+            cls: cl(n, (j) => (j >= s && j <= e ? (j === s || j === e ? "span edge" : "span") : "dim")),
+          }],
+          text: `${first ? `<b>New start = ${s}.</b> ` : ""}start = ${s}, end = ${e} → <code>arr[${s}:${e + 1}]</code> = <b>${list(a.slice(s, e + 1))}</b><br>Subarray number ${printed.length}.${e === n - 1 ? " The end reached the last box, so the outer loop moves start one step right." : ""}`,
+          extra: chips(),
+        });
+      }
+    }
+    S.push({ line: null, rows: [{ label: "arr", values: a }], text: `Done. We printed <b>${printed.length}</b> subarrays. The formula is <code>n × (n + 1) / 2</code> = ${n} × ${n + 1} / 2 = <b>${(n * (n + 1)) / 2}</b>.`, extra: chips() });
+    return S;
+  });
+
+  /* ---------- 4. prefix ---------- */
+  stepper("st-prefix", [
+    "prefix = [0] * len(arr)",
+    "prefix[0] = arr[0]",
+    "for i in range(1, len(arr)):",
+    "    prefix[i] = prefix[i - 1] + arr[i]",
+  ], (a) => {
+    const n = a.length, p = Array(n).fill(null), S = [];
+    const rows = (ca, cp) => [{ label: "arr", values: a, cls: ca }, { label: "prefix", values: [...p], cls: cp }];
+    S.push({ line: 0, rows: rows(), text: `Make a list <code>prefix</code> with ${n} slots, one under each box of <code>arr</code>.` });
+    p[0] = a[0];
+    S.push({ line: 1, rows: rows(cl(n, (j) => (j === 0 ? "hot" : "")), cl(n, (j) => (j === 0 ? "new" : ""))), text: `The first running total is just the first box: <code>prefix[0] = arr[0] = ${a[0]}</code>.` });
+    for (let i = 1; i < n; i++) {
+      p[i] = p[i - 1] + a[i];
+      S.push({
+        line: 3,
+        rows: rows(cl(n, (j) => (j === i ? "hot" : j < i ? "span" : "")), cl(n, (j) => (j === i ? "new" : j === i - 1 ? "src" : ""))),
+        text: `<code>prefix[${i}] = prefix[${i - 1}] + arr[${i}] = ${p[i - 1]} + ${fmt(a[i])} = <b>${p[i]}</b></code><br>We reuse the old total ${p[i - 1]} instead of adding from scratch. Check: ${a.slice(0, i + 1).map(fmt).join(" + ")} = ${p[i]}.`,
+      });
+    }
+    S.push({ line: null, rows: rows(null, cl(n, () => "span")), text: `Done: <code>prefix = ${list(p)}</code>. Each <code>prefix[i]</code> is the total of <code>arr[0]</code> through <code>arr[i]</code>. The last value, ${p[n - 1]}, is the sum of the whole array.` });
+    return S;
+  });
+
+  /* ---------- 4b. range query ---------- */
+  function renderRange(changed) {
+    const n = ARR.length, L = $("#rq-l"), R = $("#rq-r");
+    L.max = R.max = n - 1;
+    let l = Math.min(+L.value, n - 1), r = Math.min(+R.value, n - 1);
+    if (l > r) { if (changed === "l") r = l; else l = r; }
+    L.value = l; R.value = r;
+    $("#rq-lv").textContent = l; $("#rq-rv").textContent = r;
+    const P = [0];
+    ARR.forEach((x) => P.push(P[P.length - 1] + x));
+    $("#rq-viz").innerHTML =
+      rowHTML({ label: "arr", values: ARR, cls: cl(n, (j) => (j >= l && j <= r ? "span" : "dim")) }) +
+      rowHTML({ label: "P", values: P, cls: cl(n + 1, (j) => (j === r + 1 ? "plus" : j === l ? "minus" : "")) });
+    const ans = P[r + 1] - P[l];
+    $("#rq-out").innerHTML =
+      `<span class="big">sum(arr[${l}..${r}]) = <span class="t-good">P[${r + 1}]</span> − <span class="t-bad">P[${l}]</span> = ${P[r + 1]} − ${fmt(P[l])} = ${ans}</span><br>` +
+      `Check by adding the boxes: ${ARR.slice(l, r + 1).map(fmt).join(" + ")} = ${ans}. ` +
+      `<span class="t-good">P[${r + 1}]</span> is the sum of the first ${r + 1} boxes. <span class="t-bad">P[${l}]</span> is the sum of the first ${l} box${l === 1 ? "" : "es"}, which you don't want. One subtraction, no loop.`;
+  }
+  $("#rq-l").addEventListener("input", () => renderRange("l"));
+  $("#rq-r").addEventListener("input", () => renderRange("r"));
+
+  /* ---------- 5. suffix ---------- */
+  stepper("st-suffix", [
+    "n = len(arr)",
+    "suffix = [0] * n",
+    "suffix[n - 1] = arr[n - 1]",
+    "for i in range(n - 2, -1, -1):   # walk backwards",
+    "    suffix[i] = suffix[i + 1] + arr[i]",
+  ], (a) => {
+    const n = a.length, s = Array(n).fill(null), S = [];
+    const rows = (ca, cs) => [{ label: "arr", values: a, cls: ca }, { label: "suffix", values: [...s], cls: cs }];
+    S.push({ line: 1, rows: rows(), text: `Make a list <code>suffix</code> with ${n} slots. This time we fill it from the <b>right end</b>.` });
+    s[n - 1] = a[n - 1];
+    S.push({ line: 2, rows: rows(cl(n, (j) => (j === n - 1 ? "hot" : "")), cl(n, (j) => (j === n - 1 ? "new" : ""))), text: `Nothing comes after the last box, so <code>suffix[${n - 1}] = arr[${n - 1}] = ${a[n - 1]}</code>.` });
+    for (let i = n - 2; i >= 0; i--) {
+      s[i] = s[i + 1] + a[i];
+      S.push({
+        line: 4,
+        rows: rows(cl(n, (j) => (j === i ? "hot" : j > i ? "span" : "")), cl(n, (j) => (j === i ? "new" : j === i + 1 ? "src" : ""))),
+        text: `<code>suffix[${i}] = suffix[${i + 1}] + arr[${i}] = ${s[i + 1]} + ${fmt(a[i])} = <b>${s[i]}</b></code><br>Same trick as prefix, only moving left. Check: ${a.slice(i).map(fmt).join(" + ")} = ${s[i]}.`,
+      });
+    }
+    S.push({ line: null, rows: rows(null, cl(n, () => "span")), text: `Done: <code>suffix = ${list(s)}</code>. <code>suffix[i]</code> answers "what is the total from here to the end?" in one look. <code>suffix[0]</code> equals the whole sum, just like the last prefix value.` });
+    return S;
+  });
+
+  /* ---------- 6. product except self ---------- */
+  stepper("st-product", [
+    "n = len(arr)",
+    "left = [1] * n",
+    "for i in range(1, n):",
+    "    left[i] = left[i - 1] * arr[i - 1]",
+    "right = [1] * n",
+    "for i in range(n - 2, -1, -1):",
+    "    right[i] = right[i + 1] * arr[i + 1]",
+    "answer = [0] * n",
+    "for i in range(n):",
+    "    answer[i] = left[i] * right[i]",
+  ], (a) => {
+    const n = a.length, A = a.map(BigInt), S = [];
+    const L = Array(n).fill(null), R = Array(n).fill(null), Ans = Array(n).fill(null);
+    const str = (x) => (x === null ? null : String(x));
+    const rows = (ca, cL, cR, cA) => [
+      { label: "arr", values: a, cls: ca },
+      { label: "left", values: L.map(str), cls: cL },
+      { label: "right", values: R.map(str), cls: cR },
+      { label: "answer", values: Ans.map(str), cls: cA },
+    ];
+    const times = (xs) => (xs.length ? xs.map(fmt).join(" × ") : "nothing");
+    const only = (i, c) => cl(n, (j) => (j === i ? c : ""));
+
+    S.push({ line: null, rows: rows(), text: `<b>Goal:</b> for every box, multiply all the <i>other</i> boxes. We do it in 3 passes: <span class="t-left">left products</span>, then <span class="t-right">right products</span>, then multiply them.` });
+
+    L[0] = 1n;
+    S.push({ line: 1, rows: rows(only(0, "cover"), only(0, "new")), text: `<span class="t-left">Pass 1, left.</span> Cover box 0. Nothing is to its left, so <code>left[0] = 1</code>.` });
+    for (let i = 1; i < n; i++) {
+      L[i] = L[i - 1] * A[i - 1];
+      S.push({
+        line: 3,
+        rows: rows(cl(n, (j) => (j < i ? "left" : j === i ? "cover" : "")), cl(n, (j) => (j === i ? "new" : j === i - 1 ? "src" : ""))),
+        text: `Cover box ${i}. Its left side is <span class="t-left">${times(a.slice(0, i))}</span>.<br><code>left[${i}] = left[${i - 1}] × arr[${i - 1}] = ${L[i - 1]} × ${fmt(a[i - 1])} = <b>${L[i]}</b></code><br>We reuse <code>left[${i - 1}]</code> and multiply in the one box we just walked past.`,
+      });
+    }
+
+    R[n - 1] = 1n;
+    S.push({ line: 4, rows: rows(only(n - 1, "cover"), null, only(n - 1, "new")), text: `<span class="t-right">Pass 2, right.</span> Now walk backwards. Cover the last box ${n - 1}. Nothing is to its right, so <code>right[${n - 1}] = 1</code>.` });
+    for (let i = n - 2; i >= 0; i--) {
+      R[i] = R[i + 1] * A[i + 1];
+      S.push({
+        line: 6,
+        rows: rows(cl(n, (j) => (j > i ? "right" : j === i ? "cover" : "")), null, cl(n, (j) => (j === i ? "new" : j === i + 1 ? "src" : ""))),
+        text: `Cover box ${i}. Its right side is <span class="t-right">${times(a.slice(i + 1))}</span>.<br><code>right[${i}] = right[${i + 1}] × arr[${i + 1}] = ${R[i + 1]} × ${fmt(a[i + 1])} = <b>${R[i]}</b></code>`,
+      });
+    }
+
+    for (let i = 0; i < n; i++) {
+      Ans[i] = L[i] * R[i];
+      S.push({
+        line: 9,
+        rows: rows(cl(n, (j) => (j < i ? "left" : j === i ? "cover" : "right")), only(i, "left"), only(i, "right"), only(i, "new")),
+        text: `<b>Pass 3.</b> Cover <code>arr[${i}] = ${a[i]}</code>.<br><span class="t-left">Left side: ${times(a.slice(0, i))} → ${L[i]}</span><br><span class="t-right">Right side: ${times(a.slice(i + 1))} → ${R[i]}</span><br><code>answer[${i}] = ${L[i]} × ${R[i]} = <b>${Ans[i]}</b></code>`,
+      });
+    }
+    S.push({ line: null, rows: rows(null, null, null, cl(n, () => "span")), text: `Done: <code>answer = ${list(Ans.map(String))}</code>. Each value is "everything except me", and we never used division. Three simple loops, so it runs in O(n) time.` });
+    return S;
+  });
+
+  /* ---------- 7. kadane ---------- */
+  stepper("st-kadane", [
+    "current = best = arr[0]",
+    "for x in arr[1:]:",
+    "    current = max(x, current + x)",
+    "    best = max(best, current)",
+  ], (a) => {
+    const n = a.length, S = [];
+    let cur = a[0], cs = 0, best = a[0], bs = 0, be = 0;
+    const snap = (i) => [{
+      label: "arr", values: a,
+      top: cl(n, (j) => (j === cs ? "start" : "")),
+      cls: cl(n, (j) => [j >= cs && j <= i ? "span" : "", j === i ? "hot" : "", j >= bs && j <= be ? "best" : ""].join(" ")),
+    }];
+    const stats = (i) => `<div class="stats"><div><span>current</span><b>${cur}</b><small>arr[${cs}..${i}]</small></div><div class="g"><span>best</span><b>${best}</b><small>arr[${bs}..${be}]</small></div></div>`;
+
+    S.push({ line: 0, rows: snap(0), extra: stats(0), text: `Start with the first box. The only subarray so far is <code>[${a[0]}]</code>, so <code>current = best = ${a[0]}</code>.` });
+    for (let i = 1; i < n; i++) {
+      const x = a[i], ext = cur + x, old = cur;
+      let t;
+      if (old < 0) {
+        cur = x; cs = i;
+        t = `x = ${x}. Two choices:<br>• extend: ${old} + ${fmt(x)} = ${ext}<br>• start fresh with x alone: ${x}<br>The old sum ${old} is negative and only drags us down, so <span class="t-bad">drop it</span> and <b>start fresh at index ${i}</b>. current = ${cur}.`;
+      } else {
+        cur = ext;
+        t = `x = ${x}. Two choices:<br>• extend: ${old} + ${fmt(x)} = ${ext}<br>• start fresh with x alone: ${x}<br>The old sum ${old} is not negative, so it helps. <span class="t-acc">Extend</span> the subarray. current = ${cur}.`;
+      }
+      S.push({ line: 2, rows: snap(i), extra: stats(i), text: t });
+      const prevBest = best;
+      let t2;
+      if (cur > best) {
+        best = cur; bs = cs; be = i;
+        t2 = `current (${cur}) beats best (${prevBest}). <span class="t-good">New best: ${best}</span>, from <code>${list(a.slice(bs, be + 1))}</code>.`;
+      } else {
+        t2 = `current (${cur}) is not bigger than best (${best}), so best stays ${best}.`;
+      }
+      S.push({ line: 3, rows: snap(i), extra: stats(i), text: t2 });
+    }
+    S.push({
+      line: null, rows: [{ label: "arr", values: a, cls: cl(n, (j) => (j >= bs && j <= be ? "span best" : "dim")) }],
+      extra: `<div class="stats"><div class="g"><span>answer</span><b>${best}</b><small>arr[${bs}..${be}]</small></div></div>`,
+      text: `Done. The biggest subarray sum is <b>${best}</b>, from <code>${list(a.slice(bs, be + 1))}</code>. One pass over the array, so it runs in O(n) time.${a.every((v) => v >= 0) ? " With no negative numbers the best subarray is simply the whole array. Load the negative example above to see the reset trick." : ""}`,
+    });
+    return S;
+  });
+
+  /* ---------- global array ---------- */
+  function parseArr(text) {
+    const parts = text.replace(/[\[\]]/g, " ").split(/[\s,]+/).filter(Boolean);
+    if (!parts.length) throw "Type at least one number, for example 3, 1, 4.";
+    if (parts.length > 10) throw "Use 10 numbers or fewer so the boxes fit on screen.";
+    return parts.map((p) => {
+      const v = Number(p);
+      if (!Number.isInteger(v)) throw `"${p}" is not a whole number. Use numbers like 4 or -2.`;
+      if (Math.abs(v) > 99) throw "Keep each number between -99 and 99 so the boxes stay readable.";
+      return v;
+    });
+  }
+  function renderAll() {
+    idxSel = null; $("#idx-try").value = "";
+    picked.clear();
+    renderIndex(); renderSlice(); renderSub(); renderRange();
+    steppers.forEach((reset) => reset());
+  }
+  function apply(text) {
+    try {
+      ARR = parseArr(text);
+      $("#arr-err").textContent = "";
+      $("#arr-input").value = ARR.join(", ");
+      renderAll();
+    } catch (msg) {
+      $("#arr-err").textContent = msg;
+    }
+  }
+  $("#arr-apply").addEventListener("click", () => apply($("#arr-input").value));
+  $("#arr-input").addEventListener("keydown", (e) => { if (e.key === "Enter") apply($("#arr-input").value); });
+  document.querySelectorAll("[data-arr]").forEach((b) =>
+    b.addEventListener("click", () => {
+      apply(b.dataset.arr);
+      if (b.closest("#kadane")) document.getElementById("st-kadane").scrollIntoView({ block: "nearest" });
+    })
+  );
+
+  renderAll();
+})();
+</script>
+
+</body></html>

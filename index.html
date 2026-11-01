@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Python DSA Visualizer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,800&family=JetBrains+Mono:wght@600&display=swap">
+<style>
+:root {
+  --paper: #EEF2F5; --grid: rgba(20, 60, 110, 0.06); --surface: #FFFFFF;
+  --ink: #14213A; --muted: #586980; --line: #D3DCE5; --accent: #0F766E;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --paper: #0D141C; --grid: rgba(140, 180, 230, 0.05); --surface: #151F2B; --ink: #E4ECF4; --muted: #93A3B7; --line: #26354A; --accent: #3CC2B4; color-scheme: dark; }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; color: var(--ink); font: 16px/1.6 "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  background-color: var(--paper);
+  background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+main {
+  max-width: 820px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px;
+  padding-block: 56px 72px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.eyebrow { font: 600 12px/1 "JetBrains Mono", ui-monospace, monospace; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin: 0; }
+h1 { font: 800 clamp(2.4rem, 6vw, 3.4rem)/1.05 "Bricolage Grotesque", system-ui, sans-serif; letter-spacing: -0.02em; margin: 0; text-wrap: balance; }
+p { margin: 0; max-width: 62ch; color: var(--muted); }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+.card { display: flex; flex-direction: column; gap: 8px; padding: 20px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); color: var(--ink); text-decoration: none; }
+.card:hover, .card:focus-visible { border-color: var(--accent); outline: none; }
+.card h2 { font: 800 1.4rem/1.15 "Bricolage Grotesque", system-ui, sans-serif; margin: 0; }
+.card .go { font: 600 13px "JetBrains Mono", ui-monospace, monospace; color: var(--accent); margin-top: auto; }
+</style>
+</head>
+<body>
+<main>
+  <p class="eyebrow">Interactive lessons · Python</p>
+  <h1>Python DSA Visualizer</h1>
+  <p>Learn data structures and algorithms by clicking boxes and stepping through code one line at a time. Each lesson shows the picture, the Python code and a plain explanation side by side.</p>
+  <div class="cards">
+    <a class="card" href="array-lab.html">
+      <h2>Python Array Lab</h2>
+      <p>Indexing, slicing, subarrays, prefix and suffix sums, product of array except self, and Kadane's algorithm.</p>
+      <span class="go">Open →</span>
+    </a>
+    <a class="card" href="bit-lab.html">
+      <h2>Python Bit Lab</h2>
+      <p>Binary, AND / OR / XOR, shifts, the four core bit moves, n &amp; (n − 1) tricks, XOR single number and bitmask subsets.</p>
+      <span class="go">Open →</span>
+    </a>
+  </div>
+</main>
+</body>
+</html>

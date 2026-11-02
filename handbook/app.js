@@ -348,7 +348,7 @@
       </section>`;
   }
 
-  async function topicPage(id) {
+  async function topicPage(id, tab) {
     const t = TOPICS.find((x) => x.id === id);
     if (!t) return notFound();
     document.title = t.title + " · DSA Handbook";
@@ -358,14 +358,37 @@
     app.innerHTML = `
       <p class="crumbs"><a href="#/">Home</a> / <span>${esc(t.title)}</span></p>
       <section class="hero"><p class="eyebrow">Topic ${n} of ${TOPICS.length}</p><h1>${esc(t.title)}</h1><p class="lead">${esc(t.blurb)}</p></section>
-      ${lessonPath(t, data)}
-      <section class="refsec"><h2>Quick reference</h2><p class="lead">The whole topic on one card — come back here before an interview.</p></section>
-      <section class="theory">${data.theory}</section>
-      <section class="sol" id="demo"></section>
+      <nav class="tabs" role="tablist" aria-label="Topic sections">
+        ${TABS.map(([k, label]) => `<button type="button" role="tab" data-tab="${k}">${label}${k === "qs" ? ` (${t.qs.length})` : ""}</button>`).join("")}
+      </nav>
+      <div class="tabpanel" data-panel="theory">${theoryPanel(data)}</div>
+      <div class="tabpanel" data-panel="learn">${lessonPath(t, data)}</div>
+      <div class="tabpanel" data-panel="ref">
+        <section class="refsec"><h2>Quick reference</h2><p class="lead">The whole topic on one card — come back here before an interview.</p></section>
+        <section class="theory">${data.theory}</section>
+        <section class="sol" id="demo"></section>
+      </div>
+      <div class="tabpanel" data-panel="qs">
       <section style="display:flex;flex-direction:column;gap:12px">
         <div class="qtools"><h2>Top ${t.qs.length} questions</h2><div class="chips" role="group" aria-label="Filter by difficulty">${["All", "Easy", "Medium", "Hard"].map((d) => `<button class="chip" data-d="${d}" aria-pressed="${d === "All"}">${d}</button>`).join("")}</div></div>
         <div class="qlist"></div>
-      </section>`;
+      </section>
+      </div>
+      <div class="qnav">${tabNext()}</div>`;
+    const showTab = (k) => {
+      if (!TABS.some(([x]) => x === k)) k = data.sections && data.sections.length ? "theory" : "learn";
+      app.querySelectorAll(".tabpanel").forEach((p) => { p.hidden = p.dataset.panel !== k; });
+      app.querySelectorAll(".tabs [data-tab]").forEach((b) => b.setAttribute("aria-selected", b.dataset.tab === k));
+      app.querySelectorAll(".tabpanel .player").forEach((p) => p._stop && p._stop());
+      history.replaceState(null, "", `#/t/${t.id}/${k}`);
+      const i = TABS.findIndex(([x]) => x === k), nx = TABS[i + 1];
+      const nb = app.querySelector(".qnav");
+      nb.innerHTML = nx ? `<span></span><button type="button" class="btn" data-go="${nx[0]}">Next: ${nx[1]} →</button>` : nextTopicLink(t);
+    };
+    app.querySelector(".tabs").addEventListener("click", (e) => { const b = e.target.closest("[data-tab]"); if (b) { showTab(b.dataset.tab); } });
+    app.querySelector(".qnav").addEventListener("click", (e) => { const b = e.target.closest("[data-go]"); if (b) { showTab(b.dataset.go); window.scrollTo(0, app.querySelector(".tabs").offsetTop - 70); } });
+    app.querySelectorAll(".tnav [data-s]").forEach((b) => b.addEventListener("click", () => app.querySelector("#s-" + b.dataset.s).scrollIntoView({ behavior: "smooth", block: "start" })));
+    showTab(tab);
     app.querySelectorAll("pre code.py").forEach((c) => { c.innerHTML = c.textContent.split("\n").map(hiLine).join("\n"); });
     (data.lessons || []).forEach((les, k) => {
       if (!les.demo) return;
@@ -399,6 +422,17 @@
     list.addEventListener("change", (e) => { if (e.target.dataset.q) toggleDone(t.id, e.target.dataset.q, e.target.checked); });
   }
 
+  const TABS = [["theory", "Theory"], ["learn", "Lessons"], ["ref", "Quick reference"], ["qs", "Questions"]];
+  function tabNext() { return ""; }
+  function theoryPanel(data) {
+    const ss = data.sections || [], fq = data.faq || [];
+    if (!ss.length) return `<p class="lead">Theory for this topic is coming soon.</p>`;
+    return `<section class="path"><h2>Theory</h2><p class="lead">The textbook part: definitions, types, how each operation works and what it costs, pros and cons, and where it is used.</p>
+      <nav class="lnav tnav" aria-label="Theory sections"><div class="lgroup">${ss.map((s, k) => `<button type="button" data-s="${k + 1}">${k + 1}. ${esc(s.h)}</button>`).join("")}${fq.length ? `<button type="button" data-s="faq">Theory questions</button>` : ""}</div></nav></section>
+      ${ss.map((s, k) => `<article class="lesson tsec" id="s-${k + 1}"><div class="lhead"><span class="lnum">${k + 1}</span><div><h3>${esc(s.h)}</h3></div></div><div class="lbody">${s.body}</div></article>`).join("")}
+      ${fq.length ? `<article class="lesson tsec" id="s-faq"><div class="lhead"><span class="lnum">?</span><div><h3>Theory questions interviewers ask</h3></div></div><p class="lead">Click a question to see a model answer.</p><div class="faq">${fq.map((f) => `<details><summary>${f.q}</summary><div class="lbody">${f.a}</div></details>`).join("")}</div></article>` : ""}`;
+  }
+
   function lessonPath(t, data) {
     const ls = data.lessons || [];
     if (!ls.length) return "";
@@ -427,7 +461,7 @@
     const q = data.qs[qid];
     const k = t.qs.indexOf(meta), prev = t.qs[k - 1], next = t.qs[k + 1];
     app.innerHTML = `
-      <p class="crumbs"><a href="#/">Home</a> / <a href="#/t/${t.id}">${esc(t.title)}</a> / <span>Q${meta.n}</span></p>
+      <p class="crumbs"><a href="#/">Home</a> / <a href="#/t/${t.id}/qs">${esc(t.title)}</a> / <span>Q${meta.n}</span></p>
       <section class="qhead">
         <h1>${esc(meta.title)}</h1>
         <div class="badges"><span class="diff ${meta.diff}">${meta.diff}</span><span class="badge">${esc(meta.tags)}</span>
@@ -439,7 +473,7 @@
       <section class="sol brute"><div class="sol-h"><span class="step-n">1</span><h2>Brute force</h2><div class="cx"><span>Time ${esc(q.brute.tc)}</span><span>Space ${esc(q.brute.sc)}</span></div></div><p class="idea">${q.brute.idea}</p></section>
       <section class="sol opt"><div class="sol-h"><span class="step-n">2</span><h2>Optimal</h2><div class="cx"><span>Time ${esc(q.opt.tc)}</span><span>Space ${esc(q.opt.sc)}</span></div></div><p class="idea">${q.opt.idea}</p></section>
       <div class="qnav">
-        ${prev ? `<a class="btn" href="#/q/${t.id}/${prev.id}">← ${esc(prev.title)}</a>` : `<a class="btn" href="#/t/${t.id}">← ${esc(t.title)}</a>`}
+        ${prev ? `<a class="btn" href="#/q/${t.id}/${prev.id}">← ${esc(prev.title)}</a>` : `<a class="btn" href="#/t/${t.id}/qs">← ${esc(t.title)}</a>`}
         <button class="btn ${isDone(t.id, qid) ? "good" : ""}" id="mark" type="button">${isDone(t.id, qid) ? "✓ Done" : "Mark as done"}</button>
         ${next ? `<a class="btn" href="#/q/${t.id}/${next.id}">${esc(next.title)} →</a>` : nextTopicLink(t)}
       </div>`;
@@ -461,7 +495,7 @@
   function route() {
     app.querySelectorAll(".player").forEach((p) => p._stop && p._stop());
     const parts = location.hash.replace(/^#\/?/, "").split("/");
-    const go = parts[0] === "t" ? topicPage(parts[1]) : parts[0] === "q" ? questionPage(parts[1], parts[2]) : home();
+    const go = parts[0] === "t" ? topicPage(parts[1], parts[2]) : parts[0] === "q" ? questionPage(parts[1], parts[2]) : home();
     Promise.resolve(go).then(() => window.scrollTo(0, 0)).catch(() => { app.innerHTML = `<h1>Couldn't load this topic</h1><p>Check your connection and reload.</p>`; });
   }
   window.addEventListener("hashchange", route);

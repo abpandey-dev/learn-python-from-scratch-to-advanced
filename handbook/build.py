@@ -75,8 +75,8 @@ def type_name(q):
 
 
 def load(path):
-    lib.REG.update(topic=None, questions=[], demo=None, lessons=[])
-    for kind, file in (("topic", path), ("lessons", ROOT / "src" / "lessons" / path.name)):
+    lib.REG.update(topic=None, questions=[], demo=None, lessons=[], theory=[], faq=[])
+    for kind, file in (("topic", path), ("lessons", ROOT / "src" / "lessons" / path.name), ("theory", ROOT / "src" / "theory" / path.name)):
         if not file.exists():
             continue
         spec = importlib.util.spec_from_file_location(f"{kind}_{path.stem}", file)
@@ -94,6 +94,7 @@ def build_topic(path, failures):
         code = lib.start_trace(reg["demo"])
         reg["demo"]()
         out["demo"] = {"code": code, "frames": lib.stop_trace(), "title": meta.get("demo_title", "")}
+    out["sections"], out["faq"] = reg["theory"], reg["faq"]
     by_lc = {q["lc"]: slug(q["title"]) for q in reg["questions"]}
     out["lessons"] = []
     for k, les in enumerate(reg["lessons"], 1):
@@ -158,6 +159,7 @@ def build_topic(path, failures):
         index.append({"id": qid, "n": n, "lc": q["lc"], "title": q["title"], "diff": q["diff"], "tags": q["tags"]})
     topic_index = {k: meta[k] for k in ("id", "title", "blurb", "glyph")}
     topic_index["lessons"] = len(out["lessons"])
+    topic_index["faq"] = len(out["faq"])
     topic_index["qs"] = index
     return out, topic_index
 
@@ -167,7 +169,7 @@ def readme(topics):
     lines = [
         "# DSA Interview Handbook",
         "",
-        f"{len(topics)} topics · {sum(t['lessons'] for t in topics)} lessons from basics to advanced · {total} most-asked interview questions · Python · brute force and optimal solution for each, with a step-by-step animation of the optimal one.",
+        f"{len(topics)} topics · theory with {sum(t['faq'] for t in topics)} theory questions · {sum(t['lessons'] for t in topics)} lessons from basics to advanced · {total} most-asked interview questions · Python · brute force and optimal solution for each, with a step-by-step animation of the optimal one.",
         "",
         "**Live site:** https://abpandey-dev.github.io/python-dsa-visualizer/handbook/",
         "",

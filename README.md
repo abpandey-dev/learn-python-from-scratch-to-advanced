@@ -6,7 +6,7 @@ Interactive, step-by-step lessons for learning data structures and algorithms in
 
 ## [DSA Interview Handbook](handbook/) — 14 topics · 280 questions
 
-The 14 core DSA topics, each taught from scratch to advanced in a path of 5–8 short lessons (Basics → Core → Advanced) with animated examples, plus the **top 20 most-asked interview questions** for every topic. Each question has a brute-force solution, the optimal solution, time and space complexity, and a step-by-step animation of the optimal code running. Search by title, LeetCode number or pattern.
+The 14 core DSA topics. Each topic has a **Theory** tab (definition, types, operations and their cost, pros and cons, applications, comparisons, and theory questions with model answers), a **Lessons** tab that teaches it from scratch to advanced in 5–8 short animated lessons, a one-card **Quick reference**, and the **top 20 most-asked interview questions**. Each question has a brute-force solution, the optimal solution, time and space complexity, and a step-by-step animation of the optimal code running. Search by title, LeetCode number or pattern.
 
 **Open it:** https://abpandey-dev.github.io/python-dsa-visualizer/handbook/ · [Full question list](handbook/README.md)
 

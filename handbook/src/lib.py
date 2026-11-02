@@ -10,7 +10,7 @@ import math
 import sys
 import textwrap
 
-REG = {"topic": None, "questions": [], "demo": None, "lessons": []}
+REG = {"topic": None, "questions": [], "demo": None, "lessons": [], "theory": [], "faq": []}
 MAX_FRAMES = 90
 
 
@@ -139,6 +139,16 @@ def LD(fn):
     """Animated example attached to the most recent LESSON."""
     REG["lessons"][-1]["demo"] = fn
     return fn
+
+
+def THEORY(heading, body):
+    """A textbook-style theory section for the topic's Theory tab."""
+    REG["theory"].append({"h": heading, "body": body})
+
+
+def FAQ(question, answer):
+    """A conceptual interview question with its answer."""
+    REG["faq"].append({"q": question, "a": answer})
 
 
 # ---------- tracing ----------
@@ -353,4 +363,4 @@ def TRIE(name, root, hl=(), ok=()):
 
 
 __all__ = ["ListNode", "TreeNode", "mk_list", "list_arr", "mk_tree", "tree_arr", "find",
-           "TOPIC", "Q", "B", "O", "D", "LESSON", "LD", "T", "A", "V", "M", "S", "G", "L", "TR", "GR", "H", "BITS", "TRIE", "math"]
+           "TOPIC", "Q", "B", "O", "D", "LESSON", "LD", "THEORY", "FAQ", "T", "A", "V", "M", "S", "G", "L", "TR", "GR", "H", "BITS", "TRIE", "math"]

@@ -87,7 +87,7 @@
       const c = h("div", { class: "cell" });
       if (by[i]) c.appendChild(h("div", { class: "ptr" }, by[i].map(esc).join("<br>")));
       c.appendChild(h("div", { class: "box" + (i >= n ? " ghost" : cls(i, v)) }, i < n ? esc(v.v[i]) : "·"));
-      c.appendChild(h("div", { class: "idx" }, i));
+      c.appendChild(h("div", { class: "idx" }, v.il ? esc(v.il[i] ?? "") : i));
       row.appendChild(c);
     }
     return row;
@@ -193,7 +193,30 @@
     });
     return s;
   }
-  const RENDER = { arr: vArr, vars: vVars, map: vMap, stack: vStack, grid: vGrid, list: vList, tree: vTree, graph: vGraph };
+  function vNTree(v) {
+    if (!v.v.length) return h("span", { class: "empty-v" }, "empty trie");
+    const pos = [];
+    let x = 0, maxD = 0;
+    (function walk(i, d) {
+      maxD = Math.max(maxD, d);
+      const ch = v.v[i][1];
+      if (!ch.length) { pos[i] = [x++, d]; return; }
+      ch.forEach((c) => walk(c, d + 1));
+      pos[i] = [(pos[ch[0]][0] + pos[ch[ch.length - 1]][0]) / 2, d];
+    })(0, 0);
+    const R = 14, dx = 34, dy = 48, W = Math.max(x * dx, 80), H = (maxD + 1) * dy;
+    const s = svgEl("svg", { class: "tv", viewBox: `0 0 ${W} ${H}`, style: `max-width:${W * 1.3}px` });
+    const P = (i) => [pos[i][0] * dx + dx / 2, pos[i][1] * dy + R + 4];
+    v.v.forEach(([, ch], i) => ch.forEach((c) => { const [x1, y1] = P(i), [x2, y2] = P(c); s.appendChild(svgEl("line", { x1, y1, x2, y2, stroke: "var(--line-strong)", "stroke-width": 2 })); }));
+    v.v.forEach(([label, , end], i) => {
+      const [cx, cy] = P(i), [fill, stroke] = nodeColors(i, v);
+      s.appendChild(svgEl("circle", { cx, cy, r: R, fill, stroke, "stroke-width": 2 }));
+      if (end) s.appendChild(svgEl("circle", { cx, cy, r: R - 4, fill: "none", stroke: "var(--good)", "stroke-width": 1.5 }));
+      s.appendChild(svgEl("text", { x: cx, y: cy + 4.5, "text-anchor": "middle", "font-size": label.length > 2 ? 9 : 12, fill: "var(--ink)" }, i === 0 ? "•" : label));
+    });
+    return s;
+  }
+  const RENDER = { arr: vArr, vars: vVars, map: vMap, stack: vStack, grid: vGrid, list: vList, tree: vTree, graph: vGraph, ntree: vNTree };
   function renderView(v) {
     const wrap = h("div", { class: "view" });
     if (v.n) wrap.appendChild(h("div", { class: "vname" }, esc(v.n)));

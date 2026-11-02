@@ -1,6 +1,6 @@
 # DSA Interview Handbook
 
-12 topics · 240 most-asked interview questions · Python · brute force and optimal solution for each, with a step-by-step animation of the optimal one.
+14 topics · 280 most-asked interview questions · Python · brute force and optimal solution for each, with a step-by-step animation of the optimal one.
 
 **Live site:** https://abpandey-dev.github.io/python-dsa-visualizer/handbook/
 
@@ -20,6 +20,8 @@ Every solution is run against its test cases by `build.py` before the site is ge
 - [Graphs](#graphs) — BFS, DFS, topological sort, union-find and shortest paths — on grids and on adjacency lists.
 - [Dynamic Programming](#dynamic-programming) — Recursion that remembers: define a state, write the recurrence, fill a table in the right order.
 - [Greedy & Intervals](#greedy-intervals) — Make the locally best choice and prove it never hurts — usually after sorting, often on intervals.
+- [Tries](#tries) — Prefix trees: share common prefixes so insert, search and 'starts with' cost O(length of the word).
+- [Bit Manipulation](#bit-manipulation) — Work on the binary digits directly: XOR cancelling, n & (n − 1), masks and per-bit counting.
 
 ## Arrays & Hashing
 
@@ -320,6 +322,56 @@ Every solution is run against its test cases by `build.py` before the site is ge
 | 18 | [Maximum Units on a Truck](https://abpandey-dev.github.io/python-dsa-visualizer/handbook/#/q/greedy/maximum-units-on-a-truck) | [1710](https://leetcode.com/problems/maximum-units-on-a-truck/) | Easy | Best units per box first |
 | 19 | [Remove Covered Intervals](https://abpandey-dev.github.io/python-dsa-visualizer/handbook/#/q/greedy/remove-covered-intervals) | [1288](https://leetcode.com/problems/remove-covered-intervals/) | Medium | Sort by start asc, end desc |
 | 20 | [Car Pooling](https://abpandey-dev.github.io/python-dsa-visualizer/handbook/#/q/greedy/car-pooling) | [1094](https://leetcode.com/problems/car-pooling/) | Medium | Sweep line over stops |
+
+## Tries
+
+| # | Question | LeetCode | Level | Pattern |
+|---|---|---|---|---|
+| 1 | [Implement Trie (Prefix Tree)](https://abpandey-dev.github.io/python-dsa-visualizer/handbook/#/q/tries/implement-trie-prefix-tree) | [208](https://leetcode.com/problems/implement-trie-prefix-tree/) | Medium | Trie node class |
+| 2 | [Design Add and Search Words Data Structure](https://abpandey-dev.github.io/python-dsa-visualizer/handbook/#/q/tries/design-add-and-search-words-data-structure) | [211](https://leetcode.com/problems/design-add-and-search-words-data-structure/) | Medium | Trie + DFS on '.' |
+| 3 | [Word Search II](https://abpandey-dev.github.io/python-dsa-visualizer/handbook/#/q/tries/word-search-ii) | [212](https://leetcode.com/problems/word-search-ii/) | Hard | Trie-guided grid DFS |
+| 4 | [Longest Common Prefix](https://abpandey-dev.github.io/python-dsa-visualizer/handbook/#/q/tries/longest-common-prefix) | [14](https://leetcode.com/problems/longest-common-prefix/) | Easy | Walk the single-child chain |
+| 5 | [Replace Words](https://abpandey-dev.github.io/python-dsa-visualizer/handbook/#/q/tries/replace-words) | [648](https://leetcode.com/problems/replace-words/) | Medium | Shortest root in a trie |
+| 6 | [Longest Word in Dictionary](https://abpandey-dev.github.io/python-dsa-visualizer/handbook/#/q/tries/longest-word-in-dictionary) | [720](https://leetcode.com/problems/longest-word-in-dictionary/) | Medium | DFS through end nodes only |
+| 7 | [Search Suggestions System](https://abpandey-dev.github.io/python-dsa-visualizer/handbook/#/q/tries/search-suggestions-system) | [1268](https://leetcode.com/problems/search-suggestions-system/) | Medium | Trie nodes keep top 3 |
+| 8 | [Maximum XOR of Two Numbers in an Array](https://abpandey-dev.github.io/python-dsa-visualizer/handbook/#/q/tries/maximum-xor-of-two-numbers-in-an-array) | [421](https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/) | Medium | Binary trie, greedy opposite bit |
+| 9 | [Map Sum Pairs](https://abpandey-dev.github.io/python-dsa-visualizer/handbook/#/q/tries/map-sum-pairs) | [677](https://leetcode.com/problems/map-sum-pairs/) | Medium | Trie with prefix totals |
+| 10 | [Prefix and Suffix Search](https://abpandey-dev.github.io/python-dsa-visualizer/handbook/#/q/tries/prefix-and-suffix-search) | [745](https://leetcode.com/problems/prefix-and-suffix-search/) | Hard | Trie of 'suffix#word' |
+| 11 | [Stream of Characters](https://abpandey-dev.github.io/python-dsa-visualizer/handbook/#/q/tries/stream-of-characters) | [1032](https://leetcode.com/problems/stream-of-characters/) | Hard | Trie of reversed words |
+| 12 | [Concatenated Words](https://abpandey-dev.github.io/python-dsa-visualizer/handbook/#/q/tries/concatenated-words) | [472](https://leetcode.com/problems/concatenated-words/) | Hard | Trie + word-break DFS |
+| 13 | [Palindrome Pairs](https://abpandey-dev.github.io/python-dsa-visualizer/handbook/#/q/tries/palindrome-pairs) | [336](https://leetcode.com/problems/palindrome-pairs/) | Hard | Split each word, look up the reverse |
+| 14 | [Maximum XOR With an Element From Array](https://abpandey-dev.github.io/python-dsa-visualizer/handbook/#/q/tries/maximum-xor-with-an-element-from-array) | [1707](https://leetcode.com/problems/maximum-xor-with-an-element-from-array/) | Hard | Offline queries + binary trie |
+| 15 | [Sum of Prefix Scores of Strings](https://abpandey-dev.github.io/python-dsa-visualizer/handbook/#/q/tries/sum-of-prefix-scores-of-strings) | [2416](https://leetcode.com/problems/sum-of-prefix-scores-of-strings/) | Hard | Trie with pass counts |
+| 16 | [Short Encoding of Words](https://abpandey-dev.github.io/python-dsa-visualizer/handbook/#/q/tries/short-encoding-of-words) | [820](https://leetcode.com/problems/short-encoding-of-words/) | Medium | Trie of reversed words, count leaves |
+| 17 | [Lexicographical Numbers](https://abpandey-dev.github.io/python-dsa-visualizer/handbook/#/q/tries/lexicographical-numbers) | [386](https://leetcode.com/problems/lexicographical-numbers/) | Medium | Preorder walk of the digit trie |
+| 18 | [K-th Smallest in Lexicographical Order](https://abpandey-dev.github.io/python-dsa-visualizer/handbook/#/q/tries/k-th-smallest-in-lexicographical-order) | [440](https://leetcode.com/problems/k-th-smallest-in-lexicographical-order/) | Hard | Count subtree sizes, skip |
+| 19 | [Remove Sub-Folders from the Filesystem](https://abpandey-dev.github.io/python-dsa-visualizer/handbook/#/q/tries/remove-sub-folders-from-the-filesystem) | [1233](https://leetcode.com/problems/remove-sub-folders-from-the-filesystem/) | Medium | Trie of path parts |
+| 20 | [Counting Words With a Given Prefix](https://abpandey-dev.github.io/python-dsa-visualizer/handbook/#/q/tries/counting-words-with-a-given-prefix) | [2185](https://leetcode.com/problems/counting-words-with-a-given-prefix/) | Easy | Trie with counts |
+
+## Bit Manipulation
+
+| # | Question | LeetCode | Level | Pattern |
+|---|---|---|---|---|
+| 1 | [Single Number](https://abpandey-dev.github.io/python-dsa-visualizer/handbook/#/q/bits/single-number) | [136](https://leetcode.com/problems/single-number/) | Easy | XOR cancels pairs |
+| 2 | [Single Number II](https://abpandey-dev.github.io/python-dsa-visualizer/handbook/#/q/bits/single-number-ii) | [137](https://leetcode.com/problems/single-number-ii/) | Medium | Count bits mod 3 (ones / twos) |
+| 3 | [Single Number III](https://abpandey-dev.github.io/python-dsa-visualizer/handbook/#/q/bits/single-number-iii) | [260](https://leetcode.com/problems/single-number-iii/) | Medium | XOR, then split by a differing bit |
+| 4 | [Number of 1 Bits](https://abpandey-dev.github.io/python-dsa-visualizer/handbook/#/q/bits/number-of-1-bits) | [191](https://leetcode.com/problems/number-of-1-bits/) | Easy | n & (n − 1) |
+| 5 | [Counting Bits](https://abpandey-dev.github.io/python-dsa-visualizer/handbook/#/q/bits/counting-bits) | [338](https://leetcode.com/problems/counting-bits/) | Easy | DP on i >> 1 |
+| 6 | [Reverse Bits](https://abpandey-dev.github.io/python-dsa-visualizer/handbook/#/q/bits/reverse-bits) | [190](https://leetcode.com/problems/reverse-bits/) | Easy | Swap halves with masks |
+| 7 | [Power of Two](https://abpandey-dev.github.io/python-dsa-visualizer/handbook/#/q/bits/power-of-two) | [231](https://leetcode.com/problems/power-of-two/) | Easy | Exactly one set bit |
+| 8 | [Power of Four](https://abpandey-dev.github.io/python-dsa-visualizer/handbook/#/q/bits/power-of-four) | [342](https://leetcode.com/problems/power-of-four/) | Easy | One bit, on an even position |
+| 9 | [Sum of Two Integers](https://abpandey-dev.github.io/python-dsa-visualizer/handbook/#/q/bits/sum-of-two-integers) | [371](https://leetcode.com/problems/sum-of-two-integers/) | Medium | XOR = sum without carry, AND = carry |
+| 10 | [Bitwise AND of Numbers Range](https://abpandey-dev.github.io/python-dsa-visualizer/handbook/#/q/bits/bitwise-and-of-numbers-range) | [201](https://leetcode.com/problems/bitwise-and-of-numbers-range/) | Medium | Common binary prefix |
+| 11 | [Hamming Distance](https://abpandey-dev.github.io/python-dsa-visualizer/handbook/#/q/bits/hamming-distance) | [461](https://leetcode.com/problems/hamming-distance/) | Easy | Popcount of XOR |
+| 12 | [Total Hamming Distance](https://abpandey-dev.github.io/python-dsa-visualizer/handbook/#/q/bits/total-hamming-distance) | [477](https://leetcode.com/problems/total-hamming-distance/) | Medium | Count each bit: ones × zeros |
+| 13 | [Sum of All Subset XOR Totals](https://abpandey-dev.github.io/python-dsa-visualizer/handbook/#/q/bits/sum-of-all-subset-xor-totals) | [1863](https://leetcode.com/problems/sum-of-all-subset-xor-totals/) | Easy | Each bit is in half the subsets |
+| 14 | [Find the Difference](https://abpandey-dev.github.io/python-dsa-visualizer/handbook/#/q/bits/find-the-difference) | [389](https://leetcode.com/problems/find-the-difference/) | Easy | XOR all characters |
+| 15 | [Divide Two Integers](https://abpandey-dev.github.io/python-dsa-visualizer/handbook/#/q/bits/divide-two-integers) | [29](https://leetcode.com/problems/divide-two-integers/) | Medium | Subtract shifted divisors |
+| 16 | [Minimum Flips to Make a OR b Equal to c](https://abpandey-dev.github.io/python-dsa-visualizer/handbook/#/q/bits/minimum-flips-to-make-a-or-b-equal-to-c) | [1318](https://leetcode.com/problems/minimum-flips-to-make-a-or-b-equal-to-c/) | Medium | Per-bit cases |
+| 17 | [Minimum Bit Flips to Convert Number](https://abpandey-dev.github.io/python-dsa-visualizer/handbook/#/q/bits/minimum-bit-flips-to-convert-number) | [2220](https://leetcode.com/problems/minimum-bit-flips-to-convert-number/) | Easy | Popcount of XOR |
+| 18 | [Count Triplets That Can Form Two Arrays of Equal XOR](https://abpandey-dev.github.io/python-dsa-visualizer/handbook/#/q/bits/count-triplets-that-can-form-two-arrays-of-equal-xor) | [1442](https://leetcode.com/problems/count-triplets-that-can-form-two-arrays-of-equal-xor/) | Medium | Prefix XOR + index sums |
+| 19 | [XOR Queries of a Subarray](https://abpandey-dev.github.io/python-dsa-visualizer/handbook/#/q/bits/xor-queries-of-a-subarray) | [1310](https://leetcode.com/problems/xor-queries-of-a-subarray/) | Medium | Prefix XOR |
+| 20 | [Gray Code](https://abpandey-dev.github.io/python-dsa-visualizer/handbook/#/q/bits/gray-code) | [89](https://leetcode.com/problems/gray-code/) | Medium | i ^ (i >> 1) |
 
 ## Build
 

@@ -4,9 +4,9 @@ Interactive, step-by-step lessons for learning data structures and algorithms in
 
 **Live site:** https://abpandey-dev.github.io/python-dsa-visualizer/
 
-## [DSA Interview Handbook](handbook/) — 12 topics · 240 questions
+## [DSA Interview Handbook](handbook/) — 14 topics · 280 questions
 
-The 12 core DSA topics, each explained with an animated example, plus the **top 20 most-asked interview questions** for every topic. Each question has a brute-force solution, the optimal solution, time and space complexity, and a step-by-step animation of the optimal code running. Search by title, LeetCode number or pattern.
+The 14 core DSA topics, each explained with an animated example, plus the **top 20 most-asked interview questions** for every topic. Each question has a brute-force solution, the optimal solution, time and space complexity, and a step-by-step animation of the optimal code running. Search by title, LeetCode number or pattern.
 
 **Open it:** https://abpandey-dev.github.io/python-dsa-visualizer/handbook/ · [Full question list](handbook/README.md)
 
@@ -24,6 +24,8 @@ The 12 core DSA topics, each explained with an animated example, plus the **top 
 | 10 | Graphs | BFS/DFS, topological sort, union-find, Dijkstra, MST |
 | 11 | Dynamic Programming | 1-D, knapsack, two strings, grid, interval |
 | 12 | Greedy & Intervals | merge, schedule, sweep line, two-pass |
+| 13 | Tries | prefix trees, autocomplete, Word Search II, binary XOR tries |
+| 14 | Bit Manipulation | XOR tricks, n & (n − 1), masks, prefix XOR |
 
 ## Lessons
 

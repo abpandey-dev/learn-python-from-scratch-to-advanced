@@ -303,5 +303,42 @@ def H(name, heap, hl=()):
     return view
 
 
+def BITS(name, x, width=8, hl=(), ok=()):
+    """Binary digits of x, most significant bit on the left. hl/ok are bit positions (0 = lowest bit)."""
+    shown = x & ((1 << width) - 1)
+    bits = [(shown >> (width - 1 - i)) & 1 for i in range(width)]
+    pos = lambda ps: [width - 1 - p for p in _idx(ps) if 0 <= p < width]
+    return {"k": "arr", "n": f"{name} = {x}", "v": [str(b) for b in bits], "p": {},
+            "hl": pos(hl), "ok": pos(ok), "bad": [], "il": [str(width - 1 - i) for i in range(width)]}
+
+
+def TRIE(name, root, hl=(), ok=()):
+    """A trie drawn as a tree. Nodes are dicts (end marker "$") or objects with .children and .end/.word."""
+    nodes, index = [], {}
+
+    def kids(n):
+        if isinstance(n, dict):
+            return [(k, v) for k, v in n.items() if isinstance(v, dict)], "$" in n
+        return list(n.children.items()), bool(getattr(n, "end", False) or getattr(n, "word", None))
+
+    def walk(n, label):
+        if len(nodes) >= 60:
+            return -1
+        i = len(nodes)
+        index[id(n)] = i
+        ch, end = kids(n)
+        nodes.append([label, [], end])
+        for k, c in sorted(ch, key=lambda kv: str(kv[0])):
+            j = walk(c, s(k))
+            if j >= 0:
+                nodes[i][1].append(j)
+        return i
+
+    if root is not None:
+        walk(root, "")
+    ids = lambda xs: [index[id(n)] for n in xs or [] if id(n) in index]
+    return {"k": "ntree", "n": name, "v": nodes, "hl": ids(hl), "ok": ids(ok)}
+
+
 __all__ = ["ListNode", "TreeNode", "mk_list", "list_arr", "mk_tree", "tree_arr", "find",
-           "TOPIC", "Q", "B", "O", "D", "T", "A", "V", "M", "S", "G", "L", "TR", "GR", "H", "math"]
+           "TOPIC", "Q", "B", "O", "D", "T", "A", "V", "M", "S", "G", "L", "TR", "GR", "H", "BITS", "TRIE", "math"]

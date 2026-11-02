@@ -10,7 +10,7 @@ import math
 import sys
 import textwrap
 
-REG = {"topic": None, "questions": [], "demo": None}
+REG = {"topic": None, "questions": [], "demo": None, "lessons": []}
 MAX_FRAMES = 90
 
 
@@ -105,7 +105,7 @@ def _code(fn):
     kept, raw_to_kept = [], {}
     for i, line in enumerate(src):
         s = line.strip()
-        if s.startswith("T(") or s in ("@B", "@O", "@D"):
+        if s.startswith("T(") or s in ("@B", "@O", "@D", "@LD"):
             continue
         raw_to_kept[i] = len(kept)
         kept.append(line)
@@ -126,6 +126,18 @@ def O(fn):
 def D(fn):
     """Topic concept demo: a small traced function shown with the theory."""
     REG["demo"] = fn
+    return fn
+
+
+def LESSON(level, title, body, practice=()):
+    """One step of a topic's learning path. level: Basics, Core or Advanced.
+    practice: LeetCode numbers of this topic's questions that use the idea."""
+    REG["lessons"].append(dict(level=level, title=title, body=body, practice=list(practice), demo=None))
+
+
+def LD(fn):
+    """Animated example attached to the most recent LESSON."""
+    REG["lessons"][-1]["demo"] = fn
     return fn
 
 
@@ -341,4 +353,4 @@ def TRIE(name, root, hl=(), ok=()):
 
 
 __all__ = ["ListNode", "TreeNode", "mk_list", "list_arr", "mk_tree", "tree_arr", "find",
-           "TOPIC", "Q", "B", "O", "D", "T", "A", "V", "M", "S", "G", "L", "TR", "GR", "H", "BITS", "TRIE", "math"]
+           "TOPIC", "Q", "B", "O", "D", "LESSON", "LD", "T", "A", "V", "M", "S", "G", "L", "TR", "GR", "H", "BITS", "TRIE", "math"]

@@ -213,3 +213,33 @@ a.badge:hover { color: var(--accent); border-color: var(--accent); }
 .llist .box { border-radius: 20px; }
 svg.tv, svg.gv { width: 100%; height: auto; display: block; }
 svg text { font-family: var(--f-mono); font-weight: 600; }
+
+/* Learning path */
+.path { display: flex; flex-direction: column; gap: 12px; }
+.lnav { display: flex; flex-direction: column; gap: 10px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px; }
+.lgroup { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.lgroup button { font: 13px var(--f-body); padding: 5px 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--sunk); cursor: pointer; text-align: left; }
+.lgroup button:hover { border-color: var(--accent); color: var(--accent); }
+.lvl { font: 600 11px var(--f-mono); letter-spacing: .06em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; }
+.lvl.Basics { background: var(--good-soft); color: var(--good); }
+.lvl.Core { background: var(--blue-soft); color: var(--blue); }
+.lvl.Advanced { background: var(--bad-soft); color: var(--bad); }
+.lgroup .lvl { min-width: 84px; text-align: center; }
+.lesson { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: clamp(16px, 3vw, 26px); display: flex; flex-direction: column; gap: 14px; scroll-margin-top: 76px; }
+.lhead { display: flex; gap: 12px; align-items: flex-start; }
+.lhead h3 { font-size: 1.35rem; font-weight: 800; margin-top: 6px; }
+.lnum { font: 800 15px/1 var(--f-mono); color: var(--on-accent); background: var(--accent); border-radius: 9px; padding: 8px 10px; flex: none; }
+.lbody { display: flex; flex-direction: column; gap: 10px; }
+.lbody h4 { margin: 6px 0 0; font: 700 1rem var(--f-body); color: var(--accent); }
+.lbody ul, .lbody ol { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 5px; max-width: 80ch; }
+.lbody pre { background: var(--code-bg); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; overflow-x: auto; font: 14px/1.55 var(--f-mono); }
+.lbody table { border-collapse: collapse; font-size: 15px; display: block; overflow-x: auto; max-width: 100%; }
+.lbody th, .lbody td { border: 1px solid var(--line); padding: 6px 10px; text-align: left; }
+.lbody th { background: var(--sunk); }
+.lbody .pic { font: 14px/1.5 var(--f-mono); background: var(--sunk); border: 1px dashed var(--line-strong); border-radius: 10px; padding: 10px 14px; white-space: pre; overflow-x: auto; }
+.lbody .tip { background: var(--accent-soft); border-left: 4px solid var(--accent); border-radius: 8px; padding: 10px 14px; }
+.lbody .warn { background: var(--hot-soft); border-left: 4px solid var(--hot); border-radius: 8px; padding: 10px 14px; }
+.ldemo { display: flex; flex-direction: column; gap: 8px; }
+.watch { font: 600 13px var(--f-mono); color: var(--accent); }
+.lpractice { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 14px; color: var(--muted); }
+.refsec { display: flex; flex-direction: column; gap: 6px; margin-top: 12px; }

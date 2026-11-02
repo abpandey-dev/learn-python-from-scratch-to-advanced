@@ -1,6 +1,6 @@
 # DSA Interview Handbook
 
-14 topics · 280 most-asked interview questions · Python · brute force and optimal solution for each, with a step-by-step animation of the optimal one.
+14 topics · 90 lessons from basics to advanced · 280 most-asked interview questions · Python · brute force and optimal solution for each, with a step-by-step animation of the optimal one.
 
 **Live site:** https://abpandey-dev.github.io/python-dsa-visualizer/handbook/
 

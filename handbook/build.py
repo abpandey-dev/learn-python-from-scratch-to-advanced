@@ -75,11 +75,14 @@ def type_name(q):
 
 
 def load(path):
-    lib.REG.update(topic=None, questions=[], demo=None)
-    spec = importlib.util.spec_from_file_location(f"topic_{path.stem}", path)
-    mod = importlib.util.module_from_spec(spec)
-    sys.modules[spec.name] = mod  # inspect needs this to find class sources
-    spec.loader.exec_module(mod)
+    lib.REG.update(topic=None, questions=[], demo=None, lessons=[])
+    for kind, file in (("topic", path), ("lessons", ROOT / "src" / "lessons" / path.name)):
+        if not file.exists():
+            continue
+        spec = importlib.util.spec_from_file_location(f"{kind}_{path.stem}", file)
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = mod  # inspect needs this to find class sources
+        spec.loader.exec_module(mod)
     return dict(lib.REG)
 
 
@@ -91,6 +94,25 @@ def build_topic(path, failures):
         code = lib.start_trace(reg["demo"])
         reg["demo"]()
         out["demo"] = {"code": code, "frames": lib.stop_trace(), "title": meta.get("demo_title", "")}
+    by_lc = {q["lc"]: slug(q["title"]) for q in reg["questions"]}
+    out["lessons"] = []
+    for k, les in enumerate(reg["lessons"], 1):
+        item = {"level": les["level"], "title": les["title"], "body": les["body"], "practice": []}
+        for lc in les["practice"]:
+            if lc in by_lc:
+                item["practice"].append(by_lc[lc])
+            else:
+                failures.append(f"{meta['id']} lesson {k}: practice LC {lc} is not a question in this topic")
+        if les["demo"]:
+            code = lib.start_trace(les["demo"])
+            try:
+                les["demo"]()
+            except Exception as e:  # noqa: BLE001
+                failures.append(f"{meta['id']} lesson {k} demo: {type(e).__name__}: {e}")
+            item["demo"] = {"code": code, "frames": lib.stop_trace()}
+            if not item["demo"]["frames"]:
+                failures.append(f"{meta['id']} lesson {k} demo recorded no frames")
+        out["lessons"].append(item)
     index = []
     seen = set()
     for n, q in enumerate(reg["questions"], 1):
@@ -135,6 +157,7 @@ def build_topic(path, failures):
         }
         index.append({"id": qid, "n": n, "lc": q["lc"], "title": q["title"], "diff": q["diff"], "tags": q["tags"]})
     topic_index = {k: meta[k] for k in ("id", "title", "blurb", "glyph")}
+    topic_index["lessons"] = len(out["lessons"])
     topic_index["qs"] = index
     return out, topic_index
 
@@ -144,7 +167,7 @@ def readme(topics):
     lines = [
         "# DSA Interview Handbook",
         "",
-        f"{len(topics)} topics · {total} most-asked interview questions · Python · brute force and optimal solution for each, with a step-by-step animation of the optimal one.",
+        f"{len(topics)} topics · {sum(t['lessons'] for t in topics)} lessons from basics to advanced · {total} most-asked interview questions · Python · brute force and optimal solution for each, with a step-by-step animation of the optimal one.",
         "",
         "**Live site:** https://abpandey-dev.github.io/python-dsa-visualizer/handbook/",
         "",

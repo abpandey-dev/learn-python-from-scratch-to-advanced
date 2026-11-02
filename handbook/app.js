@@ -338,7 +338,7 @@
         const d = t.qs.filter((q) => isDone(t.id, q.id)).length;
         return `<a class="card" href="#/t/${t.id}"><span class="g">${String(i + 1).padStart(2, "0")} ${esc(t.glyph)}</span><h3>${esc(t.title)}</h3><p>${esc(t.blurb)}</p>
           <div class="bar" title="${d} of ${t.qs.length} done"><i style="width:${(100 * d) / t.qs.length}%"></i></div>
-          <div class="meta"><span>${t.qs.length} questions</span><span>${countBy(t, "Easy")}E · ${countBy(t, "Medium")}M · ${countBy(t, "Hard")}H</span></div></a>`;
+          <div class="meta"><span>${t.lessons ? t.lessons + " lessons · " : ""}${t.qs.length} questions</span><span>${countBy(t, "Easy")}E · ${countBy(t, "Medium")}M · ${countBy(t, "Hard")}H</span></div></a>`;
       }).join("")}</section>
       <section class="how">
         <div><b>1 · Learn the topic</b>What it is, when to use it, the cost of each operation and a code template.</div>
@@ -358,12 +358,25 @@
     app.innerHTML = `
       <p class="crumbs"><a href="#/">Home</a> / <span>${esc(t.title)}</span></p>
       <section class="hero"><p class="eyebrow">Topic ${n} of ${TOPICS.length}</p><h1>${esc(t.title)}</h1><p class="lead">${esc(t.blurb)}</p></section>
+      ${lessonPath(t, data)}
+      <section class="refsec"><h2>Quick reference</h2><p class="lead">The whole topic on one card — come back here before an interview.</p></section>
       <section class="theory">${data.theory}</section>
       <section class="sol" id="demo"></section>
       <section style="display:flex;flex-direction:column;gap:12px">
         <div class="qtools"><h2>Top ${t.qs.length} questions</h2><div class="chips" role="group" aria-label="Filter by difficulty">${["All", "Easy", "Medium", "Hard"].map((d) => `<button class="chip" data-d="${d}" aria-pressed="${d === "All"}">${d}</button>`).join("")}</div></div>
         <div class="qlist"></div>
       </section>`;
+    app.querySelectorAll("pre code.py").forEach((c) => { c.innerHTML = c.textContent.split("\n").map(hiLine).join("\n"); });
+    (data.lessons || []).forEach((les, k) => {
+      if (!les.demo) return;
+      const slot = app.querySelector(`#l-${k + 1} .ldemo`);
+      slot.appendChild(player({ code: les.demo.code, frames: les.demo.frames }));
+    });
+    const nav = app.querySelector(".lnav");
+    if (nav) nav.addEventListener("click", (e) => {
+      const b = e.target.closest("[data-l]"); if (!b) return;
+      app.querySelector("#l-" + b.dataset.l).scrollIntoView({ behavior: "smooth", block: "start" });
+    });
     if (data.demo) {
       const box = app.querySelector("#demo");
       box.innerHTML = `<div class="sol-h"><span class="step-n">▶</span><h3>See it work: ${esc(data.demo.title)}</h3></div>`;
@@ -384,6 +397,25 @@
       draw(b.dataset.d);
     });
     list.addEventListener("change", (e) => { if (e.target.dataset.q) toggleDone(t.id, e.target.dataset.q, e.target.checked); });
+  }
+
+  function lessonPath(t, data) {
+    const ls = data.lessons || [];
+    if (!ls.length) return "";
+    const title = (qid) => (t.qs.find((q) => q.id === qid) || {}).title || qid;
+    const nav = ["Basics", "Core", "Advanced"].map((lv) => {
+      const items = ls.map((l, k) => [l, k]).filter(([l]) => l.level === lv);
+      if (!items.length) return "";
+      return `<div class="lgroup"><span class="lvl ${lv}">${lv}</span>${items.map(([l, k]) => `<button type="button" data-l="${k + 1}">${k + 1}. ${esc(l.title)}</button>`).join("")}</div>`;
+    }).join("");
+    const cards = ls.map((l, k) => `
+      <article class="lesson" id="l-${k + 1}">
+        <div class="lhead"><span class="lnum">${k + 1}</span><div><span class="lvl ${l.level}">${l.level}</span><h3>${esc(l.title)}</h3></div></div>
+        <div class="lbody">${l.body}</div>
+        ${l.demo ? `<div class="ldemo"><p class="watch">▶ Watch it run — press play or use ← →</p></div>` : ""}
+        ${l.practice.length ? `<div class="lpractice"><span>Practise this:</span>${l.practice.map((q) => `<a class="badge" href="#/q/${t.id}/${q}">${esc(title(q))}</a>`).join("")}</div>` : ""}
+      </article>`).join("");
+    return `<section class="path"><h2>Learn it: from scratch to advanced</h2><p class="lead">${ls.length} short lessons in order. Read them top to bottom, then solve the questions.</p><nav class="lnav" aria-label="Lessons">${nav}</nav></section>${cards}`;
   }
 
   async function questionPage(tid, qid) {

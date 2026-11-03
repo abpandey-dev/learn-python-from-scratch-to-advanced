@@ -4,6 +4,27 @@ Interactive, step-by-step lessons for learning data structures and algorithms in
 
 **Live site:** https://abpandey-dev.github.io/python-dsa-visualizer/
 
+## [Python from Scratch](python-course/) — 12 topics · 240 practice questions
+
+A full course for someone writing their first line of Python. Each topic has a **Theory** tab (definitions, rules, tables, common mistakes and theory questions with answers), **Lessons** from the basics to advanced use, and **20 practice questions**, each answered twice — a brute-force "long way" and an optimal "Pythonic way". Every lesson example and every answer can be watched **running line by line**: variables, objects, the call stack and printed output update at each step, like Python Tutor.
+
+**Open it:** https://abpandey-dev.github.io/python-dsa-visualizer/python-course/ · [Full question list](python-course/README.md)
+
+| # | Topic | Covers |
+|---|---|---|
+| 1 | Python Basics | print, variables, data types, type conversion, input |
+| 2 | Operators & Expressions | arithmetic, comparison, logical, assignment, precedence, bitwise |
+| 3 | Conditions | if / elif / else, nesting, conditional expressions, match-case |
+| 4 | Loops | for, range, while, break / continue / else, nested loops |
+| 5 | Strings | indexing, slicing, methods, immutability, formatting |
+| 6 | Lists | methods, aliasing and copying, sorting, 2-D lists |
+| 7 | Tuples & Sets | unpacking, hashability, set operations |
+| 8 | Dictionaries | lookups, counting, grouping, nesting, comprehensions |
+| 9 | Functions & Recursion | parameters, *args/**kwargs, scope, lambdas, closures, recursion, memoisation |
+| 10 | Comprehensions, Iterators & Generators | comprehensions, built-ins, iterator protocol, yield, itertools |
+| 11 | Object-Oriented Programming | classes, properties, inheritance, polymorphism, dunder methods, dataclasses |
+| 12 | Errors, Exceptions & Files | try / except / else / finally, custom exceptions, files, context managers |
+
 ## [DSA Interview Handbook](handbook/) — 14 topics · 280 questions
 
 The 14 core DSA topics. Each topic has a **Theory** tab (definition, types, operations and their cost, pros and cons, applications, comparisons, and theory questions with model answers), a **Lessons** tab that teaches it from scratch to advanced in 5–8 short animated lessons, a one-card **Quick reference**, and the **top 20 most-asked interview questions**. Each question has a brute-force solution, the optimal solution, time and space complexity, and a step-by-step animation of the optimal code running. Search by title, LeetCode number or pattern.
@@ -61,6 +82,10 @@ The handbook is generated from the Python sources in `handbook/src/topics/`. `bu
 
 ```bash
 python3 handbook/build.py
+```
+
+```bash
+python3 handbook/build.py --book python-course
 ```
 
 To view it locally, serve the folder (the page loads its data files lazily):

@@ -3,6 +3,19 @@
 (function () {
   "use strict";
   const TOPICS = window.DSA_INDEX || [];
+  // Per-site wording; a page can override any of it with window.BOOK before loading this script.
+  const BOOK = Object.assign({
+    title: "DSA Interview Handbook", short: "DSA Handbook", unit: "most-asked questions",
+    lead: "Each topic starts with a plain explanation and an animated example. Then come the <b>top 20 interview questions</b> for that topic, each with a brute-force solution, the optimal solution and a step-by-step animation of the optimal code running.",
+    how: [["1 · Learn the topic", "What it is, when to use it, the cost of each operation and a code template."],
+      ["2 · Brute force first", "The first idea that works, with its time and space, so you can explain why it's slow."],
+      ["3 · Optimal + animation", "Press ▶ to watch the optimal code run line by line on a sample input. Use ← → to step."],
+      ["4 · Search anything", "Press <code>/</code> and type a title, a LeetCode number or a pattern such as “monotonic stack”."]],
+    searchHint: "${BOOK.searchHint}",
+    bruteLabel: "Brute force", optLabel: "Optimal", watchBrute: "Watch the brute force run", watchOpt: "Watch the optimal solution run",
+    qsHeading: "Top {n} questions",
+  }, window.BOOK || {});
+  const lcText = (q) => (q.lc ? `LC ${q.lc} · ` : "");
   const app = document.getElementById("app");
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const h = (tag, attrs, html) => { const e = document.createElement(tag); if (attrs) for (const k in attrs) e.setAttribute(k, attrs[k]); if (html != null) e.innerHTML = html; return e; };
@@ -216,7 +229,10 @@
     });
     return s;
   }
-  const RENDER = { arr: vArr, vars: vVars, map: vMap, stack: vStack, grid: vGrid, list: vList, tree: vTree, graph: vGraph, ntree: vNTree };
+  function vOut(v) {
+    return h("pre", { class: "console" }, v.v.length ? v.v.map(esc).join("\n") : '<span class="empty-v">(nothing printed yet)</span>');
+  }
+  const RENDER = { arr: vArr, vars: vVars, map: vMap, stack: vStack, grid: vGrid, list: vList, tree: vTree, graph: vGraph, ntree: vNTree, out: vOut };
   function renderView(v) {
     const wrap = h("div", { class: "view" });
     if (v.n) wrap.appendChild(h("div", { class: "vname" }, esc(v.n)));
@@ -297,10 +313,10 @@
   function drawResults() {
     if (!qIn.value.trim()) { resBox.hidden = true; return; }
     resBox.hidden = false;
-    if (!hits.length) { resBox.innerHTML = `<div class="empty">No match for “${esc(qIn.value)}”. Try a pattern like “sliding window”, a LeetCode number, or a title.</div>`; return; }
+    if (!hits.length) { resBox.innerHTML = `<div class="empty">No match for “${esc(qIn.value)}”. ${BOOK.searchHint}</div>`; return; }
     resBox.innerHTML = hits.map((x, k) => x.topic
       ? `<a href="#/t/${x.topic.id}" class="${k === sel ? "on" : ""}"><span class="rt">${esc(x.topic.title)}</span><span class="diff Easy">Topic</span><span class="rs">${x.topic.qs.length} questions · ${esc(x.topic.blurb)}</span></a>`
-      : `<a href="#/q/${x.t.id}/${x.q.id}" class="${k === sel ? "on" : ""}"><span class="rt">${esc(x.q.title)}</span><span class="diff ${x.q.diff}">${x.q.diff}</span><span class="rs">${esc(x.t.title)} · LC ${x.q.lc} · ${esc(x.q.tags)}</span></a>`).join("");
+      : `<a href="#/q/${x.t.id}/${x.q.id}" class="${k === sel ? "on" : ""}"><span class="rt">${esc(x.q.title)}</span><span class="diff ${x.q.diff}">${x.q.diff}</span><span class="rs">${esc(x.t.title)} · ${lcText(x.q)}${esc(x.q.tags)}</span></a>`).join("");
   }
   qIn.addEventListener("input", () => { hits = search(qIn.value); sel = 0; drawResults(); });
   qIn.addEventListener("keydown", (e) => {
@@ -320,13 +336,13 @@
   function countBy(t, d) { return t.qs.filter((q) => q.diff === d).length; }
 
   function home() {
-    document.title = "DSA Interview Handbook";
+    document.title = BOOK.title;
     const doneN = ALL.filter((x) => isDone(x.t.id, x.q.id)).length;
     app.innerHTML = `
       <section class="hero">
-        <p class="eyebrow">${TOPICS.length} topics · ${total} most-asked questions · Python</p>
-        <h1>DSA Interview Handbook</h1>
-        <p class="lead">Each topic starts with a plain explanation and an animated example. Then come the <b>top 20 interview questions</b> for that topic, each with a brute-force solution, the optimal solution and a step-by-step animation of the optimal code running.</p>
+        <p class="eyebrow">${TOPICS.length} topics · ${total} ${BOOK.unit} · Python</p>
+        <h1>${BOOK.title}</h1>
+        <p class="lead">${BOOK.lead}</p>
         <div class="stats">
           <div class="stat"><b>${TOPICS.length}</b><span>topics</span></div>
           <div class="stat"><b>${total}</b><span>questions</span></div>
@@ -340,18 +356,14 @@
           <div class="bar" title="${d} of ${t.qs.length} done"><i style="width:${(100 * d) / t.qs.length}%"></i></div>
           <div class="meta"><span>${t.lessons ? t.lessons + " lessons · " : ""}${t.qs.length} questions</span><span>${countBy(t, "Easy")}E · ${countBy(t, "Medium")}M · ${countBy(t, "Hard")}H</span></div></a>`;
       }).join("")}</section>
-      <section class="how">
-        <div><b>1 · Learn the topic</b>What it is, when to use it, the cost of each operation and a code template.</div>
-        <div><b>2 · Brute force first</b>The first idea that works, with its time and space, so you can explain why it's slow.</div>
-        <div><b>3 · Optimal + animation</b>Press ▶ to watch the optimal code run line by line on a sample input. Use ← → to step.</div>
-        <div><b>4 · Search anything</b>Press <code>/</code> and type a title, a LeetCode number or a pattern such as “monotonic stack”.</div>
+      <section class="how">${BOOK.how.map(([a, b]) => `<div><b>${a}</b>${b}</div>`).join("")}
       </section>`;
   }
 
   async function topicPage(id, tab) {
     const t = TOPICS.find((x) => x.id === id);
     if (!t) return notFound();
-    document.title = t.title + " · DSA Handbook";
+    document.title = t.title + " · " + BOOK.short;
     app.innerHTML = `<p class="crumbs"><a href="#/">Home</a> / <span>${esc(t.title)}</span></p><p class="empty-v">Loading…</p>`;
     const data = await loadTopic(id);
     const n = TOPICS.indexOf(t) + 1;
@@ -370,7 +382,7 @@
       </div>
       <div class="tabpanel" data-panel="qs">
       <section style="display:flex;flex-direction:column;gap:12px">
-        <div class="qtools"><h2>Top ${t.qs.length} questions</h2><div class="chips" role="group" aria-label="Filter by difficulty">${["All", "Easy", "Medium", "Hard"].map((d) => `<button class="chip" data-d="${d}" aria-pressed="${d === "All"}">${d}</button>`).join("")}</div></div>
+        <div class="qtools"><h2>${BOOK.qsHeading.replace("{n}", t.qs.length)}</h2><div class="chips" role="group" aria-label="Filter by difficulty">${["All", "Easy", "Medium", "Hard"].map((d) => `<button class="chip" data-d="${d}" aria-pressed="${d === "All"}">${d}</button>`).join("")}</div></div>
         <div class="qlist"></div>
       </section>
       </div>
@@ -409,7 +421,7 @@
     function draw(filter) {
       list.innerHTML = t.qs.filter((q) => filter === "All" || q.diff === filter).map((q) => `
         <div class="qrow"><span class="n">${String(q.n).padStart(2, "0")}</span>
-          <a class="t" href="#/q/${t.id}/${q.id}">${esc(q.title)}<span class="tg">LC ${q.lc} · ${esc(q.tags)}</span></a>
+          <a class="t" href="#/q/${t.id}/${q.id}">${esc(q.title)}<span class="tg">${lcText(q)}${esc(q.tags)}</span></a>
           <span class="diff ${q.diff}">${q.diff}</span>
           <input type="checkbox" class="done-box" data-q="${q.id}" aria-label="Mark ${esc(q.title)} as done" ${isDone(t.id, q.id) ? "checked" : ""}></div>`).join("");
     }
@@ -456,7 +468,7 @@
     const t = TOPICS.find((x) => x.id === tid);
     const meta = t && t.qs.find((q) => q.id === qid);
     if (!meta) return notFound();
-    document.title = meta.title + " · DSA Handbook";
+    document.title = meta.title + " · " + BOOK.short;
     const data = await loadTopic(tid);
     const q = data.qs[qid];
     const k = t.qs.indexOf(meta), prev = t.qs[k - 1], next = t.qs[k + 1];
@@ -465,21 +477,25 @@
       <section class="qhead">
         <h1>${esc(meta.title)}</h1>
         <div class="badges"><span class="diff ${meta.diff}">${meta.diff}</span><span class="badge">${esc(meta.tags)}</span>
-          <a class="badge" href="https://leetcode.com/problems/${lcSlug(meta.title)}/" target="_blank" rel="noopener">LeetCode ${meta.lc} ↗</a>
+          ${meta.lc ? `<a class="badge" href="https://leetcode.com/problems/${lcSlug(meta.title)}/" target="_blank" rel="noopener">LeetCode ${meta.lc} ↗</a>` : ""}
           <span class="badge">✓ ${q.tests} tests pass</span></div>
         <p class="stmt">${q.statement}</p>
         <div class="examples">${q.examples.map(([a, o], i) => `<div class="ex"><span>Example ${i + 1}:</span> ${esc(a)}<br><span>Output:</span> ${esc(o)}</div>`).join("")}</div>
       </section>
-      <section class="sol brute"><div class="sol-h"><span class="step-n">1</span><h2>Brute force</h2><div class="cx"><span>Time ${esc(q.brute.tc)}</span><span>Space ${esc(q.brute.sc)}</span></div></div><p class="idea">${q.brute.idea}</p></section>
-      <section class="sol opt"><div class="sol-h"><span class="step-n">2</span><h2>Optimal</h2><div class="cx"><span>Time ${esc(q.opt.tc)}</span><span>Space ${esc(q.opt.sc)}</span></div></div><p class="idea">${q.opt.idea}</p></section>
+      <section class="sol brute"><div class="sol-h"><span class="step-n">1</span><h2>${BOOK.bruteLabel}</h2><div class="cx"><span>Time ${esc(q.brute.tc)}</span><span>Space ${esc(q.brute.sc)}</span></div></div><p class="idea">${q.brute.idea}</p></section>
+      <section class="sol opt"><div class="sol-h"><span class="step-n">2</span><h2>${BOOK.optLabel}</h2><div class="cx"><span>Time ${esc(q.opt.tc)}</span><span>Space ${esc(q.opt.sc)}</span></div></div><p class="idea">${q.opt.idea}</p></section>
       <div class="qnav">
         ${prev ? `<a class="btn" href="#/q/${t.id}/${prev.id}">← ${esc(prev.title)}</a>` : `<a class="btn" href="#/t/${t.id}/qs">← ${esc(t.title)}</a>`}
         <button class="btn ${isDone(t.id, qid) ? "good" : ""}" id="mark" type="button">${isDone(t.id, qid) ? "✓ Done" : "Mark as done"}</button>
         ${next ? `<a class="btn" href="#/q/${t.id}/${next.id}">${esc(next.title)} →</a>` : nextTopicLink(t)}
       </div>`;
-    app.querySelector(".brute").appendChild(codeBlock(q.brute.code));
+    const brute = app.querySelector(".brute");
+    if (q.brute.frames && q.brute.frames.length) {
+      brute.appendChild(h("h3", null, BOOK.watchBrute));
+      brute.appendChild(player({ code: q.brute.code, frames: q.brute.frames, input: q.vizIn }));
+    } else brute.appendChild(codeBlock(q.brute.code));
     const opt = app.querySelector(".opt");
-    opt.appendChild(h("h3", null, "Watch the optimal solution run"));
+    opt.appendChild(h("h3", null, BOOK.watchOpt));
     opt.appendChild(player({ code: q.opt.code, frames: q.opt.frames, input: q.vizIn }));
     app.querySelector("#mark").addEventListener("click", (e) => {
       const on = !isDone(t.id, qid); toggleDone(t.id, qid, on);

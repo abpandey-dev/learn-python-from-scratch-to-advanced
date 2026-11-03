@@ -193,6 +193,115 @@ def T(msg, *views, at="next"):
     _Trace.frames.append({"m": msg, "l": line, "v": [v for v in views if v]})
 
 
+# ---------- automatic line-by-line tracing (Python Tutor style) ----------
+
+def _value_views(name, v):
+    if isinstance(v, bool) or v is None or isinstance(v, (int, float, complex)):
+        return None
+    if isinstance(v, str):
+        return None
+    if isinstance(v, list):
+        return A(name, v)
+    if isinstance(v, tuple):
+        return A(name + "  (tuple)", v)
+    if isinstance(v, (set, frozenset)):
+        return M(name + "  (set)", sorted(v, key=repr))
+    if isinstance(v, dict):
+        return M(name + "  (dict)", v)
+    if isinstance(v, range):
+        return None
+    if hasattr(v, "__dict__") and not callable(v):
+        return M(f"{name}  ({type(v).__name__} object)", {k: x for k, x in vars(v).items() if not k.startswith("_")})
+    return None
+
+
+def _short(v):
+    r = repr(v)
+    return r if len(r) <= 40 else r[:37] + "..."
+
+
+def _frame_views(frame, stack, out):
+    views = []
+    if len(stack) > 1:
+        views.append(S("call stack (newest on top)", stack, hl=[len(stack) - 1]))
+    scalars, rich = {}, []
+    for k, v in frame.f_locals.items():
+        if k.startswith("_") or k == "self" and False:
+            continue
+        if inspect.ismodule(v) or inspect.isclass(v) or inspect.isfunction(v) or inspect.isbuiltin(v) or inspect.ismethod(v):
+            continue
+        view = _value_views(k, v)
+        if view is None:
+            scalars[k] = _short(v) if isinstance(v, (str, range)) or v is None or isinstance(v, (int, float, bool, complex)) else type(v).__name__
+        else:
+            rich.append(view)
+    if scalars:
+        views.append({"k": "vars", "n": "variables", "v": [[k, x] for k, x in scalars.items()]})
+    views += rich
+    text = out.getvalue()
+    if text:
+        views.append({"k": "out", "n": "printed output", "v": text.rstrip("\n").split("\n")})
+    return views
+
+
+def auto_trace(fn, call, limit=MAX_FRAMES):
+    """Run call() and record a frame before every line of fn's source (and on returns and errors)."""
+    import contextlib
+    import io
+    code, raw_to_kept, first, nraw = _code(fn)
+    lines = code.split("\n")
+    file = inspect.getsourcefile(fn)
+    frames, out = [], io.StringIO()
+
+    def ours(f):
+        return f.f_code.co_filename == file and 0 <= f.f_lineno - first < nraw
+
+    def stack_of(f):
+        names = []
+        while f is not None and ours(f):
+            co = f.f_code
+            args = ", ".join(f"{a}={_short(f.f_locals.get(a))}" for a in co.co_varnames[:co.co_argcount] if a != "self")
+            names.append(f"{co.co_name}({args})")
+            f = f.f_back
+        return names[::-1]
+
+    def record(f, msg):
+        if len(frames) >= limit:
+            return
+        kept = raw_to_kept.get(f.f_lineno - first, -1)
+        frames.append({"m": msg.replace("{line}", lines[kept].strip() if kept >= 0 else "").replace("{num}", str(kept + 1)), "l": kept,
+                       "v": _frame_views(f, stack_of(f), out)})
+
+    def local(f, event, arg):
+        if not ours(f):
+            return local
+        if event == "line":
+            record(f, "Line {num}: {line}")
+        elif event == "return":
+            if f.f_code.co_name not in ("<genexpr>", "<listcomp>", "<dictcomp>", "<setcomp>", "<lambda>"):
+                record(f, f"{f.f_code.co_name}() returns {_short(arg)}")
+        elif event == "exception":
+            record(f, f"{arg[0].__name__} raised: {arg[1]}")
+        return local
+
+    def glob(f, event, arg):
+        return local if ours(f) else None
+
+    with contextlib.redirect_stdout(out):
+        sys.settrace(glob)
+        try:
+            result = call()
+        finally:
+            sys.settrace(None)
+    if len(frames) >= limit:
+        frames[-1]["m"] += f"  (animation stops after {limit} steps)"
+    return code, frames, result
+
+
+def uses_T(fn):
+    return any(l.strip().startswith("T(") for l in inspect.getsource(fn).split("\n"))
+
+
 # ---------- view builders (each returns a JSON-ready dict) ----------
 
 def s(x):
@@ -363,4 +472,4 @@ def TRIE(name, root, hl=(), ok=()):
 
 
 __all__ = ["ListNode", "TreeNode", "mk_list", "list_arr", "mk_tree", "tree_arr", "find",
-           "TOPIC", "Q", "B", "O", "D", "LESSON", "LD", "THEORY", "FAQ", "T", "A", "V", "M", "S", "G", "L", "TR", "GR", "H", "BITS", "TRIE", "math"]
+           "TOPIC", "Q", "B", "O", "D", "LESSON", "LD", "THEORY", "FAQ", "T", "A", "V", "M", "S", "G", "L", "TR", "GR", "H", "BITS", "TRIE", "math", "auto_trace"]

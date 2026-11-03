@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Python from Scratch</title>
+<meta name="description" content="Learn Python from zero: theory, step-by-step lessons with line-by-line visualisations, and 20+ practice questions per topic with brute-force and optimal answers.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="../handbook/style.css?v=6c0706ee70">
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="#/"><span class="logo">py</span><span>Python from Scratch</span></a>
+    <div class="search" role="search">
+      <input id="q" type="search" placeholder="Search topics and practice questions…  ( / )" autocomplete="off" aria-label="Search">
+      <div id="results" class="results" hidden></div>
+    </div>
+    <button id="theme" class="icon-btn" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">◐</button>
+  </div>
+</header>
+<main id="app" class="wrap" tabindex="-1"></main>
+<footer class="foot"><a href="../index.html">← Python DSA Visualizer</a> · Every answer here is run against its tests before publishing.</footer>
+<script>
+window.BOOK = {
+  title: "Python from Scratch", short: "Python from Scratch", unit: "practice questions",
+  lead: "A complete Python course for someone who has never written code. Every topic has <b>theory</b>, short <b>lessons</b> that build from the basics to advanced use, and <b>20 practice questions</b> with a brute-force answer and an optimal answer. Every piece of code can be watched running <b>line by line</b> — you see each variable change, just like Python Tutor.",
+  how: [["1 · Read the theory", "What the idea is, the rules, and the mistakes beginners make."],
+        ["2 · Follow the lessons", "Small steps from the basics to advanced. Press ▶ to watch each example run line by line."],
+        ["3 · Practise", "Try each question yourself first. Then compare with the long-way (brute-force) answer and the short, Pythonic (optimal) answer."],
+        ["4 · Watch, don't guess", "In every animation the highlighted line is the one about to run. The boxes show every variable and what has been printed."]],
+  searchHint: "Try a word like “loop”, “list”, “dictionary” or a question title.",
+  bruteLabel: "Brute force — the long way", optLabel: "Optimal — the Pythonic way",
+  watchBrute: "Watch the long way run, line by line", watchOpt: "Watch the Pythonic way run, line by line",
+  qsHeading: "{n} practice questions"
+};
+</script>
+<script src="data/index.js?v=d0ad30b49d"></script>
+<script src="../handbook/app.js?v=255dd527ab"></script>
+</body>
+</html>

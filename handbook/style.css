@@ -260,3 +260,6 @@ svg text { font-family: var(--f-mono); font-weight: 600; }
 .lbody .two > div { border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; background: var(--sunk); }
 .lbody .two h5 { margin: 0 0 6px; font: 700 14px var(--f-body); }
 .lbody .two .pro h5 { color: var(--good); } .lbody .two .con h5 { color: var(--bad); }
+
+/* Printed output in the step player */
+.console { margin: 0; background: #0B1220; color: #D7E3F4; border-radius: 10px; padding: 10px 12px; font: 13.5px/1.5 var(--f-mono); white-space: pre-wrap; min-height: 2.4em; }

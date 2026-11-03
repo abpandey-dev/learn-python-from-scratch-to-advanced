@@ -379,4 +379,4 @@ Every solution is run against its test cases by `build.py` before the site is ge
 python3 handbook/build.py
 ```
 
-Solutions live in `handbook/src/topics/`. Lines starting with `T(` record a frame of the animation and are hidden from the code shown on the site.
+Sources live in `handbook/src/`: `topics/` (questions and solutions), `lessons/` and `theory/`.

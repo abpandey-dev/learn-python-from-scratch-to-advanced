@@ -16,6 +16,9 @@
     qsHeading: "Top {n} questions",
   }, window.BOOK || {});
   const lcText = (q) => (q.lc ? `LC ${q.lc} · ` : "");
+  // Links into the in-browser IDE carry the code (and tests) in the URL hash.
+  const ideLink = (payload) => (BOOK.ide || "../ide/") + "#p=" +
+    btoa(unescape(encodeURIComponent(JSON.stringify(payload)))).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
   const app = document.getElementById("app");
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const h = (tag, attrs, html) => { const e = document.createElement(tag); if (attrs) for (const k in attrs) e.setAttribute(k, attrs[k]); if (html != null) e.innerHTML = html; return e; };
@@ -31,7 +34,7 @@
   function toggleDone(t, q, on) { const k = t + "/" + q; on ? done.add(k) : done.delete(k); store.set("dsa-hb-done", [...done]); }
 
   /* ---------- theme ---------- */
-  const themeBtn = document.getElementById("theme");
+  const themeBtn = document.getElementById("theme") || document.createElement("button");
   const savedTheme = store.get("dsa-hb-theme", null);
   if (savedTheme) document.documentElement.dataset.theme = savedTheme;
   themeBtn.addEventListener("click", () => {
@@ -241,7 +244,7 @@
   }
 
   /* ---------- step player ---------- */
-  function player({ code, frames, input }) {
+  function player({ code, frames, input, onStep }) {
     const root = h("div", { class: "player" + (code ? "" : " solo") });
     const stage = h("div", { class: "stage" });
     if (input) stage.appendChild(h("div", { class: "vin" }, "<b>Input:</b> " + esc(input)));
@@ -261,6 +264,7 @@
       const f = frames[i];
       if (!f) { msg.textContent = "No steps recorded."; return; }
       msg.textContent = f.m;
+      if (onStep) onStep(f, i);
       msg.classList.toggle("done", f.l === -1 && f.m.startsWith("Result:"));
       views.replaceChildren(...f.v.map(renderView));
       range.value = i;
@@ -318,18 +322,18 @@
       ? `<a href="#/t/${x.topic.id}" class="${k === sel ? "on" : ""}"><span class="rt">${esc(x.topic.title)}</span><span class="diff Easy">Topic</span><span class="rs">${x.topic.qs.length} questions · ${esc(x.topic.blurb)}</span></a>`
       : `<a href="#/q/${x.t.id}/${x.q.id}" class="${k === sel ? "on" : ""}"><span class="rt">${esc(x.q.title)}</span><span class="diff ${x.q.diff}">${x.q.diff}</span><span class="rs">${esc(x.t.title)} · ${lcText(x.q)}${esc(x.q.tags)}</span></a>`).join("");
   }
-  qIn.addEventListener("input", () => { hits = search(qIn.value); sel = 0; drawResults(); });
-  qIn.addEventListener("keydown", (e) => {
+  if (qIn) qIn.addEventListener("input", () => { hits = search(qIn.value); sel = 0; drawResults(); });
+  if (qIn) qIn.addEventListener("keydown", (e) => {
     if (e.key === "ArrowDown") { sel = Math.min(hits.length - 1, sel + 1); drawResults(); e.preventDefault(); }
     else if (e.key === "ArrowUp") { sel = Math.max(0, sel - 1); drawResults(); e.preventDefault(); }
     else if (e.key === "Enter" && hits[sel]) { location.hash = resBox.querySelectorAll("a")[sel].getAttribute("href"); closeSearch(); }
     else if (e.key === "Escape") closeSearch();
   });
   function closeSearch() { resBox.hidden = true; qIn.blur(); }
-  resBox.addEventListener("click", (e) => { if (e.target.closest("a")) { qIn.value = ""; resBox.hidden = true; } });
-  document.addEventListener("click", (e) => { if (!e.target.closest(".search")) resBox.hidden = true; });
-  qIn.addEventListener("focus", () => { if (qIn.value.trim()) drawResults(); });
-  document.addEventListener("keydown", (e) => { if (e.key === "/" && document.activeElement !== qIn && !/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) { e.preventDefault(); qIn.focus(); } });
+  if (resBox) resBox.addEventListener("click", (e) => { if (e.target.closest("a")) { qIn.value = ""; resBox.hidden = true; } });
+  if (resBox) document.addEventListener("click", (e) => { if (!e.target.closest(".search")) resBox.hidden = true; });
+  if (qIn) qIn.addEventListener("focus", () => { if (qIn.value.trim()) drawResults(); });
+  if (qIn) document.addEventListener("keydown", (e) => { if (e.key === "/" && document.activeElement !== qIn && !/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) { e.preventDefault(); qIn.focus(); } });
 
   /* ---------- pages ---------- */
   const total = ALL.length;
@@ -406,6 +410,7 @@
       if (!les.demo) return;
       const slot = app.querySelector(`#l-${k + 1} .ldemo`);
       slot.appendChild(player({ code: les.demo.code, frames: les.demo.frames }));
+      if (les.demo.call) slot.appendChild(h("a", { class: "btn small", target: "_blank", rel: "noopener", href: ideLink({ title: les.title, back: location.href, code: les.demo.code + "\n\n" + les.demo.call + "\n" }) }, "✎ Edit and run this in the IDE"));
     });
     const nav = app.querySelector(".lnav");
     if (nav) nav.addEventListener("click", (e) => {
@@ -480,6 +485,7 @@
           ${meta.lc ? `<a class="badge" href="https://leetcode.com/problems/${lcSlug(meta.title)}/" target="_blank" rel="noopener">LeetCode ${meta.lc} ↗</a>` : ""}
           <span class="badge">✓ ${q.tests} tests pass</span></div>
         <p class="stmt">${q.statement}</p>
+        ${q.ide ? `<div class="ide-row"><a class="btn good" target="_blank" rel="noopener" href="${ideLink({ title: meta.title, back: location.href, code: q.ide.stub + "\n\n# Try it:\n" + (q.ide.usage || ""), check: q.ide.tests.length ? { name: q.ide.name, tests: q.ide.tests, listify: q.ide.listify, design: q.ide.design } : undefined })}">✎ Solve it yourself in the IDE</a><span class="ide-note">${q.ide.tests.length ? `Write your answer, then press ✓ Check to run ${q.ide.tests.length} test${q.ide.tests.length > 1 ? "s" : ""}.` : "Write and run your answer in the browser."}</span></div>` : ""}
         <div class="examples">${q.examples.map(([a, o], i) => `<div class="ex"><span>Example ${i + 1}:</span> ${esc(a)}<br><span>Output:</span> ${esc(o)}</div>`).join("")}</div>
       </section>
       <section class="sol brute"><div class="sol-h"><span class="step-n">1</span><h2>${BOOK.bruteLabel}</h2><div class="cx"><span>Time ${esc(q.brute.tc)}</span><span>Space ${esc(q.brute.sc)}</span></div></div><p class="idea">${q.brute.idea}</p></section>
@@ -489,7 +495,11 @@
         <button class="btn ${isDone(t.id, qid) ? "good" : ""}" id="mark" type="button">${isDone(t.id, qid) ? "✓ Done" : "Mark as done"}</button>
         ${next ? `<a class="btn" href="#/q/${t.id}/${next.id}">${esc(next.title)} →</a>` : nextTopicLink(t)}
       </div>`;
+    const tryCall = q.ide && q.ide.usage ? "\n\n" + q.ide.usage + "\n" : "\n\n# Add a call here to try it, e.g. print(...)\n";
+    const editLink = (label, code) => h("a", { class: "btn small", target: "_blank", rel: "noopener", href: ideLink({ title: meta.title + " — " + label, back: location.href, code: code + tryCall }) }, "✎ Open in editor");
     const brute = app.querySelector(".brute");
+    brute.querySelector(".sol-h").appendChild(editLink("brute force", q.brute.code));
+    app.querySelector(".opt .sol-h").appendChild(editLink("optimal", q.opt.code));
     if (q.brute.frames && q.brute.frames.length) {
       brute.appendChild(h("h3", null, BOOK.watchBrute));
       brute.appendChild(player({ code: q.brute.code, frames: q.brute.frames, input: q.vizIn }));
@@ -514,6 +524,10 @@
     const go = parts[0] === "t" ? topicPage(parts[1], parts[2]) : parts[0] === "q" ? questionPage(parts[1], parts[2]) : home();
     Promise.resolve(go).then(() => window.scrollTo(0, 0)).catch(() => { app.innerHTML = `<h1>Couldn't load this topic</h1><p>Check your connection and reload.</p>`; });
   }
-  window.addEventListener("hashchange", route);
-  route();
+  // The IDE page reuses the player without the router.
+  window.DSA_PLAYER = { player, codeBlock, hiLine, renderView };
+  if (app) {
+    window.addEventListener("hashchange", route);
+    route();
+  }
 })();

@@ -26,11 +26,6 @@ with open("out.txt", "w") as f:
 """)
 
 
-def F(text):
-    import io
-    return io.StringIO(text)
-
-
 Q(None, "Safe Division", "Easy", "ZeroDivisionError",
   "Return a / b, or None if b is zero.",
   [((10, 2), 5.0), ((1, 0), None), ((-9, 3), -3.0)],
@@ -371,7 +366,8 @@ Q(None, "Count Lines in a File", "Easy", "Iterating a file",
 
 @B
 def count_lines(text):
-    f = F(text)
+    import io
+    f = io.StringIO(text)
     lines = f.readlines()
     f.close()
     return len(lines)
@@ -379,7 +375,8 @@ def count_lines(text):
 
 @O
 def count_lines(text):
-    with F(text) as f:
+    import io
+    with io.StringIO(text) as f:
         return sum(1 for _ in f)
 
 
@@ -392,8 +389,9 @@ Q(None, "Words in a File", "Easy", "Reading text",
 
 @B
 def words_in_file(text):
+    import io
     count = 0
-    f = F(text)
+    f = io.StringIO(text)
     for line in f:
         count += len(line.split())
     f.close()
@@ -402,7 +400,8 @@ def words_in_file(text):
 
 @O
 def words_in_file(text):
-    with F(text) as f:
+    import io
+    with io.StringIO(text) as f:
         return len(f.read().split())
 
 
@@ -429,9 +428,10 @@ def csv_totals(text):
 
 @O
 def csv_totals(text):
+    import io
     import csv
     totals = {}
-    with F(text) as f:
+    with io.StringIO(text) as f:
         for name, amount in csv.reader(f):
             try:
                 totals[name] = totals.get(name, 0) + float(amount)
@@ -476,8 +476,9 @@ Q(None, "Longest Line", "Easy", "max over a file",
 
 @B
 def longest_line(text):
+    import io
     best = ""
-    f = F(text)
+    f = io.StringIO(text)
     for line in f:
         line = line.rstrip("\n")
         if len(line) > len(best):
@@ -488,7 +489,8 @@ def longest_line(text):
 
 @O
 def longest_line(text):
-    with F(text) as f:
+    import io
+    with io.StringIO(text) as f:
         return max((line.rstrip("\n") for line in f), key=len, default="")
 
 

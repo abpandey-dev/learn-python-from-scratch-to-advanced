@@ -4,6 +4,17 @@ Interactive, step-by-step lessons for learning data structures and algorithms in
 
 **Live site:** https://abpandey-dev.github.io/python-dsa-visualizer/
 
+## [Python IDE](ide/) — write and run Python in the browser
+
+**Open it:** https://abpandey-dev.github.io/python-dsa-visualizer/ide/
+
+- Real Python 3.12 running in the browser (Pyodide) — nothing to install.
+- Editor with syntax highlighting, auto-indent, bracket matching and Ctrl/⌘ + Enter to run.
+- An **Input** box feeds `input()`, errors point to the line with a beginner-friendly hint, and **Stop** ends infinite loops.
+- **Visualize** runs your own code step by step: every variable, list, dict, object, the call stack and the printed output.
+- Every practice question has **Solve it yourself**: it opens a starter function and a **Check** button that runs the question's tests. Every answer and lesson example has **Open in editor**.
+- **Share** copies a link that contains your code.
+
 ## [Python from Scratch](python-course/) — 12 topics · 240 practice questions
 
 A full course for someone writing their first line of Python. Each topic has a **Theory** tab (definitions, rules, tables, common mistakes and theory questions with answers), **Lessons** from the basics to advanced use, and **20 practice questions**, each answered twice — a brute-force "long way" and an optimal "Pythonic way". Every lesson example and every answer can be watched **running line by line**: variables, objects, the call stack and printed output update at each step, like Python Tutor.

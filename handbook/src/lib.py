@@ -103,9 +103,18 @@ def Q(lc, title, diff, tags, statement, tests, brute, opt, **kw):
 def _code(fn):
     src = textwrap.dedent(inspect.getsource(fn)).rstrip("\n").split("\n")
     kept, raw_to_kept = [], {}
+    indent = lambda l: len(l) - len(l.lstrip())
     for i, line in enumerate(src):
         s = line.strip()
-        if s.startswith("T(") or s in ("@B", "@O", "@D", "@LD"):
+        if s in ("@B", "@O", "@D", "@LD"):
+            continue
+        if s.startswith("T("):
+            # Keep the block valid if the trace call was its only statement.
+            nxt = next((l for l in src[i + 1:] if l.strip() and not l.strip().startswith("T(")), "")
+            opens_block = kept and kept[-1].split("#")[0].rstrip().endswith(":") and indent(kept[-1]) < indent(line)
+            if opens_block and (not nxt or indent(nxt) < indent(line)):
+                raw_to_kept[i] = len(kept)
+                kept.append(" " * indent(line) + "pass")
             continue
         raw_to_kept[i] = len(kept)
         kept.append(line)

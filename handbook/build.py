@@ -12,6 +12,7 @@ import importlib.util
 import inspect
 import json
 import re
+import textwrap
 import sys
 import time
 from pathlib import Path
@@ -103,6 +104,61 @@ def trace(fn, call):
     return code, frames
 
 
+def _plain(html_text):
+    import html
+    return html.unescape(re.sub(r"<[^>]+>", "", html_text))
+
+
+def _literal(value):
+    """repr(value) if it evaluates back to an equal value, else None."""
+    text = repr(value)
+    try:
+        return text if eval(text, {"inf": float("inf")}) == value else None  # noqa: S307
+    except Exception:  # noqa: BLE001
+        return None
+
+
+def ide_payload(q):
+    """Starter code, example usage and checkable tests for the in-browser IDE."""
+    fn = q["opt"]
+    name = fn.__name__
+    doc = "\n".join("    " + line for line in textwrap.wrap(_plain(q["statement"]), 76))
+    tests, usage = [], None
+    if q.get("design"):
+        ctor, ops = q["tests"][0][0]
+        lines = [f"class {name}:", "    " + chr(34) * 3, doc, "    " + chr(34) * 3, ""]
+        lines += [f"    def __init__{inspect.signature(fn.__init__)}:", "        pass", ""]
+        for m in dict.fromkeys(m for m, _ in ops):
+            lines += [f"    def {m}{inspect.signature(getattr(fn, m))}:", "        pass", ""]
+        stub = "\n".join(lines)
+        usage = [f"obj = {name}({', '.join(map(repr, ctor))})"] + [f"print(obj.{m}({', '.join(map(repr, a))}))" for m, a in ops]
+        for (c, o), want in q["tests"]:
+            parts = (_literal(tuple(c)), _literal([list(x) for x in o]), _literal(want))
+            if all(parts):
+                tests.append({"ctor": parts[0], "ops": parts[1], "want": parts[2]})
+    else:
+        sig = inspect.signature(fn)
+        stub = f"def {name}{sig}:\n    {chr(34) * 3}\n{doc}\n    {chr(34) * 3}\n    # Write your code here\n    pass\n"
+        simple = not any(k in q for k in ("prep", "post", "norm", "check", "runner", "inplace")) or (
+            set(k for k in ("prep", "post", "norm", "check", "runner", "inplace") if k in q) == {"post"} and inspect.isgeneratorfunction(fn))
+        gen = inspect.isgeneratorfunction(fn)
+        args = q.get("viz", q["tests"][0][0])
+        if "runner" not in q and "prep" not in q:
+            call = f"{name}({', '.join(map(repr, args))})"
+            if "inplace" in q:
+                usage = [f"args = {args!r}", f"{name}(*args)", f"print(args[{q['inplace']}])"]
+            else:
+                usage = [f"print(list({call}))" if gen else f"print({call})"]
+        if simple:
+            for a, want in q["tests"]:
+                ar, wr = _literal(tuple(a)), _literal(want)
+                if ar and wr:
+                    tests.append({"args": ar, "want": wr})
+    return {"name": name, "stub": stub, "usage": "\n".join(usage) if usage else None,
+            "tests": tests, "listify": bool(not q.get("design") and inspect.isgeneratorfunction(fn)),
+            "design": bool(q.get("design"))}
+
+
 def build_topic(path, failures):
     reg = load(path)
     meta = reg["topic"]
@@ -128,7 +184,7 @@ def build_topic(path, failures):
                 code, frames = trace(les["demo"], les["demo"])
             except Exception as e:  # noqa: BLE001
                 failures.append(f"{meta['id']} lesson {k} demo: {type(e).__name__}: {e}")
-            item["demo"] = {"code": code, "frames": frames}
+            item["demo"] = {"code": code, "frames": frames, "call": les["demo"].__name__ + "()"}
             if not item["demo"]["frames"]:
                 failures.append(f"{meta['id']} lesson {k} demo recorded no frames")
         out["lessons"].append(item)
@@ -177,6 +233,7 @@ def build_topic(path, failures):
                       **({"frames": traced["brute"][1]} if "brute" in traced else {})},
             "opt": {"idea": oi, "tc": ot, "sc": os_, "code": opt_code, "frames": frames},
             "tests": len(q["tests"]),
+            "ide": ide_payload(q),
         }
         index.append({"id": qid, "n": n, "lc": q["lc"], "title": q["title"], "diff": q["diff"], "tags": q["tags"]})
     topic_index = {k: meta[k] for k in ("id", "title", "blurb", "glyph")}
@@ -214,16 +271,18 @@ def readme(topics):
 
 
 def stamp_assets():
-    """Add ?v=<content hash> to the page's local script and style links so browsers never serve stale files."""
-    page = BOOK / "index.html"
-    html = page.read_text()
+    """Add ?v=<content hash> to local script and style links so browsers never serve stale files."""
+    for page in (BOOK / "index.html", ROOT.parent / "ide" / "index.html"):
+        if not page.exists():
+            continue
+        html = page.read_text()
 
-    def stamp(m):
-        name = m.group(2)
-        v = hashlib.sha1((BOOK / name).read_bytes()).hexdigest()[:10]
-        return f'{m.group(1)}="{name}?v={v}"'
-    html = re.sub(r'(src|href)="((?!https?:)[^"?#]+\.(?:js|css))(?:\?v=\w+)?"', stamp, html)
-    page.write_text(html)
+        def stamp(m, base=page.parent):
+            name = m.group(2)
+            v = hashlib.sha1((base / name).read_bytes()).hexdigest()[:10]
+            return f'{m.group(1)}="{name}?v={v}"'
+        html = re.sub(r'(src|href)="((?!https?:)[^"?#]+\.(?:js|css))(?:\?v=\w+)?"', stamp, html)
+        page.write_text(html)
 
 
 def main():

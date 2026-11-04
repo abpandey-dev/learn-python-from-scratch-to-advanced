@@ -1,0 +1,9 @@
+{
+  "title": "Machine Learning from Scratch",
+  "url": "https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/",
+  "unit": "practice questions with answers",
+  "summary": "Data preparation, linear and logistic regression, model evaluation, k-NN, Naive Bayes and SVM, decision trees, ensembles, clustering, tuning and pipelines, and neural networks · every algorithm is built from scratch in plain Python and NumPy, then done again with scikit-learn, both shown running step by step.",
+  "trace_brute": true,
+  "plain": true,
+  "prelude": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\n"
+}

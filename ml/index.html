@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Machine Learning from Scratch</title>
+<meta name="description" content="Machine learning for beginners: every algorithm built from scratch in Python and NumPy, then with scikit-learn — regression, classification, evaluation, trees, ensembles, clustering, tuning and neural networks, with step-by-step visualisations.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="../handbook/style.css?v=7c2a2c4525">
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="#/"><span class="logo">ML</span><span>Machine Learning from Scratch</span></a>
+    <div class="search" role="search">
+      <input id="q" type="search" placeholder="Search topics and practice questions…  ( / )" autocomplete="off" aria-label="Search">
+      <div id="results" class="results" hidden></div>
+    </div>
+    <a class="top-link" href="../ide/" target="_blank" rel="noopener">✎ IDE</a>
+    <button id="theme" class="icon-btn" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">◐</button>
+  </div>
+</header>
+<main id="app" class="wrap" tabindex="-1"></main>
+<footer class="foot"><a href="../index.html">← Learn Python: From Scratch to Advanced</a> · Every answer here is run against its tests before publishing.</footer>
+<script>
+window.BOOK = {
+  title: "Machine Learning from Scratch", short: "Machine Learning", unit: "practice questions",
+  lead: "Learn how machine learning really works by <b>building every algorithm yourself</b>, then using <b>scikit-learn</b> the way professionals do. Start with preparing data, then linear and logistic regression, how to evaluate a model honestly, k-NN, Naive Bayes and SVMs, decision trees, random forests and boosting, clustering, tuning with pipelines, and finally neural networks. Each topic has theory, short visual lessons and <b>20 practice questions</b>. Every question is answered twice: <b>from scratch</b> in plain Python and NumPy, and <b>with scikit-learn</b>. Watch both run step by step.",
+  how: [["1 · Know the math", "This course uses vectors, derivatives and probability. If they are new, take the Math for DS &amp; ML course first."],
+        ["2 · Follow the lessons", "Each algorithm is explained with a picture, then the idea, then the code. Charts show what the model learned."],
+        ["3 · Build it from scratch", "Try each question yourself. The from-scratch answer shows exactly what the library does inside."],
+        ["4 · Use the library", "Then compare with scikit-learn — fit, predict, score — and try it in the IDE."]],
+  searchHint: "Try “overfitting”, “precision”, “random forest”, “k-means”, “gradient descent” or a question title.",
+  bruteLabel: "From scratch — plain Python & NumPy", optLabel: "With scikit-learn",
+  watchBrute: "Watch the from-scratch version run, step by step", watchOpt: "Watch the scikit-learn version run",
+  qsHeading: "{n} practice questions"
+};
+</script>
+<script src="data/index.js?v=78a710692a"></script>
+<script src="../handbook/app.js?v=5f1a53219a"></script>
+</body>
+</html>

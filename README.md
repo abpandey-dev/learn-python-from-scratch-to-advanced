@@ -1,12 +1,12 @@
-# Python DSA Visualizer
+# Learn Python: From Scratch to Advanced
 
-Interactive, step-by-step lessons for learning data structures and algorithms in Python. Each lesson shows the data as clickable boxes, the Python code with the running line highlighted, and a plain-English explanation of every step.
+A complete, interactive path for learning Python: a beginner course from the first line of code, Python for data science (NumPy, pandas, Matplotlib, Seaborn, statistics), a DSA interview handbook, and an in-browser IDE. Every lesson and answer can be watched running line by line, with the data drawn as pictures and a plain-English explanation of each step.
 
-**Live site:** https://abpandey-dev.github.io/python-dsa-visualizer/
+**Live site:** https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/
 
 ## [Python IDE](ide/) — write and run Python in the browser
 
-**Open it:** https://abpandey-dev.github.io/python-dsa-visualizer/ide/
+**Open it:** https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ide/
 
 - Real Python 3.12 running in the browser (Pyodide) — nothing to install. NumPy, pandas, Matplotlib and Seaborn load on first import, and charts appear under the output.
 - Editor with syntax highlighting, auto-indent, bracket matching and Ctrl/⌘ + Enter to run.
@@ -19,7 +19,7 @@ Interactive, step-by-step lessons for learning data structures and algorithms in
 
 A full course for someone writing their first line of Python. Each topic has a **Theory** tab (definitions, rules, tables, common mistakes and theory questions with answers), **Lessons** from the basics to advanced use, and **20 practice questions**, each answered twice — a brute-force "long way" and an optimal "Pythonic way". Every lesson example and every answer can be watched **running line by line**: variables, objects, the call stack and printed output update at each step, like Python Tutor.
 
-**Open it:** https://abpandey-dev.github.io/python-dsa-visualizer/python-course/ · [Full question list](python-course/README.md)
+**Open it:** https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/python-course/ · [Full question list](python-course/README.md)
 
 | # | Topic | Covers |
 |---|---|---|
@@ -40,7 +40,7 @@ A full course for someone writing their first line of Python. Each topic has a *
 
 The next step after the Python course: the libraries data analysts use every day. Each topic has a **Theory** tab, **Lessons** from basics to advanced, and **20 practice questions**. Every question is answered twice — a **brute-force answer in plain Python** (loops and lists, so you see what the library does for you) and an **optimal answer using the library** — and both can be watched running line by line, with arrays and DataFrames shown as tables and every chart drawn as an image. Chart questions are checked by inspecting the figure (number of bars, titles, labels, colours).
 
-**Open it:** https://abpandey-dev.github.io/python-dsa-visualizer/data-science/ · [Full question list](data-science/README.md)
+**Open it:** https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/ · [Full question list](data-science/README.md)
 
 | # | Topic | Covers |
 |---|---|---|
@@ -59,7 +59,7 @@ The IDE loads NumPy, pandas, Matplotlib and Seaborn automatically when your code
 
 The 14 core DSA topics. Each topic has a **Theory** tab (definition, types, operations and their cost, pros and cons, applications, comparisons, and theory questions with model answers), a **Lessons** tab that teaches it from scratch to advanced in 5–8 short animated lessons, a one-card **Quick reference**, and the **top 20 most-asked interview questions**. Each question has a brute-force solution, the optimal solution, time and space complexity, and a step-by-step animation of the optimal code running. Search by title, LeetCode number or pattern.
 
-**Open it:** https://abpandey-dev.github.io/python-dsa-visualizer/handbook/ · [Full question list](handbook/README.md)
+**Open it:** https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/handbook/ · [Full question list](handbook/README.md)
 
 | # | Topic | Covers |
 |---|---|---|

@@ -1,0 +1,9 @@
+{
+  "title": "Math for Data Science & Machine Learning",
+  "url": "https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/math/",
+  "unit": "practice questions with answers",
+  "summary": "Arithmetic, algebra, functions, vectors, matrices, eigenvectors and PCA, calculus, gradient descent, probability and distributions · taught from zero for someone learning math for the first time · every question is solved by hand in plain Python and again with NumPy or a formula, both shown running step by step with graphs.",
+  "trace_brute": true,
+  "plain": true,
+  "prelude": "import math\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n"
+}

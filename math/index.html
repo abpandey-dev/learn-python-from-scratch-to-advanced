@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Math for Data Science &amp; ML</title>
+<meta name="description" content="The math behind data science and machine learning, taught from zero: arithmetic, algebra, functions, vectors, matrices, PCA, calculus, gradient descent, probability and distributions, with graphs and step-by-step answers.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="../handbook/style.css?v=7c2a2c4525">
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="#/"><span class="logo">∑</span><span>Math for Data Science &amp; ML</span></a>
+    <div class="search" role="search">
+      <input id="q" type="search" placeholder="Search topics and practice questions…  ( / )" autocomplete="off" aria-label="Search">
+      <div id="results" class="results" hidden></div>
+    </div>
+    <a class="top-link" href="../ide/" target="_blank" rel="noopener">✎ IDE</a>
+    <button id="theme" class="icon-btn" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">◐</button>
+  </div>
+</header>
+<main id="app" class="wrap" tabindex="-1"></main>
+<footer class="foot"><a href="../index.html">← Learn Python: From Scratch to Advanced</a> · Every answer here is run against its tests before publishing.</footer>
+<script>
+window.BOOK = {
+  title: "Math for Data Science & Machine Learning", short: "Math for DS & ML", unit: "practice questions",
+  lead: "Never studied math, or forgot it all? Start here. This course rebuilds the math that data science and machine learning stand on, one small idea at a time: <b>numbers → algebra → functions → vectors → matrices → PCA → calculus → gradient descent → probability → distributions</b>. Every idea is explained in plain words with a picture first, then a formula. Each topic has theory, short visual lessons and <b>20 practice questions</b>, and every answer is worked twice: <b>by hand</b> in plain Python, exactly as you would on paper, and <b>with NumPy or a formula</b> the way data scientists do it. Watch both run step by step.",
+  how: [["1 · Follow the roadmap", "Topics are in order — each one uses only what came before. Start at topic 1 even if it feels easy."],
+        ["2 · Read the lessons", "Plain words first, then a picture, then the formula. Graphs show what each formula looks like."],
+        ["3 · Work the questions", "Try with pen and paper, then compare: the by-hand answer shows every step, the NumPy answer shows the shortcut."],
+        ["4 · Play in the IDE", "Change the numbers and re-run. Seeing a graph move is the fastest way to build intuition."]],
+  searchHint: "Try “slope”, “dot product”, “derivative”, “Bayes”, “normal distribution” or a question title.",
+  bruteLabel: "By hand — step by step in plain Python", optLabel: "With NumPy or a formula",
+  watchBrute: "Watch the by-hand working, step by step", watchOpt: "Watch the NumPy / formula way run",
+  qsHeading: "{n} practice questions"
+};
+</script>
+<script src="data/index.js?v=ee5d1adc80"></script>
+<script src="../handbook/app.js?v=5f1a53219a"></script>
+</body>
+</html>

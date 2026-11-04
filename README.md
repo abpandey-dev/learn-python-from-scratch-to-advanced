@@ -1,6 +1,6 @@
 # Learn Python: From Scratch to Advanced
 
-A complete, interactive path for learning Python: a beginner course from the first line of code, Python for data science (NumPy, pandas, Matplotlib, Seaborn, statistics), a DSA interview handbook, and an in-browser IDE. Every lesson and answer can be watched running line by line, with the data drawn as pictures and a plain-English explanation of each step.
+A complete, interactive path for learning Python: a beginner course from the first line of code, Python for data science (NumPy, pandas, Matplotlib, Seaborn, statistics), the math behind data science and machine learning, a DSA interview handbook, and an in-browser IDE. Every lesson and answer can be watched running line by line, with the data drawn as pictures and a plain-English explanation of each step.
 
 **Live site:** https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/
 
@@ -54,6 +54,25 @@ The next step after the Python course: the libraries data analysts use every day
 | 8 | Statistics for Data Analysis | mean / median / spread, outliers, correlation, regression, probability, confidence intervals |
 
 The IDE loads NumPy, pandas, Matplotlib and Seaborn automatically when your code imports them, shows the charts you draw, and checks data-science answers too.
+
+## [Math for Data Science & Machine Learning](math/) — 10 topics · 200 practice questions
+
+The math that data science and ML are built on, taught from zero for someone who has never studied math (or forgot it all). Topics go in order, each using only what came before. Every idea is explained in plain words with a picture first, then the formula, then where it is used in ML. Each topic has a **Theory** tab, **Lessons** from basics to advanced with graphs, and **20 practice questions**. Each question is solved twice: **by hand** in plain Python, showing every step as you would on paper, and **with NumPy or a formula**. Both versions can be watched running line by line.
+
+**Open it:** https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/math/ · [Full question list](math/README.md)
+
+| # | Topic | Covers | Used in ML for |
+|---|---|---|---|
+| 1 | Numbers & Arithmetic | fractions, percentages, powers, roots, primes, rounding, Σ notation | reading every formula |
+| 2 | Algebra & Equations | expressions, linear and quadratic equations, polynomials, systems, sequences | rearranging models and losses |
+| 3 | Functions & Graphs | lines and slope, parabolas, exponentials, logarithms, sigmoid, ReLU | models as functions, activations |
+| 4 | Vectors | length, distance, dot product, cosine similarity, projection | data points, embeddings, k-NN |
+| 5 | Matrices | multiplication, determinant, inverse, solving systems, rank | datasets, neural-network layers, regression |
+| 6 | Eigenvectors, PCA & SVD | eigenvalues, power iteration, PCA, SVD, Markov chains, PageRank | dimensionality reduction, recommenders |
+| 7 | Calculus: Derivatives & Integrals | limits, derivative rules, chain rule, max/min, Newton's method, integrals | the slope that training follows |
+| 8 | Gradients & Optimisation | partial derivatives, gradient, gradient descent, backpropagation, convexity | how every model is trained |
+| 9 | Probability | counting, conditional probability, Bayes, independence, expected value | reasoning under uncertainty, Naive Bayes |
+| 10 | Distributions & Information | binomial, Poisson, normal, CLT, entropy, cross-entropy, KL, softmax, log-loss, MLE | loss functions and probabilistic models |
 
 ## [DSA Interview Handbook](handbook/) — 14 topics · 280 questions
 
@@ -118,10 +137,14 @@ python3 handbook/build.py
 python3 handbook/build.py --book python-course
 ```
 
-The data-science book needs NumPy, pandas, Matplotlib and Seaborn installed:
+The data-science and math books need NumPy, pandas, Matplotlib and Seaborn installed:
 
 ```bash
 python3 handbook/build.py --book data-science
+```
+
+```bash
+python3 handbook/build.py --book math
 ```
 
 To view it locally, serve the folder (the page loads its data files lazily):

@@ -1,5 +1,5 @@
 /* Python IDE: CodeMirror editor + Pyodide worker. Opened with #p=<base64 JSON>
-   ({title, code, back, check: {name, tests, listify, design}}) from the course and handbook pages. */
+   ({title, code, back, check: {name, tests, listify, design, plain}}) from the course and handbook pages. */
 (function () {
   "use strict";
   const $ = (id) => document.getElementById(id);
@@ -16,6 +16,10 @@
     "Recursion": `def factorial(n):\n    if n <= 1:\n        return 1\n    return n * factorial(n - 1)\n\nprint(factorial(5))\n`,
     "Class and objects": `class BankAccount:\n    def __init__(self, owner, balance=0):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n\nacc = BankAccount("Ana", 100)\nacc.deposit(50)\nprint(acc.owner, acc.balance)\n`,
     "Handling errors": `values = ["10", "abc", "7"]\nfor v in values:\n    try:\n        print(int(v) * 2)\n    except ValueError:\n        print(v, "is not a number")\n`,
+    "NumPy arrays": `import numpy as np\n\nmarks = np.array([72, 45, 90, 38, 66])\nprint("mean:", marks.mean())\npassed = marks[marks >= 40]\nprint("passed:", passed)\ngrid = np.arange(12).reshape(3, 4)\nprint(grid.sum(axis=0))\n`,
+    "pandas DataFrame": `import pandas as pd\n\ndf = pd.DataFrame({\n    "name": ["Ana", "Ben", "Cy", "Dee"],\n    "city": ["Pune", "Delhi", "Pune", "Delhi"],\n    "score": [72, 45, 90, 66],\n})\nprint(df[df.score > 50])\nby_city = df.groupby("city")["score"].mean()\nprint(by_city)\n`,
+    "Matplotlib chart": `import matplotlib.pyplot as plt\n\nmonths = ["Jan", "Feb", "Mar", "Apr"]\nsales = [120, 150, 90, 180]\nfig, ax = plt.subplots(figsize=(5, 3))\nax.bar(months, sales, color="teal")\nax.set_title("Sales by month")\nax.set_ylabel("units")\n`,
+    "Seaborn chart": `import pandas as pd\nimport seaborn as sns\n\ndf = pd.DataFrame({\n    "bill": [10, 20, 30, 40, 50, 15, 25, 35],\n    "tip": [1.5, 3.0, 4.2, 5.8, 7.1, 2.0, 3.9, 5.0],\n    "day": ["Sat", "Sun", "Sat", "Sun", "Sat", "Fri", "Fri", "Sun"],\n})\nax = sns.scatterplot(data=df, x="bill", y="tip", hue="day")\nax.set_title("Tip vs bill")\n`,
   };
   const WELCOME = `# Welcome! Write Python here and press ▶ Run (Ctrl/⌘ + Enter).\n# Press ⏯ Visualize to watch it run one line at a time.\n\n${EXAMPLES["Loop and list"]}`;
 
@@ -93,6 +97,7 @@
     worker.onmessage = (e) => {
       const d = e.data;
       if (d.type === "ready") { ready = true; setBusy(false); setStatus(`Python ${d.version} ready`); }
+      else if (d.type === "loading") setStatus(`Loading ${d.names.join(", ")}… (first use downloads it once)`, true);
       else if (d.type === "fatal") setStatus("Couldn't load Python: " + d.error);
       else if (d.type === "result" && d.id === seq) { setBusy(false); show(d.cmd, d.result); }
     };
@@ -126,7 +131,9 @@
   function show(cmd, r) {
     setStatus(r.error ? "Finished with an error" : "Done");
     const out = $("out");
-    out.innerHTML = (r.out ? esc(r.out) : r.error ? "" : '<span class="meta">(the program printed nothing)</span>') + errorHtml(r);
+    const images = r.images || [];
+    out.innerHTML = (r.out ? esc(r.out) : r.error || images.length ? "" : '<span class="meta">(the program printed nothing)</span>') + errorHtml(r) +
+      images.map((src) => `<img class="chart" alt="chart drawn by the program" src="${src}">`).join("");
     if (r.line) markLine(r.line);
     if (cmd === "trace") {
       const panel = document.querySelector('[data-panel="viz"]');

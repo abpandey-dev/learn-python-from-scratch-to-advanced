@@ -7,6 +7,7 @@ frame per T() call, and strips those lines from the code shown on the site.
 """
 import inspect
 import math
+import os
 import sys
 import textwrap
 
@@ -204,7 +205,39 @@ def T(msg, *views, at="next"):
 
 # ---------- automatic line-by-line tracing (Python Tutor style) ----------
 
+def _ds_view(name, v):
+    """NumPy arrays and pandas objects as tables (only if those libraries are loaded)."""
+    np = sys.modules.get("numpy")
+    pd = sys.modules.get("pandas")
+    if np is not None and isinstance(v, np.ndarray):
+        label = f"{name}  (array {v.dtype}, shape {v.shape})"
+        if v.ndim == 1:
+            return {"k": "arr", "n": label, "v": [s(x) for x in v[:30].tolist()], "p": {}, "hl": [], "ok": [], "bad": []}
+        if v.ndim == 2:
+            return G(label, v[:10, :10].tolist())
+        return {"k": "vars", "n": label, "v": [["values", _short(v.tolist())]]}
+    if pd is not None and isinstance(v, pd.DataFrame):
+        head = v.iloc[:8, :8]
+        rows = [[s(x) for x in row] for row in head.itertuples(index=False)]
+        more = f", showing {len(head)} of {len(v)} rows" if len(v) > 8 else ""
+        return {"k": "grid", "n": f"{name}  (DataFrame {v.shape[0]}×{v.shape[1]}{more})", "v": rows, "hl": [], "ok": [], "bad": [],
+                "rl": [s(i) for i in head.index], "cl": [str(c) for c in head.columns]}
+    if pd is not None and isinstance(v, pd.Series):
+        head = v.iloc[:20]
+        return {"k": "arr", "n": f"{name}  (Series {v.dtype}{', ' + str(v.name) if v.name is not None else ''})", "v": [s(x) for x in head.tolist()],
+                "p": {}, "hl": [], "ok": [], "bad": [], "il": [s(i) for i in head.index]}
+    return None
+
+
+def _user_object(v):
+    mod = getattr(type(v), "__module__", "") or ""
+    return mod.startswith(("topic_", "lessons_", "theory_", "__main__"))
+
+
 def _value_views(name, v):
+    ds = _ds_view(name, v)
+    if ds is not None:
+        return ds
     if isinstance(v, bool) or v is None or isinstance(v, (int, float, complex)):
         return None
     if isinstance(v, str):
@@ -219,12 +252,15 @@ def _value_views(name, v):
         return M(name + "  (dict)", v)
     if isinstance(v, range):
         return None
-    if hasattr(v, "__dict__") and not callable(v):
+    if hasattr(v, "__dict__") and not callable(v) and _user_object(v):
         return M(f"{name}  ({type(v).__name__} object)", {k: x for k, x in vars(v).items() if not k.startswith("_")})
     return None
 
 
 def _short(v):
+    np = sys.modules.get("numpy")
+    if np is not None and isinstance(v, np.generic):
+        v = v.item()
     r = repr(v)
     return r if len(r) <= 40 else r[:37] + "..."
 
@@ -296,12 +332,16 @@ def auto_trace(fn, call, limit=MAX_FRAMES):
     def glob(f, event, arg):
         return local if ours(f) else None
 
+    close_figures()
     with contextlib.redirect_stdout(out):
         sys.settrace(glob)
         try:
             result = call()
         finally:
             sys.settrace(None)
+    charts = capture_figures()
+    if charts and frames:
+        frames[-1]["v"] = frames[-1]["v"] + charts
     if len(frames) >= limit:
         frames[-1]["m"] += f"  (animation stops after {limit} steps)"
     return code, frames, result
@@ -331,6 +371,9 @@ def s(x):
         return f"node({x.val})"
     if isinstance(x, TreeNode):
         return f"node({x.val})"
+    np = sys.modules.get("numpy")
+    if np is not None and isinstance(x, np.generic):
+        return s(x.item())
     return str(x)
 
 
@@ -480,5 +523,66 @@ def TRIE(name, root, hl=(), ok=()):
     return {"k": "ntree", "n": name, "v": nodes, "hl": ids(hl), "ok": ids(ok)}
 
 
+# ---------- data science helpers ----------
+
+os.environ.setdefault("MPLBACKEND", "Agg")
+
+
+def close_figures():
+    plt = sys.modules.get("matplotlib.pyplot")
+    if plt is not None:
+        plt.close("all")
+
+
+def capture_figures(dpi=64):
+    """Every open matplotlib figure as an image view (base64 PNG), then close them."""
+    plt = sys.modules.get("matplotlib.pyplot")
+    if plt is None:
+        return []
+    import base64
+    import io as _io
+    views = []
+    for num in plt.get_fignums():
+        fig = plt.figure(num)
+        buf = _io.BytesIO()
+        fig.savefig(buf, format="png", dpi=dpi, bbox_inches="tight")
+        views.append({"k": "img", "n": "chart", "src": "data:image/png;base64," + base64.b64encode(buf.getvalue()).decode()})
+    plt.close("all")
+    return views
+
+
+def plain(x, digits=4):
+    """Turn NumPy / pandas / matplotlib results into plain Python values for comparison and display."""
+    np = sys.modules.get("numpy")
+    pd = sys.modules.get("pandas")
+    if pd is not None:
+        if isinstance(x, pd.DataFrame):
+            return {str(c): plain(x[c].tolist(), digits) for c in x.columns}
+        if isinstance(x, pd.Series):
+            return {plain(k, digits): plain(v, digits) for k, v in x.items()}
+        if isinstance(x, pd.Index):
+            return plain(x.tolist(), digits)
+        if x is pd.NaT:
+            return None
+        if isinstance(x, pd.Timestamp):
+            return str(x.date()) if x == x.normalize() else str(x)
+    if np is not None:
+        if isinstance(x, np.ndarray):
+            return plain(x.tolist(), digits)
+        if isinstance(x, np.generic):
+            return plain(x.item(), digits)
+    if isinstance(x, float):
+        return None if x != x else round(x, digits) + 0.0
+    if isinstance(x, list):
+        return [plain(v, digits) for v in x]
+    if isinstance(x, tuple):
+        return tuple(plain(v, digits) for v in x)
+    if isinstance(x, dict):
+        return {plain(k, digits): plain(v, digits) for k, v in x.items()}
+    if isinstance(x, (set, frozenset)):
+        return {plain(v, digits) for v in x}
+    return x
+
+
 __all__ = ["ListNode", "TreeNode", "mk_list", "list_arr", "mk_tree", "tree_arr", "find",
-           "TOPIC", "Q", "B", "O", "D", "LESSON", "LD", "THEORY", "FAQ", "T", "A", "V", "M", "S", "G", "L", "TR", "GR", "H", "BITS", "TRIE", "math", "auto_trace"]
+           "TOPIC", "Q", "B", "O", "D", "LESSON", "LD", "THEORY", "FAQ", "T", "A", "V", "M", "S", "G", "L", "TR", "GR", "H", "BITS", "TRIE", "math", "auto_trace", "plain"]

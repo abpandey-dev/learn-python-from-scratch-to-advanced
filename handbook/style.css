@@ -276,3 +276,6 @@ svg text { font-family: var(--f-mono); font-weight: 600; }
 
 /* Show code exactly as typed (no >= → ≥ ligatures) */
 code, pre, .code, .box, .console { font-variant-ligatures: none; }
+
+/* Charts drawn by the code */
+img.chart { max-width: 100%; height: auto; border-radius: 8px; background: #fff; border: 1px solid var(--line); align-self: flex-start; }

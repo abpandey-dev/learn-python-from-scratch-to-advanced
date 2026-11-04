@@ -8,7 +8,7 @@ Interactive, step-by-step lessons for learning data structures and algorithms in
 
 **Open it:** https://abpandey-dev.github.io/python-dsa-visualizer/ide/
 
-- Real Python 3.12 running in the browser (Pyodide) — nothing to install.
+- Real Python 3.12 running in the browser (Pyodide) — nothing to install. NumPy, pandas, Matplotlib and Seaborn load on first import, and charts appear under the output.
 - Editor with syntax highlighting, auto-indent, bracket matching and Ctrl/⌘ + Enter to run.
 - An **Input** box feeds `input()`, errors point to the line with a beginner-friendly hint, and **Stop** ends infinite loops.
 - **Visualize** runs your own code step by step: every variable, list, dict, object, the call stack and the printed output.
@@ -35,6 +35,25 @@ A full course for someone writing their first line of Python. Each topic has a *
 | 10 | Comprehensions, Iterators & Generators | comprehensions, built-ins, iterator protocol, yield, itertools |
 | 11 | Object-Oriented Programming | classes, properties, inheritance, polymorphism, dunder methods, dataclasses |
 | 12 | Errors, Exceptions & Files | try / except / else / finally, custom exceptions, files, context managers |
+
+## [Python for Data Science](data-science/) — 8 topics · 160 practice questions
+
+The next step after the Python course: the libraries data analysts use every day. Each topic has a **Theory** tab, **Lessons** from basics to advanced, and **20 practice questions**. Every question is answered twice — a **brute-force answer in plain Python** (loops and lists, so you see what the library does for you) and an **optimal answer using the library** — and both can be watched running line by line, with arrays and DataFrames shown as tables and every chart drawn as an image. Chart questions are checked by inspecting the figure (number of bars, titles, labels, colours).
+
+**Open it:** https://abpandey-dev.github.io/python-dsa-visualizer/data-science/ · [Full question list](data-science/README.md)
+
+| # | Topic | Covers |
+|---|---|---|
+| 1 | NumPy Basics | creating arrays, shape and dtype, indexing, slicing, reshaping, fancy indexing |
+| 2 | NumPy Operations | vectorised maths, axes, broadcasting, matrix algebra, numeric recipes |
+| 3 | Pandas Basics | Series, DataFrames, selecting with loc / iloc, filtering, sorting, new columns |
+| 4 | Data Cleaning with Pandas | missing values, duplicates, types, text, dates, outliers |
+| 5 | Grouping, Merging & Reshaping | groupby, merge, concat, pivot tables, melt, rolling windows |
+| 6 | Matplotlib | line, bar, scatter, histogram, pie, box; labels, legends, subplots |
+| 7 | Seaborn | distributions, categorical plots, relationships, heat maps, figure-level grids |
+| 8 | Statistics for Data Analysis | mean / median / spread, outliers, correlation, regression, probability, confidence intervals |
+
+The IDE loads NumPy, pandas, Matplotlib and Seaborn automatically when your code imports them, shows the charts you draw, and checks data-science answers too.
 
 ## [DSA Interview Handbook](handbook/) — 14 topics · 280 questions
 
@@ -97,6 +116,12 @@ python3 handbook/build.py
 
 ```bash
 python3 handbook/build.py --book python-course
+```
+
+The data-science book needs NumPy, pandas, Matplotlib and Seaborn installed:
+
+```bash
+python3 handbook/build.py --book data-science
 ```
 
 To view it locally, serve the folder (the page loads its data files lazily):

@@ -1,0 +1,9 @@
+{
+  "title": "Python for Data Science",
+  "url": "https://abpandey-dev.github.io/python-dsa-visualizer/data-science/",
+  "unit": "practice questions with answers",
+  "summary": "NumPy, Pandas, Matplotlib, Seaborn and statistics \u00b7 every question has a plain-Python brute-force answer and an optimal vectorised or library answer, both shown running line by line, with the charts they draw.",
+  "trace_brute": true,
+  "plain": true,
+  "prelude": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\n\n"
+}

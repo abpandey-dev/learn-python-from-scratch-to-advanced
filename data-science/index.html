@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Python for Data Science</title>
+<meta name="description" content="NumPy, Pandas, Matplotlib, Seaborn and statistics for beginners: theory, step-by-step visual lessons and 20 practice questions per topic, with charts.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="../handbook/style.css?v=3ea64c6f73">
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="#/"><span class="logo">np</span><span>Python for Data Science</span></a>
+    <div class="search" role="search">
+      <input id="q" type="search" placeholder="Search topics and practice questions…  ( / )" autocomplete="off" aria-label="Search">
+      <div id="results" class="results" hidden></div>
+    </div>
+    <a class="top-link" href="../ide/" target="_blank" rel="noopener">✎ IDE</a>
+    <button id="theme" class="icon-btn" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">◐</button>
+  </div>
+</header>
+<main id="app" class="wrap" tabindex="-1"></main>
+<footer class="foot"><a href="../index.html">← Python DSA Visualizer</a> · Every answer here is run against its tests before publishing.</footer>
+<script>
+window.BOOK = {
+  title: "Python for Data Science", short: "Data Science", unit: "practice questions",
+  lead: "Learn the four libraries every data analyst uses — <b>NumPy</b>, <b>Pandas</b>, <b>Matplotlib</b> and <b>Seaborn</b> — plus the <b>statistics</b> behind them. Every topic has theory, short visual lessons and <b>20 practice questions</b>. Each question is answered twice: a <b>brute-force</b> answer in plain Python loops, and the <b>optimal</b> answer using the library the way professionals do. Watch both run line by line — arrays and tables update at every step, and you see the chart each answer draws.",
+  how: [["1 · Read the theory", "What each library is for, its key objects, and the rules that trip beginners up."],
+        ["2 · Follow the lessons", "Small runnable steps. Arrays and DataFrames are drawn as tables so you can see every change."],
+        ["3 · Practise", "Try the question first, then compare the plain-Python way with the vectorised, library way."],
+        ["4 · Experiment in the IDE", "Every answer opens in the browser IDE with NumPy, Pandas, Matplotlib and Seaborn ready to use."]],
+  searchHint: "Try “groupby”, “broadcasting”, “histogram”, “missing values” or a question title.",
+  bruteLabel: "Brute force — plain Python", optLabel: "Optimal — the library way",
+  watchBrute: "Watch the plain-Python way run, line by line", watchOpt: "Watch the library way run, line by line",
+  qsHeading: "{n} practice questions"
+};
+</script>
+<script src="data/index.js?v=a21bf53550"></script>
+<script src="../handbook/app.js?v=5f1a53219a"></script>
+</body>
+</html>

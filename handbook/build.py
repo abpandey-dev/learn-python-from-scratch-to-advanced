@@ -6,6 +6,7 @@ book.json, index.html and src/{topics,lessons,theory}/.
     python3 handbook/build.py --book python-course     # the Python course
     python3 handbook/build.py arrays                   # only topics whose file name contains "arrays"
 """
+import ast
 import copy
 import hashlib
 import importlib.util
@@ -52,7 +53,9 @@ def run(q, fn, args):
 
 def _result_text(q, args, kind="opt"):
     try:
-        out = repr(run(q, q[kind], args))
+        res = run(q, q[kind], args)
+        lib.close_figures()
+        out = repr(lib.plain(res) if CONF.get("plain") and "check" not in q else res)
     except Exception:  # noqa: BLE001
         return "(see above)"
     return out if len(out) <= 160 else out[:157] + "..."
@@ -61,7 +64,7 @@ def _result_text(q, args, kind="opt"):
 def passes(q, args, want, got):
     if "check" in q:
         return q["check"](copy.deepcopy(args), got)
-    norm = q.get("norm", lambda x: x)
+    norm = q.get("norm", lib.plain if CONF.get("plain") else (lambda x: x))
     return norm(copy.deepcopy(got)) == norm(copy.deepcopy(want))
 
 
@@ -156,7 +159,46 @@ def ide_payload(q):
                     tests.append({"args": ar, "want": wr})
     return {"name": name, "stub": stub, "usage": "\n".join(usage) if usage else None,
             "tests": tests, "listify": bool(not q.get("design") and inspect.isgeneratorfunction(fn)),
-            "design": bool(q.get("design"))}
+            "design": bool(q.get("design")), "plain": bool(CONF.get("plain"))}
+
+
+def _defined_names(tree):
+    names = set()
+    for node in tree.body:
+        if isinstance(node, (ast.Import, ast.ImportFrom)):
+            names |= {(a.asname or a.name).split(".")[0] for a in node.names}
+        elif isinstance(node, (ast.Assign, ast.AnnAssign)):
+            for t in node.targets if isinstance(node, ast.Assign) else [node.target]:
+                names |= {n.id for n in ast.walk(t) if isinstance(n, ast.Name)}
+        elif isinstance(node, (ast.FunctionDef, ast.ClassDef)) and not node.decorator_list:
+            names.add(node.name)
+    return names
+
+
+def setup_for(fn):
+    """Module-level imports, data and helpers that fn uses, so its code also runs on its own in the IDE."""
+    fn = inspect.unwrap(fn)
+    shown = ast.parse(textwrap.dedent(lib._code(fn)[0]))  # the code users see: trace-only names don't count
+    tree = ast.parse(Path(inspect.getsourcefile(fn)).read_text())
+    src = Path(inspect.getsourcefile(fn)).read_text().split("\n")
+    have = _defined_names(ast.parse(CONF.get("prelude", ""))) | set(lib.__all__) | {"lib"}
+    stmts = {}
+    for node in tree.body:
+        defines = _defined_names(ast.Module(body=[node], type_ignores=[]))
+        for name in defines - have:
+            stmts.setdefault(name, node)
+    wanted, todo = {}, {n.id for n in ast.walk(shown) if isinstance(n, ast.Name)}
+    while todo:
+        name = todo.pop()
+        node = stmts.get(name)
+        if node is None or id(node) in wanted:
+            continue
+        wanted[id(node)] = node
+        todo |= {n.id for n in ast.walk(node) if isinstance(n, ast.Name)}
+    if not wanted:
+        return ""
+    parts = ["\n".join(src[n.lineno - 1:n.end_lineno]) for n in sorted(wanted.values(), key=lambda n: n.lineno)]
+    return "\n".join(parts) + "\n\n\n"
 
 
 def build_topic(path, failures):
@@ -167,6 +209,7 @@ def build_topic(path, failures):
         code, frames = trace(reg["demo"], reg["demo"])
         out["demo"] = {"code": code, "frames": frames, "title": meta.get("demo_title", "")}
     out["sections"], out["faq"] = reg["theory"], reg["faq"]
+    out["prelude"] = CONF.get("prelude", "")
     by_lc = {q["lc"]: slug(q["title"]) for q in reg["questions"]}
     out["lessons"] = []
     for k, les in enumerate(reg["lessons"], 1):
@@ -184,7 +227,7 @@ def build_topic(path, failures):
                 code, frames = trace(les["demo"], les["demo"])
             except Exception as e:  # noqa: BLE001
                 failures.append(f"{meta['id']} lesson {k} demo: {type(e).__name__}: {e}")
-            item["demo"] = {"code": code, "frames": frames, "call": les["demo"].__name__ + "()"}
+            item["demo"] = {"code": code, "frames": frames, "call": les["demo"].__name__ + "()", "setup": setup_for(les["demo"])}
             if not item["demo"]["frames"]:
                 failures.append(f"{meta['id']} lesson {k} demo recorded no frames")
         out["lessons"].append(item)
@@ -207,6 +250,7 @@ def build_topic(path, failures):
                     ok = passes(q, args, want, got)
                 except Exception as e:  # noqa: BLE001
                     got, ok = f"{type(e).__name__}: {e}", False
+                lib.close_figures()
                 if not ok:
                     failures.append(f"{where} [{kind}] args={args!r} want={want!r} got={got!r}")
             times[kind] = time.perf_counter() - t0
@@ -229,9 +273,9 @@ def build_topic(path, failures):
             "statement": q["statement"],
             "examples": [[fmt_args(q, a), repr(w)] for a, w in q["tests"][:3]],
             "vizIn": fmt_args(q, viz_args),
-            "brute": {"idea": bi, "tc": bt, "sc": bs, "code": traced["brute"][0] if "brute" in traced else lib._code(q["brute"])[0],
+            "brute": {"idea": bi, "tc": bt, "sc": bs, "code": traced["brute"][0] if "brute" in traced else lib._code(q["brute"])[0], "setup": setup_for(q["brute"]),
                       **({"frames": traced["brute"][1]} if "brute" in traced else {})},
-            "opt": {"idea": oi, "tc": ot, "sc": os_, "code": opt_code, "frames": frames},
+            "opt": {"idea": oi, "tc": ot, "sc": os_, "code": opt_code, "frames": frames, "setup": setup_for(q["opt"])},
             "tests": len(q["tests"]),
             "ide": ide_payload(q),
         }

@@ -232,10 +232,13 @@
     });
     return s;
   }
+  function vImg(v) {
+    return h("img", { class: "chart", src: v.src, alt: v.n || "chart drawn by the code" });
+  }
   function vOut(v) {
     return h("pre", { class: "console" }, v.v.length ? v.v.map(esc).join("\n") : '<span class="empty-v">(nothing printed yet)</span>');
   }
-  const RENDER = { arr: vArr, vars: vVars, map: vMap, stack: vStack, grid: vGrid, list: vList, tree: vTree, graph: vGraph, ntree: vNTree, out: vOut };
+  const RENDER = { arr: vArr, vars: vVars, map: vMap, stack: vStack, grid: vGrid, list: vList, tree: vTree, graph: vGraph, ntree: vNTree, out: vOut, img: vImg };
   function renderView(v) {
     const wrap = h("div", { class: "view" });
     if (v.n) wrap.appendChild(h("div", { class: "vname" }, esc(v.n)));
@@ -410,7 +413,7 @@
       if (!les.demo) return;
       const slot = app.querySelector(`#l-${k + 1} .ldemo`);
       slot.appendChild(player({ code: les.demo.code, frames: les.demo.frames }));
-      if (les.demo.call) slot.appendChild(h("a", { class: "btn small", target: "_blank", rel: "noopener", href: ideLink({ title: les.title, back: location.href, code: les.demo.code + "\n\n" + les.demo.call + "\n" }) }, "✎ Edit and run this in the IDE"));
+      if (les.demo.call) slot.appendChild(h("a", { class: "btn small", target: "_blank", rel: "noopener", href: ideLink({ title: les.title, back: location.href, code: (data.prelude || "") + (les.demo.setup || "") + les.demo.code + "\n\n" + les.demo.call + "\n" }) }, "✎ Edit and run this in the IDE"));
     });
     const nav = app.querySelector(".lnav");
     if (nav) nav.addEventListener("click", (e) => {
@@ -485,7 +488,7 @@
           ${meta.lc ? `<a class="badge" href="https://leetcode.com/problems/${lcSlug(meta.title)}/" target="_blank" rel="noopener">LeetCode ${meta.lc} ↗</a>` : ""}
           <span class="badge">✓ ${q.tests} tests pass</span></div>
         <p class="stmt">${q.statement}</p>
-        ${q.ide ? `<div class="ide-row"><a class="btn good" target="_blank" rel="noopener" href="${ideLink({ title: meta.title, back: location.href, code: q.ide.stub + "\n\n# Try it:\n" + (q.ide.usage || ""), check: q.ide.tests.length ? { name: q.ide.name, tests: q.ide.tests, listify: q.ide.listify, design: q.ide.design } : undefined })}">✎ Solve it yourself in the IDE</a><span class="ide-note">${q.ide.tests.length ? `Write your answer, then press ✓ Check to run ${q.ide.tests.length} test${q.ide.tests.length > 1 ? "s" : ""}.` : "Write and run your answer in the browser."}</span></div>` : ""}
+        ${q.ide ? `<div class="ide-row"><a class="btn good" target="_blank" rel="noopener" href="${ideLink({ title: meta.title, back: location.href, code: (data.prelude || "") + q.ide.stub + "\n\n# Try it:\n" + (q.ide.usage || ""), check: q.ide.tests.length ? { name: q.ide.name, tests: q.ide.tests, listify: q.ide.listify, design: q.ide.design, plain: q.ide.plain } : undefined })}">✎ Solve it yourself in the IDE</a><span class="ide-note">${q.ide.tests.length ? `Write your answer, then press ✓ Check to run ${q.ide.tests.length} test${q.ide.tests.length > 1 ? "s" : ""}.` : "Write and run your answer in the browser."}</span></div>` : ""}
         <div class="examples">${q.examples.map(([a, o], i) => `<div class="ex"><span>Example ${i + 1}:</span> ${esc(a)}<br><span>Output:</span> ${esc(o)}</div>`).join("")}</div>
       </section>
       <section class="sol brute"><div class="sol-h"><span class="step-n">1</span><h2>${BOOK.bruteLabel}</h2><div class="cx"><span>Time ${esc(q.brute.tc)}</span><span>Space ${esc(q.brute.sc)}</span></div></div><p class="idea">${q.brute.idea}</p></section>
@@ -496,10 +499,10 @@
         ${next ? `<a class="btn" href="#/q/${t.id}/${next.id}">${esc(next.title)} →</a>` : nextTopicLink(t)}
       </div>`;
     const tryCall = q.ide && q.ide.usage ? "\n\n" + q.ide.usage + "\n" : "\n\n# Add a call here to try it, e.g. print(...)\n";
-    const editLink = (label, code) => h("a", { class: "btn small", target: "_blank", rel: "noopener", href: ideLink({ title: meta.title + " — " + label, back: location.href, code: code + tryCall }) }, "✎ Open in editor");
+    const editLink = (label, sol) => h("a", { class: "btn small", target: "_blank", rel: "noopener", href: ideLink({ title: meta.title + " — " + label, back: location.href, code: (data.prelude || "") + (sol.setup || "") + sol.code + tryCall }) }, "✎ Open in editor");
     const brute = app.querySelector(".brute");
-    brute.querySelector(".sol-h").appendChild(editLink("brute force", q.brute.code));
-    app.querySelector(".opt .sol-h").appendChild(editLink("optimal", q.opt.code));
+    brute.querySelector(".sol-h").appendChild(editLink("brute force", q.brute));
+    app.querySelector(".opt .sol-h").appendChild(editLink("optimal", q.opt));
     if (q.brute.frames && q.brute.frames.length) {
       brute.appendChild(h("h3", null, BOOK.watchBrute));
       brute.appendChild(player({ code: q.brute.code, frames: q.brute.frames, input: q.vizIn }));

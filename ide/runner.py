@@ -11,8 +11,13 @@ import copy
 import inspect
 import io
 import json
+import os
 import sys
 import traceback
+import warnings
+
+os.environ.setdefault("MPLBACKEND", "AGG")  # draw charts off-screen; we send them back as PNGs
+warnings.filterwarnings("ignore", message=r"(?s).*pyarrow", category=DeprecationWarning)  # pandas 2.2 notice, not the learner's concern
 
 MAX_STEPS = 400
 INTERNAL = ("<genexpr>", "<listcomp>", "<dictcomp>", "<setcomp>", "<lambda>")
@@ -36,17 +41,60 @@ HINTS = {
 # ---------- Python Tutor style views ----------
 
 def _short(v, limit=40):
+    if type(v).__module__ == "numpy" and getattr(v, "shape", None) == ():
+        v = v.item()
     r = repr(v)
     return r if len(r) <= limit else r[:limit - 3] + "..."
 
 
 def _cell(v):
+    if type(v).__module__ == "numpy" and getattr(v, "shape", None) == ():
+        v = v.item()
+    if isinstance(v, float):
+        if v != v or v in (float("inf"), float("-inf")):
+            return repr(v)  # JSON has no NaN / inf
+        return v if v == int(v) or abs(v) >= 1e6 else round(v, 4)
     if isinstance(v, str) and len(v) == 1:
         return v
     return _short(v, 16)
 
 
+def _ds_view(name, v):
+    """NumPy arrays and pandas objects as tables (only when the program imported them)."""
+    np = sys.modules.get("numpy")
+    pd = sys.modules.get("pandas")
+    if np is not None and isinstance(v, np.ndarray):
+        label = f"{name}  (array {v.dtype}, shape {v.shape})"
+        if v.ndim == 1:
+            return {"k": "arr", "n": label, "v": [_cell(x) for x in v[:30].tolist()], "p": {}, "hl": [], "ok": [], "bad": []}
+        if v.ndim == 2:
+            return {"k": "grid", "n": label, "v": [[_cell(x) for x in r] for r in v[:10, :10].tolist()],
+                    "hl": [], "ok": [], "bad": [], "rl": None, "cl": None}
+        return {"k": "vars", "n": label, "v": [["values", _short(v.tolist())]]}
+    if pd is not None and isinstance(v, pd.DataFrame):
+        head = v.iloc[:8, :8]
+        more = f", showing {len(head)} of {len(v)} rows" if len(v) > 8 else ""
+        return {"k": "grid", "n": f"{name}  (DataFrame {v.shape[0]}×{v.shape[1]}{more})",
+                "v": [[_cell(x) for x in row] for row in head.itertuples(index=False)], "hl": [], "ok": [], "bad": [],
+                "rl": [_cell(i) for i in head.index], "cl": [str(c) for c in head.columns]}
+    if pd is not None and isinstance(v, pd.Series):
+        head = v.iloc[:20]
+        return {"k": "arr", "n": f"{name}  (Series {v.dtype})", "v": [_cell(x) for x in head.tolist()],
+                "p": {}, "hl": [], "ok": [], "bad": [], "il": [_cell(i) for i in head.index]}
+    return None
+
+
+def _library_object(v):
+    mod = getattr(type(v), "__module__", "") or ""
+    return mod.split(".")[0] in ("numpy", "pandas", "matplotlib", "seaborn")
+
+
 def _view(name, v):
+    ds = _ds_view(name, v)
+    if ds is not None:
+        return ds
+    if _library_object(v):
+        return None
     if isinstance(v, list):
         if v and len(v) <= 12 and all(isinstance(r, list) and len(r) <= 12 for r in v):
             return {"k": "grid", "n": name, "v": [[_cell(x) for x in r] for r in v],
@@ -86,6 +134,62 @@ def _views(frame, stack, out, hidden):
     if text:
         views.append({"k": "out", "n": "printed output", "v": text.rstrip("\n").split("\n")[-30:]})
     return views
+
+
+# ---------- charts and library results ----------
+
+def _close_figures():
+    plt = sys.modules.get("matplotlib.pyplot")
+    if plt is not None:
+        plt.close("all")
+
+
+def _figures(dpi=80):
+    """Every open matplotlib figure as a base64 PNG, then close them."""
+    plt = sys.modules.get("matplotlib.pyplot")
+    if plt is None:
+        return []
+    import base64
+    images = []
+    for num in plt.get_fignums():
+        buf = io.BytesIO()
+        plt.figure(num).savefig(buf, format="png", dpi=dpi, bbox_inches="tight")
+        images.append("data:image/png;base64," + base64.b64encode(buf.getvalue()).decode())
+    plt.close("all")
+    return images
+
+
+def plain(x, digits=4):
+    """NumPy / pandas results as plain Python values, so they compare with a test's expected answer."""
+    np = sys.modules.get("numpy")
+    pd = sys.modules.get("pandas")
+    if pd is not None:
+        if isinstance(x, pd.DataFrame):
+            return {str(c): plain(x[c].tolist(), digits) for c in x.columns}
+        if isinstance(x, pd.Series):
+            return {plain(k, digits): plain(v, digits) for k, v in x.items()}
+        if isinstance(x, pd.Index):
+            return plain(x.tolist(), digits)
+        if x is pd.NaT:
+            return None
+        if isinstance(x, pd.Timestamp):
+            return str(x.date()) if x == x.normalize() else str(x)
+    if np is not None:
+        if isinstance(x, np.ndarray):
+            return plain(x.tolist(), digits)
+        if isinstance(x, np.generic):
+            return plain(x.item(), digits)
+    if isinstance(x, float):
+        return None if x != x else round(x, digits) + 0.0
+    if isinstance(x, list):
+        return [plain(v, digits) for v in x]
+    if isinstance(x, tuple):
+        return tuple(plain(v, digits) for v in x)
+    if isinstance(x, dict):
+        return {plain(k, digits): plain(v, digits) for k, v in x.items()}
+    if isinstance(x, (set, frozenset)):
+        return {plain(v, digits) for v in x}
+    return x
 
 
 # ---------- helpers available to every program (used by DSA handbook answers) ----------
@@ -208,6 +312,7 @@ def _run(code, stdin, trace):
     except SyntaxError as e:
         result.update(_error_info(e))
         return result, None
+    _close_figures()
     with contextlib.redirect_stdout(out), contextlib.redirect_stderr(out):
         if trace:
             sys.settrace(tracer)
@@ -219,6 +324,11 @@ def _run(code, stdin, trace):
             sys.settrace(None)
     result["out"] = out.getvalue()
     result["truncated"] = state["truncated"]
+    result["images"] = _figures()
+    if frames and result["images"]:
+        frames.append({"m": "Charts drawn by the program", "l": frames[-1]["l"],
+                       "v": [v for v in frames[-1]["v"] if v["k"] != "img"] +
+                            [{"k": "img", "n": "chart", "src": src} for src in result["images"]]})
     return result, g
 
 
@@ -253,7 +363,15 @@ def check_code(code, stdin, payload_json):
                 if p.get("listify"):
                     got = list(got)
             want = eval(t["want"])  # noqa: S307
-            result["tests"].append({"call": call, "want": t["want"], "got": repr(got), "ok": got == want})
+            if p.get("plain"):
+                got, want = plain(got), plain(want)
+            _close_figures()
+            try:
+                ok = got == want
+                ok = ok if isinstance(ok, bool) else False  # e.g. an unconverted NumPy array compares element by element
+            except Exception:  # noqa: BLE001
+                ok = False
+            result["tests"].append({"call": call, "want": t["want"], "got": repr(got), "ok": ok})
         except BaseException as e:  # noqa: BLE001
             result["tests"].append({"call": call, "want": t["want"], "got": _error_info(e)["error"], "ok": False})
     return json.dumps(result)

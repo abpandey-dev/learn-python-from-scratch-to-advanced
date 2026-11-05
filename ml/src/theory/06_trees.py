@@ -35,3 +35,14 @@ FAQ("Why do decision trees overfit and how do you prevent it?", "<p>Grown fully,
 FAQ("Do trees need feature scaling?", "<p>No. Splits compare a feature with a threshold, which is unaffected by monotonic rescaling.</p>")
 FAQ("What is feature importance in a tree?", "<p>The total impurity decrease contributed by splits on each feature, weighted by the fraction of samples reaching those nodes and normalised. Prefer permutation importance for reliable conclusions.</p>")
 FAQ("Can a regression tree predict values outside the training range?", "<p>No. Each leaf predicts an average of training targets, so predictions are bounded by the training data's range.</p>")
+
+THEORY("Practical tuning guide", """
+<table>
+<tr><th>Symptom</th><th>Change</th></tr>
+<tr><td>Train accuracy near 100%, test much lower</td><td>lower max_depth; raise min_samples_leaf; raise ccp_alpha</td></tr>
+<tr><td>Both low</td><td>allow more depth; add better features; switch to boosting</td></tr>
+<tr><td>Rules are too hard to read</td><td>max_depth of 3–5, or max_leaf_nodes</td></tr>
+<tr><td>Results change with small data changes</td><td>use a random forest</td></tr>
+<tr><td>Imbalanced classes</td><td>class_weight="balanced"</td></tr>
+</table>
+""")

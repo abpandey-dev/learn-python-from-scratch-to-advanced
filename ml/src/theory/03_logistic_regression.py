@@ -39,3 +39,11 @@ FAQ("How do you interpret a logistic regression coefficient?", "<p>A one-unit in
 FAQ("What does C do in sklearn's LogisticRegression?", "<p>C is the inverse regularisation strength. Small C = strong penalty, smaller weights, simpler model; large C = weak penalty, risk of overfitting.</p>")
 FAQ("How do you handle class imbalance in logistic regression?", "<p>class_weight='balanced' (or custom weights), resampling, choosing a threshold other than 0.5, and evaluating with precision/recall or PR-AUC instead of accuracy.</p>")
 FAQ("What is the decision boundary of logistic regression?", "<p>The set where wᵀx + b = 0 (p = 0.5): a hyperplane, so the model is a linear classifier unless you add non-linear features.</p>")
+
+THEORY("When to use logistic regression", """
+<table>
+<tr><th>Good for</th><th>Weak at</th></tr>
+<tr><td>a strong, explainable baseline; probabilities; text with many sparse features; small data; regulated settings that need reasons</td><td>curved boundaries unless you add features; feature interactions; unscaled features with a penalty</td></tr>
+</table>
+<p>Checklist: scale features, one-hot encode categories, tune C on a log scale, use class_weight for imbalance, and pick the threshold on validation data.</p>
+""")

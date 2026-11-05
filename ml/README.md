@@ -1,6 +1,6 @@
 # Machine Learning from Scratch
 
-10 topics · theory with 62 theory questions · 46 lessons from basics to advanced · 200 practice questions with answers · Data preparation, linear and logistic regression, model evaluation, k-NN, Naive Bayes and SVM, decision trees, ensembles, clustering, tuning and pipelines, and neural networks · every algorithm is built from scratch in plain Python and NumPy, then done again with scikit-learn, both shown running step by step.
+10 topics · theory with 62 theory questions · 100 lessons from basics to advanced · 200 practice questions with answers · Data preparation, linear and logistic regression, model evaluation, k-NN, Naive Bayes and SVM, decision trees, ensembles, clustering, tuning and pipelines, and neural networks · every algorithm is built from scratch in plain Python and NumPy, then done again with scikit-learn, both shown running step by step.
 
 **Live site:** https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/
 

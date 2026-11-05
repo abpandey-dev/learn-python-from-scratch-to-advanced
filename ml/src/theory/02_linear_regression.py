@@ -49,3 +49,11 @@ FAQ("What is multicollinearity and why is it a problem?", "<p>Features that are 
 FAQ("Ridge vs Lasso?", "<p>Ridge (L2) shrinks all weights toward zero but keeps them; Lasso (L1) can set weights exactly to zero, performing feature selection. Elastic Net mixes both.</p>")
 FAQ("How do you detect overfitting?", "<p>Training error much lower than validation/test error. Learning curves and validation curves make it visible.</p>")
 FAQ("Can R² be negative?", "<p>Yes, on test data: a model worse than always predicting the mean gives R² &lt; 0.</p>")
+
+THEORY("When to use linear regression", """
+<table>
+<tr><th>Good for</th><th>Weak at</th></tr>
+<tr><td>a quick, explainable baseline; small data; many features with Ridge; fast predictions; extrapolating a true trend</td><td>curves and interactions you didn't add as features; outliers (with squared error); correlated features if you need to interpret coefficients</td></tr>
+</table>
+<p>Variants: Huber and RANSAC (robust to outliers), Poisson regression (counts), quantile regression (predicts a percentile instead of the mean).</p>
+""")

@@ -4,6 +4,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
@@ -128,3 +129,136 @@ def poly_demo():
     ax.plot(x, curved, label="features: x, x²")
     ax.legend(fontsize=8)
     ax.set_title("Adding x² lets a linear model curve", fontsize=9)
+
+
+LESSON("Basics", "Choosing the right kind of model", """
+<p>Before any code, turn the question into a machine-learning task. Ask three things:</p>
+<ol>
+<li><b>Do I have the answers for past examples?</b> Yes means supervised learning. No means unsupervised.</li>
+<li><b>What kind of answer do I want?</b> A number means regression. A category means classification.</li>
+<li><b>How will I know it worked?</b> Pick the metric and the baseline before training.</li>
+</ol>
+<table><tr><th>Question</th><th>Task</th><th>First model to try</th><th>Baseline</th></tr>
+<tr><td>What price will this flat sell for?</td><td>regression</td><td>linear regression, then boosting</td><td>the average price</td></tr>
+<tr><td>Is this transaction fraud?</td><td>binary classification</td><td>logistic regression, then boosting</td><td>"never fraud"</td></tr>
+<tr><td>Which topic is this article about?</td><td>multi-class classification</td><td>Naive Bayes or logistic regression</td><td>the most common topic</td></tr>
+<tr><td>Which customers are alike?</td><td>clustering</td><td>k-means</td><td>none: judge usefulness</td></tr>
+</table>
+<h4>A checklist for every dataset</h4>
+<ul>
+<li>How many rows and columns? What does one row mean?</li>
+<li>Which columns are numbers, categories, dates or free text?</li>
+<li>How many values are missing, and is that pattern meaningful?</li>
+<li>Is the target balanced? Are there duplicates or impossible values?</li>
+<li>Would each column really be known at prediction time? If not, it leaks.</li>
+</ul>
+""", practice=["Majority-Class Baseline", "Mean Baseline for Regression"])
+
+
+@LD
+def explore_first():
+    df = pd.DataFrame({"size": [50, 70, None, 100, 120, 900], "city": ["Pune", "Delhi", "Pune", None, "Pune", "Delhi"], "price": [150, 200, 230, 280, 330, 2500]})
+    shape = df.shape
+    missing = df.isna().sum()
+    summary = df["size"].describe()
+    city_counts = df["city"].value_counts()
+    suspicious_rows = df[df["size"] > 500]
+
+
+LESSON("Core", "Leakage, worked by hand", """
+<p><b>Idea:</b> a model must only learn from what it would have at prediction time. Fitting a scaler on the full data quietly breaks this.</p>
+<h4>Worked example</h4>
+<p>Training values are 1, 2, 3 and the only test value is 10.</p>
+<table><tr><th></th><th>Correct: fit on train</th><th>Leaky: fit on all data</th></tr>
+<tr><td>Mean</td><td>2</td><td>4</td></tr>
+<tr><td>Standard deviation</td><td>0.816</td><td>3.536</td></tr>
+<tr><td>Scaled test value</td><td>(10 − 2) / 0.816 = <b>9.80</b></td><td>(10 − 4) / 3.536 = <b>1.70</b></td></tr>
+</table>
+<p>The correct version says plainly that 10 is far outside anything seen in training. The leaky version makes it look ordinary, because the outlier helped set the scale. The model was evaluated on data that had already shaped its inputs, so the score can't be trusted.</p>
+<h4>Common mistakes</h4>
+<ul>
+<li>Calling <code>fit_transform</code> on the test set. Use <code>transform</code>.</li>
+<li>Selecting features, or filling missing values, before splitting.</li>
+<li>A column recorded after the outcome, such as "days in hospital" when predicting admission.</li>
+<li>Shuffling time-series data, which lets the model see the future.</li>
+</ul>
+<p><b>Warning sign:</b> a score that looks too good. Check which feature is doing the work.</p>
+""", practice=["Standard Scaling (Fit on Train Only)", "A Scale-Then-Fit Pipeline"])
+
+
+@LD
+def leakage_numbers():
+    train = np.array([1.0, 2.0, 3.0])
+    test_value = 10.0
+    correct = (test_value - train.mean()) / train.std()
+    everything = np.append(train, test_value)
+    leaky = (test_value - everything.mean()) / everything.std()
+
+
+LESSON("Core", "Imbalanced classes", """
+<p><b>Idea:</b> when one class is rare, a model can score highly by ignoring it. If 95 of 100 emails are fine, predicting "fine" every time is 95% accurate and catches nothing.</p>
+<h4>Worked example: balanced class weights</h4>
+<p>weight = n_samples / (n_classes × count of that class)</p>
+<table><tr><th>Class</th><th>Count</th><th>Weight</th></tr>
+<tr><td>Normal</td><td>95</td><td>100 / (2 × 95) = 0.526</td></tr>
+<tr><td>Fraud</td><td>5</td><td>100 / (2 × 5) = 10</td></tr></table>
+<p>Each fraud row now counts 19 times as much as a normal row, so both classes contribute equally to the loss.</p>
+<h4>What you can do, in the order to try it</h4>
+<ol>
+<li>Use a metric that sees the rare class: recall, precision, F1 or PR-AUC.</li>
+<li>Use <code>stratify=y</code> when splitting, so every part contains the rare class.</li>
+<li>Set <code>class_weight="balanced"</code>.</li>
+<li>Move the decision threshold instead of staying at 0.5.</li>
+<li>Resample the <b>training</b> data only. Oversampling before the split copies rows into the test set, which is leakage.</li>
+</ol>
+""", practice=["Balanced Class Weights", "Majority-Class Baseline"])
+
+
+@LD
+def imbalance_trap():
+    y_true = np.array([0] * 95 + [1] * 5)
+    always_normal = np.zeros(100, dtype=int)
+    accuracy = (always_normal == y_true).mean()
+    frauds_caught = always_normal[y_true == 1].sum()
+    weight_normal = 100 / (2 * 95)
+    weight_fraud = 100 / (2 * 5)
+    balance = (95 * weight_normal, 5 * weight_fraud)
+
+
+LESSON("Advanced", "A complete small project, start to finish", """
+<p>Here is every step on one small dataset. The demo below runs all of them.</p>
+<ol>
+<li><b>Define:</b> predict the flat price; measure with mean absolute error (MAE).</li>
+<li><b>Split first:</b> hold out a test set before looking closely at anything.</li>
+<li><b>Baseline:</b> always predict the training average, and record its error.</li>
+<li><b>Prepare:</b> fill missing sizes, scale numbers and one-hot encode the city, all inside one pipeline.</li>
+<li><b>Train and compare:</b> the model must beat the baseline.</li>
+<li><b>Test once:</b> report that score, and don't tune after seeing it.</li>
+<li><b>Inspect errors:</b> which rows are worst, and why?</li>
+</ol>
+<p>Real projects spend most of their time on steps 1–4 and step 7.</p>
+""", practice=["A Scale-Then-Fit Pipeline", "Train / Test Split Without Shuffling", "Mean Baseline for Regression"])
+
+
+@LD
+def whole_project():
+    from sklearn.compose import ColumnTransformer
+    from sklearn.impute import SimpleImputer
+    from sklearn.linear_model import LinearRegression
+    from sklearn.metrics import mean_absolute_error
+    from sklearn.pipeline import make_pipeline
+    from sklearn.preprocessing import OneHotEncoder
+    rng = np.random.default_rng(0)
+    size = rng.uniform(40, 150, 60)
+    city = rng.choice(["Pune", "Delhi"], 60)
+    price = 3 * size + np.where(city == "Delhi", 60, 0) + rng.normal(0, 15, 60)
+    df = pd.DataFrame({"size": size, "city": city})
+    df.loc[::10, "size"] = np.nan
+    X_train, X_test, y_train, y_test = train_test_split(df, price, test_size=0.25, random_state=0)
+    baseline_mae = mean_absolute_error(y_test, np.full(len(y_test), y_train.mean()))
+    prep = ColumnTransformer([("num", make_pipeline(SimpleImputer(), StandardScaler()), ["size"]), ("cat", OneHotEncoder(), ["city"])])
+    model = make_pipeline(prep, LinearRegression()).fit(X_train, y_train)
+    model_mae = mean_absolute_error(y_test, model.predict(X_test))
+    fig, ax = plt.subplots(figsize=(4.5, 2.6))
+    ax.bar(["baseline", "model"], [baseline_mae, model_mae], color=["#9ca3af", "#0f766e"])
+    ax.set_ylabel("test MAE (lower is better)")

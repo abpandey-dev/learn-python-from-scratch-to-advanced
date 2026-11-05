@@ -55,3 +55,15 @@ FAQ("One-hot vs label encoding for features?", "<p>One-hot for unordered categor
 FAQ("Why do we need a baseline?", "<p>It tells you whether the model learned anything. Accuracy of 90% means nothing if predicting the majority class already gives 90%.</p>")
 FAQ("Which models need feature scaling?", "<p>Distance- and gradient-based ones: k-NN, k-means, SVM, linear/logistic regression with regularisation, neural networks, PCA. Tree-based models (decision trees, random forests, gradient boosting) don't.</p>")
 FAQ("What is a pipeline and why use it?", "<p>An object chaining preprocessing steps and a model. It guarantees the same transforms at train and predict time and that each fold of cross-validation fits preprocessing only on its training part, preventing leakage.</p>")
+
+THEORY("Common beginner mistakes", """
+<table>
+<tr><th>Mistake</th><th>Why it hurts</th><th>Do this instead</th></tr>
+<tr><td>Judging a model on its training data</td><td>rewards memorising</td><td>score on held-out data</td></tr>
+<tr><td>Skipping the baseline</td><td>you can't tell if it learned anything</td><td>compare with a dummy model</td></tr>
+<tr><td>Preprocessing before splitting</td><td>leakage inflates the score</td><td>put preprocessing in a pipeline</td></tr>
+<tr><td>Only reporting accuracy on imbalanced data</td><td>hides total failure on the rare class</td><td>recall, precision, PR-AUC</td></tr>
+<tr><td>Tuning repeatedly against the test set</td><td>the test score becomes optimistic</td><td>tune with CV, test once</td></tr>
+<tr><td>Trying fancy models first</td><td>harder to debug, often no better</td><td>simple model first, then add complexity</td></tr>
+</table>
+""")

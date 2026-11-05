@@ -212,7 +212,8 @@ def build_topic(path, failures):
     out["prelude"] = CONF.get("prelude", "")
     by_lc = {q["lc"]: slug(q["title"]) for q in reg["questions"]}
     out["lessons"] = []
-    for k, les in enumerate(reg["lessons"], 1):
+    levels = {"Basics": 0, "Core": 1, "Advanced": 2}
+    for k, les in enumerate(sorted(reg["lessons"], key=lambda l: levels.get(l["level"], 3)), 1):
         item = {"level": les["level"], "title": les["title"], "body": les["body"], "practice": []}
         qids = {slug(q["title"]) for q in reg["questions"]}
         for ref in les["practice"]:

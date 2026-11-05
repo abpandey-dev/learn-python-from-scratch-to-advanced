@@ -40,3 +40,15 @@ FAQ("What is Laplace smoothing?", "<p>Adding α (usually 1) to every count so a 
 FAQ("What are support vectors?", "<p>The training points on or inside the margin. They alone determine the SVM's boundary; removing other points doesn't change it.</p>")
 FAQ("What do C and gamma control in an RBF SVM?", "<p>C sets how much margin violations are penalised (high C: fit training data tightly). γ sets how far each point's influence reaches (high γ: very local, wiggly boundary). Both high → overfitting.</p>")
 FAQ("What is the kernel trick?", "<p>Computing dot products in a high-dimensional feature space directly from the original inputs, so the SVM can learn non-linear boundaries without ever building those features.</p>")
+
+THEORY("Choosing between them", """
+<table>
+<tr><th></th><th>k-NN</th><th>Naive Bayes</th><th>SVM</th></tr>
+<tr><td>Training</td><td>none</td><td>very fast</td><td>slow on large data (kernels)</td></tr>
+<tr><td>Prediction</td><td>slow on large data</td><td>very fast</td><td>fast if few support vectors</td></tr>
+<tr><td>Needs scaling</td><td>yes</td><td>no</td><td>yes</td></tr>
+<tr><td>Many features</td><td>poor</td><td>good (text)</td><td>good</td></tr>
+<tr><td>Probabilities</td><td>rough</td><td>overconfident</td><td>extra step</td></tr>
+<tr><td>Best for</td><td>small, low-dimensional data; similarity search</td><td>text baselines, tiny data</td><td>medium data with clear margins</td></tr>
+</table>
+""")

@@ -50,3 +50,15 @@ FAQ("Can adding more trees to a random forest overfit?", "<p>No — performance 
 FAQ("What is the out-of-bag score?", "<p>Each row is predicted only by the trees that did not see it in their bootstrap sample; the accuracy of those predictions estimates generalisation without a separate validation set.</p>")
 FAQ("What does the learning rate do in gradient boosting?", "<p>It scales each new tree's contribution. Smaller rates need more trees but generalise better; it trades training time for accuracy.</p>")
 FAQ("Why are gradient-boosted trees so popular for tabular data?", "<p>They capture non-linearities and interactions automatically, handle mixed feature types and missing values, need little preprocessing, and with tuning usually give the best accuracy on structured data.</p>")
+
+THEORY("Random forest vs gradient boosting", """
+<table>
+<tr><th></th><th>Random forest</th><th>Gradient boosting</th></tr>
+<tr><td>Trees</td><td>deep, independent, parallel</td><td>shallow, sequential</td></tr>
+<tr><td>Reduces</td><td>variance</td><td>bias (then variance through shrinkage)</td></tr>
+<tr><td>More trees</td><td>never overfits, only plateaus</td><td>can overfit; use early stopping</td></tr>
+<tr><td>Tuning effort</td><td>low</td><td>higher, but usually higher accuracy</td></tr>
+<tr><td>Noisy labels</td><td>robust</td><td>more sensitive</td></tr>
+<tr><td>Training</td><td>easy to parallelise</td><td>sequential across trees</td></tr>
+</table>
+""")

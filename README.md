@@ -76,7 +76,7 @@ The math that data science and ML are built on, taught from zero for someone who
 
 ## [Machine Learning from Scratch](ml/) — 10 topics · 200 practice questions
 
-Learn how machine learning works by building every algorithm yourself, then using scikit-learn. Each topic has a **Theory** tab, **Lessons** with charts of what the model learned, and **20 practice questions**. Each question is answered twice: **from scratch** in plain Python and NumPy, and **with scikit-learn** (or NumPy and SciPy where the library has no direct function). Both can be watched running line by line. Take the Math course first if vectors and derivatives are new.
+Learn how machine learning works by building every algorithm yourself, then using scikit-learn. Each topic has a **Theory** tab, **9–12 detailed lessons** that work real examples by hand, step by step, and **20 practice questions**. Each question is answered twice: **from scratch** in plain Python and NumPy, and **with scikit-learn** (or NumPy and SciPy where the library has no direct function). Both can be watched running line by line. Take the Math course first if vectors and derivatives are new.
 
 **Open it:** https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/ · [Full question list](ml/README.md)
 

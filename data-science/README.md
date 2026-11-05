@@ -1,6 +1,6 @@
 # Python for Data Science
 
-8 topics · theory with 50 theory questions · 42 lessons from basics to advanced · 160 practice questions with answers · NumPy, Pandas, Matplotlib, Seaborn and statistics · every question has a plain-Python brute-force answer and an optimal vectorised or library answer, both shown running line by line, with the charts they draw.
+8 topics · theory with 50 theory questions · 78 lessons from basics to advanced · 160 practice questions with answers · NumPy, Pandas, Matplotlib, Seaborn and statistics · every question has a plain-Python brute-force answer and an optimal vectorised or library answer, both shown running line by line, with the charts they draw.
 
 **Live site:** https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/
 

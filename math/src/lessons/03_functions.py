@@ -118,3 +118,155 @@ def activations():
     ax.set_ylim(-1.2, 3)
     ax.axhline(0, color="black", linewidth=0.5)
     ax.legend()
+
+
+LESSON("Basics", "Reading a graph and substituting", """
+<h4>The coordinate plane</h4>
+<p>A point (3, 2) means 3 right, 2 up. For a function, x is the input and y = f(x) is the output.</p>
+<table><tr><th>You see</th><th>It means</th></tr>
+<tr><td>Line going up to the right</td><td>output grows with input (positive slope)</td></tr>
+<tr><td>Flat part</td><td>no change: slope 0</td></tr>
+<tr><td>Crosses the y-axis</td><td>the value at x = 0</td></tr>
+<tr><td>Crosses the x-axis</td><td>a root, where f(x) = 0</td></tr>
+<tr><td>Lowest or highest point</td><td>a minimum or maximum</td></tr></table>
+<h4>Substituting anything</h4>
+<p>f(x) = x² + 1. The x is a slot, and whatever you put in goes everywhere x appears:</p>
+<ul><li>f(3) = 9 + 1 = 10</li><li>f(−2) = 4 + 1 = 5</li>
+<li>f(a + 1) = (a + 1)² + 1 = a² + 2a + 2</li></ul>
+<h4>Domain: what inputs are allowed?</h4>
+<ul><li>√(x − 2) needs x ≥ 2.</li><li>1 / (x − 5) needs x ≠ 5.</li><li>log(x) needs x &gt; 0.</li></ul>
+<p>These cause most <code>NaN</code> and <code>inf</code> values in real code.</p>
+""", practice=["Table of Values", "Allowed Inputs (Domain)", "Is It a Function?"])
+
+
+@LD
+def substitute_demo():
+    def f(x):
+        return x ** 2 + 1
+
+    values = {x: f(x) for x in [3, -2, 0]}
+    a = 4
+    direct = f(a + 1)
+    expanded = a ** 2 + 2 * a + 2
+    xs = np.linspace(-3, 3, 100)
+    fig, ax = plt.subplots(figsize=(4.2, 2.8))
+    ax.plot(xs, f(xs))
+    ax.plot(list(values), list(values.values()), "o", color="#b45309")
+    ax.set_title("f(x) = x² + 1, with three points marked", fontsize=9)
+    ax.grid(alpha=0.3)
+
+
+LESSON("Core", "Logarithms by hand", """
+<p>A log answers: <b>what power do I need?</b></p>
+<table><tr><th>Log</th><th>Reads as</th><th>Answer</th></tr>
+<tr><td>log₂ 8</td><td>2 to what power gives 8?</td><td>3</td></tr>
+<tr><td>log₁₀ 1000</td><td>10 to what power gives 1000?</td><td>3</td></tr>
+<tr><td>log₁₀ 0.01</td><td>10 to what power gives 0.01?</td><td>−2</td></tr>
+<tr><td>log₅ 1</td><td>5 to what power gives 1?</td><td>0</td></tr></table>
+<h4>The rules, checked with numbers</h4>
+<ul><li><b>Product:</b> log₁₀(100 × 1000) = 5 = 2 + 3 ✓</li>
+<li><b>Power:</b> log₂(8²) = log₂ 64 = 6 = 2 × 3 ✓</li>
+<li><b>Change of base:</b> log₂ 10 = ln 10 / ln 2 = 2.303 / 0.693 = 3.322</li></ul>
+<p><b>Rule of thumb:</b> log₂ n is how many times you can halve n before reaching 1. log₂ 1000 ≈ 10, which is why binary search is so fast.</p>
+<p><b>Mistake:</b> log(a + b) isn't log a + log b. Only products become sums.</p>
+<h4>Why logs matter in data</h4>
+<p>They compress big ranges and turn multiplying into adding. The chart shows the same exponential growth with normal and log scales; on a log scale it's a straight line.</p>
+""", practice=["Logarithm by Counting", "Solve an Exponential Equation", "Multiply Tiny Probabilities With Logs"])
+
+
+@LD
+def log_checks():
+    product_rule = (math.log10(100 * 1000), math.log10(100) + math.log10(1000))
+    power_rule = (math.log2(8 ** 2), 2 * math.log2(8))
+    change_of_base = math.log(10) / math.log(2)
+    halvings = math.log2(1000)
+    x = np.arange(0, 31)
+    y = 2.0 ** x
+    fig, (left, right) = plt.subplots(1, 2, figsize=(7.5, 2.6))
+    left.plot(x, y)
+    left.set_title("normal scale", fontsize=9)
+    right.semilogy(x, y)
+    right.set_title("log scale: a straight line", fontsize=9)
+    fig.tight_layout()
+
+
+LESSON("Core", "Composition and inverses by hand", """
+<p>f(x) = 2x + 3 and g(x) = x².</p>
+<h4>Composition: feed one into the other</h4>
+<table><tr><th>Expression</th><th>Inside first</th><th>Then</th><th>At x = 2</th></tr>
+<tr><td>f(g(x))</td><td>g(2) = 4</td><td>f(4) = 11</td><td>11</td></tr>
+<tr><td>g(f(x))</td><td>f(2) = 7</td><td>g(7) = 49</td><td>49</td></tr></table>
+<p><b>Order matters.</b> A neural network is a long composition, with each layer feeding the next.</p>
+<h4>Inverse: undo the function</h4>
+<ol><li>Write y = 2x + 3.</li><li>Solve for x: x = (y − 3) / 2.</li><li>So f⁻¹(x) = (x − 3) / 2.</li><li>Check: f(5) = 13 and f⁻¹(13) = 5 ✓.</li></ol>
+<p>A function needs one output to come from just one input to have an inverse. x² doesn't, since (−2)² = 2² = 4; restrict it to x ≥ 0 and √x undoes it.</p>
+<p><b>Inverses in ML:</b> exp and ln undo each other, and the sigmoid's inverse is the logit (log-odds).</p>
+""", practice=["Compose Two Functions", "Inverse of a Line"])
+
+
+@LD
+def compose_inverse():
+    def f(x):
+        return 2 * x + 3
+
+    def g(x):
+        return x ** 2
+
+    def f_inverse(x):
+        return (x - 3) / 2
+
+    f_of_g = f(g(2))
+    g_of_f = g(f(2))
+    round_trip = f_inverse(f(5))
+    not_one_to_one = (g(-2), g(2))
+    logit_of_sigmoid = math.log((1 / (1 + math.exp(-1.5))) / (1 - 1 / (1 + math.exp(-1.5))))
+
+
+LESSON("Advanced", "How fast do functions grow?", """
+<p>When data grows, which part dominates? This decides whether code finishes.</p>
+<table><tr><th>n</th><th>log₂ n</th><th>n</th><th>n log₂ n</th><th>n²</th><th>2ⁿ</th></tr>
+<tr><td>10</td><td>3.3</td><td>10</td><td>33</td><td>100</td><td>1,024</td></tr>
+<tr><td>100</td><td>6.6</td><td>100</td><td>664</td><td>10,000</td><td>about 10³⁰</td></tr>
+<tr><td>1,000</td><td>10</td><td>1,000</td><td>9,966</td><td>1,000,000</td><td>unimaginable</td></tr></table>
+<p>Going from 10 to 1,000 rows multiplies n² work by 10,000.</p>
+<h4>Where you'll see them</h4>
+<ul><li><b>log n:</b> binary search, tree depth</li><li><b>n log n:</b> sorting, tree building</li>
+<li><b>n²:</b> comparing every pair of points (k-NN by brute force)</li><li><b>2ⁿ:</b> trying every subset of features, which is why nobody does</li></ul>
+<p><b>Only the fastest-growing term matters</b> for large n: in n² + 100n, at n = 1,000,000 the first term is 10¹² and the second just 10⁸.</p>
+""", practice=["Exponential Growth Table", "Highest Point on a Grid"])
+
+
+@LD
+def growth_rates():
+    n = np.arange(1, 21)
+    fig, ax = plt.subplots(figsize=(4.8, 3))
+    ax.semilogy(n, np.log2(n) + 1, label="log n")
+    ax.semilogy(n, n, label="n")
+    ax.semilogy(n, n * np.log2(n) + 1, label="n log n")
+    ax.semilogy(n, n ** 2, label="n²")
+    ax.semilogy(n, 2.0 ** n, label="2ⁿ")
+    ax.set_xlabel("n")
+    ax.legend(fontsize=7)
+
+
+LESSON("Advanced", "The number e and exponential decay", """
+<h4>Where e comes from</h4>
+<p>₹1 at 100% yearly interest, added in n equal parts through the year, grows to (1 + 1/n)ⁿ:</p>
+<table><tr><th>n</th><th>1</th><th>2</th><th>10</th><th>100</th><th>1000</th></tr>
+<tr><th>Value</th><td>2</td><td>2.25</td><td>2.5937</td><td>2.7048</td><td>2.7169</td></tr></table>
+<p>It approaches <b>e ≈ 2.71828</b>. eˣ is special: its slope at any point equals its height, which makes all of calculus with it easy.</p>
+<h4>Decay</h4>
+<p>Multiply by a number below 1 repeatedly. With half-life steps, 100 → 50 → 25 → <b>12.5</b> after 3 steps.</p>
+<p><b>In ML, a learning-rate schedule</b> does this: starting at 0.1 and multiplying by 0.9 each epoch gives 0.09 after 1 epoch, 0.059 after 5, and 0.035 after 10.</p>
+""", practice=["Exponential Growth Table", "Sigmoid Function"])
+
+
+@LD
+def e_and_decay():
+    approaching = {n: round((1 + 1 / n) ** n, 4) for n in [1, 2, 10, 100, 1000]}
+    half_life = [100 * 0.5 ** k for k in range(4)]
+    rates = 0.1 * 0.9 ** np.arange(21)
+    fig, ax = plt.subplots(figsize=(4.4, 2.7))
+    ax.plot(rates)
+    ax.set_xlabel("epoch")
+    ax.set_ylabel("learning rate")

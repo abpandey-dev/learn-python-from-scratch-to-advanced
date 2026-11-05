@@ -120,3 +120,131 @@ def projection_demo():
     ax.set_xlim(-0.5, 5)
     ax.set_ylim(-0.5, 3.5)
     ax.set_aspect("equal")
+
+
+LESSON("Basics", "What vector operations mean for data", """
+<p>Treat each house as a vector: [size, rooms, age].</p>
+<table><tr><th>Operation</th><th>Example</th><th>Meaning</th></tr>
+<tr><td>Subtract</td><td>[120, 3, 5] − [100, 2, 15] = [20, 1, −10]</td><td>how they differ</td></tr>
+<tr><td>Add, then divide</td><td>mean of two houses = [110, 2.5, 10]</td><td>the average house (a k-means centre)</td></tr>
+<tr><td>Scale</td><td>0.5 × [120, 3, 5] = [60, 1.5, 2.5]</td><td>shrink all features together</td></tr>
+<tr><td>Dot with weights</td><td>[2, 10, −1]·[120, 3, 5] = 265</td><td>a linear model's prediction</td></tr></table>
+<p><b>Sizes must match.</b> Adding a 3-feature house to a 2-feature one is meaningless, and it's the most common shape error in practice.</p>
+<p>A word embedding, an image and a customer are all vectors. Everything you learn here works in any number of dimensions, even though we only draw two.</p>
+""", practice=["Add Two Vectors", "Scale a Vector", "Centroid of Points", "A Single Neuron"])
+
+
+@LD
+def house_vectors():
+    a = np.array([120.0, 3, 5])
+    b = np.array([100.0, 2, 15])
+    difference = a - b
+    average = (a + b) / 2
+    half = 0.5 * a
+    weights = np.array([2.0, 10, -1])
+    prediction = weights @ a
+
+
+LESSON("Core", "The dot product and angle, worked", """
+<p>u = (3, 4) and v = (4, 3).</p>
+<ol><li><b>Dot product:</b> 3·4 + 4·3 = 24.</li>
+<li><b>Lengths:</b> ‖u‖ = √(9 + 16) = 5 and ‖v‖ = 5.</li>
+<li><b>Cosine:</b> 24 / (5 × 5) = 0.96.</li>
+<li><b>Angle:</b> arccos(0.96) = <b>16.26°</b>. They point in similar directions.</li></ol>
+<table><tr><th>Cosine</th><th>Angle</th><th>Meaning</th></tr>
+<tr><td>1</td><td>0°</td><td>same direction</td></tr><tr><td>0</td><td>90°</td><td>unrelated (perpendicular)</td></tr><tr><td>−1</td><td>180°</td><td>opposite</td></tr></table>
+<h4>Why u·v = ‖u‖‖v‖cos θ?</h4>
+<p>Think of shadows. The dot product is the length of u's shadow on v, multiplied by v's length. When they're perpendicular there's no shadow, so the result is 0.</p>
+<p><b>Length itself comes from the dot product:</b> v·v = ‖v‖². That's why squared errors and vector lengths look alike.</p>
+""", practice=["Dot Product", "Angle Between Two Vectors", "Cosine Similarity", "Are They Perpendicular?", "Project One Vector Onto Another"])
+
+
+@LD
+def dot_worked():
+    u, v = np.array([3.0, 4.0]), np.array([4.0, 3.0])
+    dot = u @ v
+    lengths = (np.linalg.norm(u), np.linalg.norm(v))
+    cosine = dot / (lengths[0] * lengths[1])
+    degrees = math.degrees(math.acos(cosine))
+    self_dot = v @ v
+
+
+LESSON("Core", "Three ways to measure length", """
+<p>For v = (3, −4):</p>
+<table><tr><th>Norm</th><th>Formula</th><th>Value</th><th>Think of it as</th></tr>
+<tr><td>L1 (Manhattan)</td><td>|3| + |−4|</td><td>7</td><td>walking a street grid</td></tr>
+<tr><td>L2 (Euclidean)</td><td>√(9 + 16)</td><td>5</td><td>straight line</td></tr>
+<tr><td>L∞ (max)</td><td>max(3, 4)</td><td>4</td><td>the single largest change</td></tr></table>
+<p>The chart draws all points with length 1 under each norm. L2 gives a circle, L1 a diamond, and L∞ a square.</p>
+<h4>Why ML cares</h4>
+<ul><li><b>L2 penalty (Ridge):</b> shrinks all weights smoothly.</li>
+<li><b>L1 penalty (Lasso):</b> sets some weights to exactly 0. The diamond's corners lie on the axes, where a weight is 0.</li>
+<li><b>Distances:</b> L1 is less sensitive to one huge difference, since it isn't squared.</li></ul>
+""", practice=["Length of a Vector", "Manhattan Distance", "Unit Vector", "Distance Between Two Points", "Nearest Neighbour", "Min-Max Scaling"])
+
+
+@LD
+def norm_shapes():
+    v = np.array([3.0, -4.0])
+    l1 = np.abs(v).sum()
+    l2 = math.sqrt((v ** 2).sum())
+    linf = np.abs(v).max()
+    t = np.linspace(0, 2 * np.pi, 400)
+    circle = np.column_stack([np.cos(t), np.sin(t)])
+    fig, ax = plt.subplots(figsize=(3.4, 3.4))
+    for p, name in [(1, "L1"), (2, "L2"), (50, "L∞")]:
+        scale = (np.abs(circle) ** p).sum(axis=1) ** (1 / p)
+        ax.plot(circle[:, 0] / scale, circle[:, 1] / scale, label=name)
+    ax.set_aspect("equal")
+    ax.legend(fontsize=8)
+    ax.set_title("All points of length 1", fontsize=9)
+
+
+LESSON("Advanced", "Independence, span and basis", """
+<h4>Span: everywhere you can reach</h4>
+<p>Combining vectors with weights, c₁v₁ + c₂v₂, reaches a set of points called their <b>span</b>.</p>
+<ul><li>(1, 0) and (0, 1) reach every point of the plane.</li>
+<li>(1, 2) and (2, 4) only reach one line, since the second is just 2 × the first.</li></ul>
+<h4>Linear independence</h4>
+<p>Vectors are <b>independent</b> if none can be built from the others. (1, 2) and (2, 4) are dependent, so the second adds no new direction.</p>
+<p><b>In data:</b> a "price in rupees" column and a "price in dollars" column are dependent. The second adds no information, and it causes unstable regression.</p>
+<h4>Basis: a coordinate system</h4>
+<p>A basis is a minimal set of independent vectors that reaches everything. The point (3, 5) can be written in two ways:</p>
+<ul><li>Using (1, 0), (0, 1): 3(1, 0) + 5(0, 1)</li>
+<li>Using (1, 1), (1, −1): 4(1, 1) − 1(1, −1) = (3, 5)</li></ul>
+<p>It's the same point with different coordinates. <b>PCA is choosing a better basis</b> for your data.</p>
+""", practice=["Linear Combination", "Cross Product (3-D)"])
+
+
+@LD
+def basis_demo():
+    dependent_rank = np.linalg.matrix_rank([[1, 2], [2, 4]])
+    independent_rank = np.linalg.matrix_rank([[1, 0], [0, 1]])
+    new_basis = np.array([[1, 1], [1, -1]]).T
+    coordinates = np.linalg.solve(new_basis, [3, 5])
+    rebuilt = coordinates[0] * np.array([1, 1]) + coordinates[1] * np.array([1, -1])
+
+
+LESSON("Advanced", "Similarity search, the idea behind embeddings", """
+<p>Modern AI turns text into vectors called <b>embeddings</b>, placing similar meanings close together. Finding similar items is then simple maths.</p>
+<h4>Cosine or distance?</h4>
+<p>Compare a = (1, 2) with b = (2, 4), a longer vector in the same direction.</p>
+<ul><li>Euclidean distance: √(1 + 4) = 2.236, so they seem different.</li>
+<li>Cosine similarity: 10 / (2.236 × 4.472) = 1, so they seem identical.</li></ul>
+<p>A long document and a short one on one topic have different lengths and the same direction, so cosine suits text.</p>
+<h4>A speed trick</h4>
+<p>If all vectors are scaled to length 1, the dot product <b>is</b> the cosine. So similarity against a million items becomes one matrix–vector multiply. That's how retrieval in a RAG system works, and vector databases add indexes to make it faster still.</p>
+""", practice=["Most Similar Word", "Cosine Similarity", "Squared Error Between Two Vectors", "Element-wise Product"])
+
+
+@LD
+def similarity_search():
+    words = ["king", "queen", "apple", "banana"]
+    vectors = np.array([[0.9, 0.8, 0.1], [0.85, 0.9, 0.15], [0.1, 0.2, 0.9], [0.15, 0.1, 0.95]])
+    unit = vectors / np.linalg.norm(vectors, axis=1, keepdims=True)
+    query = unit[0]
+    scores = (unit @ query).round(3)
+    ranked = [words[i] for i in np.argsort(-scores)]
+    a, b = np.array([1.0, 2.0]), np.array([2.0, 4.0])
+    distance = np.linalg.norm(a - b)
+    cosine = a @ b / (np.linalg.norm(a) * np.linalg.norm(b))

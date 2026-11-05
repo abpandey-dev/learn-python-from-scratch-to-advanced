@@ -1,6 +1,6 @@
 # Math for Data Science & Machine Learning
 
-10 topics · theory with 55 theory questions · 50 lessons from basics to advanced · 200 practice questions with answers · Arithmetic, algebra, functions, vectors, matrices, eigenvectors and PCA, calculus, gradient descent, probability and distributions · taught from zero for someone learning math for the first time · every question is solved by hand in plain Python and again with NumPy or a formula, both shown running step by step with graphs.
+10 topics · theory with 55 theory questions · 103 lessons from basics to advanced · 200 practice questions with answers · Arithmetic, algebra, functions, vectors, matrices, eigenvectors and PCA, calculus, gradient descent, probability and distributions · taught from zero for someone learning math for the first time · every question is solved by hand in plain Python and again with NumPy or a formula, both shown running step by step with graphs.
 
 **Live site:** https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/math/
 

@@ -122,3 +122,115 @@ def uncertainty_demo():
     ax.fill_between(x, mean - spread, mean + spread, alpha=0.3, label="range")
     ax.errorbar(x, mean, yerr=spread, fmt="o", color="C0", capsize=3)
     ax.legend()
+
+
+LESSON("Basics", "From a default chart to a clear one", """
+<p>A chart should answer a question at a glance. The chart in the demo goes from default to clear in a few steps:</p>
+<ol><li><b>Sort</b> the bars by value, unless they have a natural order.</li>
+<li><b>Title with the finding:</b> "Pune leads sales", not "Sales by city".</li>
+<li><b>Label the units</b> on the axis, such as "sales (₹ lakh)".</li>
+<li><b>Remove clutter:</b> top and right borders, a pointless legend.</li>
+<li><b>Highlight</b> what matters with colour, and grey out the rest.</li>
+<li><b>Label values directly</b> when there are few of them: <code>ax.bar_label</code>.</li></ol>
+<p>Every element should earn its place. If you removed it and nothing was lost, leave it out.</p>
+""", practice=["Sorted Horizontal Bars", "Labels and Limits", "Bar Chart"])
+
+
+@LD
+def default_to_clear():
+    sales = {"Goa": 12, "Pune": 41, "Delhi": 28, "Agra": 9}
+    fig, (before, after) = plt.subplots(1, 2, figsize=(8, 2.9))
+    before.bar(list(sales), list(sales.values()))
+    before.set_title("Before: default", fontsize=9)
+    ordered = sorted(sales.items(), key=lambda kv: kv[1])
+    names = [k for k, v in ordered]
+    values = [v for k, v in ordered]
+    colours = ["#0f766e" if k == "Pune" else "#c9ced6" for k in names]
+    bars = after.barh(names, values, color=colours)
+    after.bar_label(bars, padding=3)
+    after.set_title("After: Pune leads sales", fontsize=9)
+    after.set_xlabel("sales (₹ lakh)")
+    after.spines[["top", "right"]].set_visible(False)
+    fig.tight_layout()
+
+
+LESSON("Core", "Charts that mislead", """
+<p>The same honest numbers can tell a false story. Learn to spot and avoid these:</p>
+<table><tr><th>Trick</th><th>Effect</th><th>Do this</th></tr>
+<tr><td>Bar axis not starting at 0</td><td>a 2% gap looks huge</td><td>start bars at 0</td></tr>
+<tr><td>Two y axes</td><td>any two lines can seem to move together</td><td>use two panels, or index both to 100</td></tr>
+<tr><td>Chart areas for values</td><td>doubling the radius quadruples the area</td><td>use length</td></tr>
+<tr><td>Picking a date range</td><td>a fall can be made to look like growth</td><td>show the full context</td></tr>
+<tr><td>Pie with many slices</td><td>angles are hard to compare</td><td>sorted bars</td></tr>
+<tr><td>Averages only</td><td>hides spread and outliers</td><td>show the points, or a box plot</td></tr></table>
+<p>The demo plots 98 vs 100 twice. With a cut axis, one bar looks many times smaller than the other. With an axis from 0, they're almost equal, which is the truth.</p>
+<p><b>Exception:</b> line charts don't need to start at 0, since they show change rather than size.</p>
+""", practice=["Two Different Y Scales", "Pie Chart With Percentages"])
+
+
+@LD
+def truncated_axis():
+    names, values = ["A", "B"], [98, 100]
+    fig, (cut, honest) = plt.subplots(1, 2, figsize=(6.5, 2.7))
+    cut.bar(names, values, color="#b91c1c")
+    cut.set_ylim(97.5, 100.2)
+    cut.set_title("Axis cut: B looks far ahead", fontsize=9)
+    honest.bar(names, values, color="#0f766e")
+    honest.set_ylim(0, 110)
+    honest.set_title("Axis from 0: almost equal", fontsize=9)
+    fig.tight_layout()
+
+
+LESSON("Core", "Working with many panels", """
+<p><code>plt.subplots</code> returns a figure and <code>axes</code>. The shape of <code>axes</code> changes, and that's a common source of errors:</p>
+<table><tr><th>Call</th><th>axes is</th><th>Access with</th></tr>
+<tr><td><code>plt.subplots()</code></td><td>one Axes</td><td><code>ax.plot(...)</code></td></tr>
+<tr><td><code>plt.subplots(1, 3)</code></td><td>array of shape (3,)</td><td><code>axes[0]</code></td></tr>
+<tr><td><code>plt.subplots(2, 3)</code></td><td>array of shape (2, 3)</td><td><code>axes[1, 2]</code>, or loop over <code>axes.flat</code></td></tr></table>
+<h4>Small multiples</h4>
+<p>One panel per category, on <b>shared axes</b>, often beats many lines on one chart. Use <code>sharex=True, sharey=True</code> so panels can be compared at a glance. Without shared axes, a small value can look just as large as a big one.</p>
+<p>Finish with <code>fig.tight_layout()</code> to stop labels overlapping.</p>
+""", practice=["Two Charts Side by Side", "2 × 2 Small Multiples"])
+
+
+@LD
+def small_multiples():
+    months = np.arange(1, 13)
+    cities = {"Pune": 20 + 2 * months, "Delhi": 60 - 3 * months, "Goa": 30 + 10 * np.sin(months), "Agra": 15 + 0 * months}
+    fig, axes = plt.subplots(2, 2, figsize=(6, 3.6), sharex=True, sharey=True)
+    for ax, (city, values) in zip(axes.flat, cities.items()):
+        ax.plot(months, values)
+        ax.set_title(city, fontsize=9)
+    fig.supxlabel("month", fontsize=9)
+    fig.tight_layout()
+
+
+LESSON("Advanced", "Pointing at what matters", """
+<p>Guide the reader's eye:</p>
+<table><tr><th>Tool</th><th>Use</th></tr>
+<tr><td><code>ax.annotate("Launch", xy=(x, y), xytext=(a, b), arrowprops={...})</code></td><td>explain one point</td></tr>
+<tr><td><code>ax.axhline(100, ls="--")</code>, <code>ax.axvline(...)</code></td><td>a target or an event</td></tr>
+<tr><td><code>ax.axvspan(a, b, alpha=0.2)</code></td><td>shade a period</td></tr>
+<tr><td><code>ax.fill_between(x, low, high, alpha=0.2)</code></td><td>show uncertainty</td></tr>
+<tr><td><code>ax.text(x, y, "label")</code></td><td>label a line directly, instead of a legend</td></tr></table>
+<h4>Colour choices</h4>
+<ul><li><b>Categories:</b> distinct colours, at most about 6–8 (<code>tab10</code>).</li>
+<li><b>Ordered values:</b> one colour from light to dark (<code>viridis</code>).</li>
+<li><b>Above or below a middle:</b> two colours (<code>coolwarm</code>, with the centre at 0).</li>
+<li>Don't rely on red vs green alone, as many people can't tell them apart.</li></ul>
+""", practice=["Mark the Highest Point", "Shaded Range", "Error Bars", "Markers and Line Styles"])
+
+
+@LD
+def annotated_story():
+    weeks = np.arange(12)
+    users = np.array([50, 52, 51, 55, 54, 58, 85, 92, 96, 101, 104, 110])
+    fig, ax = plt.subplots(figsize=(5.2, 3))
+    ax.plot(weeks, users, color="#0f766e")
+    ax.axhline(100, ls="--", color="gray")
+    ax.text(0, 102, "target: 100", fontsize=8)
+    ax.axvspan(5.5, 6.5, alpha=0.15, color="#b45309")
+    ax.annotate("App launch", xy=(6, 85), xytext=(1.5, 80), arrowprops={"arrowstyle": "->"})
+    ax.set_xlabel("week")
+    ax.set_ylabel("users")
+    ax.set_title("Users passed the target after launch", fontsize=9)

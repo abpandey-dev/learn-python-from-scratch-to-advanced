@@ -1,4 +1,8 @@
 from lib import *
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+import numpy as np
 import pandas as pd
 
 LESSON("Basics", "Why clean data?", """
@@ -110,3 +114,121 @@ def dates_demo():
     df["month"] = start.dt.month_name()
     df["band"] = pd.cut(df["age"], bins=[0, 17, 59, 120], labels=["child", "adult", "senior"])
     print(df)
+
+
+LESSON("Basics", "How missing values really behave", """
+<p>Missing values are quietly treated differently from what you may expect. Take <code>s = pd.Series([1, None, 5])</code>:</p>
+<table><tr><th>Code</th><th>Result</th><th>Why</th></tr>
+<tr><td><code>s.sum()</code></td><td>6</td><td>skips the gap</td></tr>
+<tr><td><code>s.mean()</code></td><td>3</td><td>6 / 2, not 6 / 3</td></tr>
+<tr><td><code>s.count()</code></td><td>2</td><td>counts present values</td></tr>
+<tr><td><code>len(s)</code></td><td>3</td><td>counts all rows</td></tr>
+<tr><td><code>s == None</code></td><td>all False</td><td>never test for gaps this way</td></tr>
+<tr><td><code>s.isna()</code></td><td>False, True, False</td><td>the right way</td></tr>
+<tr><td>the dtype</td><td>float64</td><td>a gap turned the whole-number column to decimals</td></tr></table>
+<p>So if ids suddenly look like 3.0, a gap is probably the reason. <code>convert_dtypes()</code> or the <code>Int64</code> type keeps them whole.</p>
+<h4>Ask why it's missing</h4>
+<ul><li><b>Random:</b> a form glitch. Filling is fairly safe.</li>
+<li><b>Linked to other columns:</b> younger people skip the income question. Fill within groups.</li>
+<li><b>Linked to the value itself:</b> very high earners hide their income. Any fill will bias results, so keep a "was missing" flag.</li></ul>
+""", practice=["Count Missing Values", "Drop Incomplete Rows"])
+
+
+@LD
+def missing_behaviour():
+    s = pd.Series([1, None, 5])
+    total = s.sum()
+    average = s.mean()
+    present = s.count()
+    rows = len(s)
+    wrong_test = (s == None).sum()
+    right_test = s.isna().sum()
+    kind = str(s.dtype)
+
+
+LESSON("Core", "Choosing how to fill gaps, worked", """
+<table><tr><th>Situation</th><th>Choice</th></tr>
+<tr><td>Very few rows affected</td><td>drop those rows</td></tr>
+<tr><td>Numbers, roughly symmetric</td><td>mean</td></tr>
+<tr><td>Numbers with outliers</td><td>median</td></tr>
+<tr><td>Categories</td><td>most common, or "Unknown"</td></tr>
+<tr><td>Time series</td><td>carry forward, or interpolate</td></tr>
+<tr><td>Values depend on a group</td><td>the group's own average</td></tr>
+<tr><td>Over 60–70% missing</td><td>consider dropping the column</td></tr></table>
+<h4>Worked example: group filling</h4>
+<table><tr><th>City</th><th>Rent</th><th>Global mean fill</th><th>Group mean fill</th></tr>
+<tr><td>Pune</td><td>10</td><td>10</td><td>10</td></tr>
+<tr><td>Pune</td><td>missing</td><td>20</td><td><b>15</b></td></tr>
+<tr><td>Pune</td><td>20</td><td>20</td><td>20</td></tr>
+<tr><td>Delhi</td><td>30</td><td>30</td><td>30</td></tr>
+<tr><td>Delhi</td><td>missing</td><td>20</td><td><b>30</b></td></tr></table>
+<p>The global mean (20) gives a Delhi flat a Pune-like price. The group mean respects the difference:</p>
+<pre><code class="py">df["rent"].fillna(df.groupby("city")["rent"].transform("mean"))</code></pre>
+<p><b>Filling shrinks the spread,</b> since many rows get the same value, and can make relationships look different. Note how much you filled when you report results.</p>
+""", practice=["Fill Gaps With the Average", "Fill Missing Text", "Carry the Last Reading Forward", "Fill Gaps by Interpolation", "Drop Mostly-Empty Columns"])
+
+
+@LD
+def group_fill():
+    df = pd.DataFrame({"city": ["Pune", "Pune", "Pune", "Delhi", "Delhi"], "rent": [10, None, 20, 30, None]})
+    global_mean = df["rent"].mean()
+    global_filled = df["rent"].fillna(global_mean)
+    group_means = df.groupby("city")["rent"].transform("mean")
+    group_filled = df["rent"].fillna(group_means)
+
+
+LESSON("Core", "Outliers: find them, then decide", """
+<h4>Find them with the IQR rule</h4>
+<p>Values: 10, 12, 13, 14, 15, 16, 100.</p>
+<ol><li>Q1 = 12.5 and Q3 = 15.5, so IQR = 3.</li>
+<li>Lower fence: 12.5 − 1.5 × 3 = 8. Upper fence: 15.5 + 1.5 × 3 = 20.</li>
+<li>100 is outside the fences, so it's flagged.</li></ol>
+<p>One value drags the mean from 13.33 up to <b>25.71</b>, while the median is just 14.</p>
+<h4>Then decide, don't just delete</h4>
+<table><tr><th>What it is</th><th>What to do</th></tr>
+<tr><td>Data entry error (age 200)</td><td>fix it, or set it to missing</td></tr>
+<tr><td>Wrong unit (height 170 among values in metres)</td><td>convert</td></tr>
+<tr><td>Real but extreme (a billionaire's income)</td><td>keep it; use median or a log transform</td></tr>
+<tr><td>Real and it distorts a model</td><td>cap it (<code>clip</code>) and say so</td></tr>
+<tr><td>The thing you're looking for (fraud)</td><td><b>definitely keep it</b></td></tr></table>
+<p>Always look at flagged rows yourself, and record what you removed and why.</p>
+""", practice=["Cap Outliers"])
+
+
+@LD
+def outlier_steps():
+    s = pd.Series([10, 12, 13, 14, 15, 16, 100])
+    q1, q3 = s.quantile(0.25), s.quantile(0.75)
+    iqr = q3 - q1
+    low, high = q1 - 1.5 * iqr, q3 + 1.5 * iqr
+    flagged = s[(s < low) | (s > high)]
+    mean_with, mean_without, median = s.mean(), s[s <= high].mean(), s.median()
+    capped = s.clip(low, high)
+
+
+LESSON("Advanced", "A complete cleaning walk-through", """
+<p>A small, realistically messy table, cleaned in order. The demo runs each step.</p>
+<ol><li><b>Column names:</b> lower case, no spaces.</li>
+<li><b>Duplicates:</b> remove repeated rows.</li>
+<li><b>Text:</b> strip spaces, fix capitals, so " pune" and "PUNE" match.</li>
+<li><b>Numbers stored as text:</b> remove "₹" and commas, then <code>pd.to_numeric(errors="coerce")</code> turns anything unreadable into a gap.</li>
+<li><b>Dates:</b> <code>pd.to_datetime(errors="coerce")</code>. Check whether 03/04 means March or April: <code>dayfirst=True</code> sets it.</li>
+<li><b>Gaps:</b> fill or drop, knowing why.</li>
+<li><b>Check the result:</b> shape, types, and <code>describe()</code> again.</li></ol>
+<p><b>Why <code>errors="coerce"</code>?</b> It turns bad values into visible gaps you can count, rather than crashing or hiding them. But check how many appeared: a sudden jump means your format assumption was wrong.</p>
+<p>Keep cleaning in code, never by editing the file by hand, so it can be rerun on next month's data.</p>
+""", practice=["Clean Column Names", "Remove Duplicate Rows", "Tidy Up Text", "Prices From Messy Text", "Fix Column Types", "Text to Numbers", "Month From a Date"])
+
+
+@LD
+def clean_walkthrough():
+    raw = pd.DataFrame({"Customer Name": [" ana ", "BEN", "BEN", "cy"], "City": [" pune", "Delhi", "Delhi", "PUNE "], "Price": ["₹1,200", "₹900", "₹900", "n/a"], "Joined": ["2024-01-15", "2024-02-20", "2024-02-20", "bad date"]})
+    df = raw.rename(columns=lambda c: c.strip().lower().replace(" ", "_"))
+    df = df.drop_duplicates()
+    df["customer_name"] = df["customer_name"].str.strip().str.title()
+    df["city"] = df["city"].str.strip().str.title()
+    df["price"] = pd.to_numeric(df["price"].str.replace("₹", "").str.replace(",", ""), errors="coerce")
+    df["joined"] = pd.to_datetime(df["joined"], errors="coerce")
+    new_gaps = df.isna().sum()
+    df["price"] = df["price"].fillna(df["price"].median())
+    clean_shape = df.shape

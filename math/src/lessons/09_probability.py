@@ -120,3 +120,137 @@ def expected_value_demo():
     ax.axhline(mean, color="#b45309", linestyle="--", label="E[X] = 3.5")
     ax.legend(fontsize=8)
     ax.set_xlabel("number of rolls")
+
+
+LESSON("Basics", "List the outcomes first", """
+<p>Most probability mistakes come from not listing what can happen.</p>
+<h4>Two coins: P(at least one head)?</h4>
+<p>A tempting answer: "0, 1 or 2 heads, so 2 out of 3". But those three aren't equally likely. List properly:</p>
+<table><tr><th>Outcome</th><th>HH</th><th>HT</th><th>TH</th><th>TT</th></tr><tr><th>Probability</th><td>1/4</td><td>1/4</td><td>1/4</td><td>1/4</td></tr></table>
+<p>Three of the four have a head, so <b>P = 3/4</b>.</p>
+<h4>Using a probability tree</h4>
+<p>Multiply along branches, add across paths. For two flips, P(exactly one head) = ½·½ + ½·½ = ½.</p>
+<h4>Helpful checks</h4>
+<ul><li>All probabilities must add to 1.</li>
+<li>"At least one" is usually easiest as 1 − P(none).</li>
+<li>Results always lie between 0 and 1.</li></ul>
+<h4>The gambler's fallacy</h4>
+<p>After 5 heads in a row, the next flip is still 50/50. Coins have no memory. A run of bad luck doesn't make good luck "due".</p>
+""", practice=["Rolling a Total With Two Dice", "At Least One Six", "Drawing a Card: Or"])
+
+
+@LD
+def coins_listing():
+    from itertools import product
+    outcomes = list(product("HT", repeat=2))
+    with_a_head = [o for o in outcomes if "H" in o]
+    probability = len(with_a_head) / len(outcomes)
+    exactly_one = sum(o.count("H") == 1 for o in outcomes) / len(outcomes)
+    three_flips = 1 - 0.5 ** 3
+
+
+LESSON("Core", "Counting, worked", """
+<p>Ask two questions: <b>does order matter?</b> and <b>can things repeat?</b></p>
+<table><tr><th>Question</th><th>Order?</th><th>Repeats?</th><th>Calculation</th><th>Answer</th></tr>
+<tr><td>4-digit PINs</td><td>yes</td><td>yes</td><td>10⁴</td><td>10,000</td></tr>
+<tr><td>4-digit PINs with no repeats</td><td>yes</td><td>no</td><td>10·9·8·7</td><td>5,040</td></tr>
+<tr><td>Team of 3 from 10</td><td>no</td><td>no</td><td>(10·9·8) / 3!</td><td>120</td></tr></table>
+<p><b>Why divide by 3!?</b> Each team of Ana, Ben, Cy was counted in 6 orders: ABC, ACB, BAC, BCA, CAB, CBA.</p>
+<h4>Using counts to get a probability</h4>
+<p>Two cards from a deck. P(both aces)?</p>
+<ul><li>Ways to choose 2 aces: C(4, 2) = 6.</li>
+<li>Ways to choose any 2 cards: C(52, 2) = 1,326.</li>
+<li>P = 6 / 1326 = <b>0.0045</b>.</li></ul>
+<p>Step by step gives the same: (4/52) × (3/51) = 0.0045. Pick whichever seems easier.</p>
+""", practice=["Permutations", "Combinations", "Arrangements With Repeated Letters", "At Least k Heads", "The Birthday Problem"])
+
+
+@LD
+def counting_checks():
+    pins = 10 ** 4
+    no_repeats = math.perm(10, 4)
+    teams = math.comb(10, 3)
+    orders_of_a_team = math.factorial(3)
+    by_counting = math.comb(4, 2) / math.comb(52, 2)
+    step_by_step = (4 / 52) * (3 / 51)
+
+
+LESSON("Core", "Conditional probability with a table", """
+<p>100 people:</p>
+<table><tr><th></th><th>Smoker</th><th>Non-smoker</th><th>Total</th></tr>
+<tr><th>Cough</th><td>30</td><td>10</td><td>40</td></tr>
+<tr><th>No cough</th><td>20</td><td>40</td><td>60</td></tr>
+<tr><th>Total</th><td>50</td><td>50</td><td>100</td></tr></table>
+<p>Conditioning means <b>shrinking your world to one row or column.</b></p>
+<table><tr><th>Question</th><th>Look only at</th><th>Answer</th></tr>
+<tr><td>P(cough | smoker)</td><td>smokers: 50 people</td><td>30 / 50 = 0.6</td></tr>
+<tr><td>P(smoker | cough)</td><td>coughers: 40 people</td><td>30 / 40 = 0.75</td></tr>
+<tr><td>P(cough)</td><td>everyone</td><td>40 / 100 = 0.4</td></tr>
+<tr><td>P(cough and smoker)</td><td>everyone</td><td>30 / 100 = 0.3</td></tr></table>
+<h4>The biggest confusion</h4>
+<p><b>P(A | B) isn't P(B | A).</b> Nearly all cats have four legs, but few four-legged animals are cats.</p>
+<h4>Independent?</h4>
+<p>Smoking and coughing would be independent if P(cough | smoker) equalled P(cough). Here 0.6 ≠ 0.4, so they're related. <b>Related doesn't prove one causes the other.</b></p>
+""", practice=["Conditional Probability From a Table", "Are the Events Independent?", "Marginal Probabilities", "Two Draws Without Replacement", "All Parts Must Work", "Law of Total Probability"])
+
+
+@LD
+def table_conditioning():
+    table = np.array([[30, 10], [20, 40]])
+    cough_given_smoker = table[0, 0] / table[:, 0].sum()
+    smoker_given_cough = table[0, 0] / table[0].sum()
+    cough = table[0].sum() / table.sum()
+    both = table[0, 0] / table.sum()
+    expected_if_independent = cough * (table[:, 0].sum() / table.sum())
+
+
+LESSON("Advanced", "Bayes: updating step by step", """
+<p>Recall the test: 1% have the disease, it detects 99% of cases, and flags 5% of healthy people. One positive result means a <b>16.7%</b> chance of disease.</p>
+<h4>A second positive test</h4>
+<p>Today's answer becomes tomorrow's prior. Now start from 0.167:</p>
+<p>P = (0.99 × 0.167) / (0.99 × 0.167 + 0.05 × 0.833) = <b>0.798</b>.</p>
+<p>Two independent positive tests take us from 1% to about 80%. That's Bayesian updating.</p>
+<h4>The prior matters enormously</h4>
+<table><tr><th>How common is it?</th><th>0.1%</th><th>1%</th><th>10%</th><th>50%</th></tr>
+<tr><th>P(disease | positive)</th><td>1.9%</td><td>16.7%</td><td>68.8%</td><td>95.2%</td></tr></table>
+<p>The same test gives very different meanings. This is why screening for rare conditions gives many false alarms, and why a rare-class classifier can have high accuracy but low precision.</p>
+""", practice=["Bayes' Theorem: Medical Test", "Naive Bayes Spam Score", "Monty Hall"])
+
+
+@LD
+def bayes_updates():
+    def update(prior, sensitivity=0.99, false_alarm=0.05):
+        return sensitivity * prior / (sensitivity * prior + false_alarm * (1 - prior))
+
+    first = update(0.01)
+    second = update(first)
+    priors = np.logspace(-3, -0.01, 100)
+    posteriors = update(priors)
+    fig, ax = plt.subplots(figsize=(4.6, 2.8))
+    ax.semilogx(priors, posteriors)
+    ax.set_xlabel("how common the disease is (prior)")
+    ax.set_ylabel("P(disease | positive)")
+
+
+LESSON("Advanced", "Expected value for decisions", """
+<h4>Is this ticket worth it?</h4>
+<p>A ₹10 ticket gives a 1 in 200 chance of ₹1,000. E[winnings] = 1000 × 1/200 = ₹5. Subtract the cost: <b>−₹5 per ticket on average</b>.</p>
+<h4>Expected values simply add</h4>
+<p>E[X + Y] = E[X] + E[Y], <b>even when they're related</b>. Two dice: 3.5 + 3.5 = 7. This makes hard-looking problems easy.</p>
+<p><b>Example:</b> shuffle n name-tags and hand them out. On average, how many people get their own? Each person has a 1/n chance, so the total is n × 1/n = <b>1</b>, for any n.</p>
+<h4>Variance adds only if independent</h4>
+<p>One die has variance 2.92, and two independent dice 5.83.</p>
+<h4>Expected cost in ML</h4>
+<p>If a missed fraud costs ₹5,000 and a false alarm ₹50, flag when P(fraud) × 5000 &gt; (1 − P(fraud)) × 50, or P(fraud) &gt; about 0.0099. The threshold comes from the costs, not from 0.5.</p>
+""", practice=["Expected Value", "Variance of a Random Variable", "Waiting for the First Success"])
+
+
+@LD
+def expected_checks():
+    ticket = 1000 * (1 / 200) - 10
+    r = np.random.default_rng(0)
+    own_tags = [(r.permutation(10) == np.arange(10)).sum() for _ in range(5000)]
+    average_fixed = float(np.mean(own_tags))
+    two_dice = r.integers(1, 7, (20000, 2)).sum(axis=1)
+    mean_var = (round(float(two_dice.mean()), 2), round(float(two_dice.var()), 2))
+    threshold = 50 / (5000 + 50)

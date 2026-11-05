@@ -113,3 +113,186 @@ def log_loss_curve():
     right.axvline(np.mean(data), color="#b45309", linestyle="--")
     right.set_title("log-likelihood peaks at p = mean = 0.75", fontsize=8)
     fig.tight_layout()
+
+
+LESSON("Basics", "PMF, PDF and CDF", """
+<table><tr><th>Name</th><th>For</th><th>Gives</th></tr>
+<tr><td>PMF</td><td>countable values (a die)</td><td>the probability of each value</td></tr>
+<tr><td>PDF</td><td>continuous values (height)</td><td>density: probability is the <b>area</b></td></tr>
+<tr><td>CDF</td><td>both</td><td>P(X ≤ x): always rises from 0 to 1</td></tr></table>
+<h4>A die</h4>
+<p>PMF: each value has 1/6. CDF at 4: P(X ≤ 4) = 4/6.</p>
+<h4>Two facts about density that surprise people</h4>
+<ul><li><b>A density can be above 1.</b> A uniform distribution on [0, 0.5] has height 2, and the area is still 0.5 × 2 = 1.</li>
+<li><b>Exactly one value has probability 0.</b> P(height = exactly 170.000…) = 0, as a line has no area. Only ranges have probability.</li></ul>
+<p>P(a ≤ X ≤ b) = CDF(b) − CDF(a).</p>
+""", practice=["Uniform Distribution", "Height of the Normal Curve", "Area Under the Normal Curve"])
+
+
+@LD
+def pmf_pdf_cdf():
+    values = np.arange(1, 7)
+    pmf = np.full(6, 1 / 6)
+    cdf = pmf.cumsum()
+    at_four = cdf[3]
+    fig, axes = plt.subplots(1, 3, figsize=(8.5, 2.4))
+    axes[0].bar(values, pmf)
+    axes[0].set_title("die: PMF", fontsize=9)
+    axes[1].step(values, cdf, where="post")
+    axes[1].set_title("die: CDF", fontsize=9)
+    axes[2].fill_between([0, 0.5], [2, 2], alpha=0.4)
+    axes[2].set_xlim(-0.2, 1)
+    axes[2].set_title("uniform on [0, 0.5]: height 2, area 1", fontsize=9)
+    fig.tight_layout()
+
+
+LESSON("Core", "The binomial, by hand", """
+<p>A player makes free throws with probability 0.8. What's the chance of exactly 4 from 5?</p>
+<ol><li><b>One particular order</b> (hit, hit, hit, hit, miss): 0.8⁴ × 0.2 = 0.08192.</li>
+<li><b>How many orders?</b> Choose which 4 shots hit: C(5, 4) = 5.</li>
+<li><b>Multiply:</b> 5 × 0.08192 = <b>0.4096</b>.</li></ol>
+<p>P(all 5) = 0.8⁵ = 0.3277, so P(at least 4) = 0.4096 + 0.3277 = 0.7373.</p>
+<p><b>Shortcuts:</b> mean = np = 4; variance = np(1 − p) = 0.8.</p>
+<h4>When to use it</h4>
+<p>Check four conditions: a fixed number of tries, two outcomes, the same chance each time, and independent tries. Drawing cards without putting them back fails the last two.</p>
+<h4>Related distributions</h4>
+<ul><li>Many tries with a tiny chance (n large, p small) becomes <b>Poisson</b> with λ = np.</li>
+<li>Many tries in general looks <b>normal</b>, as the chart shows.</li></ul>
+""", practice=["Bernoulli Mean and Variance", "Binomial Probability Table", "Poisson Probability"])
+
+
+@LD
+def binomial_by_hand():
+    one_order = 0.8 ** 4 * 0.2
+    orders = math.comb(5, 4)
+    exactly_four = orders * one_order
+    all_five = 0.8 ** 5
+    n, p = 100, 0.3
+    k = np.arange(10, 51)
+    pmf = np.array([math.comb(n, int(i)) * p ** int(i) * (1 - p) ** (n - int(i)) for i in k])
+    mean, sd = n * p, (n * p * (1 - p)) ** 0.5
+    normal = np.exp(-((k - mean) / sd) ** 2 / 2) / (sd * (2 * np.pi) ** 0.5)
+    fig, ax = plt.subplots(figsize=(4.8, 2.8))
+    ax.bar(k, pmf, color="#99c9c2", label="Binomial(100, 0.3)")
+    ax.plot(k, normal, color="#b45309", label="normal with same mean and sd")
+    ax.legend(fontsize=7)
+
+
+LESSON("Core", "z-scores and the normal curve, worked", """
+<p>Heights have mean 170 cm and standard deviation 10 cm.</p>
+<table><tr><th>Question</th><th>Steps</th><th>Answer</th></tr>
+<tr><td>P(height &lt; 185)?</td><td>z = (185 − 170)/10 = 1.5; table gives 0.9332</td><td>93.3%</td></tr>
+<tr><td>P(160 to 180)?</td><td>z from −1 to 1; 0.8413 − 0.1587</td><td>68.3%</td></tr>
+<tr><td>P(height &gt; 185)?</td><td>1 − 0.9332</td><td>6.7%</td></tr>
+<tr><td>Height of the tallest 10%?</td><td>z for 0.90 is 1.2816; 170 + 1.2816 × 10</td><td>182.8 cm</td></tr></table>
+<h4>Comparing different scales</h4>
+<p>Ana scores 80 in maths (mean 70, sd 10) and 75 in English (mean 60, sd 5). Which is better?</p>
+<ul><li>Maths: z = 1.0</li><li>English: z = 3.0</li></ul>
+<p>The lower mark is far more impressive. Standardising puts everything on a common scale.</p>
+<p><b>Beware:</b> these answers assume the data is roughly normal. For skewed data such as income, they can be badly wrong. Plot first.</p>
+""", practice=["The 68–95–99.7 Rule", "Z-Score to Percentile", "Exponential Waiting Time"])
+
+
+@LD
+def z_score_steps():
+    def cdf(z):
+        return 0.5 * (1 + math.erf(z / 2 ** 0.5))
+
+    below_185 = cdf((185 - 170) / 10)
+    between = cdf(1) - cdf(-1)
+    above_185 = 1 - below_185
+    tallest_ten_percent = 170 + 1.2816 * 10
+    maths_z, english_z = (80 - 70) / 10, (75 - 60) / 5
+
+
+LESSON("Advanced", "Entropy and KL divergence by hand", """
+<h4>Entropy</h4>
+<p>P = (0.5, 0.25, 0.25).</p>
+<p>H = −0.5·log₂0.5 − 0.25·log₂0.25 − 0.25·log₂0.25 = 0.5 + 0.5 + 0.5 = <b>1.5 bits</b>.</p>
+<p><b>Why bits?</b> Ask "is it A?" (1 question, half the time), then "is it B?" (2 questions otherwise): an average of 1.5 yes/no questions. A heavily biased coin (0.9, 0.1) has only 0.469 bits: it's rarely surprising.</p>
+<h4>Cross-entropy</h4>
+<p>Reality P = (0.5, 0.25, 0.25), but you believe Q = (0.25, 0.5, 0.25).</p>
+<p>H(P, Q) = −0.5·log₂0.25 − 0.25·log₂0.5 − 0.25·log₂0.25 = 1 + 0.25 + 0.5 = <b>1.75 bits</b>. Using a wrong belief costs extra.</p>
+<h4>KL divergence</h4>
+<p>The extra cost: 1.75 − 1.5 = <b>0.25 bits</b>.</p>
+<p><b>It isn't a true distance,</b> since direction matters. P = (0.9, 0.1) and Q = (0.5, 0.5) give KL(P‖Q) = 0.531, but KL(Q‖P) = 0.737.</p>
+<p>Training a classifier minimises cross-entropy. As H(P) is fixed by the data, that also minimises KL: the predictions move towards the truth.</p>
+""", practice=["Entropy", "Cross-Entropy", "KL Divergence", "Gini Impurity", "Information Gain of a Split"])
+
+
+@LD
+def information_by_hand():
+    def entropy(p):
+        return -sum(a * math.log2(a) for a in p if a > 0)
+
+    def cross(p, q):
+        return -sum(a * math.log2(b) for a, b in zip(p, q) if a > 0)
+
+    p, q = [0.5, 0.25, 0.25], [0.25, 0.5, 0.25]
+    h = entropy(p)
+    ce = cross(p, q)
+    kl = ce - h
+    forward = cross([0.9, 0.1], [0.5, 0.5]) - entropy([0.9, 0.1])
+    backward = cross([0.5, 0.5], [0.9, 0.1]) - entropy([0.5, 0.5])
+
+
+LESSON("Advanced", "Maximum likelihood by hand", """
+<p>A coin lands H, H, T, H. What p best explains this?</p>
+<h4>Step 1: write the likelihood</h4>
+<p>L(p) = p·p·(1 − p)·p = p³(1 − p).</p>
+<table><tr><th>p</th><th>0.25</th><th>0.5</th><th>0.75</th><th>0.9</th></tr><tr><th>L(p)</th><td>0.0117</td><td>0.0625</td><td><b>0.1055</b></td><td>0.0729</td></tr></table>
+<h4>Step 2: take logs, which turn products into sums</h4>
+<p>ln L = 3 ln p + ln(1 − p).</p>
+<h4>Step 3: set the derivative to zero</h4>
+<p>3/p − 1/(1 − p) = 0, so 3(1 − p) = p and <b>p = 3/4</b>. It's simply the share of heads.</p>
+<h4>The link to loss functions</h4>
+<ul><li>Bernoulli likelihood → <b>log-loss</b></li><li>Normal likelihood → <b>squared error</b>, and the best μ is the mean</li><li>Categorical likelihood → <b>cross-entropy</b></li></ul>
+<h4>Too little data</h4>
+<p>After H, H, H the estimate is p = 1: "tails is impossible". Add one imaginary head and one imaginary tail (Laplace smoothing): (3 + 1) / (3 + 2) = 0.8. That's the same trick used in Naive Bayes, and it behaves like a prior.</p>
+""", practice=["Maximum Likelihood for a Coin", "Log-Likelihood Under a Normal Model", "Binary Log-Loss", "Softmax"])
+
+
+@LD
+def coin_likelihood():
+    p = np.linspace(0.01, 0.99, 197)
+    likelihood = p ** 3 * (1 - p)
+    log_likelihood = 3 * np.log(p) + np.log(1 - p)
+    best = p[likelihood.argmax()]
+    same_best = p[log_likelihood.argmax()]
+    smoothed = (3 + 1) / (3 + 2)
+    fig, (left, right) = plt.subplots(1, 2, figsize=(7.5, 2.6))
+    left.plot(p, likelihood)
+    left.axvline(best, ls="--", color="#b45309")
+    left.set_title("likelihood", fontsize=9)
+    right.plot(p, log_likelihood)
+    right.axvline(same_best, ls="--", color="#b45309")
+    right.set_title("log-likelihood: same peak", fontsize=9)
+    fig.tight_layout()
+
+
+LESSON("Core", "Means of samples: the central limit theorem at work", """
+<p>Take a value from a skewed distribution, such as a waiting time. Now average 30 such values, and repeat many times. Those averages form a <b>bell curve</b> around the true mean, whatever the original shape.</p>
+<p>Their spread, the standard error, is <b>σ / √n</b>:</p>
+<table><tr><th>n</th><th>1</th><th>4</th><th>25</th><th>100</th></tr><tr><th>Spread when σ = 10</th><td>10</td><td>5</td><td>2</td><td>1</td></tr></table>
+<p>So 4× the data halves the uncertainty, and 100× gives one-tenth. Diminishing returns, as the charts show.</p>
+<h4>Why it matters</h4>
+<ul><li><b>Confidence intervals</b> and A/B tests rely on it.</li>
+<li><b>Mini-batch gradients</b> are averages. A larger batch gives a less noisy gradient, but quadrupling it only halves the noise, which is why small batches are usually efficient.</li></ul>
+<p><b>Limits:</b> rows must be reasonably independent, and very heavy tails need many more samples.</p>
+""", practice=["Distribution of the Sum of Two Dice", "Sum of Three Dice"])
+
+
+@LD
+def standard_error_demo():
+    r = np.random.default_rng(0)
+    sizes = [1, 4, 25, 100]
+    fig, axes = plt.subplots(1, 4, figsize=(8.8, 2.3), sharex=True)
+    measured = {}
+    for ax, n in zip(axes, sizes):
+        means = r.exponential(10, (5000, n)).mean(axis=1)
+        measured[n] = round(float(means.std()), 2)
+        ax.hist(means, bins=40, color="#0f766e")
+        ax.set_xlim(0, 40)
+        ax.set_yticks([])
+        ax.set_title(f"n = {n}: spread {measured[n]}", fontsize=8)
+    fig.tight_layout()

@@ -1,0 +1,9 @@
+{
+  "title": "Deep Learning & LLMs",
+  "url": "https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/deep-learning/",
+  "unit": "practice questions with answers",
+  "summary": "Tensors, training, CNNs, RNNs, embeddings, attention and transformers, language models, building LLM apps, RAG, agents and evaluation · everything is built from scratch so you can see inside it, then written the efficient way, both shown running step by step.",
+  "trace_brute": true,
+  "plain": true,
+  "prelude": "import math\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n"
+}

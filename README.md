@@ -1,6 +1,6 @@
 # Learn Python: From Scratch to Advanced
 
-A complete, interactive path for learning Python: a beginner course from the first line of code, Python for data science (NumPy, pandas, Matplotlib, Seaborn, statistics), the math behind data science and machine learning, machine learning from scratch, a DSA interview handbook, and an in-browser IDE. Every lesson and answer can be watched running line by line, with the data drawn as pictures and a plain-English explanation of each step.
+A complete, interactive path for learning Python: a beginner course from the first line of code, Python for data science (NumPy, pandas, Matplotlib, Seaborn, statistics), the math behind data science and machine learning, machine learning from scratch, deep learning and LLMs, a DSA interview handbook, and an in-browser IDE. Every lesson and answer can be watched running line by line, with the data drawn as pictures and a plain-English explanation of each step.
 
 **Live site:** https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/
 
@@ -92,6 +92,25 @@ Learn how machine learning works by building every algorithm yourself, then usin
 | 8 | Clustering & Unsupervised Learning | k-means, silhouette, hierarchical, DBSCAN, PCA |
 | 9 | Tuning, Pipelines & Regularisation | grid search, validation and learning curves, ColumnTransformer, leakage |
 | 10 | Neural Networks | forward pass, backpropagation, SGD, momentum, Adam, dropout, MLPs |
+
+## [Deep Learning & LLMs](deep-learning/) — 10 topics · 200 practice questions
+
+See inside modern AI by building it, then learn to build real products with it. Each topic has a **Theory** tab, **detailed lessons** that work real numbers by hand and explain why, and **20 practice questions**, each answered **step by step** in plain Python and again **the efficient way**, both of which you can watch run line by line. Everything you can run works in the browser with NumPy. PyTorch and Claude API code appears in the lessons as text, because neither can run in the browser IDE.
+
+**Open it:** https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/deep-learning/ · [Full question list](deep-learning/README.md)
+
+| # | Topic | Covers |
+|---|---|---|
+| 1 | Tensors & Layers | shapes, broadcasting, dense layers, activations, parameter counts, initialisation |
+| 2 | Training Deep Networks | losses, backpropagation, optimisers, schedules, normalisation, dropout, clipping |
+| 3 | Convolutional Networks | convolution by hand, stride, padding, pooling, receptive fields, residual blocks |
+| 4 | RNNs & Sequences | RNN, LSTM and GRU cells, vanishing gradients, masks, teacher forcing |
+| 5 | Tokens & Embeddings | tokenising, BPE, TF-IDF, embedding tables, skip-gram, positional encoding |
+| 6 | Attention & Transformers | scaled dot-product attention, masks, multi-head attention, the transformer block |
+| 7 | Language Models | bigrams, perplexity, next-token loss, temperature, top-k, top-p, beam search, KV cache |
+| 8 | Building With LLMs | prompts, costs, context limits, structured output, retries, streaming, tool calling, caching, the Claude API |
+| 9 | RAG & Retrieval | chunking, BM25, vector search, approximate indexes, fusion, MMR, re-ranking, recall, MRR, nDCG |
+| 10 | Agents, Evals & Production | agent loops, guard rails, evaluation, fair comparison, latency, cost, safety, quantisation, LoRA, drift |
 
 ## [DSA Interview Handbook](handbook/) — 14 topics · 280 questions
 

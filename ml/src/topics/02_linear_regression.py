@@ -424,7 +424,7 @@ def top_feature(X, y):
 
 Q(None, "Weighted Least Squares", "Medium", "Some points count more",
   "Fit a line where point i has weight w[i]. Return (slope, intercept), rounded to 4 decimals.",
-  [((X1, Y1, [1, 1, 1, 1, 10]), (1.9869, 1.0562)), (([0, 1, 2], [1, 3, 4], [1, 1, 1]), (1.5, 1.1667))],
+  [((X1, Y1, [1, 1, 2, 1, 8]), (1.9775, 1.107)), (([0, 1, 2], [1, 3, 4], [1, 1, 1]), (1.5, 1.1667))],
   ("Weighted means, then slope = Σw(x − x̄)(y − ȳ) / Σw(x − x̄)².", "O(n)", "O(1)"),
   ("<code>LinearRegression().fit(X, y, sample_weight=w)</code>.", "O(n)", "O(n)"),
   names=["x", "y", "w"])

@@ -1,6 +1,6 @@
 # Learn Python: From Scratch to Advanced
 
-A complete, interactive path for learning Python: a beginner course from the first line of code, Python for data science (NumPy, pandas, Matplotlib, Seaborn, statistics), the math behind data science and machine learning, a DSA interview handbook, and an in-browser IDE. Every lesson and answer can be watched running line by line, with the data drawn as pictures and a plain-English explanation of each step.
+A complete, interactive path for learning Python: a beginner course from the first line of code, Python for data science (NumPy, pandas, Matplotlib, Seaborn, statistics), the math behind data science and machine learning, machine learning from scratch, a DSA interview handbook, and an in-browser IDE. Every lesson and answer can be watched running line by line, with the data drawn as pictures and a plain-English explanation of each step.
 
 **Live site:** https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/
 
@@ -8,7 +8,7 @@ A complete, interactive path for learning Python: a beginner course from the fir
 
 **Open it:** https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ide/
 
-- Real Python 3.12 running in the browser (Pyodide) — nothing to install. NumPy, pandas, Matplotlib and Seaborn load on first import, and charts appear under the output.
+- Real Python 3.12 running in the browser (Pyodide) — nothing to install. NumPy, pandas, Matplotlib, Seaborn and scikit-learn load on first import, and charts appear under the output.
 - Editor with syntax highlighting, auto-indent, bracket matching and Ctrl/⌘ + Enter to run.
 - An **Input** box feeds `input()`, errors point to the line with a beginner-friendly hint, and **Stop** ends infinite loops.
 - **Visualize** runs your own code step by step: every variable, list, dict, object, the call stack and the printed output.
@@ -74,6 +74,25 @@ The math that data science and ML are built on, taught from zero for someone who
 | 9 | Probability | counting, conditional probability, Bayes, independence, expected value | reasoning under uncertainty, Naive Bayes |
 | 10 | Distributions & Information | binomial, Poisson, normal, CLT, entropy, cross-entropy, KL, softmax, log-loss, MLE | loss functions and probabilistic models |
 
+## [Machine Learning from Scratch](ml/) — 10 topics · 200 practice questions
+
+Learn how machine learning works by building every algorithm yourself, then using scikit-learn. Each topic has a **Theory** tab, **Lessons** with charts of what the model learned, and **20 practice questions**. Each question is answered twice: **from scratch** in plain Python and NumPy, and **with scikit-learn** (or NumPy and SciPy where the library has no direct function). Both can be watched running line by line. Take the Math course first if vectors and derivatives are new.
+
+**Open it:** https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/ · [Full question list](ml/README.md)
+
+| # | Topic | Covers |
+|---|---|---|
+| 1 | ML Basics & Data Preparation | splits, baselines, scaling, encoding, imputation, feature selection |
+| 2 | Linear Regression | least squares, gradient descent, metrics, polynomial features, Ridge, Lasso, Elastic Net |
+| 3 | Logistic Regression & Classification | sigmoid, log-loss, Newton's method, boundaries, softmax, perceptron |
+| 4 | Model Evaluation & Validation | confusion matrix, precision, recall, F1, ROC, PR, cross-validation |
+| 5 | k-NN, Naive Bayes & SVM | neighbours, Laplace smoothing, margins, hinge loss, kernels |
+| 6 | Decision Trees | Gini, entropy, best splits, growing and stopping, importances |
+| 7 | Ensembles | voting, bagging, random forests, gradient boosting, AdaBoost, stacking |
+| 8 | Clustering & Unsupervised Learning | k-means, silhouette, hierarchical, DBSCAN, PCA |
+| 9 | Tuning, Pipelines & Regularisation | grid search, validation and learning curves, ColumnTransformer, leakage |
+| 10 | Neural Networks | forward pass, backpropagation, SGD, momentum, Adam, dropout, MLPs |
+
 ## [DSA Interview Handbook](handbook/) — 14 topics · 280 questions
 
 The 14 core DSA topics. Each topic has a **Theory** tab (definition, types, operations and their cost, pros and cons, applications, comparisons, and theory questions with model answers), a **Lessons** tab that teaches it from scratch to advanced in 5–8 short animated lessons, a one-card **Quick reference**, and the **top 20 most-asked interview questions**. Each question has a brute-force solution, the optimal solution, time and space complexity, and a step-by-step animation of the optimal code running. Search by title, LeetCode number or pattern.
@@ -137,7 +156,7 @@ python3 handbook/build.py
 python3 handbook/build.py --book python-course
 ```
 
-The data-science and math books need NumPy, pandas, Matplotlib and Seaborn installed:
+The data-science, math and ML books need NumPy, pandas, Matplotlib, Seaborn and scikit-learn installed:
 
 ```bash
 python3 handbook/build.py --book data-science
@@ -145,6 +164,10 @@ python3 handbook/build.py --book data-science
 
 ```bash
 python3 handbook/build.py --book math
+```
+
+```bash
+python3 handbook/build.py --book ml
 ```
 
 To view it locally, serve the folder (the page loads its data files lazily):

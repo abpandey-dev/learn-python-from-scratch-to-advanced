@@ -181,7 +181,7 @@ def setup_for(fn):
     shown = ast.parse(textwrap.dedent(lib._code(fn)[0]))  # the code users see: trace-only names don't count
     tree = ast.parse(Path(inspect.getsourcefile(fn)).read_text())
     src = Path(inspect.getsourcefile(fn)).read_text().split("\n")
-    have = _defined_names(ast.parse(CONF.get("prelude", ""))) | set(lib.__all__) | {"lib"}
+    have = _defined_names(ast.parse(CONF.get("prelude", "")))
     stmts = {}
     for node in tree.body:
         defines = _defined_names(ast.Module(body=[node], type_ignores=[]))

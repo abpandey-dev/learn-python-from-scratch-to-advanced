@@ -1,6 +1,6 @@
 # Machine Learning from Scratch
 
-9 topics · theory with 49 theory questions · 36 lessons from basics to advanced · 180 practice questions with answers · Data preparation, linear and logistic regression, model evaluation, k-NN, Naive Bayes and SVM, decision trees, ensembles, clustering, tuning and pipelines, and neural networks · every algorithm is built from scratch in plain Python and NumPy, then done again with scikit-learn, both shown running step by step.
+10 topics · theory with 62 theory questions · 46 lessons from basics to advanced · 200 practice questions with answers · Data preparation, linear and logistic regression, model evaluation, k-NN, Naive Bayes and SVM, decision trees, ensembles, clustering, tuning and pipelines, and neural networks · every algorithm is built from scratch in plain Python and NumPy, then done again with scikit-learn, both shown running step by step.
 
 **Live site:** https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/
 
@@ -17,6 +17,7 @@ Every solution is run against its test cases by `build.py` before the site is ge
 - [Ensembles: Bagging, Forests & Boosting](#ensembles-bagging-forests-boosting) — Many models beat one: voting, bootstrap samples and bagging, random forests from the inside, gradient boosting built from scratch, AdaBoost's weights, and why averaging reduces variance.
 - [Clustering & Unsupervised Learning](#clustering-unsupervised-learning) — Finding structure without labels: k-means step by step, choosing k with the elbow and silhouette, hierarchical clustering, DBSCAN for odd shapes and noise, comparing clusterings, PCA, and distance-based outliers.
 - [Tuning, Pipelines & Regularisation](#tuning-pipelines-regularisation) — Turning a model into a reliable system: hyper-parameter grids and grid search, validation and learning curves, choosing regularisation by CV, ColumnTransformer and pipelines, avoiding leakage, custom scorers and target transforms.
+- [Neural Networks](#neural-networks) — From one neuron to a trained network: logic gates, why XOR needs a hidden layer, activations, forward passes, loss functions, backpropagation, SGD, momentum and Adam, initialisation, dropout and mini-batches.
 
 ## ML Basics & Data Preparation
 
@@ -242,6 +243,31 @@ Every solution is run against its test cases by `build.py` before the site is ge
 | 18 | [Tune C for Logistic Regression](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/tuning/tune-c-for-logistic-regression) | Medium | Regularisation strength by CV |
 | 19 | [Refit the Winner and Predict](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/tuning/refit-the-winner-and-predict) | Medium | best_estimator_ |
 | 20 | [LassoCV: Pick α by K-Fold](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/tuning/lassocv-pick-by-k-fold) | Hard | Sparse model, tuned |
+
+## Neural Networks
+
+| # | Question | Level | Concept |
+|---|---|---|---|
+| 1 | [Logic Gates With One Neuron](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/neural-networks/logic-gates-with-one-neuron) | Easy | Weights decide the rule |
+| 2 | [XOR Needs a Hidden Layer](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/neural-networks/xor-needs-a-hidden-layer) | Medium | Stacking neurons |
+| 3 | [Activation Functions](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/neural-networks/activation-functions) | Easy | Sigmoid, tanh, ReLU |
+| 4 | [Slopes of the Activations](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/neural-networks/slopes-of-the-activations) | Medium | Why sigmoids make gradients vanish |
+| 5 | [Count the Parameters](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/neural-networks/count-the-parameters) | Easy | Weights + biases |
+| 6 | [Forward Pass With ReLU](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/neural-networks/forward-pass-with-relu) | Medium | Input → hidden → output |
+| 7 | [Forward Pass With tanh](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/neural-networks/forward-pass-with-tanh) | Medium | Same network, different bend |
+| 8 | [Classifier Output Layer](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/neural-networks/classifier-output-layer) | Easy | Softmax, then pick the winner |
+| 9 | [Regression Loss](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/neural-networks/regression-loss) | Easy | ½ · mean squared error |
+| 10 | [Cross-Entropy for a Batch](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/neural-networks/cross-entropy-for-a-batch) | Easy | The classifier's loss |
+| 11 | [Backpropagation Gradients](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/neural-networks/backpropagation-gradients) | Hard | The chain rule, layer by layer |
+| 12 | [One Training Step](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/neural-networks/one-training-step) | Hard | Backprop + gradient descent |
+| 13 | [A Short Training Loop](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/neural-networks/a-short-training-loop) | Hard | Watch the loss fall |
+| 14 | [Momentum](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/neural-networks/momentum) | Medium | Build up speed |
+| 15 | [One Adam Update](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/neural-networks/one-adam-update) | Hard | Adaptive step sizes |
+| 16 | [L2 Regularisation in a Network](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/neural-networks/l2-regularisation-in-a-network) | Medium | Weight decay |
+| 17 | [Initialisation Range](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/neural-networks/initialisation-range) | Easy | Glorot: keep signals a sensible size |
+| 18 | [Dropout](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/neural-networks/dropout) | Medium | Randomly silence neurons |
+| 19 | [Mini-Batches](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/neural-networks/mini-batches) | Easy | Slice the data |
+| 20 | [Learn XOR](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/neural-networks/learn-xor) | Hard | Train a real network |
 
 ## Build
 

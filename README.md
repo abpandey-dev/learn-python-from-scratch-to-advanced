@@ -1,8 +1,12 @@
 # Learn Python: From Scratch to Advanced
 
-A complete, interactive path for learning Python: a beginner course from the first line of code, Python for data science (NumPy, pandas, Matplotlib, Seaborn, statistics), the math behind data science and machine learning, machine learning from scratch, deep learning and LLMs, a DSA interview handbook, and an in-browser IDE. Every lesson and answer can be watched running line by line, with the data drawn as pictures and a plain-English explanation of each step.
+A complete, interactive path for learning Python: a beginner course from the first line of code, Python for data science (NumPy, pandas, Matplotlib, Seaborn, statistics), the math behind data science and machine learning, machine learning from scratch, deep learning and LLMs, interview prep, a DSA interview handbook, teacher-style Jupyter notebooks, and an in-browser IDE. Every lesson and answer can be watched running line by line, with the data drawn as pictures and a plain-English explanation of each step.
 
 **Live site:** https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/
+
+## [Teacher's Notebooks](notebooks/) — 69 notebooks · 560 lessons · 1,380 questions
+
+Every course below as Jupyter notebooks, explained the way a teacher would. Open any of them in Google Colab with nothing to install. Each has lessons with worked numbers, practice cells that check your answer, hints and two answers hidden until you want them, advice on explaining each answer aloud, and interview questions to practise. **[Start here](notebooks/00_START_HERE.ipynb)**, or see the [full list](notebooks/README.md).
 
 ## [Python IDE](ide/) — write and run Python in the browser
 
@@ -111,6 +115,20 @@ See inside modern AI by building it, then learn to build real products with it. 
 | 8 | Building With LLMs | prompts, costs, context limits, structured output, retries, streaming, tool calling, caching, the Claude API |
 | 9 | RAG & Retrieval | chunking, BM25, vector search, approximate indexes, fusion, MMR, re-ranking, recall, MRR, nDCG |
 | 10 | Agents, Evals & Production | agent loops, guard rails, evaluation, fair comparison, latency, cost, safety, quantisation, LoRA, drift |
+
+## [Interview Prep](interview/) — 5 topics · 100 practice questions
+
+The interview topics the other courses leave out. Each topic has a **Theory** tab, detailed **lessons** with worked examples, and **20 practice questions**, each answered step by step and again the efficient way.
+
+**Open it:** https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/interview/ · [Full question list](interview/README.md)
+
+| # | Topic | Covers |
+|---|---|---|
+| 1 | SQL for Interviews | joins, GROUP BY, second-highest salary, window functions, gaps and islands, recursive CTEs, indexes |
+| 2 | Advanced Python | closures, decorators, generators, context managers, the MRO, the standard library, the GIL and asyncio |
+| 3 | Classic Algorithms | sorting, inversions, KMP, union-find, Fenwick and segment trees, LFU cache, shortest paths, knapsack |
+| 4 | Statistics & A/B Testing | confidence intervals, z and t tests, sample size, peeking, Bayes, Simpson's paradox, funnels and retention |
+| 5 | ML System Design | a design framework, sizing, leakage, calibration, recommender, fraud and LLM assistant walkthroughs, rollout |
 
 ## [DSA Interview Handbook](handbook/) — 14 topics · 280 questions
 

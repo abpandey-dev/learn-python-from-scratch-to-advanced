@@ -1,0 +1,9 @@
+{
+  "title": "Interview Prep",
+  "url": "https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/interview/",
+  "unit": "interview questions",
+  "summary": "SQL, advanced Python, classic algorithms, statistics and ML system design, with a step-by-step and an efficient answer for each.",
+  "trace_brute": true,
+  "plain": true,
+  "prelude": "import math\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n"
+}

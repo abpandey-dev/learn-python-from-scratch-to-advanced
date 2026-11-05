@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Interview Prep</title>
+<meta name="description" content="Interview practice for the topics other courses leave out: SQL, advanced Python, classic algorithms, A/B testing and statistics, and ML system design.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="../handbook/style.css?v=7c2a2c4525">
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="#/"><span class="logo">Q&amp;A</span><span>Interview Prep</span></a>
+    <div class="search" role="search">
+      <input id="q" type="search" placeholder="Search topics and practice questions…  ( / )" autocomplete="off" aria-label="Search">
+      <div id="results" class="results" hidden></div>
+    </div>
+    <a class="top-link" href="../ide/" target="_blank" rel="noopener">✎ IDE</a>
+    <button id="theme" class="icon-btn" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">◐</button>
+  </div>
+</header>
+<main id="app" class="wrap" tabindex="-1"></main>
+<footer class="foot"><a href="../index.html">← Learn Python: From Scratch to Advanced</a> · Every answer here is run against its tests before publishing.</footer>
+<script>
+window.BOOK = {
+  title: "Interview Prep", short: "Interview Prep", unit: "practice questions",
+  lead: "Fill the gaps that interviews love: <b>SQL</b>, <b>advanced Python</b>, <b>classic algorithms</b> you must write yourself, <b>statistics and A/B testing</b>, and <b>ML system design</b>. Each topic has theory, lessons worked with real numbers, and <b>20 practice questions</b>, answered step by step and again the efficient way.",
+  how: [["1 · Learn the basics first", "This course fills gaps. If you're new to Python or DSA, start with those courses, then come back."],
+        ["2 · Follow the worked examples", "Every idea is calculated with small numbers you can check yourself."],
+        ["3 · Answer before looking", "Try each question, then compare with the step-by-step answer and the efficient one."],
+        ["4 · Say it out loud", "Interviews test explanation too, so practise the theory questions aloud."]],
+  searchHint: "Try “window function”, “second highest”, “decorator”, “GIL”, “KMP”, “p-value”, “recommender” or a question title.",
+  bruteLabel: "Step by step", optLabel: "The efficient way",
+  watchBrute: "Watch the step-by-step version run", watchOpt: "Watch the efficient version run",
+  qsHeading: "{n} practice questions"
+};
+</script>
+<script src="data/index.js?v=3e963c48cc"></script>
+<script src="../handbook/app.js?v=5f1a53219a"></script>
+</body>
+</html>

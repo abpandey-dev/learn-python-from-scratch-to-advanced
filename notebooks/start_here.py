@@ -15,7 +15,7 @@ This set of notebooks takes you from your first line of Python to machine learni
 | This course covers well | You still need to do this yourself |
 |---|---|
 | Python, DSA patterns, SQL, statistics, ML, deep learning and LLMs | **Practise until you're quick.** Reading an answer isn't the same as producing one under pressure |
-| Over 1,300 questions with hints, tested answers and explanations | **Mock interviews with a real person,** because explaining while being watched is its own skill |
+| Over 1,500 questions with hints, tested answers and explanations | **Mock interviews with a real person,** because explaining while being watched is its own skill |
 | ML and LLM system design | **General backend system design** (scaling a chat app, say), covered here only for ML systems |
 | A method for unseen problems | **Behavioural preparation** using your own stories, and **company-specific research** |
 
@@ -39,8 +39,8 @@ Reading feels productive, but most of it fades within days. These habits are wha
 |---|---|---|
 | **Complete beginner** | Python → DSA basics | 8 to 12 weeks |
 | **Software engineer interviews** | Python → DSA → Classic Algorithms → Advanced Python → SQL | 10 to 14 weeks |
-| **Data analyst or data scientist** | Python → Data Science → SQL → Statistics & A/B Testing → Math → ML | 12 to 16 weeks |
-| **ML engineer** | Python → Math → Data Science → ML → Deep Learning → DSA → ML System Design | 16 to 24 weeks |
+| **Data analyst or data scientist** | Python (including APIs & JSON) → Data Science (including SQL, hypothesis testing, KPIs and time series) → Statistics & A/B Testing → Math → ML | 14 to 18 weeks |
+| **ML engineer** | Python → Math → Data Science → ML (including recommenders, explainability and MLOps) → Deep Learning → DSA → ML System Design | 16 to 24 weeks |
 | **AI / LLM engineer** | Python → ML basics → Deep Learning & LLMs → Advanced Python → ML System Design → DSA | 14 to 20 weeks |
 
 These times are rough guides, so go at your own pace. Moving on when you can tick a notebook's checklist **without looking** matters more than sticking to the calendar.

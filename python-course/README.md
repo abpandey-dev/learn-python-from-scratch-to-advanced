@@ -1,6 +1,6 @@
 # Python from Scratch
 
-12 topics · theory with 89 theory questions · 75 lessons from basics to advanced · 240 practice questions with answers · for complete beginners · every question has a brute-force and an optimal solution, and both are shown running line by line like Python Tutor.
+13 topics · theory with 95 theory questions · 81 lessons from basics to advanced · 260 practice questions with answers · for complete beginners · every question has a brute-force and an optimal solution, and both are shown running line by line like Python Tutor.
 
 **Live site:** https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/python-course/
 
@@ -20,6 +20,7 @@ Every solution is run against its test cases by `build.py` before the site is ge
 - [Comprehensions, Iterators & Generators](#comprehensions-iterators-generators) — Build collections in one line, use the iteration built-ins, and produce values lazily with generators.
 - [Object-Oriented Programming](#object-oriented-programming) — Model things as objects: classes, attributes, methods, encapsulation, inheritance, polymorphism and special methods.
 - [Errors, Exceptions & Files](#errors-exceptions-files) — Handle things that go wrong with try / except / else / finally, raise your own errors, and read and write files safely.
+- [Modules, Packages, APIs & JSON](#modules-packages-apis-json) — Split code into modules and packages, install libraries in a virtual environment, read and write JSON, and call web APIs the safe way: status codes, pagination, retries, rate limits and caching.
 
 ## Python Basics
 
@@ -320,6 +321,31 @@ Every solution is run against its test cases by `build.py` before the site is ge
 | 18 | [Make Your Own Context Manager](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/python-course/#/q/exceptions/make-your-own-context-manager) | Hard | __enter__ / __exit__ |
 | 19 | [Read key=value Settings](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/python-course/#/q/exceptions/read-key-value-settings) | Medium | Unpacking errors |
 | 20 | [Parse JSON Safely](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/python-course/#/q/exceptions/parse-json-safely) | Medium | json + JSONDecodeError |
+
+## Modules, Packages, APIs & JSON
+
+| # | Question | Level | Concept |
+|---|---|---|---|
+| 1 | [Read a Nested JSON Field](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/python-course/#/q/modules-apis/read-a-nested-json-field) | Easy | Nested dicts and lists |
+| 2 | [JSON Text for a Flat Record](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/python-course/#/q/modules-apis/json-text-for-a-flat-record) | Easy | json.dumps |
+| 3 | [What Survives a JSON Round Trip?](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/python-course/#/q/modules-apis/what-survives-a-json-round-trip) | Medium | Type mapping |
+| 4 | [Count Records by Status](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/python-course/#/q/modules-apis/count-records-by-status) | Easy | json.loads + counting |
+| 5 | [Flatten Nested JSON](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/python-course/#/q/modules-apis/flatten-nested-json) | Medium | Recursion · dotted keys |
+| 6 | [Build a Query String](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/python-course/#/q/modules-apis/build-a-query-string) | Easy | URL encoding |
+| 7 | [Pull Apart a URL](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/python-course/#/q/modules-apis/pull-apart-a-url) | Medium | urllib.parse |
+| 8 | [Join API Paths Without Double Slashes](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/python-course/#/q/modules-apis/join-api-paths-without-double-slashes) | Easy | Building endpoints |
+| 9 | [Classify an HTTP Status Code](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/python-course/#/q/modules-apis/classify-an-http-status-code) | Easy | Status families |
+| 10 | [Exponential Backoff Delays](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/python-course/#/q/modules-apis/exponential-backoff-delays) | Easy | Retry timing |
+| 11 | [Call With Retries](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/python-course/#/q/modules-apis/call-with-retries) | Medium | Retry loop |
+| 12 | [Collect Every Page](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/python-course/#/q/modules-apis/collect-every-page) | Medium | Cursor pagination |
+| 13 | [Days Between ISO Dates](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/python-course/#/q/modules-apis/days-between-iso-dates) | Easy | datetime from JSON |
+| 14 | [Validate an API Response](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/python-course/#/q/modules-apis/validate-an-api-response) | Medium | Schema checks |
+| 15 | [Sliding-Window Rate Limiter](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/python-course/#/q/modules-apis/sliding-window-rate-limiter) | Medium | Rate limits · deque |
+| 16 | [Cache Repeated API Calls](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/python-course/#/q/modules-apis/cache-repeated-api-calls) | Medium | Memoisation · lru_cache |
+| 17 | [What Does import * Bring In?](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/python-course/#/q/modules-apis/what-does-import-bring-in) | Easy | __all__ and private names |
+| 18 | [Resolve a Relative Import](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/python-course/#/q/modules-apis/resolve-a-relative-import) | Medium | Packages |
+| 19 | [Read a requirements.txt](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/python-course/#/q/modules-apis/read-a-requirements-txt) | Easy | Pinned dependencies |
+| 20 | [Compare Version Numbers](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/python-course/#/q/modules-apis/compare-version-numbers) | Easy | Versions are not strings |
 
 ## Build
 

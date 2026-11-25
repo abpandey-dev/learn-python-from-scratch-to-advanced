@@ -52,7 +52,7 @@ THEORY("Dates and times", """
 <tr><td><code>Period</code></td><td>a span such as a month (<code>to_period("M")</code>)</td></tr>
 <tr><td><code>DatetimeIndex</code></td><td>an index of dates, enabling <code>resample</code> and date slicing</td></tr>
 </table>
-<p>The <code>.dt</code> accessor exposes parts: <code>year, month, day, dayofweek, day_name(), hour, quarter, is_month_end</code>. Time zones: <code>tz_localize</code>, <code>tz_convert</code>.</p>
+<p>The <code>.dt</code> accessor exposes parts: <code>year, month, day, day_of_week, day_name(), hour, quarter, is_month_end</code>. Time zones: <code>tz_localize</code>, <code>tz_convert</code>.</p>
 """)
 
 THEORY("Outliers", """

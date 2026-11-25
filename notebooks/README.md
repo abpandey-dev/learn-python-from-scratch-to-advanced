@@ -1,6 +1,6 @@
 # Notebooks: learn it, practise it, explain it
 
-**69 notebooks · 560 lessons · 1380 practice questions.**
+**77 notebooks · 608 lessons · 1540 practice questions.**
 
 Every course on the site as Jupyter notebooks, written the way a teacher would explain it. **[Start here](00_START_HERE.ipynb)** ([open in Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/00_START_HERE.ipynb)).
 
@@ -16,7 +16,7 @@ No installation is needed: open any notebook in Colab and run the first cell. Or
 
 ## Python from Scratch
 
-12 notebooks · 75 lessons · 240 questions
+13 notebooks · 81 lessons · 260 questions
 
 | # | Topic | Lessons | Questions | Open |
 |---|---|---|---|---|
@@ -32,10 +32,11 @@ No installation is needed: open any notebook in Colab and run the first cell. Or
 | 10 | [Comprehensions, Iterators & Generators](01-python/10_comprehensions.ipynb) | 6 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/01-python/10_comprehensions.ipynb) |
 | 11 | [Object-Oriented Programming](01-python/11_oop.ipynb) | 6 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/01-python/11_oop.ipynb) |
 | 12 | [Errors, Exceptions & Files](01-python/12_exceptions.ipynb) | 6 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/01-python/12_exceptions.ipynb) |
+| 13 | [Modules, Packages, APIs & JSON](01-python/13_modules-apis.ipynb) | 6 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/01-python/13_modules-apis.ipynb) |
 
 ## Python for Data Science
 
-8 notebooks · 78 lessons · 160 questions
+12 notebooks · 101 lessons · 240 questions
 
 | # | Topic | Lessons | Questions | Open |
 |---|---|---|---|---|
@@ -47,6 +48,10 @@ No installation is needed: open any notebook in Colab and run the first cell. Or
 | 6 | [Matplotlib](02-data-science/06_matplotlib.ipynb) | 9 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/02-data-science/06_matplotlib.ipynb) |
 | 7 | [Seaborn](02-data-science/07_seaborn.ipynb) | 10 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/02-data-science/07_seaborn.ipynb) |
 | 8 | [Statistics for Data Analysis](02-data-science/08_statistics.ipynb) | 10 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/02-data-science/08_statistics.ipynb) |
+| 9 | [SQL from Python](02-data-science/09_sql-python.ipynb) | 6 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/02-data-science/09_sql-python.ipynb) |
+| 10 | [Hypothesis Testing & Inference](02-data-science/10_hypothesis-testing.ipynb) | 6 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/02-data-science/10_hypothesis-testing.ipynb) |
+| 11 | [EDA, Business KPIs & Storytelling](02-data-science/11_eda-kpis.ipynb) | 5 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/02-data-science/11_eda-kpis.ipynb) |
+| 12 | [Time Series & Forecasting](02-data-science/12_time-series.ipynb) | 6 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/02-data-science/12_time-series.ipynb) |
 
 ## Math for Data Science & ML
 
@@ -67,7 +72,7 @@ No installation is needed: open any notebook in Colab and run the first cell. Or
 
 ## Machine Learning from Scratch
 
-10 notebooks · 100 lessons · 200 questions
+13 notebooks · 119 lessons · 260 questions
 
 | # | Topic | Lessons | Questions | Open |
 |---|---|---|---|---|
@@ -81,6 +86,9 @@ No installation is needed: open any notebook in Colab and run the first cell. Or
 | 8 | [Clustering & Unsupervised Learning](04-machine-learning/08_clustering.ipynb) | 11 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/04-machine-learning/08_clustering.ipynb) |
 | 9 | [Tuning, Pipelines & Regularisation](04-machine-learning/09_tuning.ipynb) | 10 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/04-machine-learning/09_tuning.ipynb) |
 | 10 | [Neural Networks](04-machine-learning/10_neural-networks.ipynb) | 12 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/04-machine-learning/10_neural-networks.ipynb) |
+| 11 | [Recommender Systems](04-machine-learning/11_recommenders.ipynb) | 6 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/04-machine-learning/11_recommenders.ipynb) |
+| 12 | [Explainability, Fairness & Imbalanced Data](04-machine-learning/12_explainability-fairness.ipynb) | 7 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/04-machine-learning/12_explainability-fairness.ipynb) |
+| 13 | [MLOps: Deploying & Monitoring Models](04-machine-learning/13_mlops.ipynb) | 6 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/04-machine-learning/13_mlops.ipynb) |
 
 ## Deep Learning & LLMs
 

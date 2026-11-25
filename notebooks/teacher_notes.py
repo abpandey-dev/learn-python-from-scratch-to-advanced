@@ -13,6 +13,7 @@ NOTES = {
  "comprehensions": ("A comprehension is a one-sentence loop. A generator is a tap that gives one value at a time, rather than a full bucket.", "Readability limits, lazy evaluation, memory use, and writing generators."),
  "oop": ("A class is a cookie cutter and objects are the cookies. Each cookie has its own data but shares the same behaviour.", "Inheritance vs composition, dunder methods, properties and class vs instance attributes."),
  "exceptions": ("An exception is a fire alarm: normal work stops, and control jumps to whoever is ready to handle it.", "Catching specific errors, else/finally, context managers and reading files safely."),
+ "modules-apis": ("A module is a toolbox in its own drawer, and an API is a shop counter: you ask in a fixed format (JSON), and you get an answer with a status code.", "__name__ == '__main__', virtual environments, json.loads vs json.load, status codes, retries with backoff, pagination and keeping secrets out of code."),
 },
 "data-science": {
  "numpy-basics": ("NumPy is a spreadsheet grid for Python: every cell has the same type, so the computer can race through it.", "Shape, dtype, views vs copies, and why arrays beat lists for numeric work."),
@@ -23,6 +24,10 @@ NOTES = {
  "matplotlib": ("A figure is a canvas and axes are the drawings on it. You build a chart in layers, like a painter.", "Choosing the right chart, and the figure/axes model."),
  "seaborn": ("Seaborn is the helpful assistant: hand over a DataFrame and say which columns matter, and it draws the statistical chart.", "Distribution and relationship plots, and reading them to find insight."),
  "statistics": ("Statistics is how you stay honest with a small sample: it asks whether what you saw could just be luck.", "Mean vs median, standard deviation, confidence intervals, p-values and correlation vs causation."),
+ "sql-python": ("The database is the warehouse and pandas is your desk: do the heavy sorting in the warehouse and carry only the small result to your desk.", "Joins and row multiplication, WHERE vs HAVING, window functions, parameterised queries against SQL injection, and when to aggregate in SQL vs pandas."),
+ "hypothesis-testing": ("A hypothesis test is a courtroom: assume innocence (no effect) and only convict when the evidence would be very surprising otherwise.", "What a p-value is and isn't, choosing the right test, Type I vs II errors, power and sample size, peeking, and multiple comparisons."),
+ "eda-kpis": ("EDA is a doctor's check-up for a dataset, and KPIs are its vital signs: take them the same way every time, and investigate when one moves.", "First steps with a new dataset, defining KPIs precisely, funnels, cohorts and churn, explaining a metric drop, and charts that make one point."),
+ "time-series": ("A time series is a diary: order matters, yesterday explains today, and you can never read tomorrow's page while writing today's.", "Trend vs seasonality, why you can't shuffle, baselines, walk-forward validation, leakage in lag features, and MAE vs MAPE."),
 },
 "math": {
  "arithmetic": ("Everything in machine learning eventually reduces to these operations, done millions of times.", "Rounding errors, logs and exponents as used in loss functions."),
@@ -47,6 +52,9 @@ NOTES = {
  "clustering": ("Clustering sorts a pile of items into groups with no labels, so it has no answer key to check against.", "k-means limits, choosing k, DBSCAN, and evaluating without labels."),
  "tuning": ("Tuning is adjusting the knobs on a radio, using a validation set so you don't fool yourself.", "Grid vs random search, nested CV, pipelines and preventing leakage."),
  "neural-networks": ("A neural network is many simple decisions stacked together, each layer building on the last.", "Backpropagation, activations, why non-linearity matters, and optimisers."),
+ "recommenders": ("A recommender is a well-read friend: it remembers what you liked, notices who has similar taste, and suggests what they enjoyed next.", "User- vs item-based CF, cold start, implicit feedback, matrix factorisation, two-stage retrieval and ranking, and ranking metrics like NDCG."),
+ "explainability-fairness": ("Explaining a model is like a teacher showing the marking scheme: every point awarded can be traced, and the same rules apply to every student.", "Permutation importance vs SHAP, counterfactuals, fairness definitions and their trade-offs, proxies, calibration, and handling class imbalance."),
+ "mlops": ("Shipping a model is like opening a restaurant: the recipe (model) is only the start; you need a kitchen that runs every day, health checks, and a way to change the menu safely.", "Batch vs real-time serving, training-serving skew, model registry and rollback, canary and shadow releases, drift detection, and when to retrain."),
 },
 "deep-learning": {
  "tensors": ("A tensor is a labelled stack of numbers. Most deep-learning bugs are shape bugs, so track the shape on every line.", "Shapes, broadcasting, parameter counts and activations."),

@@ -1,6 +1,6 @@
 # Machine Learning from Scratch
 
-10 topics · theory with 62 theory questions · 100 lessons from basics to advanced · 200 practice questions with answers · Data preparation, linear and logistic regression, model evaluation, k-NN, Naive Bayes and SVM, decision trees, ensembles, clustering, tuning and pipelines, and neural networks · every algorithm is built from scratch in plain Python and NumPy, then done again with scikit-learn, both shown running step by step.
+13 topics · theory with 81 theory questions · 119 lessons from basics to advanced · 260 practice questions with answers · Data preparation, linear and logistic regression, model evaluation, k-NN, Naive Bayes and SVM, decision trees, ensembles, clustering, tuning and pipelines, neural networks, recommender systems, explainability and fairness, and MLOps · every algorithm is built from scratch in plain Python and NumPy, then done again with scikit-learn, both shown running step by step.
 
 **Live site:** https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/
 
@@ -18,6 +18,9 @@ Every solution is run against its test cases by `build.py` before the site is ge
 - [Clustering & Unsupervised Learning](#clustering-unsupervised-learning) — Finding structure without labels: k-means step by step, choosing k with the elbow and silhouette, hierarchical clustering, DBSCAN for odd shapes and noise, comparing clusterings, PCA, and distance-based outliers.
 - [Tuning, Pipelines & Regularisation](#tuning-pipelines-regularisation) — Turning a model into a reliable system: hyper-parameter grids and grid search, validation and learning curves, choosing regularisation by CV, ColumnTransformer and pipelines, avoiding leakage, custom scorers and target transforms.
 - [Neural Networks](#neural-networks) — From one neuron to a trained network: logic gates, why XOR needs a hidden layer, activations, forward passes, loss functions, backpropagation, SGD, momentum and Adam, initialisation, dropout and mini-batches.
+- [Recommender Systems](#recommender-systems) — Suggest what a user will like next: popularity baselines, similarity measures, user- and item-based collaborative filtering, content-based TF-IDF, matrix factorisation, market-basket rules, cold start, and the ranking metrics used to judge recommenders.
+- [Explainability, Fairness & Imbalanced Data](#explainability-fairness-imbalanced-data) — Open the black box and check it is fair: linear contributions and Shapley values, permutation importance, partial dependence, counterfactuals, fairness metrics across groups, calibration, thresholds and class weights for imbalanced data, and privacy basics.
+- [MLOps: Deploying & Monitoring Models](#mlops-deploying-monitoring-models) — Take a model from notebook to production: experiment tracking and a model registry, data validation gates, saving and serving models, request validation, batch scoring, canary and shadow releases, latency budgets, point-in-time features, drift detection (PSI, KS), monitoring and retraining triggers.
 
 ## ML Basics & Data Preparation
 
@@ -268,6 +271,81 @@ Every solution is run against its test cases by `build.py` before the site is ge
 | 18 | [Dropout](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/neural-networks/dropout) | Medium | Randomly silence neurons |
 | 19 | [Mini-Batches](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/neural-networks/mini-batches) | Easy | Slice the data |
 | 20 | [Learn XOR](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/neural-networks/learn-xor) | Hard | Train a real network |
+
+## Recommender Systems
+
+| # | Question | Level | Concept |
+|---|---|---|---|
+| 1 | [Most Popular Unseen Items](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/recommenders/most-popular-unseen-items) | Easy | Popularity baseline |
+| 2 | [Cosine Similarity of Two Users](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/recommenders/cosine-similarity-of-two-users) | Easy | Angle between vectors |
+| 3 | [Mean-Centred (Pearson) Similarity](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/recommenders/mean-centred-pearson-similarity) | Medium | Handling harsh and generous raters |
+| 4 | [Most Similar Item](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/recommenders/most-similar-item) | Easy | Item-item cosine |
+| 5 | [User-Based Rating Prediction](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/recommenders/user-based-rating-prediction) | Medium | Neighbours' weighted average |
+| 6 | [Item-Based Recommendations](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/recommenders/item-based-recommendations) | Medium | Score = ratings × item similarity |
+| 7 | [Content-Based: Similar Descriptions](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/recommenders/content-based-similar-descriptions) | Medium | TF-IDF |
+| 8 | [Jaccard Similarity for Clicks](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/recommenders/jaccard-similarity-for-clicks) | Easy | Implicit feedback |
+| 9 | [Rank-1 Matrix Factorisation](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/recommenders/rank-1-matrix-factorisation) | Hard | Latent factors |
+| 10 | [Precision@k and Recall@k](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/recommenders/precision-k-and-recall-k) | Easy | Did we recommend the right things? |
+| 11 | [NDCG@k](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/recommenders/ndcg-k) | Medium | Position-aware quality |
+| 12 | [Hit Rate and Mean Reciprocal Rank](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/recommenders/hit-rate-and-mean-reciprocal-rank) | Easy | Leave-one-out evaluation |
+| 13 | [Cold Start Fallback](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/recommenders/cold-start-fallback) | Easy | New users |
+| 14 | [Frequently Bought Together](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/recommenders/frequently-bought-together) | Easy | Co-occurrence |
+| 15 | [Association Rule Metrics](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/recommenders/association-rule-metrics) | Medium | Support, confidence, lift |
+| 16 | [Leave-Last-Out Split](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/recommenders/leave-last-out-split) | Medium | Time-aware evaluation |
+| 17 | [Catalogue Coverage](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/recommenders/catalogue-coverage) | Easy | Beyond accuracy |
+| 18 | [Baseline Predictor With Biases](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/recommenders/baseline-predictor-with-biases) | Medium | μ + user bias + item bias |
+| 19 | [RMSE of Rating Predictions](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/recommenders/rmse-of-rating-predictions) | Easy | Rating accuracy |
+| 20 | [k Nearest Items](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/recommenders/k-nearest-items) | Easy | NearestNeighbors with cosine |
+
+## Explainability, Fairness & Imbalanced Data
+
+| # | Question | Level | Concept |
+|---|---|---|---|
+| 1 | [Explain a Linear Prediction](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/explainability-fairness/explain-a-linear-prediction) | Medium | Contributions (exact SHAP for linear models) |
+| 2 | [Shapley Values by Hand](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/explainability-fairness/shapley-values-by-hand) | Hard | Fair credit for each feature |
+| 3 | [Rank Features by Permutation Importance](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/explainability-fairness/rank-features-by-permutation-importance) | Medium | Model-agnostic importance |
+| 4 | [Partial Dependence](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/explainability-fairness/partial-dependence) | Medium | Average effect of one feature |
+| 5 | [Where Tree Importances Come From](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/explainability-fairness/where-tree-importances-come-from) | Hard | Impurity decrease |
+| 6 | [Counterfactual: What Would Change the Decision?](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/explainability-fairness/counterfactual-what-would-change-the-decision) | Medium | Actionable explanations |
+| 7 | [Demographic Parity Difference](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/explainability-fairness/demographic-parity-difference) | Easy | Equal selection rates |
+| 8 | [Disparate Impact and the 80% Rule](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/explainability-fairness/disparate-impact-and-the-80-rule) | Easy | Ratio of selection rates |
+| 9 | [Equal Opportunity](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/explainability-fairness/equal-opportunity) | Medium | True positive rate by group |
+| 10 | [Equalized Odds Gap](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/explainability-fairness/equalized-odds-gap) | Medium | TPR and FPR together |
+| 11 | [Reliability Curve](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/explainability-fairness/reliability-curve) | Medium | Calibration |
+| 12 | [Brier Score](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/explainability-fairness/brier-score) | Easy | Probability accuracy |
+| 13 | [Expected Calibration Error](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/explainability-fairness/expected-calibration-error) | Medium | One number for calibration |
+| 14 | [Balanced Class Weights](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/explainability-fairness/balanced-class-weights) | Easy | Imbalanced data |
+| 15 | [Threshold That Maximises F1](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/explainability-fairness/threshold-that-maximises-f1) | Medium | Don't default to 0.5 |
+| 16 | [Cost-Sensitive Threshold](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/explainability-fairness/cost-sensitive-threshold) | Medium | Errors have different prices |
+| 17 | [Accuracy vs Balanced Accuracy](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/explainability-fairness/accuracy-vs-balanced-accuracy) | Easy | The imbalance trap |
+| 18 | [Mask Personal Data](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/explainability-fairness/mask-personal-data) | Medium | Privacy before training |
+| 19 | [k-Anonymity](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/explainability-fairness/k-anonymity) | Medium | Re-identification risk |
+| 20 | [Find Proxy Features](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/explainability-fairness/find-proxy-features) | Medium | Bias sneaks back in |
+
+## MLOps: Deploying & Monitoring Models
+
+| # | Question | Level | Concept |
+|---|---|---|---|
+| 1 | [Pick the Best Run](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/mlops/pick-the-best-run) | Easy | Experiment tracking |
+| 2 | [Promote a Model Version](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/mlops/promote-a-model-version) | Medium | Model registry |
+| 3 | [Same Data, Different Order?](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/mlops/same-data-different-order) | Easy | Dataset fingerprints |
+| 4 | [Data Quality Gate](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/mlops/data-quality-gate) | Medium | Validate before you train |
+| 5 | [Population Stability Index](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/mlops/population-stability-index) | Medium | Has the input shifted? |
+| 6 | [Kolmogorov–Smirnov Drift Statistic](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/mlops/kolmogorov-smirnov-drift-statistic) | Medium | Compare two distributions |
+| 7 | [Training–Serving Skew](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/mlops/training-serving-skew) | Easy | Same features online and offline? |
+| 8 | [Save and Reload a Model](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/mlops/save-and-reload-a-model) | Easy | Serialisation |
+| 9 | [Batch Scoring in Chunks](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/mlops/batch-scoring-in-chunks) | Easy | Memory-safe inference |
+| 10 | [Validate an Inference Request](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/mlops/validate-an-inference-request) | Medium | API input checks |
+| 11 | [Latency Percentiles](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/mlops/latency-percentiles) | Easy | p50, p95, p99 |
+| 12 | [Canary Routing by Hash](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/mlops/canary-routing-by-hash) | Hard | Sticky gradual rollout |
+| 13 | [Shadow Mode Comparison](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/mlops/shadow-mode-comparison) | Easy | Test on live traffic safely |
+| 14 | [Should We Retrain?](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/mlops/should-we-retrain) | Easy | Retraining triggers |
+| 15 | [Rolling Accuracy Alerts](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/mlops/rolling-accuracy-alerts) | Medium | Monitoring with delayed labels |
+| 16 | [Point-in-Time Feature Join](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/mlops/point-in-time-feature-join) | Hard | No peeking at the future |
+| 17 | [Bump the Model Version](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/mlops/bump-the-model-version) | Easy | Semantic versioning |
+| 18 | [Pre-Deployment Checks](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/mlops/pre-deployment-checks) | Medium | CI for models |
+| 19 | [How Many Replicas?](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/mlops/how-many-replicas) | Medium | Capacity planning |
+| 20 | [Scale Serving Data With Training Statistics](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/mlops/scale-serving-data-with-training-statistics) | Easy | Fit once, reuse |
 
 ## Build
 

@@ -1,10 +1,12 @@
 # Learn Python: From Scratch to Advanced
 
-A complete, interactive path for learning Python: a beginner course from the first line of code, Python for data science (NumPy, pandas, Matplotlib, Seaborn, statistics), the math behind data science and machine learning, machine learning from scratch, deep learning and LLMs, interview prep, a DSA interview handbook, teacher-style Jupyter notebooks, and an in-browser IDE. Every lesson and answer can be watched running line by line, with the data drawn as pictures and a plain-English explanation of each step.
+A complete, interactive path for learning Python: a beginner course from the first line of code, Python for data science (NumPy, pandas, Matplotlib, Seaborn, statistics, SQL, hypothesis testing, business KPIs, time series), the math behind data science and machine learning, machine learning from scratch, deep learning and LLMs, interview prep, a DSA interview handbook, teacher-style Jupyter notebooks, and an in-browser IDE. Every lesson and answer can be watched running line by line, with the data drawn as pictures and a plain-English explanation of each step.
 
 **Live site:** https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/
 
-## [Teacher's Notebooks](notebooks/) — 69 notebooks · 560 lessons · 1,380 questions
+**Companion course:** [Data Engineering from Scratch to Advanced](https://github.com/abpandey-dev/data-engineering-from-scratch-to-advanced) covers big data (Spark, Airflow, Kafka, lakehouses, dbt, cloud) and has a [SQL IDE](https://abpandey-dev.github.io/data-engineering-from-scratch-to-advanced/ide/sql.html) with automatically checked questions.
+
+## [Teacher's Notebooks](notebooks/) — 77 notebooks · 608 lessons · 1,540 questions
 
 Every course below as Jupyter notebooks, explained the way a teacher would. Open any of them in Google Colab with nothing to install. Each has lessons with worked numbers, practice cells that check your answer, hints and two answers hidden until you want them, advice on explaining each answer aloud, and interview questions to practise. **[Start here](notebooks/00_START_HERE.ipynb)**, or see the [full list](notebooks/README.md).
 
@@ -19,7 +21,7 @@ Every course below as Jupyter notebooks, explained the way a teacher would. Open
 - Every practice question has **Solve it yourself**: it opens a starter function and a **Check** button that runs the question's tests. Every answer and lesson example has **Open in editor**.
 - **Share** copies a link that contains your code.
 
-## [Python from Scratch](python-course/) — 12 topics · 240 practice questions
+## [Python from Scratch](python-course/) — 13 topics · 260 practice questions
 
 A full course for someone writing their first line of Python. Each topic has a **Theory** tab (definitions, rules, tables, common mistakes and theory questions with answers), **Lessons** from the basics to advanced use, and **20 practice questions**, each answered twice — a brute-force "long way" and an optimal "Pythonic way". Every lesson example and every answer can be watched **running line by line**: variables, objects, the call stack and printed output update at each step, like Python Tutor.
 
@@ -39,8 +41,9 @@ A full course for someone writing their first line of Python. Each topic has a *
 | 10 | Comprehensions, Iterators & Generators | comprehensions, built-ins, iterator protocol, yield, itertools |
 | 11 | Object-Oriented Programming | classes, properties, inheritance, polymorphism, dunder methods, dataclasses |
 | 12 | Errors, Exceptions & Files | try / except / else / finally, custom exceptions, files, context managers |
+| 13 | Modules, Packages, APIs & JSON | imports, packages, pip and virtual environments, JSON, URLs, status codes, pagination, retries, rate limits, caching |
 
-## [Python for Data Science](data-science/) — 8 topics · 160 practice questions
+## [Python for Data Science](data-science/) — 12 topics · 240 practice questions
 
 The next step after the Python course: the libraries data analysts use every day. Each topic has a **Theory** tab, **Lessons** from basics to advanced, and **20 practice questions**. Every question is answered twice — a **brute-force answer in plain Python** (loops and lists, so you see what the library does for you) and an **optimal answer using the library** — and both can be watched running line by line, with arrays and DataFrames shown as tables and every chart drawn as an image. Chart questions are checked by inspecting the figure (number of bars, titles, labels, colours).
 
@@ -56,6 +59,10 @@ The next step after the Python course: the libraries data analysts use every day
 | 6 | Matplotlib | line, bar, scatter, histogram, pie, box; labels, legends, subplots |
 | 7 | Seaborn | distributions, categorical plots, relationships, heat maps, figure-level grids |
 | 8 | Statistics for Data Analysis | mean / median / spread, outliers, correlation, regression, probability, confidence intervals |
+| 9 | SQL from Python | sqlite3, safe parameters, joins, GROUP BY / HAVING, subqueries, window functions, dates, upserts, transactions, indexes, read_sql / to_sql |
+| 10 | Hypothesis Testing & Inference | p-values, z and t tests, paired and Welch tests, chi-square, ANOVA, Mann–Whitney, permutation tests, bootstrap, power, sample size, multiple testing |
+| 11 | EDA, Business KPIs & Storytelling | profiling, skew, Excel → pandas (VLOOKUP, pivot tables, SUMIFS, IF), funnels, cohorts, churn, ARPU, LTV, DAU/MAU, explaining a change, charts that tell a story |
+| 12 | Time Series & Forecasting | resampling, lags, rolling and exponential averages, seasonality, autocorrelation, baselines, smoothing, AR models, walk-forward validation, anomalies |
 
 The IDE loads NumPy, pandas, Matplotlib and Seaborn automatically when your code imports them, shows the charts you draw, and checks data-science answers too.
 
@@ -78,7 +85,7 @@ The math that data science and ML are built on, taught from zero for someone who
 | 9 | Probability | counting, conditional probability, Bayes, independence, expected value | reasoning under uncertainty, Naive Bayes |
 | 10 | Distributions & Information | binomial, Poisson, normal, CLT, entropy, cross-entropy, KL, softmax, log-loss, MLE | loss functions and probabilistic models |
 
-## [Machine Learning from Scratch](ml/) — 10 topics · 200 practice questions
+## [Machine Learning from Scratch](ml/) — 13 topics · 260 practice questions
 
 Learn how machine learning works by building every algorithm yourself, then using scikit-learn. Each topic has a **Theory** tab, **9–12 detailed lessons** that work real examples by hand, step by step, and **20 practice questions**. Each question is answered twice: **from scratch** in plain Python and NumPy, and **with scikit-learn** (or NumPy and SciPy where the library has no direct function). Both can be watched running line by line. Take the Math course first if vectors and derivatives are new.
 
@@ -96,6 +103,9 @@ Learn how machine learning works by building every algorithm yourself, then usin
 | 8 | Clustering & Unsupervised Learning | k-means, silhouette, hierarchical, DBSCAN, PCA |
 | 9 | Tuning, Pipelines & Regularisation | grid search, validation and learning curves, ColumnTransformer, leakage |
 | 10 | Neural Networks | forward pass, backpropagation, SGD, momentum, Adam, dropout, MLPs |
+| 11 | Recommender Systems | popularity, cosine and Pearson similarity, user- and item-based CF, TF-IDF content, matrix factorisation, basket rules, cold start, NDCG |
+| 12 | Explainability, Fairness & Imbalanced Data | linear contributions, Shapley values, permutation importance, partial dependence, counterfactuals, fairness metrics, calibration, class weights, thresholds, privacy |
+| 13 | MLOps: Deploying & Monitoring Models | experiment tracking, model registry, data gates, serialisation, request validation, canary and shadow releases, latency, point-in-time joins, PSI and KS drift, retraining |
 
 ## [Deep Learning & LLMs](deep-learning/) — 10 topics · 200 practice questions
 

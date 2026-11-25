@@ -1,6 +1,6 @@
 # Python for Data Science
 
-8 topics · theory with 50 theory questions · 78 lessons from basics to advanced · 160 practice questions with answers · NumPy, Pandas, Matplotlib, Seaborn and statistics · every question has a plain-Python brute-force answer and an optimal vectorised or library answer, both shown running line by line, with the charts they draw.
+12 topics · theory with 75 theory questions · 101 lessons from basics to advanced · 240 practice questions with answers · NumPy, Pandas, Matplotlib, Seaborn, statistics, SQL from Python, hypothesis testing, EDA and business KPIs, and time series forecasting · every question has a plain-Python brute-force answer and an optimal vectorised or library answer, both shown running line by line, with the charts they draw.
 
 **Live site:** https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/
 
@@ -16,6 +16,10 @@ Every solution is run against its test cases by `build.py` before the site is ge
 - [Matplotlib](#matplotlib) — Draw line, bar, scatter, histogram, pie and box charts; add labels, legends and annotations; build multi-panel figures.
 - [Seaborn](#seaborn) — Statistical charts from DataFrames in one line: distributions, categories, relationships, heat maps and multi-panel grids.
 - [Statistics for Data Analysis](#statistics-for-data-analysis) — Describe and compare data: centre, spread, percentiles, outliers, correlation, simple regression and basic probability.
+- [SQL from Python](#sql-from-python) — Query a real database from Python: sqlite3 connections, safe parameters, joins, GROUP BY and HAVING, subqueries, window functions, dates, upserts, transactions, and moving data between SQL and pandas.
+- [Hypothesis Testing & Inference](#hypothesis-testing-inference) — Decide whether a difference is real or luck: null and alternative hypotheses, p-values, z and t tests, chi-square, ANOVA, non-parametric and permutation tests, the bootstrap, power and sample size, effect sizes and multiple testing.
+- [EDA, Business KPIs & Storytelling](#eda-business-kpis-storytelling) — Explore a new dataset systematically, turn Excel habits (VLOOKUP, pivot tables, SUMIFS, IF) into pandas, and compute the metrics businesses run on: funnels, cohorts and retention, churn, ARPU, LTV, growth, Pareto shares and what drove a change.
+- [Time Series & Forecasting](#time-series-forecasting) — Work with data ordered in time: resampling and missing dates, lags, rolling and exponential averages, trend and seasonality, autocorrelation, baseline and smoothing forecasts, autoregression, honest time-based validation, forecast errors and anomaly flags.
 
 ## NumPy Basics
 
@@ -216,6 +220,106 @@ Every solution is run against its test cases by `build.py` before the site is ge
 | 18 | [Probability From Data](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/statistics/probability-from-data) | Easy | Empirical probability |
 | 19 | [Binomial Probability](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/statistics/binomial-probability) | Medium | math.comb |
 | 20 | [Spearman Rank Correlation](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/statistics/spearman-rank-correlation) | Hard | Correlation of ranks |
+
+## SQL from Python
+
+| # | Question | Level | Concept |
+|---|---|---|---|
+| 1 | [Load Rows and Count Them](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/sql-python/load-rows-and-count-them) | Easy | CREATE · executemany |
+| 2 | [Orders Above an Amount](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/sql-python/orders-above-an-amount) | Easy | WHERE with a parameter |
+| 3 | [Safe Lookup by Name](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/sql-python/safe-lookup-by-name) | Medium | SQL injection |
+| 4 | [Revenue per City](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/sql-python/revenue-per-city) | Easy | JOIN + GROUP BY |
+| 5 | [Customers With No Orders](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/sql-python/customers-with-no-orders) | Easy | LEFT JOIN … IS NULL |
+| 6 | [Big Spenders](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/sql-python/big-spenders) | Medium | HAVING |
+| 7 | [Orders Above Average](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/sql-python/orders-above-average) | Medium | Subquery |
+| 8 | [Biggest Order per Customer](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/sql-python/biggest-order-per-customer) | Medium | ROW_NUMBER() OVER (PARTITION BY …) |
+| 9 | [Running Total per Customer](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/sql-python/running-total-per-customer) | Medium | SUM() OVER (ORDER BY …) |
+| 10 | [Bucket Orders by Size](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/sql-python/bucket-orders-by-size) | Easy | CASE WHEN |
+| 11 | [Monthly Revenue](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/sql-python/monthly-revenue) | Easy | Dates with strftime |
+| 12 | [Second-Highest Order Amount](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/sql-python/second-highest-order-amount) | Medium | DISTINCT · LIMIT/OFFSET |
+| 13 | [Days With Several Customers](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/sql-python/days-with-several-customers) | Easy | COUNT(DISTINCT …) |
+| 14 | [Query Straight into a DataFrame](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/sql-python/query-straight-into-a-dataframe) | Easy | pd.read_sql_query |
+| 15 | [From a DataFrame to a Table and Back](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/sql-python/from-a-dataframe-to-a-table-and-back) | Medium | df.to_sql |
+| 16 | [Upsert Stock Levels](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/sql-python/upsert-stock-levels) | Medium | INSERT … ON CONFLICT |
+| 17 | [All-or-Nothing Transfers](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/sql-python/all-or-nothing-transfers) | Hard | Transactions · rollback |
+| 18 | [Pivot Months into Columns](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/sql-python/pivot-months-into-columns) | Medium | Conditional aggregation |
+| 19 | [Keep the Latest Version of Each Record](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/sql-python/keep-the-latest-version-of-each-record) | Hard | De-duplication |
+| 20 | [Does the Query Use the Index?](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/sql-python/does-the-query-use-the-index) | Medium | Indexes · EXPLAIN QUERY PLAN |
+
+## Hypothesis Testing & Inference
+
+| # | Question | Level | Concept |
+|---|---|---|---|
+| 1 | [One-Sample z-Test](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/hypothesis-testing/one-sample-z-test) | Easy | Known σ · two-sided p |
+| 2 | [One-Sample t Statistic](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/hypothesis-testing/one-sample-t-statistic) | Easy | Unknown σ |
+| 3 | [Welch's t-Test](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/hypothesis-testing/welchs-t-test) | Medium | Two groups, unequal variances |
+| 4 | [Pooled Two-Sample t-Test](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/hypothesis-testing/pooled-two-sample-t-test) | Medium | Equal variances |
+| 5 | [Paired t-Test](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/hypothesis-testing/paired-t-test) | Medium | Before and after |
+| 6 | [A/B Test on Conversion Rates](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/hypothesis-testing/a-b-test-on-conversion-rates) | Medium | Two-proportion z-test |
+| 7 | [Is the Die Fair?](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/hypothesis-testing/is-the-die-fair) | Medium | Chi-square goodness of fit |
+| 8 | [Are Two Categories Related?](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/hypothesis-testing/are-two-categories-related) | Medium | Chi-square independence |
+| 9 | [One-Way ANOVA](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/hypothesis-testing/one-way-anova) | Medium | Three or more means |
+| 10 | [One-Tailed or Two-Tailed?](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/hypothesis-testing/one-tailed-or-two-tailed) | Easy | Alternative hypotheses |
+| 11 | [Confidence Interval for a Difference](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/hypothesis-testing/confidence-interval-for-a-difference) | Medium | Large-sample CI |
+| 12 | [How Many Users Does the A/B Test Need?](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/hypothesis-testing/how-many-users-does-the-a-b-test-need) | Hard | Sample size |
+| 13 | [Power of a z-Test](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/hypothesis-testing/power-of-a-z-test) | Medium | Chance of catching a real effect |
+| 14 | [Permutation Test](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/hypothesis-testing/permutation-test) | Hard | No formula needed |
+| 15 | [Bootstrap Confidence Interval](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/hypothesis-testing/bootstrap-confidence-interval) | Medium | Resampling |
+| 16 | [Bonferroni Correction](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/hypothesis-testing/bonferroni-correction) | Easy | Many tests at once |
+| 17 | [False Discovery Rate (Benjamini–Hochberg)](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/hypothesis-testing/false-discovery-rate-benjamini-hochberg) | Hard | Adjusted p-values |
+| 18 | [Mann–Whitney U](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/hypothesis-testing/mann-whitney-u) | Medium | Ranks instead of means |
+| 19 | [Effect Size: Cohen's d](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/hypothesis-testing/effect-size-cohens-d) | Easy | How big, not just whether |
+| 20 | [Exact Binomial Test](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/hypothesis-testing/exact-binomial-test) | Medium | Small samples, one proportion |
+
+## EDA, Business KPIs & Storytelling
+
+| # | Question | Level | Concept |
+|---|---|---|---|
+| 1 | [Profile a New Dataset](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/eda-kpis/profile-a-new-dataset) | Easy | First look |
+| 2 | [Which Way Is It Skewed?](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/eda-kpis/which-way-is-it-skewed) | Medium | Skewness |
+| 3 | [Most Correlated Pair of Columns](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/eda-kpis/most-correlated-pair-of-columns) | Medium | Correlation matrix |
+| 4 | [Segment Summary](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/eda-kpis/segment-summary) | Easy | Category vs number |
+| 5 | [VLOOKUP in pandas](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/eda-kpis/vlookup-in-pandas) | Easy | Left merge |
+| 6 | [Pivot Table With Totals](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/eda-kpis/pivot-table-with-totals) | Medium | pivot_table(margins=True) |
+| 7 | [SUMIFS](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/eda-kpis/sumifs) | Easy | Sum with several conditions |
+| 8 | [Nested IF to Labels](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/eda-kpis/nested-if-to-labels) | Easy | np.select |
+| 9 | [Conversion Funnel](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/eda-kpis/conversion-funnel) | Medium | Step-to-step conversion |
+| 10 | [Cohort Retention Table](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/eda-kpis/cohort-retention-table) | Hard | Cohorts |
+| 11 | [Monthly Churn Rate](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/eda-kpis/monthly-churn-rate) | Medium | Who didn't come back |
+| 12 | [ARPU and ARPPU](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/eda-kpis/arpu-and-arppu) | Easy | Revenue per user |
+| 13 | [Month-over-Month Growth](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/eda-kpis/month-over-month-growth) | Easy | pct_change |
+| 14 | [The 80/20 Check](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/eda-kpis/the-80-20-check) | Medium | Pareto share |
+| 15 | [Customer Lifetime Value](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/eda-kpis/customer-lifetime-value) | Easy | LTV |
+| 16 | [Repeat Purchase Rate](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/eda-kpis/repeat-purchase-rate) | Easy | Loyalty |
+| 17 | [What Drove the Change?](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/eda-kpis/what-drove-the-change) | Medium | Contribution analysis |
+| 18 | [Top N and 'Other'](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/eda-kpis/top-n-and-other) | Easy | Charts people can read |
+| 19 | [Bucket Values into Ranges](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/eda-kpis/bucket-values-into-ranges) | Easy | pd.cut (Excel FREQUENCY) |
+| 20 | [Stickiness: DAU / MAU](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/eda-kpis/stickiness-dau-mau) | Medium | Engagement |
+
+## Time Series & Forecasting
+
+| # | Question | Level | Concept |
+|---|---|---|---|
+| 1 | [Daily to Weekly Totals](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/time-series/daily-to-weekly-totals) | Easy | resample |
+| 2 | [Fill Missing Dates](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/time-series/fill-missing-dates) | Easy | asfreq |
+| 3 | [Lags and Differences](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/time-series/lags-and-differences) | Easy | shift · diff |
+| 4 | [Rolling Average](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/time-series/rolling-average) | Easy | Smoothing noise |
+| 5 | [Exponential Moving Average](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/time-series/exponential-moving-average) | Medium | ewm |
+| 6 | [Baseline Forecasts](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/time-series/baseline-forecasts) | Easy | Naive, mean, seasonal naive |
+| 7 | [Forecast Error Metrics](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/time-series/forecast-error-metrics) | Easy | MAE, RMSE, MAPE |
+| 8 | [Which Baseline Wins?](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/time-series/which-baseline-wins) | Medium | Backtesting |
+| 9 | [Straight-Line Trend Forecast](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/time-series/straight-line-trend-forecast) | Easy | Linear trend |
+| 10 | [Seasonal Indices](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/time-series/seasonal-indices) | Medium | Classical decomposition |
+| 11 | [Autocorrelation at a Lag](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/time-series/autocorrelation-at-a-lag) | Medium | Does it repeat? |
+| 12 | [Find the Season Length](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/time-series/find-the-season-length) | Medium | Peak autocorrelation |
+| 13 | [Walk-Forward Validation Splits](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/time-series/walk-forward-validation-splits) | Medium | Never train on the future |
+| 14 | [Year-over-Year Change](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/time-series/year-over-year-change) | Easy | Compare with the same season |
+| 15 | [Flag Anomalies](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/time-series/flag-anomalies) | Medium | Rolling z-score |
+| 16 | [Returns and Compound Growth](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/time-series/returns-and-compound-growth) | Easy | pct_change · cumprod |
+| 17 | [Average by Day of the Week](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/time-series/average-by-day-of-the-week) | Easy | Calendar features |
+| 18 | [Turn a Series into a Supervised Dataset](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/time-series/turn-a-series-into-a-supervised-dataset) | Medium | Lag features |
+| 19 | [Autoregressive Forecast AR(1)](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/time-series/autoregressive-forecast-ar-1) | Hard | Regress on the past |
+| 20 | [Tune the Smoothing Factor](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/time-series/tune-the-smoothing-factor) | Medium | Simple exponential smoothing |
 
 ## Build
 

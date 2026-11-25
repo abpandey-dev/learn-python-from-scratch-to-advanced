@@ -2,7 +2,7 @@
   "title": "Python for Data Science",
   "url": "https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/",
   "unit": "practice questions with answers",
-  "summary": "NumPy, Pandas, Matplotlib, Seaborn and statistics \u00b7 every question has a plain-Python brute-force answer and an optimal vectorised or library answer, both shown running line by line, with the charts they draw.",
+  "summary": "NumPy, Pandas, Matplotlib, Seaborn, statistics, SQL from Python, hypothesis testing, EDA and business KPIs, and time series forecasting · every question has a plain-Python brute-force answer and an optimal vectorised or library answer, both shown running line by line, with the charts they draw.",
   "trace_brute": true,
   "plain": true,
   "prelude": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\n\n"

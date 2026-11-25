@@ -10,6 +10,23 @@ A complete, interactive path for learning Python: a beginner course from the fir
 
 Every course below as Jupyter notebooks, explained the way a teacher would. Open any of them in Google Colab with nothing to install. Each has lessons with worked numbers, practice cells that check your answer, hints and two answers hidden until you want them, advice on explaining each answer aloud, and interview questions to practise. **[Start here](notebooks/00_START_HERE.ipynb)**, or see the [full list](notebooks/README.md).
 
+## [Industry Projects](projects/) — 8 end-to-end portfolio projects
+
+Turn the courses into portfolio work. Each project is a notebook (open it in Colab, nothing to install) with a business brief, realistic data, 6–8 milestones whose answers are **checked automatically**, hints, a hidden reference solution, a report template, resume bullets and the interview questions you'll be asked about it.
+
+**Open it:** https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/projects/
+
+| # | Project | Role | Skills |
+|---|---|---|---|
+| 1 | Retail Sales Analysis & Forecast | Data Analyst | cleaning, KPIs, SQL, Pareto, cohort retention, forecast backtesting |
+| 2 | Checkout Redesign: A/B Test Readout | Product Analyst | sample ratio mismatch, funnel, z-test, CI, segments, guardrails, power |
+| 3 | Predict Churn for a Subscription App | Data Scientist | pipelines, logistic regression vs boosting, cost-based threshold, drivers |
+| 4 | Predictive Maintenance from Sensor Data | ML Engineer | label engineering, rolling features, time split, alert policy, business case |
+| 5 | "You Might Also Like": A Store Recommender | ML Engineer | item-based CF, TF-IDF for new items, hybrid, hit rate, coverage |
+| 6 | Fair Credit-Risk Scoring | Data Scientist | calibration, approval policy, fairness audit, reason codes, counterfactuals |
+| 7 | Ship It: Serve and Monitor the Churn Model | MLOps | joblib pipeline, request validation, FastAPI, Docker, batch scoring, PSI drift |
+| 8 | Customer-Support Assistant with RAG | AI Engineer | chunking, BM25 from scratch, retrieval evaluation, grounded prompts, Claude API |
+
 ## [Python IDE](ide/) — write and run Python in the browser
 
 **Open it:** https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ide/

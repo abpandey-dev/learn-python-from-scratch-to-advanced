@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Industry Projects · Learn Python</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,800&family=JetBrains+Mono:wght@600&display=swap">
+<style>
+:root {
+  --paper: #EEF2F5; --grid: rgba(20, 60, 110, 0.06); --surface: #FFFFFF;
+  --ink: #14213A; --muted: #586980; --line: #D3DCE5; --accent: #0F766E; --chip: #E3F1EF;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --paper: #0D141C; --grid: rgba(140, 180, 230, 0.05); --surface: #151F2B; --ink: #E4ECF4; --muted: #93A3B7; --line: #26354A; --accent: #3CC2B4; --chip: #1B2F33; color-scheme: dark; }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; color: var(--ink); font: 16px/1.6 "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  background-color: var(--paper);
+  background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+main {
+  max-width: 860px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px;
+  padding-block: 48px 72px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.back { font: 600 13px "JetBrains Mono", ui-monospace, monospace; color: var(--accent); text-decoration: none; }
+.eyebrow { font: 600 12px/1 "JetBrains Mono", ui-monospace, monospace; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin: 0; }
+h1 { font: 800 clamp(2.2rem, 6vw, 3.2rem)/1.05 "Bricolage Grotesque", system-ui, sans-serif; letter-spacing: -0.02em; margin: 0; text-wrap: balance; }
+p { margin: 0; max-width: 66ch; color: var(--muted); }
+ol { margin: 0; padding-left: 1.2em; color: var(--muted); }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; }
+.card { display: flex; flex-direction: column; gap: 10px; padding: 20px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
+.card h2 { font: 800 1.35rem/1.15 "Bricolage Grotesque", system-ui, sans-serif; margin: 0; color: var(--ink); }
+.meta { font: 600 12px "JetBrains Mono", ui-monospace, monospace; color: var(--accent); }
+.skills { display: flex; flex-wrap: wrap; gap: 6px; }
+.skills span { font-size: 12.5px; padding: 2px 8px; border-radius: 999px; background: var(--chip); color: var(--ink); }
+.links { display: flex; flex-wrap: wrap; gap: 14px; margin-top: auto; }
+.links a { font: 600 13px "JetBrains Mono", ui-monospace, monospace; color: var(--accent); }
+</style>
+</head>
+<body>
+<main>
+  <a class="back" href="../">← All courses</a>
+  <p class="eyebrow">Portfolio · Industry projects</p>
+  <h1>Industry Projects</h1>
+  <p>Eight end-to-end projects modelled on real data jobs. Each has a business brief, realistic data, 6–8 milestones whose answers are checked automatically, hints, a hidden reference solution, a report template, resume bullets and the interview questions you'll be asked about it. Open any of them in Google Colab — nothing to install.</p>
+  <ol>
+    <li>Run the first cell, read the brief, and work milestone by milestone until every check shows ✅.</li>
+    <li>Write the short report at the end in your own words.</li>
+    <li>Publish the notebook on your GitHub with a README: problem, data, approach, results, next steps.</li>
+  </ol>
+  <div class="cards">
+    <article class="card">
+      <p class="meta">Project 1 · Data Analyst · Beginner–Intermediate · ~6–8 h</p>
+      <h2>Retail Sales Analysis &amp; Forecast</h2>
+      <p>An online retailer&#x27;s head of sales wants to know where revenue comes from, who the best customers are, whether new customers come back, and what the next quarter looks like.</p>
+      <p class="skills"><span>pandas</span> <span>data cleaning</span> <span>KPIs</span> <span>SQL (sqlite3)</span> <span>Pareto analysis</span> <span>cohort retention</span> <span>forecasting</span> <span>storytelling</span></p>
+      <p class="links"><a href="https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/projects/01_retail-sales-analysis.ipynb">Open in Colab →</a> <a href="https://github.com/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/projects/01_retail-sales-analysis.ipynb">View on GitHub</a></p>
+    </article>
+    <article class="card">
+      <p class="meta">Project 2 · Product / Data Analyst · Intermediate · ~5–7 h</p>
+      <h2>Checkout Redesign: A/B Test Readout</h2>
+      <p>A product team tested a new one-page checkout on 12,000 users. Decide whether to ship it — with a funnel, significance test, confidence interval, segment and guardrail checks, and a power calculation.</p>
+      <p class="skills"><span>A/B testing</span> <span>funnels</span> <span>sample ratio mismatch</span> <span>two-proportion z-test</span> <span>confidence intervals</span> <span>segments</span> <span>guardrail metrics</span> <span>power analysis</span></p>
+      <p class="links"><a href="https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/projects/02_checkout-ab-test.ipynb">Open in Colab →</a> <a href="https://github.com/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/projects/02_checkout-ab-test.ipynb">View on GitHub</a></p>
+    </article>
+    <article class="card">
+      <p class="meta">Project 3 · Data Scientist · Intermediate · ~8–10 h</p>
+      <h2>Predict Churn for a Subscription App</h2>
+      <p>A streaming app loses customers every month. Build a churn model, choose a decision threshold from the business cost, explain what drives churn, and hand the retention team a prioritised call list.</p>
+      <p class="skills"><span>EDA</span> <span>train/test split</span> <span>scikit-learn pipelines</span> <span>logistic regression</span> <span>gradient boosting</span> <span>ROC AUC</span> <span>cost-based thresholds</span> <span>permutation importance</span></p>
+      <p class="links"><a href="https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/projects/03_subscription-churn.ipynb">Open in Colab →</a> <a href="https://github.com/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/projects/03_subscription-churn.ipynb">View on GitHub</a></p>
+    </article>
+    <article class="card">
+      <p class="meta">Project 4 · ML Engineer · Intermediate–Advanced · ~8–10 h</p>
+      <h2>Predictive Maintenance from Sensor Data</h2>
+      <p>A factory wants a warning before machines break. Build the label carefully, engineer time-series features, validate on the future, and design an alert policy the maintenance crew can act on.</p>
+      <p class="skills"><span>time-series features</span> <span>label engineering</span> <span>leakage</span> <span>time-based validation</span> <span>random forests</span> <span>precision–recall</span> <span>alert policies</span> <span>business case</span></p>
+      <p class="links"><a href="https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/projects/04_predictive-maintenance.ipynb">Open in Colab →</a> <a href="https://github.com/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/projects/04_predictive-maintenance.ipynb">View on GitHub</a></p>
+    </article>
+    <article class="card">
+      <p class="meta">Project 5 · ML Engineer · Intermediate · ~7–9 h</p>
+      <h2>&quot;You Might Also Like&quot;: A Store Recommender</h2>
+      <p>Build the recommendations widget for an online store: a popularity baseline, item-based collaborative filtering, content-based similar items for new products, a hybrid, and an honest offline evaluation.</p>
+      <p class="skills"><span>implicit feedback</span> <span>leave-last-out evaluation</span> <span>hit rate</span> <span>item-item collaborative filtering</span> <span>cosine similarity</span> <span>TF-IDF</span> <span>cold start</span> <span>coverage</span></p>
+      <p class="links"><a href="https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/projects/05_store-recommender.ipynb">Open in Colab →</a> <a href="https://github.com/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/projects/05_store-recommender.ipynb">View on GitHub</a></p>
+    </article>
+    <article class="card">
+      <p class="meta">Project 6 · Data Scientist · Advanced · ~8–10 h</p>
+      <h2>Fair Credit-Risk Scoring</h2>
+      <p>A digital lender wants an automated loan decision. Build a calibrated default-risk model, audit it for fairness between groups, and give every rejected applicant reasons and a path to approval.</p>
+      <p class="skills"><span>logistic regression</span> <span>calibration</span> <span>Brier score</span> <span>approval policy</span> <span>fairness metrics</span> <span>disparate impact</span> <span>reason codes</span> <span>counterfactuals</span></p>
+      <p class="links"><a href="https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/projects/06_fair-credit-scoring.ipynb">Open in Colab →</a> <a href="https://github.com/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/projects/06_fair-credit-scoring.ipynb">View on GitHub</a></p>
+    </article>
+    <article class="card">
+      <p class="meta">Project 7 · MLOps / ML Engineer · Advanced · ~8–10 h</p>
+      <h2>Ship It: Serve and Monitor the Churn Model</h2>
+      <p>Take the churn model from project 3 to production: package the pipeline, validate requests, serve predictions, score a monthly batch, detect drift in new data, and decide when to retrain.</p>
+      <p class="skills"><span>joblib</span> <span>request validation</span> <span>FastAPI</span> <span>Docker</span> <span>batch scoring</span> <span>PSI drift</span> <span>monitoring</span> <span>retraining policy</span></p>
+      <p class="links"><a href="https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/projects/07_ship-the-churn-model.ipynb">Open in Colab →</a> <a href="https://github.com/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/projects/07_ship-the-churn-model.ipynb">View on GitHub</a></p>
+    </article>
+    <article class="card">
+      <p class="meta">Project 8 · AI Engineer · Advanced · ~8–10 h</p>
+      <h2>Customer-Support Assistant with RAG</h2>
+      <p>Build the retrieval half of an LLM support bot over a company help centre: chunking, BM25 search written from scratch, retrieval evaluation, query improvements, a grounded prompt with citations, and an optional Claude call.</p>
+      <p class="skills"><span>RAG</span> <span>chunking</span> <span>BM25</span> <span>retrieval evaluation</span> <span>hit@k / MRR</span> <span>query expansion</span> <span>prompt design</span> <span>grounded answers</span> <span>Claude API</span></p>
+      <p class="links"><a href="https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/projects/08_support-rag-assistant.ipynb">Open in Colab →</a> <a href="https://github.com/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/projects/08_support-rag-assistant.ipynb">View on GitHub</a></p>
+    </article>
+  </div>
+</main>
+</body>
+</html>

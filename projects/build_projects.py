@@ -173,21 +173,18 @@ def expected_answers(spec):
 def notebook(spec, number, wants, solved=False):
     P = spec.PROJECT
     name = f"{number:02d}_{P['slug']}.ipynb"
-    cells = [md(f"""
-        [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)]({colab(name)})
-
-        *Industry Project {number} of {TOTAL} · {P['role']} · {P['level']} · about {P['hours']} hours*
-
-        # {P['title']}
-
-        {P['brief'].strip()}
-
-        **What you'll hand in:** {P['deliverable'].strip()}
-
-        **Skills:** {", ".join(P['skills'])}
-
-        **How this works:** each milestone has a task, a code cell for you to finish, and a ✅ check. Hints and a reference solution are hidden until you open them. Try for at least 20 minutes before opening the solution — the struggle is where the learning happens.
-        """)]
+    header = "\n\n".join([
+        f"[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)]({colab(name)})",
+        f"*Industry Project {number} of {TOTAL} · {P['role']} · {P['level']} · about {P['hours']} hours*",
+        f"# {P['title']}",
+        textwrap.dedent(P["brief"]).strip(),
+        f"**What you'll hand in:** {' '.join(P['deliverable'].split())}",
+        f"**Skills:** {', '.join(P['skills'])}",
+        "**How this works:** each milestone has a task, a code cell for you to finish, and a ✅ check. Hints and a "
+        "reference solution are hidden until you open them. Try for at least 20 minutes before opening the solution "
+        "— the struggle is where the learning happens.",
+    ])
+    cells = [nbf.v4.new_markdown_cell(header)]
     cells.append(md("## The data\n\n" + textwrap.dedent(P["data_notes"]).strip()))
     cells.append(code("# ▶ Run this cell first: it loads the libraries, the data and the checker.\n"
                       + HELPERS.replace("__RAW__", RAW).strip() + "\n\n" + textwrap.dedent(P["setup"]).strip()

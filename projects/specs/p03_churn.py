@@ -192,7 +192,7 @@ def best_threshold(probs, y):
              after="Notice the best threshold is far below 0.5: a missed churner costs much more than a wasted call. The *default* 0.5 cut-off is almost never the business-optimal one."),
         dict(title="What drives churn?",
              task="""
-Write `top_drivers(model, X_test, y_test)` returning the names of the **3 most important** original columns by permutation importance (`scoring='roc_auc'`, `n_repeats=5`, `random_state=0`), most important first. The check uses the boosted model.
+Write `top_drivers(model, X_test, y_test)` returning the names of the **3 most important** original columns by permutation importance (`scoring='roc_auc'`, `n_repeats=5`, `random_state=0`), most important first. The check uses the boosted model and compares **which** three features you found, not their order: features with nearly equal importance can swap places between library versions.
 """,
              hint="`permutation_importance(model, X_test, y_test, scoring='roc_auc', n_repeats=5, random_state=0)` works on the whole pipeline, so it shuffles the original columns.",
              starter="""
@@ -205,7 +205,7 @@ def top_drivers(model, X_test, y_test):
     order = np.argsort(-r.importances_mean)[:3]
     return [X_test.columns[i] for i in order]
 """,
-             call="top_drivers(*fitted(boosted_model))", tol=1e-9,
+             call="sorted(top_drivers(*fitted(boosted_model)))", tol=1e-9,
              after="Turn drivers into actions: monthly contracts → offer an annual plan; payment failures → fix billing reminders; low usage / long since login → re-engagement emails."),
         dict(title="The call list",
              task="""

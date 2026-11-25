@@ -94,15 +94,14 @@ def check(name, fn, want, tol=1e-3):
         got = _plain(fn())
     except NotImplementedError:
         print(f"⬜ {name}: not started yet.")
-        return False
+        return
     except Exception as e:
         print(f"❌ {name}: your code raised {type(e).__name__}: {e}")
-        return False
+        return
     if _same(got, want, tol):
         print(f"✅ {name}: correct!")
-        return True
+        return
     print(f"❌ {name}: not yet — {_why(got, want)}")
-    return False
 '''
 
 

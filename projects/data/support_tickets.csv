@@ -1,0 +1,241 @@
+ticket_id,product,category,priority,status,day,text
+T001,App,bug,low,closed,37,app crashes when opening the cart
+T002,Payments,billing,medium,closed,2,refund not received after return
+T003,Web,bug,low,closed,14,checkout button does nothing
+T004,Payments,billing,low,open,20,invoice shows the wrong GST amount
+T005,Delivery,delivery,high,open,11,parcel marked delivered but not received
+T006,Payments,billing,medium,open,44,coupon discount not applied
+T007,Web,bug,high,closed,41,images fail to load on the product page
+T008,Web,login,high,closed,37,account locked after failed attempts
+T009,Delivery,delivery,low,closed,8,wrong item delivered
+T010,Delivery,delivery,medium,closed,53,wrong item delivered
+T011,Payments,billing,high,open,47,charged twice for one order
+T012,Payments,billing,low,open,48,charged twice for one order
+T013,App,bug,medium,open,31,app crashes when opening the cart
+T014,Delivery,delivery,low,open,50,order delayed by more than a week
+T015,Web,bug,high,open,31,app crashes when opening the cart
+T016,Delivery,delivery,high,closed,14,courier did not come for the pickup
+T017,Web,login,medium,closed,25,account locked after failed attempts
+T018,Web,bug,medium,open,29,checkout button does nothing
+T019,Delivery,delivery,medium,closed,17,courier did not come for the pickup
+T020,App,bug,medium,closed,7,app crashes when opening the cart
+T021,App,bug,medium,closed,53,app crashes when opening the cart
+T022,Web,login,high,closed,13,account locked after failed attempts
+T023,Web,login,medium,closed,27,cannot reset the password
+T024,Delivery,delivery,medium,open,12,order delayed by more than a week
+T025,Delivery,delivery,low,closed,42,order delayed by more than a week
+T026,Payments,billing,high,closed,48,invoice shows the wrong GST amount
+T027,App,login,medium,closed,18,cannot reset the password
+T028,Payments,billing,medium,open,6,invoice shows the wrong GST amount
+T029,Payments,billing,low,open,37,charged twice for one order
+T030,Payments,billing,high,closed,57,invoice shows the wrong GST amount
+T031,App,login,high,closed,5,account locked after failed attempts
+T032,Payments,billing,high,closed,2,refund not received after return
+T033,Delivery,delivery,medium,open,37,parcel marked delivered but not received
+T034,Payments,billing,medium,closed,29,coupon discount not applied
+T035,Delivery,delivery,low,open,56,order delayed by more than a week
+T036,Web,login,low,open,8,account locked after failed attempts
+T037,Web,bug,medium,closed,36,images fail to load on the product page
+T038,Payments,billing,medium,closed,41,charged twice for one order
+T039,App,bug,low,closed,56,checkout button does nothing
+T040,App,login,low,open,49,account locked after failed attempts
+T041,Delivery,delivery,high,open,22,parcel marked delivered but not received
+T042,App,bug,medium,closed,43,search shows no results for valid items
+T043,Delivery,delivery,low,open,35,courier did not come for the pickup
+T044,App,bug,medium,open,27,checkout button does nothing
+T045,Payments,billing,medium,closed,47,invoice shows the wrong GST amount
+T046,Delivery,delivery,medium,closed,60,wrong item delivered
+T047,App,bug,medium,open,30,search shows no results for valid items
+T048,App,login,medium,open,38,cannot reset the password
+T049,Payments,billing,low,open,35,invoice shows the wrong GST amount
+T050,App,bug,medium,closed,6,app crashes when opening the cart
+T051,App,bug,high,closed,11,search shows no results for valid items
+T052,Payments,billing,medium,closed,47,coupon discount not applied
+T053,Delivery,delivery,low,closed,19,courier did not come for the pickup
+T054,Payments,billing,medium,closed,57,charged twice for one order
+T055,App,bug,medium,closed,58,app crashes when opening the cart
+T056,App,bug,low,open,58,search shows no results for valid items
+T057,App,bug,medium,closed,9,checkout button does nothing
+T058,App,bug,medium,closed,56,images fail to load on the product page
+T059,Web,bug,medium,open,18,app crashes when opening the cart
+T060,Delivery,delivery,high,closed,30,courier did not come for the pickup
+T061,App,bug,medium,open,29,images fail to load on the product page
+T062,Web,bug,high,open,23,app crashes when opening the cart
+T063,App,login,high,open,22,OTP not received on mobile
+T064,App,bug,high,closed,7,checkout button does nothing
+T065,Delivery,delivery,medium,open,13,wrong item delivered
+T066,App,bug,medium,closed,19,app crashes when opening the cart
+T067,Delivery,delivery,high,closed,21,order delayed by more than a week
+T068,Payments,billing,medium,open,49,coupon discount not applied
+T069,Delivery,delivery,medium,open,58,courier did not come for the pickup
+T070,Web,bug,low,closed,5,search shows no results for valid items
+T071,Web,bug,medium,open,37,images fail to load on the product page
+T072,Delivery,delivery,medium,closed,38,wrong item delivered
+T073,Payments,billing,high,closed,49,coupon discount not applied
+T074,Web,login,low,open,12,OTP not received on mobile
+T075,Web,login,high,closed,13,cannot reset the password
+T076,Payments,billing,high,open,50,invoice shows the wrong GST amount
+T077,Web,bug,low,open,32,checkout button does nothing
+T078,Web,login,medium,closed,13,OTP not received on mobile
+T079,Payments,billing,medium,closed,20,coupon discount not applied
+T080,App,bug,medium,closed,9,images fail to load on the product page
+T081,Delivery,delivery,medium,closed,24,wrong item delivered
+T082,Delivery,delivery,medium,open,18,wrong item delivered
+T083,Delivery,delivery,high,closed,16,wrong item delivered
+T084,Delivery,delivery,medium,open,45,parcel marked delivered but not received
+T085,Delivery,delivery,low,closed,58,courier did not come for the pickup
+T086,App,bug,low,closed,51,images fail to load on the product page
+T087,Delivery,delivery,medium,closed,53,parcel marked delivered but not received
+T088,App,bug,low,open,7,app crashes when opening the cart
+T089,App,bug,medium,closed,9,search shows no results for valid items
+T090,Payments,billing,medium,closed,22,refund not received after return
+T091,App,bug,medium,open,16,app crashes when opening the cart
+T092,Delivery,delivery,low,open,28,order delayed by more than a week
+T093,Payments,billing,high,closed,36,charged twice for one order
+T094,Web,login,low,open,16,cannot reset the password
+T095,Web,bug,medium,open,49,app crashes when opening the cart
+T096,App,login,low,open,58,cannot reset the password
+T097,Payments,billing,medium,closed,43,refund not received after return
+T098,Delivery,delivery,high,closed,15,wrong item delivered
+T099,App,login,low,open,30,OTP not received on mobile
+T100,Payments,billing,medium,closed,43,charged twice for one order
+T101,Delivery,delivery,high,open,52,parcel marked delivered but not received
+T102,Delivery,delivery,medium,closed,9,order delayed by more than a week
+T103,Payments,billing,high,open,47,coupon discount not applied
+T104,App,bug,low,closed,31,images fail to load on the product page
+T105,App,bug,medium,open,32,checkout button does nothing
+T106,Web,login,medium,closed,48,account locked after failed attempts
+T107,Payments,billing,medium,open,4,invoice shows the wrong GST amount
+T108,Web,bug,medium,closed,5,images fail to load on the product page
+T109,App,login,medium,closed,28,cannot reset the password
+T110,Web,login,high,open,6,account locked after failed attempts
+T111,App,login,medium,closed,12,cannot reset the password
+T112,Delivery,delivery,high,closed,49,wrong item delivered
+T113,Payments,billing,medium,open,4,refund not received after return
+T114,Web,bug,medium,closed,5,search shows no results for valid items
+T115,Delivery,delivery,low,open,31,order delayed by more than a week
+T116,Payments,billing,medium,open,10,coupon discount not applied
+T117,Delivery,delivery,medium,closed,20,courier did not come for the pickup
+T118,Payments,billing,high,open,47,refund not received after return
+T119,App,login,low,open,24,cannot reset the password
+T120,Delivery,delivery,medium,open,16,courier did not come for the pickup
+T121,App,bug,high,closed,21,checkout button does nothing
+T122,App,bug,medium,open,26,images fail to load on the product page
+T123,Payments,billing,high,closed,15,charged twice for one order
+T124,Delivery,delivery,medium,open,41,parcel marked delivered but not received
+T125,Payments,billing,high,open,27,coupon discount not applied
+T126,Payments,billing,high,closed,32,charged twice for one order
+T127,Delivery,delivery,medium,open,39,courier did not come for the pickup
+T128,Payments,billing,low,closed,41,invoice shows the wrong GST amount
+T129,Payments,billing,high,closed,49,invoice shows the wrong GST amount
+T130,App,bug,medium,open,36,app crashes when opening the cart
+T131,Web,bug,medium,open,10,checkout button does nothing
+T132,App,bug,medium,open,43,app crashes when opening the cart
+T133,Delivery,delivery,high,open,26,parcel marked delivered but not received
+T134,Delivery,delivery,medium,closed,15,courier did not come for the pickup
+T135,Payments,billing,high,open,22,coupon discount not applied
+T136,App,login,medium,closed,48,OTP not received on mobile
+T137,Web,bug,high,closed,20,search shows no results for valid items
+T138,Delivery,delivery,low,closed,44,courier did not come for the pickup
+T139,App,login,low,open,38,OTP not received on mobile
+T140,Web,bug,medium,open,19,images fail to load on the product page
+T141,Web,login,low,open,10,OTP not received on mobile
+T142,App,bug,high,open,55,checkout button does nothing
+T143,App,login,low,closed,22,OTP not received on mobile
+T144,Web,login,medium,closed,36,cannot reset the password
+T145,App,bug,medium,closed,46,app crashes when opening the cart
+T146,Web,login,low,open,25,cannot reset the password
+T147,App,bug,medium,open,1,app crashes when opening the cart
+T148,Web,bug,low,closed,49,search shows no results for valid items
+T149,Web,bug,high,closed,42,images fail to load on the product page
+T150,Payments,billing,medium,open,50,refund not received after return
+T151,Web,login,medium,closed,11,cannot reset the password
+T152,Payments,billing,medium,open,20,refund not received after return
+T153,Payments,billing,high,open,56,refund not received after return
+T154,App,bug,medium,closed,13,app crashes when opening the cart
+T155,App,bug,medium,open,59,images fail to load on the product page
+T156,Delivery,delivery,high,closed,10,parcel marked delivered but not received
+T157,Delivery,delivery,high,open,51,courier did not come for the pickup
+T158,App,bug,low,closed,15,images fail to load on the product page
+T159,App,login,medium,closed,37,account locked after failed attempts
+T160,App,bug,low,closed,1,images fail to load on the product page
+T161,App,bug,medium,open,54,checkout button does nothing
+T162,Payments,billing,low,open,60,refund not received after return
+T163,App,login,medium,open,29,OTP not received on mobile
+T164,App,bug,high,closed,26,checkout button does nothing
+T165,App,bug,medium,open,27,app crashes when opening the cart
+T166,Delivery,delivery,high,open,59,order delayed by more than a week
+T167,Payments,billing,high,open,11,charged twice for one order
+T168,Delivery,delivery,medium,open,41,order delayed by more than a week
+T169,Payments,billing,high,open,35,invoice shows the wrong GST amount
+T170,Web,bug,high,open,40,app crashes when opening the cart
+T171,Delivery,delivery,medium,open,10,courier did not come for the pickup
+T172,Delivery,delivery,high,closed,14,parcel marked delivered but not received
+T173,Web,login,high,closed,44,OTP not received on mobile
+T174,Web,bug,low,closed,56,checkout button does nothing
+T175,Delivery,delivery,medium,open,47,parcel marked delivered but not received
+T176,App,bug,low,closed,26,app crashes when opening the cart
+T177,Payments,billing,high,open,56,charged twice for one order
+T178,App,bug,low,open,20,search shows no results for valid items
+T179,Web,login,medium,closed,19,OTP not received on mobile
+T180,App,login,medium,open,18,account locked after failed attempts
+T181,App,login,low,open,13,account locked after failed attempts
+T182,App,bug,low,open,12,checkout button does nothing
+T183,Web,login,medium,open,45,account locked after failed attempts
+T184,Payments,billing,medium,open,11,coupon discount not applied
+T185,Payments,billing,low,open,6,coupon discount not applied
+T186,Web,login,medium,closed,3,OTP not received on mobile
+T187,Delivery,delivery,low,closed,30,order delayed by more than a week
+T188,Delivery,delivery,medium,closed,25,wrong item delivered
+T189,Delivery,delivery,low,closed,38,order delayed by more than a week
+T190,Payments,billing,medium,open,14,charged twice for one order
+T191,App,bug,low,open,11,app crashes when opening the cart
+T192,Payments,billing,high,closed,46,refund not received after return
+T193,App,bug,low,closed,52,images fail to load on the product page
+T194,App,bug,medium,closed,22,checkout button does nothing
+T195,Payments,billing,high,closed,60,invoice shows the wrong GST amount
+T196,Delivery,delivery,high,closed,37,order delayed by more than a week
+T197,Delivery,delivery,low,open,12,order delayed by more than a week
+T198,App,login,high,open,13,cannot reset the password
+T199,Delivery,delivery,medium,open,24,courier did not come for the pickup
+T200,Delivery,delivery,medium,open,53,order delayed by more than a week
+T201,Delivery,delivery,medium,open,60,order delayed by more than a week
+T202,Payments,billing,high,open,40,invoice shows the wrong GST amount
+T203,Payments,billing,high,open,1,coupon discount not applied
+T204,Delivery,delivery,low,open,46,wrong item delivered
+T205,Web,bug,low,open,30,search shows no results for valid items
+T206,App,bug,medium,closed,7,search shows no results for valid items
+T207,App,bug,high,closed,27,images fail to load on the product page
+T208,App,bug,medium,open,47,checkout button does nothing
+T209,Web,bug,high,closed,8,images fail to load on the product page
+T210,Payments,billing,high,open,22,charged twice for one order
+T211,Delivery,delivery,high,closed,57,parcel marked delivered but not received
+T212,Web,login,low,open,24,OTP not received on mobile
+T213,Delivery,delivery,medium,closed,19,parcel marked delivered but not received
+T214,Web,login,high,closed,1,OTP not received on mobile
+T215,Delivery,delivery,medium,closed,53,parcel marked delivered but not received
+T216,App,bug,medium,open,12,app crashes when opening the cart
+T217,Delivery,delivery,low,closed,6,courier did not come for the pickup
+T218,App,login,medium,open,4,account locked after failed attempts
+T219,Delivery,delivery,medium,closed,40,parcel marked delivered but not received
+T220,App,login,medium,open,6,account locked after failed attempts
+T221,Payments,billing,high,closed,16,coupon discount not applied
+T222,Web,bug,medium,closed,16,images fail to load on the product page
+T223,App,bug,low,closed,60,checkout button does nothing
+T224,App,login,low,closed,19,OTP not received on mobile
+T225,App,bug,medium,closed,57,checkout button does nothing
+T226,Payments,billing,high,closed,18,refund not received after return
+T227,Payments,billing,medium,open,51,charged twice for one order
+T228,Delivery,delivery,medium,closed,4,courier did not come for the pickup
+T229,Delivery,delivery,low,closed,34,order delayed by more than a week
+T230,Payments,billing,medium,open,13,invoice shows the wrong GST amount
+T231,Payments,billing,medium,open,6,coupon discount not applied
+T232,Web,login,high,closed,36,account locked after failed attempts
+T233,App,bug,low,closed,15,images fail to load on the product page
+T234,Web,bug,low,open,16,images fail to load on the product page
+T235,App,bug,low,open,39,images fail to load on the product page
+T236,Payments,billing,low,closed,1,charged twice for one order
+T237,App,bug,low,closed,3,search shows no results for valid items
+T238,Delivery,delivery,medium,closed,12,wrong item delivered
+T239,Web,login,low,closed,51,account locked after failed attempts
+T240,Payments,billing,medium,closed,3,charged twice for one order

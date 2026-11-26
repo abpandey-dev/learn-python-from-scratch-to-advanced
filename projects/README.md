@@ -1,6 +1,6 @@
 # Industry Projects
 
-Eight end-to-end projects that turn the courses into portfolio work, each modelled on a real job task. Every project has a business brief, realistic data, 6–8 milestones whose answers are **checked automatically**, hints, a hidden reference solution, how to present it, resume bullets and the interview questions you'll be asked about it.
+Ten end-to-end projects that turn the courses into portfolio work, each modelled on a real job task. Every project has a business brief, realistic data, 6–8 milestones whose answers are **checked automatically**, hints, a hidden reference solution, how to present it, resume bullets and the interview questions you'll be asked about it.
 
 **Web page:** https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/projects/
 
@@ -14,6 +14,8 @@ Eight end-to-end projects that turn the courses into portfolio work, each modell
 | 6 | [Fair Credit-Risk Scoring](06_fair-credit-scoring.ipynb) | Data Scientist | Advanced | 8–10 | logistic regression, calibration, Brier score, approval policy, fairness metrics | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/projects/06_fair-credit-scoring.ipynb) |
 | 7 | [Ship It: Serve and Monitor the Churn Model](07_ship-the-churn-model.ipynb) | MLOps / ML Engineer | Advanced | 8–10 | joblib, request validation, FastAPI, Docker, batch scoring | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/projects/07_ship-the-churn-model.ipynb) |
 | 8 | [Customer-Support Assistant with RAG](08_support-rag-assistant.ipynb) | AI Engineer | Advanced | 8–10 | RAG, chunking, BM25, retrieval evaluation, hit@k / MRR | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/projects/08_support-rag-assistant.ipynb) |
+| 9 | [Multi-Agent Support Analyst over an MCP Server](09_mcp-multi-agent-assistant.ipynb) | AI Engineer | Advanced | 8–10 | MCP, JSON-RPC, tool schemas, multi-agent orchestration, citations | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/projects/09_mcp-multi-agent-assistant.ipynb) |
+| 10 | [Fine-Tune With LoRA: Adapt a Model to a New Domain](10_lora-fine-tuning.ipynb) | AI / ML Engineer | Advanced | 8–10 | LoRA, full vs parameter-efficient fine-tuning, gradient descent, data cleaning and leakage, catastrophic forgetting | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/projects/10_lora-fine-tuning.ipynb) |
 
 ## How to do a project
 
@@ -21,7 +23,7 @@ Eight end-to-end projects that turn the courses into portfolio work, each modell
 2. Run the first cell, read the brief, then work milestone by milestone. Each ✅ check tells you when you're right.
 3. Write the short report at the end in your own words, and publish the notebook on your GitHub.
 
-Suggested order: projects 1–2 after **Python for Data Science**, 3–6 after **Machine Learning**, 7 after the **MLOps** topic and 8 after **Deep Learning & LLMs**.
+Suggested order: projects 1–2 after **Python for Data Science**, 3–6 after **Machine Learning**, 7 after the **MLOps** topic, 8 after **Deep Learning & LLMs**, and 9–10 after **AI Engineering**.
 
 ## Rebuild
 

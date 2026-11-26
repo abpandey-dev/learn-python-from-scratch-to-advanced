@@ -29,7 +29,8 @@ COURSES = [("python-course", "01-python", "Python from Scratch"),
            ("ml", "04-machine-learning", "Machine Learning from Scratch"),
            ("deep-learning", "05-deep-learning-llms", "Deep Learning & LLMs"),
            ("handbook", "06-dsa-interview", "DSA Interview Handbook"),
-           ("interview", "07-interview-prep", "Interview Prep")]
+           ("interview", "07-interview-prep", "Interview Prep"),
+           ("ai-engineering", "08-ai-engineering", "AI Engineering")]
 
 
 # ---------- HTML to Markdown ----------

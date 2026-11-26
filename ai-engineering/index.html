@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AI Engineering</title>
+<meta name="description" content="Modern AI engineering from scratch: MCP, multi-agent systems, context engineering and memory, reasoning models, LLM serving, observability, fine-tuning, multimodal AI and shipping AI products.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="../handbook/style.css?v=7c2a2c4525">
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="#/"><span class="logo">AE</span><span>AI Engineering</span></a>
+    <div class="search" role="search">
+      <input id="q" type="search" placeholder="Search topics and practice questions…  ( / )" autocomplete="off" aria-label="Search">
+      <div id="results" class="results" hidden></div>
+    </div>
+    <a class="top-link" href="../ide/" target="_blank" rel="noopener">✎ IDE</a>
+    <button id="theme" class="icon-btn" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">◐</button>
+  </div>
+</header>
+<main id="app" class="wrap" tabindex="-1"></main>
+<footer class="foot"><a href="../index.html">← Learn Python: From Scratch to Advanced</a> · Every answer here is run against its tests before publishing.</footer>
+<script>
+window.BOOK = {
+  title: "AI Engineering", short: "AI Engineering", unit: "practice questions",
+  lead: "The skills AI Engineer jobs ask for in 2026, built so you can see inside them: <b>MCP</b> servers and tools, <b>multi-agent</b> orchestration, <b>context engineering and memory</b>, <b>reasoning models</b>, <b>LLM serving</b> (batching, KV cache, speculative decoding), <b>observability and evals</b>, <b>fine-tuning with LoRA and DPO</b>, <b>multimodal</b> apps and <b>shipping AI products</b>. Each topic has theory, lessons and <b>20 practice questions</b> answered step by step and again the efficient way. Lessons also show the real SDK and library code.",
+  how: [["1 · Know the basics", "This course builds on Deep Learning &amp; LLMs. If attention, RAG or tool calling are new, start there."],
+        ["2 · See inside the tools", "Every idea is built from scratch with small, deterministic stand-ins for the model, so it runs anywhere and nothing is magic."],
+        ["3 · Build it", "Try each question. The step-by-step answer shows exactly what a framework does for you."],
+        ["4 · Then use the real thing", "Lessons show the matching code for the Claude API, MCP SDK, vLLM, PEFT and friends, to run on your own machine."]],
+  searchHint: "Try “MCP”, “handoff”, “KV cache”, “LoRA”, “DPO”, “trace”, “compaction”, “SSE” or a question title.",
+  bruteLabel: "Step by step — plain Python", optLabel: "The efficient way",
+  watchBrute: "Watch the step-by-step version run", watchOpt: "Watch the efficient version run",
+  qsHeading: "{n} practice questions"
+};
+</script>
+<script src="data/index.js?v=9728583daf"></script>
+<script src="../handbook/app.js?v=5f1a53219a"></script>
+</body>
+</html>

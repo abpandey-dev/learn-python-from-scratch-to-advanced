@@ -246,7 +246,7 @@ def main():
 
 def write_readme(built):
     lines = ["# Industry Projects", "",
-             "Eight end-to-end projects that turn the courses into portfolio work, each modelled on a real job task. "
+             "Ten end-to-end projects that turn the courses into portfolio work, each modelled on a real job task. "
              "Every project has a business brief, realistic data, 6–8 milestones whose answers are **checked automatically**, "
              "hints, a hidden reference solution, how to present it, resume bullets and the interview questions you'll be asked about it.", "",
              f"**Web page:** {SITE}/projects/", "",
@@ -258,7 +258,7 @@ def write_readme(built):
               "1. Open it in Colab (nothing to install) or run it locally with Jupyter.",
               "2. Run the first cell, read the brief, then work milestone by milestone. Each ✅ check tells you when you're right.",
               "3. Write the short report at the end in your own words, and publish the notebook on your GitHub.", "",
-              "Suggested order: projects 1–2 after **Python for Data Science**, 3–6 after **Machine Learning**, 7 after the **MLOps** topic and 8 after **Deep Learning & LLMs**.", "",
+              "Suggested order: projects 1–2 after **Python for Data Science**, 3–6 after **Machine Learning**, 7 after the **MLOps** topic, 8 after **Deep Learning & LLMs**, and 9–10 after **AI Engineering**.", "",
               "## Rebuild", "", "```bash", "python3 projects/build_projects.py verify", "```", "",
               "The data is synthetic but realistic, generated with fixed seeds and saved in [data/](data/), so every learner gets the same numbers."]
     (HERE / "README.md").write_text("\n".join(lines) + "\n")

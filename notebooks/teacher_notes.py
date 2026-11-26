@@ -91,4 +91,15 @@ NOTES = {
  "stats-ab": ("Statistics asks one honest question: could this just be luck? An A/B test is that question, with money attached.", "Defining a p-value correctly, sample size, peeking, base rates, and turning a question into pandas."),
  "ml-system-design": ("There's no single right design. You're being judged on how you frame the problem, weigh trade-offs and plan for failure.", "A clear structure, labels and leakage, sizing, offline vs online metrics, and what happens when things go wrong."),
 },
+"ai-engineering": {
+ "mcp": ("MCP is a universal power socket for AI: build a plug (server) once for a system, and every AI app with the socket can use it.", "JSON-RPC message shapes, the initialize handshake, tools vs resources vs prompts, stdio vs HTTP, isError results, and MCP security."),
+ "multi-agent": ("Agents are a team: a manager plans, specialists do the work, a reviewer checks it — and every extra person adds cost and coordination.", "Workflow vs agent, choosing the simplest pattern, handoffs, shared state, loop detection, budgets, and when multi-agent is worth it."),
+ "context-memory": ("The context window is a small desk: put only what the task needs on it, keep the important papers at the edges, and file the rest in memory.", "Trimming vs compaction, prompt caching and prefix order, lost in the middle, and add/update/skip memory with recency."),
+ "reasoning": ("A reasoning model shows its working before the answer — worth it for hard sums, wasteful for 'what's 2 + 2'.", "Thinking cost and latency, self-consistency vs best-of-N, pass@k, process vs outcome checks, and routing easy vs hard questions."),
+ "serving": ("Serving an LLM is running a busy kitchen: memory is counter space, batching cooks many orders at once, and the KV cache is the prep you don't redo.", "Weight and KV-cache memory, continuous batching, prefill vs decode, quantisation, speculative decoding and self-host vs API economics."),
+ "observability": ("Traces are the flight recorder; evals are the driving test you retake after every change.", "Spans and self time, cost per feature, LLM-as-judge and its biases, kappa, pairwise comparisons and release gates."),
+ "fine-tuning": ("LoRA is sticky notes on a textbook: the book stays the same, the notes change how you read it, and you can swap notes per student.", "When to fine-tune vs prompt vs RAG, LoRA maths and rank, QLoRA memory, loss masking, DPO, leakage and forgetting."),
+ "multimodal": ("To a model, an image is a grid of word-like patches and audio is a strip of short frames — all of them end up as tokens.", "Image token cost, patches, document extraction and validation, WER, voice latency budgets and zero-shot labels."),
+ "shipping": ("Shipping AI is building the guard rails, seat belts and dashboard around the engine — the model is only one part of the car.", "Streaming, retries and fallbacks, structured output, coding-agent edits and sandboxing, guardrails, budgets and launch checklists."),
+},
 }

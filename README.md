@@ -1,16 +1,16 @@
 # Learn Python: From Scratch to Advanced
 
-A complete, interactive path for learning Python: a beginner course from the first line of code, Python for data science (NumPy, pandas, Matplotlib, Seaborn, statistics, SQL, hypothesis testing, business KPIs, time series), the math behind data science and machine learning, machine learning from scratch, deep learning and LLMs, interview prep, a DSA interview handbook, teacher-style Jupyter notebooks, and an in-browser IDE. Every lesson and answer can be watched running line by line, with the data drawn as pictures and a plain-English explanation of each step.
+A complete, interactive path for learning Python: a beginner course from the first line of code, Python for data science (NumPy, pandas, Matplotlib, Seaborn, statistics, SQL, hypothesis testing, business KPIs, time series), the math behind data science and machine learning, machine learning from scratch, deep learning and LLMs, AI engineering (MCP, agents, context engineering, evals, fine-tuning, serving), interview prep, a DSA interview handbook, teacher-style Jupyter notebooks, and an in-browser IDE. Every lesson and answer can be watched running line by line, with the data drawn as pictures and a plain-English explanation of each step.
 
 **Live site:** https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/
 
 **Companion course:** [Data Engineering from Scratch to Advanced](https://github.com/abpandey-dev/data-engineering-from-scratch-to-advanced) covers big data (Spark, Airflow, Kafka, lakehouses, dbt, cloud) and has a [SQL IDE](https://abpandey-dev.github.io/data-engineering-from-scratch-to-advanced/ide/sql.html) with automatically checked questions.
 
-## [Teacher's Notebooks](notebooks/) — 77 notebooks · 608 lessons · 1,540 questions
+## [Teacher's Notebooks](notebooks/) — 86 notebooks · 655 lessons · 1,720 questions
 
 Every course below as Jupyter notebooks, explained the way a teacher would. Open any of them in Google Colab with nothing to install. Each has lessons with worked numbers, practice cells that check your answer, hints and two answers hidden until you want them, advice on explaining each answer aloud, and interview questions to practise. **[Start here](notebooks/00_START_HERE.ipynb)**, or see the [full list](notebooks/README.md).
 
-## [Industry Projects](projects/) — 8 end-to-end portfolio projects
+## [Industry Projects](projects/) — 10 end-to-end portfolio projects
 
 Turn the courses into portfolio work. Each project is a notebook (open it in Colab, nothing to install) with a business brief, realistic data, 6–8 milestones whose answers are **checked automatically**, hints, a hidden reference solution, a report template, resume bullets and the interview questions you'll be asked about it.
 
@@ -26,6 +26,8 @@ Turn the courses into portfolio work. Each project is a notebook (open it in Col
 | 6 | Fair Credit-Risk Scoring | Data Scientist | calibration, approval policy, fairness audit, reason codes, counterfactuals |
 | 7 | Ship It: Serve and Monitor the Churn Model | MLOps | joblib pipeline, request validation, FastAPI, Docker, batch scoring, PSI drift |
 | 8 | Customer-Support Assistant with RAG | AI Engineer | chunking, BM25 from scratch, retrieval evaluation, grounded prompts, Claude API |
+| 9 | Multi-Agent Support Analyst over an MCP Server | AI Engineer | your own MCP server (JSON-RPC, tools/list, tools/call), orchestrator, research, writer and reviewer agents, citations, tracing, Claude tool use |
+| 10 | Fine-Tune With LoRA: Adapt a Model to a New Domain | AI / ML Engineer | data cleaning and leakage, LoRA from scratch, full fine-tuning comparison, forgetting, adapter merging, rank sweep, QLoRA with PEFT/TRL |
 
 ## [Python IDE](ide/) — write and run Python in the browser
 
@@ -142,6 +144,24 @@ See inside modern AI by building it, then learn to build real products with it. 
 | 8 | Building With LLMs | prompts, costs, context limits, structured output, retries, streaming, tool calling, caching, the Claude API |
 | 9 | RAG & Retrieval | chunking, BM25, vector search, approximate indexes, fusion, MMR, re-ranking, recall, MRR, nDCG |
 | 10 | Agents, Evals & Production | agent loops, guard rails, evaluation, fair comparison, latency, cost, safety, quantisation, LoRA, drift |
+
+## [AI Engineering](ai-engineering/) — 9 topics · 180 practice questions
+
+The skills current AI Engineer roles ask for, built from scratch so nothing is a black box, with the matching real SDK and library code in every lesson. Each topic has a **Theory** tab, **lessons** and **20 practice questions**, answered step by step and again the efficient way. Model calls are simulated with small deterministic stand-ins, so everything runs in the browser with no API key.
+
+**Open it:** https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ai-engineering/ · [Full question list](ai-engineering/README.md)
+
+| # | Topic | Covers |
+|---|---|---|
+| 1 | MCP: Connecting AI to Tools and Data | JSON-RPC, stdio, initialize, tools/resources/prompts, input schemas, isError, pagination, permissions, MCP → Claude tools |
+| 2 | Agents & Multi-Agent Orchestration | the agent loop, routers, planning and fan-out, orchestrator–workers, handoffs, shared state, evaluator loops, budgets, graph workflows |
+| 3 | Context Engineering & Agent Memory | token budgets, trimming and compaction, prompt-cache ordering, lost in the middle, tool-result clearing, long-term memory and recall |
+| 4 | Reasoning Models & Test-Time Compute | thinking cost and latency, effort levels, self-consistency, best-of-N, pass@k, process vs outcome checks, routing |
+| 5 | Serving LLMs: Inference Optimisation | weight and KV-cache memory, continuous batching, prefill/decode, speculative decoding, quantisation, paged KV, self-host vs API |
+| 6 | Observability, Tracing & Evals in Production | spans and self time, cost per feature, redaction, LLM-as-judge, kappa, pairwise bias, faithfulness, release gates |
+| 7 | Fine-Tuning in Practice: LoRA, QLoRA & DPO | LoRA maths and merging, training memory, chat templates and loss masking, packing, data cleaning, DPO, forgetting |
+| 8 | Multimodal AI: Images, Documents & Speech | image tokens and patches, image blocks, OCR reading order, invoice validation, WER, subtitles, CLIP-style labels, voice latency |
+| 9 | Shipping AI Products | streaming (SSE), structured output, retries and fallbacks, coding-agent edits and sandboxing, guardrails, budgets, launch checklist |
 
 ## [Interview Prep](interview/) — 5 topics · 100 practice questions
 

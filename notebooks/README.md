@@ -1,6 +1,6 @@
 # Notebooks: learn it, practise it, explain it
 
-**77 notebooks · 608 lessons · 1540 practice questions.**
+**86 notebooks · 655 lessons · 1720 practice questions.**
 
 Every course on the site as Jupyter notebooks, written the way a teacher would explain it. **[Start here](00_START_HERE.ipynb)** ([open in Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/00_START_HERE.ipynb)).
 
@@ -139,3 +139,19 @@ No installation is needed: open any notebook in Colab and run the first cell. Or
 | 3 | [Classic Algorithms](07-interview-prep/03_dsa-classics.ipynb) | 8 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/07-interview-prep/03_dsa-classics.ipynb) |
 | 4 | [Statistics & A/B Testing](07-interview-prep/04_stats-ab.ipynb) | 5 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/07-interview-prep/04_stats-ab.ipynb) |
 | 5 | [ML System Design](07-interview-prep/05_ml-system-design.ipynb) | 8 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/07-interview-prep/05_ml-system-design.ipynb) |
+
+## AI Engineering
+
+9 notebooks · 47 lessons · 180 questions
+
+| # | Topic | Lessons | Questions | Open |
+|---|---|---|---|---|
+| 1 | [MCP: Connecting AI to Tools and Data](08-ai-engineering/01_mcp.ipynb) | 6 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/08-ai-engineering/01_mcp.ipynb) |
+| 2 | [Agents & Multi-Agent Orchestration](08-ai-engineering/02_multi-agent.ipynb) | 6 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/08-ai-engineering/02_multi-agent.ipynb) |
+| 3 | [Context Engineering & Agent Memory](08-ai-engineering/03_context-memory.ipynb) | 5 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/08-ai-engineering/03_context-memory.ipynb) |
+| 4 | [Reasoning Models & Test-Time Compute](08-ai-engineering/04_reasoning.ipynb) | 5 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/08-ai-engineering/04_reasoning.ipynb) |
+| 5 | [Serving LLMs: Inference Optimisation](08-ai-engineering/05_serving.ipynb) | 5 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/08-ai-engineering/05_serving.ipynb) |
+| 6 | [Observability, Tracing & Evals in Production](08-ai-engineering/06_observability.ipynb) | 5 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/08-ai-engineering/06_observability.ipynb) |
+| 7 | [Fine-Tuning in Practice: LoRA, QLoRA & DPO](08-ai-engineering/07_fine-tuning.ipynb) | 5 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/08-ai-engineering/07_fine-tuning.ipynb) |
+| 8 | [Multimodal AI: Images, Documents & Speech](08-ai-engineering/08_multimodal.ipynb) | 5 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/08-ai-engineering/08_multimodal.ipynb) |
+| 9 | [Shipping AI Products: Streaming, Coding Agents & Guardrails](08-ai-engineering/09_shipping.ipynb) | 5 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/08-ai-engineering/09_shipping.ipynb) |

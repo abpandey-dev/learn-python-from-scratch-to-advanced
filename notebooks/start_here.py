@@ -17,7 +17,7 @@ This set of notebooks takes you from your first line of Python to machine learni
 | Python, DSA patterns, SQL, statistics, ML, deep learning and LLMs | **Practise until you're quick.** Reading an answer isn't the same as producing one under pressure |
 | Over 1,900 questions with hints, tested answers and explanations | **Mock interviews with a real person,** because explaining while being watched is its own skill |
 | System design: estimation, caching, sharding, queues, rate limiting, chat, feeds, and ML/LLM systems | **Drawing and talking through a full design live**, which takes mock practice on top of the building blocks |
-| A method for unseen problems | **Behavioural preparation** using your own stories, and **company-specific research** |
+| A method for unseen problems, and a [behavioural interview guide](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/behavioural/) with a practice drill | **Your own stories, practised aloud,** and **company-specific research** |
 
 Do the work below and you'll be well prepared for most Python, data and ML interviews. You also won't need another site for practice questions until you've finished these, and that's a lot of practice.
 """),

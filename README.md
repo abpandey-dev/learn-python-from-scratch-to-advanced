@@ -1,6 +1,6 @@
 # Learn Python: From Scratch to Advanced
 
-A complete, interactive path for learning Python: a beginner course from the first line of code, Python for data science (NumPy, pandas, Matplotlib, Seaborn, statistics, SQL, hypothesis testing, business KPIs, time series), the math behind data science and machine learning, machine learning from scratch, deep learning and LLMs, AI engineering (MCP, agents, context engineering, evals, fine-tuning, serving), system design (caching, sharding, queues, rate limiting, chat, feeds), interview prep, a DSA interview handbook, teacher-style Jupyter notebooks, and an in-browser IDE. Every lesson and answer can be watched running line by line, with the data drawn as pictures and a plain-English explanation of each step.
+A complete, interactive path for learning Python: a beginner course from the first line of code, Python for data science (NumPy, pandas, Matplotlib, Seaborn, statistics, SQL, hypothesis testing, business KPIs, time series), the math behind data science and machine learning, machine learning from scratch, deep learning and LLMs, AI engineering (MCP, agents, context engineering, evals, fine-tuning, serving), system design (caching, sharding, queues, rate limiting, chat, feeds), interview prep, behavioural interview prep, a DSA interview handbook, teacher-style Jupyter notebooks, and an in-browser IDE. Every lesson and answer can be watched running line by line, with the data drawn as pictures and a plain-English explanation of each step.
 
 **Live site:** https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/
 
@@ -195,6 +195,12 @@ The interview topics the other courses leave out. Each topic has a **Theory** ta
 | 3 | Classic Algorithms | sorting, inversions, KMP, union-find, Fenwick and segment trees, LFU cache, shortest paths, knapsack |
 | 4 | Statistics & A/B Testing | confidence intervals, z and t tests, sample size, peeking, Bayes, Simpson's paradox, funnels and retention |
 | 5 | ML System Design | a design framework, sizing, leakage, calibration, recommender, fraud and LLM assistant walkthroughs, rollout |
+
+## [Behavioural Interviews](behavioural/) — a guide, 66 questions and a practice drill
+
+The rounds that often decide the offer and the level. What interviewers score, the STAR method with a weak and a strong answer side by side, "tell me about yourself" for freshers, career switchers and experienced engineers, how to build a story bank, the project deep dive, tricky questions (weakness, failure, gaps, why leaving), questions to ask, salary and offers, role-specific questions for software, data and ML/AI engineers, and a two-week plan. The web page has a **timed practice drill** with a self-scoring checklist.
+
+**Open it:** https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/behavioural/ · [Read on GitHub](behavioural/README.md)
 
 ## [DSA Interview Handbook](handbook/) — 14 topics · 280 questions
 

@@ -1,6 +1,6 @@
 # Notebooks: learn it, practise it, explain it
 
-**86 notebooks · 655 lessons · 1720 practice questions.**
+**96 notebooks · 696 lessons · 1920 practice questions.**
 
 Every course on the site as Jupyter notebooks, written the way a teacher would explain it. **[Start here](00_START_HERE.ipynb)** ([open in Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/00_START_HERE.ipynb)).
 
@@ -155,3 +155,20 @@ No installation is needed: open any notebook in Colab and run the first cell. Or
 | 7 | [Fine-Tuning in Practice: LoRA, QLoRA & DPO](08-ai-engineering/07_fine-tuning.ipynb) | 5 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/08-ai-engineering/07_fine-tuning.ipynb) |
 | 8 | [Multimodal AI: Images, Documents & Speech](08-ai-engineering/08_multimodal.ipynb) | 5 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/08-ai-engineering/08_multimodal.ipynb) |
 | 9 | [Shipping AI Products: Streaming, Coding Agents & Guardrails](08-ai-engineering/09_shipping.ipynb) | 5 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/08-ai-engineering/09_shipping.ipynb) |
+
+## System Design
+
+10 notebooks · 41 lessons · 200 questions
+
+| # | Topic | Lessons | Questions | Open |
+|---|---|---|---|---|
+| 1 | [Requirements & Back-of-the-Envelope Estimation](09-system-design/01_estimation.ipynb) | 5 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/09-system-design/01_estimation.ipynb) |
+| 2 | [Load Balancing, Routing & CDNs](09-system-design/02_load-balancing.ipynb) | 5 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/09-system-design/02_load-balancing.ipynb) |
+| 3 | [Caching](09-system-design/03_caching.ipynb) | 4 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/09-system-design/03_caching.ipynb) |
+| 4 | [Databases, Replication & Sharding](09-system-design/04_databases.ipynb) | 5 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/09-system-design/04_databases.ipynb) |
+| 5 | [Consistency & Distributed Systems](09-system-design/05_consistency.ipynb) | 4 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/09-system-design/05_consistency.ipynb) |
+| 6 | [Queues & Streams](09-system-design/06_queues.ipynb) | 4 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/09-system-design/06_queues.ipynb) |
+| 7 | [APIs & Rate Limiting](09-system-design/07_apis.ipynb) | 4 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/09-system-design/07_apis.ipynb) |
+| 8 | [URL Shortener & ID Generation](09-system-design/08_ids.ipynb) | 3 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/09-system-design/08_ids.ipynb) |
+| 9 | [News Feed, Chat & Notifications](09-system-design/09_feeds_chat.ipynb) | 3 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/09-system-design/09_feeds_chat.ipynb) |
+| 10 | [Search, Storage, Reliability & the Interview](09-system-design/10_search_reliability.ipynb) | 4 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/09-system-design/10_search_reliability.ipynb) |

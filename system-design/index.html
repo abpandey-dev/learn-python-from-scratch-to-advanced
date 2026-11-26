@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>System Design</title>
+<meta name="description" content="System design from first principles: estimation, load balancing, caching, sharding, replication, consistency, queues, rate limiting, and full designs of a URL shortener, chat, news feed, notifications and search, with every building block simulated in Python.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="../handbook/style.css?v=7c2a2c4525">
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="#/"><span class="logo">SD</span><span>System Design</span></a>
+    <div class="search" role="search">
+      <input id="q" type="search" placeholder="Search topics and practice questions…  ( / )" autocomplete="off" aria-label="Search">
+      <div id="results" class="results" hidden></div>
+    </div>
+    <a class="top-link" href="../ide/" target="_blank" rel="noopener">✎ IDE</a>
+    <button id="theme" class="icon-btn" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">◐</button>
+  </div>
+</header>
+<main id="app" class="wrap" tabindex="-1"></main>
+<footer class="foot"><a href="../index.html">← Learn Python: From Scratch to Advanced</a> · Every answer here is run against its tests before publishing.</footer>
+<script>
+window.BOOK = {
+  title: "System Design", short: "System Design", unit: "practice questions",
+  lead: "Pass the system design round by understanding how the building blocks <b>actually behave</b>: estimation, <b>load balancing</b>, <b>caching</b>, <b>databases, replication and sharding</b>, <b>consistency</b>, <b>queues</b>, <b>APIs and rate limiting</b> — then put them together in full designs of a <b>URL shortener</b>, <b>chat</b>, <b>news feed</b>, <b>notifications</b> and <b>search</b>. Each topic has theory, lessons and <b>20 practice questions</b> that simulate the component in Python, answered step by step and again the efficient way.",
+  how: [["1 · Start with the numbers", "Every design starts with estimation. Do topic 1 first — interviewers notice when you size before you draw."],
+        ["2 · Learn the blocks", "Topics 2–7 are the components every design reuses. Each question makes you build or simulate one."],
+        ["3 · Practise full designs", "Topics 8–10 walk through the classic interview designs with the trade-offs interviewers ask about."],
+        ["4 · Say it out loud", "Use the framework in topic 10 and explain each design aloud in 35–45 minutes, like the real round."]],
+  searchHint: "Try “consistent hashing”, “LRU”, “quorum”, “token bucket”, “fan-out”, “base62”, “inverted index” or a question title.",
+  bruteLabel: "Step by step — plain Python", optLabel: "The efficient way",
+  watchBrute: "Watch the step-by-step version run", watchOpt: "Watch the efficient version run",
+  qsHeading: "{n} practice questions"
+};
+</script>
+<script src="data/index.js?v=3aa025e97b"></script>
+<script src="../handbook/app.js?v=b19d0d1088"></script>
+</body>
+</html>

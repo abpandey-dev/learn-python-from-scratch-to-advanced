@@ -1,0 +1,9 @@
+{
+  "title": "System Design",
+  "url": "https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/system-design/",
+  "unit": "practice questions with answers",
+  "summary": "Estimation, load balancing, caching, databases and sharding, consistency, queues, APIs and rate limiting, then full designs: URL shortener, chat, news feed, notifications, search, storage and reliability · every building block is simulated in plain Python so you can see how it behaves, then written the efficient way, both shown running step by step.",
+  "trace_brute": true,
+  "plain": true,
+  "prelude": "import math\nimport json\n\n"
+}

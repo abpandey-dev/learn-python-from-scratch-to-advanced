@@ -1,12 +1,12 @@
 # Learn Python: From Scratch to Advanced
 
-A complete, interactive path for learning Python: a beginner course from the first line of code, Python for data science (NumPy, pandas, Matplotlib, Seaborn, statistics, SQL, hypothesis testing, business KPIs, time series), the math behind data science and machine learning, machine learning from scratch, deep learning and LLMs, AI engineering (MCP, agents, context engineering, evals, fine-tuning, serving), interview prep, a DSA interview handbook, teacher-style Jupyter notebooks, and an in-browser IDE. Every lesson and answer can be watched running line by line, with the data drawn as pictures and a plain-English explanation of each step.
+A complete, interactive path for learning Python: a beginner course from the first line of code, Python for data science (NumPy, pandas, Matplotlib, Seaborn, statistics, SQL, hypothesis testing, business KPIs, time series), the math behind data science and machine learning, machine learning from scratch, deep learning and LLMs, AI engineering (MCP, agents, context engineering, evals, fine-tuning, serving), system design (caching, sharding, queues, rate limiting, chat, feeds), interview prep, a DSA interview handbook, teacher-style Jupyter notebooks, and an in-browser IDE. Every lesson and answer can be watched running line by line, with the data drawn as pictures and a plain-English explanation of each step.
 
 **Live site:** https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/
 
 **Companion course:** [Data Engineering from Scratch to Advanced](https://github.com/abpandey-dev/data-engineering-from-scratch-to-advanced) covers big data (Spark, Airflow, Kafka, lakehouses, dbt, cloud) and has a [SQL IDE](https://abpandey-dev.github.io/data-engineering-from-scratch-to-advanced/ide/sql.html) with automatically checked questions.
 
-## [Teacher's Notebooks](notebooks/) — 86 notebooks · 655 lessons · 1,720 questions
+## [Teacher's Notebooks](notebooks/) — 96 notebooks · 696 lessons · 1,920 questions
 
 Every course below as Jupyter notebooks, explained the way a teacher would. Open any of them in Google Colab with nothing to install. Each has lessons with worked numbers, practice cells that check your answer, hints and two answers hidden until you want them, advice on explaining each answer aloud, and interview questions to practise. **[Start here](notebooks/00_START_HERE.ipynb)**, or see the [full list](notebooks/README.md).
 
@@ -162,6 +162,25 @@ The skills current AI Engineer roles ask for, built from scratch so nothing is a
 | 7 | Fine-Tuning in Practice: LoRA, QLoRA & DPO | LoRA maths and merging, training memory, chat templates and loss masking, packing, data cleaning, DPO, forgetting |
 | 8 | Multimodal AI: Images, Documents & Speech | image tokens and patches, image blocks, OCR reading order, invoice validation, WER, subtitles, CLIP-style labels, voice latency |
 | 9 | Shipping AI Products | streaming (SSE), structured output, retries and fallbacks, coding-agent edits and sandboxing, guardrails, budgets, launch checklist |
+
+## [System Design](system-design/) — 10 topics · 200 practice questions
+
+What backend and senior interviews test, with every building block simulated in plain Python so you can watch it behave: an LRU cache evicting, a consistent-hash ring moving keys, a token bucket refilling, a Raft vote, a Kafka consumer crashing and redelivering. Each topic has a **Theory** tab, **lessons** that walk through full designs, and **20 practice questions**, answered step by step and again the efficient way.
+
+**Open it:** https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/system-design/ · [Full question list](system-design/README.md)
+
+| # | Topic | Covers |
+|---|---|---|
+| 1 | Requirements & Back-of-the-Envelope Estimation | the interview framework, QPS and peaks, storage, bandwidth, latency numbers, availability, servers, cache and shard counts |
+| 2 | Load Balancing, Routing & CDNs | round robin, weighted, least connections, power of two choices, consistent hashing, health checks, DNS, CDNs, regions, autoscaling, deploys |
+| 3 | Caching | LRU, LFU, TTL, cache-aside, write-through/back, stampedes, jitter, cache keys, invalidation, hot keys, sizing, HTTP caching |
+| 4 | Databases, Replication & Sharding | choosing a database, indexes, LSM trees, replication lag, quorums, read repair, hash vs range sharding, shard keys, locking |
+| 5 | Consistency & Distributed Systems | CAP/PACELC, Lamport and vector clocks, CRDTs, idempotency, 2PC vs sagas, majorities, Raft voting, leases, fencing, gossip, Merkle trees |
+| 6 | Queues & Streams | backlogs, Kafka partitions and consumer groups, lag, at-least-once, backoff and jitter, DLQs, backpressure, outbox, windows, watermarks |
+| 7 | APIs & Rate Limiting | fixed/sliding window, token and leaky bucket, pagination, idempotency keys, status codes, ETags, circuit breakers, gateways, webhooks |
+| 8 | URL Shortener & ID Generation | base62, hashing and collisions, ticket ranges, key-generation service, Snowflake IDs, ULIDs, birthday paradox, Bloom filters |
+| 9 | News Feed, Chat & Notifications | fan-out on write vs read, celebrities, ranking, chat sequencing, unread counts, presence, routing, digests, quiet hours |
+| 10 | Search, Storage, Reliability & the Interview | inverted index, TF-IDF, autocomplete, geohash, chunked uploads, erasure coding, SLOs, burn rates, retry storms, DR, the 45-minute plan |
 
 ## [Interview Prep](interview/) — 5 topics · 100 practice questions
 

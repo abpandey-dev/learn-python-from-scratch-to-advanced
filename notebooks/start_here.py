@@ -15,8 +15,8 @@ This set of notebooks takes you from your first line of Python to machine learni
 | This course covers well | You still need to do this yourself |
 |---|---|
 | Python, DSA patterns, SQL, statistics, ML, deep learning and LLMs | **Practise until you're quick.** Reading an answer isn't the same as producing one under pressure |
-| Over 1,700 questions with hints, tested answers and explanations | **Mock interviews with a real person,** because explaining while being watched is its own skill |
-| ML and LLM system design | **General backend system design** (scaling a chat app, say), covered here only for ML systems |
+| Over 1,900 questions with hints, tested answers and explanations | **Mock interviews with a real person,** because explaining while being watched is its own skill |
+| System design: estimation, caching, sharding, queues, rate limiting, chat, feeds, and ML/LLM systems | **Drawing and talking through a full design live**, which takes mock practice on top of the building blocks |
 | A method for unseen problems | **Behavioural preparation** using your own stories, and **company-specific research** |
 
 Do the work below and you'll be well prepared for most Python, data and ML interviews. You also won't need another site for practice questions until you've finished these, and that's a lot of practice.
@@ -38,10 +38,11 @@ Reading feels productive, but most of it fades within days. These habits are wha
 | Your goal | Follow these, in order | Rough time at 1 to 2 hours a day |
 |---|---|---|
 | **Complete beginner** | Python → DSA basics | 8 to 12 weeks |
-| **Software engineer interviews** | Python → DSA → Classic Algorithms → Advanced Python → SQL | 10 to 14 weeks |
+| **Software engineer interviews** | Python → DSA → Classic Algorithms → Advanced Python → SQL → System Design | 12 to 16 weeks |
+| **Backend / senior engineer** | Python → Advanced Python → SQL → System Design (all 10 topics) → DSA | 10 to 14 weeks |
 | **Data analyst or data scientist** | Python (including APIs & JSON) → Data Science (including SQL, hypothesis testing, KPIs and time series) → Statistics & A/B Testing → Math → ML | 14 to 18 weeks |
-| **ML engineer** | Python → Math → Data Science → ML (including recommenders, explainability and MLOps) → Deep Learning → DSA → ML System Design | 16 to 24 weeks |
-| **AI / LLM engineer** | Python → ML basics → Deep Learning & LLMs → AI Engineering (MCP, agents, context, evals, fine-tuning, serving) → Advanced Python → ML System Design → DSA | 16 to 22 weeks |
+| **ML engineer** | Python → Math → Data Science → ML (including recommenders, explainability and MLOps) → Deep Learning → DSA → System Design → ML System Design | 16 to 24 weeks |
+| **AI / LLM engineer** | Python → ML basics → Deep Learning & LLMs → AI Engineering (MCP, agents, context, evals, fine-tuning, serving) → Advanced Python → System Design → ML System Design → DSA | 16 to 22 weeks |
 
 These times are rough guides, so go at your own pace. Moving on when you can tick a notebook's checklist **without looking** matters more than sticking to the calendar.
 

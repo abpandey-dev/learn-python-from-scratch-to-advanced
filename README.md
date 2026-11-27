@@ -1,12 +1,12 @@
 # Learn Python: From Scratch to Advanced
 
-A complete, interactive path for learning Python: a beginner course from the first line of code, Python for data science (NumPy, pandas, Matplotlib, Seaborn, statistics, SQL, hypothesis testing, business KPIs, time series), the math behind data science and machine learning, machine learning from scratch, deep learning and LLMs, AI engineering (MCP, agents, context engineering, evals, fine-tuning, serving), system design (caching, sharding, queues, rate limiting, chat, feeds), an engineering toolbox (Git, pytest, linting and type hints, packaging, Linux, logging, Docker, CI/CD), interview prep, behavioural interview prep, a DSA interview handbook, teacher-style Jupyter notebooks, and an in-browser IDE. Every lesson and answer can be watched running line by line, with the data drawn as pictures and a plain-English explanation of each step.
+A complete, interactive path for learning Python: a beginner course from the first line of code, Python for data science (NumPy, pandas, Matplotlib, Seaborn, statistics, SQL, hypothesis testing, business KPIs, time series, Polars and DuckDB), the math behind data science and machine learning, machine learning from scratch, deep learning and LLMs, AI engineering (MCP, agents, context engineering, evals, fine-tuning, serving), system design (caching, sharding, queues, rate limiting, chat, feeds), an engineering toolbox (Git, pytest, linting and type hints, packaging, Linux, logging, Docker, CI/CD), interview prep, behavioural interview prep, a DSA interview handbook, teacher-style Jupyter notebooks, and an in-browser IDE. Every lesson and answer can be watched running line by line, with the data drawn as pictures and a plain-English explanation of each step.
 
 **Live site:** https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/
 
 **Companion course:** [Data Engineering from Scratch to Advanced](https://github.com/abpandey-dev/data-engineering-from-scratch-to-advanced) covers big data (Spark, Airflow, Kafka, lakehouses, dbt, cloud) and has a [SQL IDE](https://abpandey-dev.github.io/data-engineering-from-scratch-to-advanced/ide/sql.html) with automatically checked questions.
 
-## [Teacher's Notebooks](notebooks/) — 104 notebooks · 728 lessons · 2,080 questions
+## [Teacher's Notebooks](notebooks/) — 105 notebooks · 732 lessons · 2,100 questions
 
 Every course below as Jupyter notebooks, explained the way a teacher would. Open any of them in Google Colab with nothing to install. Each has lessons with worked numbers, practice cells that check your answer, hints and two answers hidden until you want them, advice on explaining each answer aloud, and interview questions to practise. **[Start here](notebooks/00_START_HERE.ipynb)**, or see the [full list](notebooks/README.md).
 
@@ -62,7 +62,7 @@ A full course for someone writing their first line of Python. Each topic has a *
 | 12 | Errors, Exceptions & Files | try / except / else / finally, custom exceptions, files, context managers |
 | 13 | Modules, Packages, APIs & JSON | imports, packages, pip and virtual environments, JSON, URLs, status codes, pagination, retries, rate limits, caching |
 
-## [Python for Data Science](data-science/) — 12 topics · 240 practice questions
+## [Python for Data Science](data-science/) — 13 topics · 260 practice questions
 
 The next step after the Python course: the libraries data analysts use every day. Each topic has a **Theory** tab, **Lessons** from basics to advanced, and **20 practice questions**. Every question is answered twice — a **brute-force answer in plain Python** (loops and lists, so you see what the library does for you) and an **optimal answer using the library** — and both can be watched running line by line, with arrays and DataFrames shown as tables and every chart drawn as an image. Chart questions are checked by inspecting the figure (number of bars, titles, labels, colours).
 
@@ -82,6 +82,7 @@ The next step after the Python course: the libraries data analysts use every day
 | 10 | Hypothesis Testing & Inference | p-values, z and t tests, paired and Welch tests, chi-square, ANOVA, Mann–Whitney, permutation tests, bootstrap, power, sample size, multiple testing |
 | 11 | EDA, Business KPIs & Storytelling | profiling, skew, Excel → pandas (VLOOKUP, pivot tables, SUMIFS, IF), funnels, cohorts, churn, ARPU, LTV, DAU/MAU, explaining a change, charts that tell a story |
 | 12 | Time Series & Forecasting | resampling, lags, rolling and exponential averages, seasonality, autocorrelation, baselines, smoothing, AR models, walk-forward validation, anomalies |
+| 13 | Polars & DuckDB | Polars expressions, lazy queries, window functions with `over`, joins and anti joins, pivot, rolling, strings, explode; DuckDB SQL on DataFrames, HAVING, running totals and LAG, QUALIFY, FILTER, ASOF joins, gap-filled dates |
 
 The IDE loads NumPy, pandas, Matplotlib and Seaborn automatically when your code imports them, shows the charts you draw, and checks data-science answers too.
 

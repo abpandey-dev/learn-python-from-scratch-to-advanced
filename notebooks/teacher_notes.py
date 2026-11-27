@@ -28,6 +28,7 @@ NOTES = {
  "hypothesis-testing": ("A hypothesis test is a courtroom: assume innocence (no effect) and only convict when the evidence would be very surprising otherwise.", "What a p-value is and isn't, choosing the right test, Type I vs II errors, power and sample size, peeking, and multiple comparisons."),
  "eda-kpis": ("EDA is a doctor's check-up for a dataset, and KPIs are its vital signs: take them the same way every time, and investigate when one moves.", "First steps with a new dataset, defining KPIs precisely, funnels, cohorts and churn, explaining a metric drop, and charts that make one point."),
  "time-series": ("A time series is a diary: order matters, yesterday explains today, and you can never read tomorrow's page while writing today's.", "Trend vs seasonality, why you can't shuffle, baselines, walk-forward validation, leakage in lag features, and MAE vs MAPE."),
+ "polars-duckdb": ("pandas is a trusty hand tool; Polars and DuckDB are power tools — same jobs, much faster, and they read only what they need.", "Polars expressions and lazy queries, window functions with over(), joins and anti joins, DuckDB SQL on files and DataFrames, QUALIFY, ASOF joins, and when to choose which tool."),
 },
 "math": {
  "arithmetic": ("Everything in machine learning eventually reduces to these operations, done millions of times.", "Rounding errors, logs and exponents as used in loss functions."),

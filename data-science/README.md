@@ -1,6 +1,6 @@
 # Python for Data Science
 
-12 topics · theory with 75 theory questions · 101 lessons from basics to advanced · 240 practice questions with answers · NumPy, Pandas, Matplotlib, Seaborn, statistics, SQL from Python, hypothesis testing, EDA and business KPIs, and time series forecasting · every question has a plain-Python brute-force answer and an optimal vectorised or library answer, both shown running line by line, with the charts they draw.
+13 topics · theory with 81 theory questions · 105 lessons from basics to advanced · 260 practice questions with answers · NumPy, Pandas, Matplotlib, Seaborn, statistics, SQL from Python, hypothesis testing, EDA and business KPIs, and time series forecasting · every question has a plain-Python brute-force answer and an optimal vectorised or library answer, both shown running line by line, with the charts they draw.
 
 **Live site:** https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/
 
@@ -20,6 +20,7 @@ Every solution is run against its test cases by `build.py` before the site is ge
 - [Hypothesis Testing & Inference](#hypothesis-testing-inference) — Decide whether a difference is real or luck: null and alternative hypotheses, p-values, z and t tests, chi-square, ANOVA, non-parametric and permutation tests, the bootstrap, power and sample size, effect sizes and multiple testing.
 - [EDA, Business KPIs & Storytelling](#eda-business-kpis-storytelling) — Explore a new dataset systematically, turn Excel habits (VLOOKUP, pivot tables, SUMIFS, IF) into pandas, and compute the metrics businesses run on: funnels, cohorts and retention, churn, ARPU, LTV, growth, Pareto shares and what drove a change.
 - [Time Series & Forecasting](#time-series-forecasting) — Work with data ordered in time: resampling and missing dates, lags, rolling and exponential averages, trend and seasonality, autocorrelation, baseline and smoothing forecasts, autoregression, honest time-based validation, forecast errors and anomaly flags.
+- [Polars & DuckDB](#polars-duckdb) — The modern, fast way to wrangle data on one machine: Polars expressions, lazy queries, window functions, joins, pivots, rolling windows, strings, nulls, lists and dedupe — and DuckDB SQL straight on your data: HAVING, running totals and LAG, QUALIFY, FILTER, ASOF joins, lists and gap-filled dates. Every answer is also shown in plain Python.
 
 ## NumPy Basics
 
@@ -320,6 +321,31 @@ Every solution is run against its test cases by `build.py` before the site is ge
 | 18 | [Turn a Series into a Supervised Dataset](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/time-series/turn-a-series-into-a-supervised-dataset) | Medium | Lag features |
 | 19 | [Autoregressive Forecast AR(1)](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/time-series/autoregressive-forecast-ar-1) | Hard | Regress on the past |
 | 20 | [Tune the Smoothing Factor](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/time-series/tune-the-smoothing-factor) | Medium | Simple exponential smoothing |
+
+## Polars & DuckDB
+
+| # | Question | Level | Concept |
+|---|---|---|---|
+| 1 | [Filter and Add a Column](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/polars-duckdb/filter-and-add-a-column) | Easy | Polars · filter, with_columns |
+| 2 | [Bucket Values With when/then](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/polars-duckdb/bucket-values-with-when-then) | Easy | Polars · conditional columns |
+| 3 | [Group and Aggregate](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/polars-duckdb/group-and-aggregate) | Easy | Polars · group_by().agg() |
+| 4 | [A Lazy Query](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/polars-duckdb/a-lazy-query) | Medium | Polars · lazy() and collect() |
+| 5 | [Rank Within Groups](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/polars-duckdb/rank-within-groups) | Medium | Polars · window expressions with over() |
+| 6 | [Left Joins and Anti Joins](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/polars-duckdb/left-joins-and-anti-joins) | Medium | Polars · join(how=...) |
+| 7 | [Pivot Long to Wide](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/polars-duckdb/pivot-long-to-wide) | Medium | Polars · pivot |
+| 8 | [A Rolling Average](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/polars-duckdb/a-rolling-average) | Easy | Polars · rolling_mean |
+| 9 | [Clean Strings and Extract Parts](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/polars-duckdb/clean-strings-and-extract-parts) | Easy | Polars · str namespace |
+| 10 | [Fill Gaps Per Group](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/polars-duckdb/fill-gaps-per-group) | Medium | Polars · forward_fill().over() |
+| 11 | [Explode Lists Into Rows](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/polars-duckdb/explode-lists-into-rows) | Easy | Polars · explode |
+| 12 | [Keep the Latest Version of Each Row](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/polars-duckdb/keep-the-latest-version-of-each-row) | Easy | Polars · sort + unique |
+| 13 | [SQL on Your Data With HAVING](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/polars-duckdb/sql-on-your-data-with-having) | Easy | DuckDB · GROUP BY … HAVING |
+| 14 | [Running Totals and Month-Over-Month](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/polars-duckdb/running-totals-and-month-over-month) | Medium | DuckDB · window functions, LAG |
+| 15 | [Top Row per Group With QUALIFY](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/polars-duckdb/top-row-per-group-with-qualify) | Medium | DuckDB · QUALIFY |
+| 16 | [Conditional Counts With FILTER](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/polars-duckdb/conditional-counts-with-filter) | Easy | DuckDB · aggregate FILTER |
+| 17 | [Match Each Trade to the Latest Quote](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/polars-duckdb/match-each-trade-to-the-latest-quote) | Medium | DuckDB · ASOF JOIN |
+| 18 | [Collect Values Into Lists](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/polars-duckdb/collect-values-into-lists) | Easy | DuckDB · list and string aggregates |
+| 19 | [Fill Missing Days With Zero](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/polars-duckdb/fill-missing-days-with-zero) | Medium | DuckDB · generate_series + LEFT JOIN |
+| 20 | [Run SQL on a pandas DataFrame](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/data-science/#/q/polars-duckdb/run-sql-on-a-pandas-dataframe) | Easy | DuckDB · query DataFrames in place |
 
 ## Build
 

@@ -40,7 +40,7 @@ Reading feels productive, but most of it fades within days. These habits are wha
 | **Complete beginner** | Python → DSA basics → Engineering Toolbox (Git, testing) | 10 to 14 weeks |
 | **Software engineer interviews** | Python → Engineering Toolbox → DSA → Classic Algorithms → Advanced Python → SQL → System Design | 14 to 18 weeks |
 | **Backend / senior engineer** | Python → Advanced Python → Engineering Toolbox → SQL → System Design (all 10 topics) → DSA | 12 to 16 weeks |
-| **Data analyst or data scientist** | Python (including APIs & JSON) → Data Science (including SQL, hypothesis testing, KPIs and time series) → Statistics & A/B Testing → Math → ML | 14 to 18 weeks |
+| **Data analyst or data scientist** | Python (including APIs & JSON) → Data Science (including SQL, hypothesis testing, KPIs, time series, Polars and DuckDB) → Statistics & A/B Testing → Math → ML | 14 to 18 weeks |
 | **ML engineer** | Python → Engineering Toolbox → Math → Data Science → ML (including recommenders, explainability and MLOps) → Deep Learning → DSA → System Design → ML System Design | 16 to 24 weeks |
 | **AI / LLM engineer** | Python → Engineering Toolbox → ML basics → Deep Learning & LLMs → AI Engineering (MCP, agents, context, evals, fine-tuning, serving) → Advanced Python → System Design → ML System Design → DSA | 16 to 22 weeks |
 

@@ -1,6 +1,6 @@
 # Notebooks: learn it, practise it, explain it
 
-**104 notebooks · 728 lessons · 2080 practice questions.**
+**105 notebooks · 732 lessons · 2100 practice questions.**
 
 Every course on the site as Jupyter notebooks, written the way a teacher would explain it. **[Start here](00_START_HERE.ipynb)** ([open in Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/00_START_HERE.ipynb)).
 
@@ -36,7 +36,7 @@ No installation is needed: open any notebook in Colab and run the first cell. Or
 
 ## Python for Data Science
 
-12 notebooks · 101 lessons · 240 questions
+13 notebooks · 105 lessons · 260 questions
 
 | # | Topic | Lessons | Questions | Open |
 |---|---|---|---|---|
@@ -52,6 +52,7 @@ No installation is needed: open any notebook in Colab and run the first cell. Or
 | 10 | [Hypothesis Testing & Inference](02-data-science/10_hypothesis-testing.ipynb) | 6 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/02-data-science/10_hypothesis-testing.ipynb) |
 | 11 | [EDA, Business KPIs & Storytelling](02-data-science/11_eda-kpis.ipynb) | 5 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/02-data-science/11_eda-kpis.ipynb) |
 | 12 | [Time Series & Forecasting](02-data-science/12_time-series.ipynb) | 6 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/02-data-science/12_time-series.ipynb) |
+| 13 | [Polars & DuckDB](02-data-science/13_polars-duckdb.ipynb) | 4 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/02-data-science/13_polars-duckdb.ipynb) |
 
 ## Math for Data Science & ML
 

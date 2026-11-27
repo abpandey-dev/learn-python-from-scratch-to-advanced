@@ -1,0 +1,9 @@
+{
+  "title": "Engineering Toolbox",
+  "url": "https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/engineering-toolbox/",
+  "unit": "practice questions with answers",
+  "summary": "The tools every engineering job assumes on day one: Git, testing with pytest, code quality and type hints, packaging and environments, the command line and Linux, logging and configuration, Docker and CI/CD with GitHub Actions · each tool's core idea is built in plain Python so you see what it really does, with the real commands in every lesson.",
+  "trace_brute": true,
+  "plain": true,
+  "prelude": "import math\nimport json\n\n"
+}

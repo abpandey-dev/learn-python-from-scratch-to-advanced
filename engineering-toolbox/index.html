@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Engineering Toolbox</title>
+<meta name="description" content="The engineering tools every job assumes: Git, pytest, code quality and type hints, packaging, the command line, logging and config, Docker and CI/CD, with each tool's core idea built in Python and the real commands alongside.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="../handbook/style.css?v=7c2a2c4525">
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="#/"><span class="logo">ET</span><span>Engineering Toolbox</span></a>
+    <div class="search" role="search">
+      <input id="q" type="search" placeholder="Search topics and practice questions…  ( / )" autocomplete="off" aria-label="Search">
+      <div id="results" class="results" hidden></div>
+    </div>
+    <a class="top-link" href="../ide/" target="_blank" rel="noopener">✎ IDE</a>
+    <button id="theme" class="icon-btn" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">◐</button>
+  </div>
+</header>
+<main id="app" class="wrap" tabindex="-1"></main>
+<footer class="foot"><a href="../index.html">← Learn Python: From Scratch to Advanced</a> · Every answer here is run against its tests before publishing.</footer>
+<script>
+window.BOOK = {
+  title: "Engineering Toolbox", short: "Engineering Toolbox", unit: "practice questions",
+  lead: "The skills every engineering job assumes on <b>day one</b>, and that take-home assignments quietly check: <b>Git</b>, <b>testing with pytest</b>, <b>code quality and type hints</b>, <b>packaging and environments</b>, the <b>command line and Linux</b>, <b>logging and configuration</b>, <b>Docker</b> and <b>CI/CD with GitHub Actions</b>. Each topic builds the tool's core idea in Python so you understand what it really does, shows the real commands, and has <b>20 practice questions</b> answered step by step and again the efficient way.",
+  how: [["1 · Learn what the tool does", "Each question rebuilds one idea — a commit hash, a merge, a test fixture, a layer cache — in a few lines of Python."],
+        ["2 · Run the real commands", "Every lesson shows the real git, pytest, uv, docker and GitHub Actions commands. Try them on your own machine."],
+        ["3 · Use them on a project", "Put one of your projects in Git with tests, type checks, a Dockerfile and a CI workflow. That's what reviewers look for."],
+        ["4 · Explain the why", "Interviewers ask why: why rebase, why pin versions, why multi-stage builds. The theory tabs have the short answers."]],
+  searchHint: "Try “merge base”, “fixture”, “mock”, “cyclomatic”, “version range”, “cron”, “log level”, “layer cache”, “matrix” or a question title.",
+  bruteLabel: "Step by step — plain Python", optLabel: "The efficient way",
+  watchBrute: "Watch the step-by-step version run", watchOpt: "Watch the efficient version run",
+  qsHeading: "{n} practice questions"
+};
+</script>
+<script src="data/index.js?v=edf89b5ec1"></script>
+<script src="../handbook/app.js?v=b19d0d1088"></script>
+</body>
+</html>

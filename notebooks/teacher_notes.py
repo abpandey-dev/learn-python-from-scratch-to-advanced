@@ -114,4 +114,14 @@ NOTES = {
  "feeds_chat": ("Push fan-out is delivering a newspaper to every subscriber's door; pull is everyone walking to the newsstand. Celebrities need the newsstand.", "Fan-out on write vs read, hybrid feeds, ranking, chat ordering and sync, presence, routing to connection servers, notifications."),
  "search_reliability": ("An inverted index is the index at the back of a book: look up the word, get the pages — no reading every page.", "Inverted indexes and ranking, autocomplete, geohash, chunked file storage, SLOs and error budgets, retry storms, and the interview framework."),
 },
+"engineering-toolbox": {
+ "git": ("Git is a time machine for your folder: every commit is a saved snapshot, and branches are bookmarks you can move.", "Commits and branches, merge vs rebase, resolving conflicts, revert vs reset, good pull requests and what to do if you commit a secret."),
+ "testing": ("Tests are a safety net under a trapeze: you can try bold moves because a mistake gets caught before it hits the ground.", "Writing pytest tests, fixtures and scopes, mocks at the boundaries, coverage and its limits, flaky tests and the test pyramid."),
+ "code-quality": ("A linter is a spell-checker for code: it reads without running anything and underlines the likely mistakes.", "Linters and formatters, type hints vs runtime validation, mutable defaults, bare except, complexity and how to roll rules out to an old codebase."),
+ "packaging": ("A lockfile is a shopping receipt: it lists exactly which version of everything you bought, so anyone can buy the same again.", "Virtual environments, pyproject.toml vs lockfiles, version specifiers, dependency conflicts, vulnerability checks and keeping config and secrets out of code."),
+ "cli-linux": ("The shell is a workshop of small tools; pipes are the conveyor belt between them.", "Navigating and searching files, pipes, permissions, exit codes, environment variables, processes and signals, and writing your own CLI."),
+ "logging": ("Logs are a flight recorder, metrics are the dashboard dials, and alerts are the warning lights.", "Log levels and structured logs, never logging secrets, correlation ids, counters vs gauges vs histograms, retries, health checks and alert fatigue."),
+ "docker": ("An image is a recipe plus all its ingredients, sealed in a box; a container is the meal being cooked from it.", "Writing a good Dockerfile, layer caching, multi-stage builds, volumes, compose, secrets, and liveness vs readiness in Kubernetes."),
+ "cicd": ("CI is an automatic inspector at the factory door: nothing leaves until it passes every check.", "What a pipeline should check, speeding it up, caching and matrices, secrets and least privilege, deploying through environments and rolling back."),
+},
 }

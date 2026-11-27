@@ -1,12 +1,12 @@
 # Learn Python: From Scratch to Advanced
 
-A complete, interactive path for learning Python: a beginner course from the first line of code, Python for data science (NumPy, pandas, Matplotlib, Seaborn, statistics, SQL, hypothesis testing, business KPIs, time series), the math behind data science and machine learning, machine learning from scratch, deep learning and LLMs, AI engineering (MCP, agents, context engineering, evals, fine-tuning, serving), system design (caching, sharding, queues, rate limiting, chat, feeds), interview prep, behavioural interview prep, a DSA interview handbook, teacher-style Jupyter notebooks, and an in-browser IDE. Every lesson and answer can be watched running line by line, with the data drawn as pictures and a plain-English explanation of each step.
+A complete, interactive path for learning Python: a beginner course from the first line of code, Python for data science (NumPy, pandas, Matplotlib, Seaborn, statistics, SQL, hypothesis testing, business KPIs, time series), the math behind data science and machine learning, machine learning from scratch, deep learning and LLMs, AI engineering (MCP, agents, context engineering, evals, fine-tuning, serving), system design (caching, sharding, queues, rate limiting, chat, feeds), an engineering toolbox (Git, pytest, linting and type hints, packaging, Linux, logging, Docker, CI/CD), interview prep, behavioural interview prep, a DSA interview handbook, teacher-style Jupyter notebooks, and an in-browser IDE. Every lesson and answer can be watched running line by line, with the data drawn as pictures and a plain-English explanation of each step.
 
 **Live site:** https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/
 
 **Companion course:** [Data Engineering from Scratch to Advanced](https://github.com/abpandey-dev/data-engineering-from-scratch-to-advanced) covers big data (Spark, Airflow, Kafka, lakehouses, dbt, cloud) and has a [SQL IDE](https://abpandey-dev.github.io/data-engineering-from-scratch-to-advanced/ide/sql.html) with automatically checked questions.
 
-## [Teacher's Notebooks](notebooks/) — 96 notebooks · 696 lessons · 1,920 questions
+## [Teacher's Notebooks](notebooks/) — 104 notebooks · 728 lessons · 2,080 questions
 
 Every course below as Jupyter notebooks, explained the way a teacher would. Open any of them in Google Colab with nothing to install. Each has lessons with worked numbers, practice cells that check your answer, hints and two answers hidden until you want them, advice on explaining each answer aloud, and interview questions to practise. **[Start here](notebooks/00_START_HERE.ipynb)**, or see the [full list](notebooks/README.md).
 
@@ -181,6 +181,23 @@ What backend and senior interviews test, with every building block simulated in 
 | 8 | URL Shortener & ID Generation | base62, hashing and collisions, ticket ranges, key-generation service, Snowflake IDs, ULIDs, birthday paradox, Bloom filters |
 | 9 | News Feed, Chat & Notifications | fan-out on write vs read, celebrities, ranking, chat sequencing, unread counts, presence, routing, digests, quiet hours |
 | 10 | Search, Storage, Reliability & the Interview | inverted index, TF-IDF, autocomplete, geohash, chunked uploads, erasure coding, SLOs, burn rates, retry storms, DR, the 45-minute plan |
+
+## [Engineering Toolbox](engineering-toolbox/) — 8 topics · 160 practice questions
+
+The tools every engineering job assumes on day one, and that take-home assignments quietly check. Each question rebuilds one idea a tool relies on — a Git blob hash, a merge base, a pytest fixture order, an unused-import check with `ast`, a dependency resolver, a cron schedule, a Prometheus histogram, a Docker layer cache, a GitHub Actions matrix — and every lesson shows the real commands. Each topic has a **Theory** tab, **lessons** and **20 practice questions**, answered step by step and again the efficient way.
+
+**Open it:** https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/engineering-toolbox/ · [Full question list](engineering-toolbox/README.md)
+
+| # | Topic | Covers |
+|---|---|---|
+| 1 | Git: From Commits to Pull Requests | blob hashes, history, merge base, fast-forward, diffs, three-way merge, .gitignore, conventional commits, bisect, rebase, cherry-pick, blame, branch protection, secret scanning |
+| 2 | Testing With pytest | approx, parametrize, fixtures and scopes, mocks, line and branch coverage, mutation testing, flaky tests, property-based shrinking, affected tests, snapshots, test smells |
+| 3 | Code Quality, Linting & Type Hints | linters built with `ast`: unused imports, complexity, naming, mutable defaults, swallowed errors, docstring and type-hint coverage, import sorting, duplicates, layer rules |
+| 4 | Packages, Versions & Environments | version ordering, specifiers, dependency resolution, pyproject.toml, markers, wheel tags, lockfile diffs, vulnerabilities, config precedence, .env files, PATH |
+| 5 | The Command Line & Linux | permissions and chmod, globs, paths, argparse, exit codes, grep/cut/sort/uniq, cron, du, find, log parsing, variable expansion, processes and signals, quoting |
+| 6 | Logging, Metrics & Errors in Production | levels and formats, JSON logs, rotation, request tracing, redaction, retries, exception chaining, Prometheus histograms and rates, health checks, feature flags, alerts |
+| 7 | Docker & Containers | image references, layer caching, multi-stage builds, .dockerignore, Dockerfile linting, compose order and variables, restart policies, volumes, Kubernetes QoS and probes |
+| 8 | CI/CD With GitHub Actions | matrices, job graphs, path filters, caching, concurrency, step conditions, check status, workflow validation, sharding, changelogs, environments, DORA, least privilege |
 
 ## [Interview Prep](interview/) — 5 topics · 100 practice questions
 

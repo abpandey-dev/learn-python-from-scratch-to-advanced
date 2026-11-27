@@ -31,7 +31,8 @@ COURSES = [("python-course", "01-python", "Python from Scratch"),
            ("handbook", "06-dsa-interview", "DSA Interview Handbook"),
            ("interview", "07-interview-prep", "Interview Prep"),
            ("ai-engineering", "08-ai-engineering", "AI Engineering"),
-           ("system-design", "09-system-design", "System Design")]
+           ("system-design", "09-system-design", "System Design"),
+           ("engineering-toolbox", "10-engineering-toolbox", "Engineering Toolbox")]
 
 
 # ---------- HTML to Markdown ----------

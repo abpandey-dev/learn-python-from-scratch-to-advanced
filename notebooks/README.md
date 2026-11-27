@@ -1,6 +1,6 @@
 # Notebooks: learn it, practise it, explain it
 
-**96 notebooks · 696 lessons · 1920 practice questions.**
+**104 notebooks · 728 lessons · 2080 practice questions.**
 
 Every course on the site as Jupyter notebooks, written the way a teacher would explain it. **[Start here](00_START_HERE.ipynb)** ([open in Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/00_START_HERE.ipynb)).
 
@@ -172,3 +172,18 @@ No installation is needed: open any notebook in Colab and run the first cell. Or
 | 8 | [URL Shortener & ID Generation](09-system-design/08_ids.ipynb) | 3 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/09-system-design/08_ids.ipynb) |
 | 9 | [News Feed, Chat & Notifications](09-system-design/09_feeds_chat.ipynb) | 3 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/09-system-design/09_feeds_chat.ipynb) |
 | 10 | [Search, Storage, Reliability & the Interview](09-system-design/10_search_reliability.ipynb) | 4 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/09-system-design/10_search_reliability.ipynb) |
+
+## Engineering Toolbox
+
+8 notebooks · 32 lessons · 160 questions
+
+| # | Topic | Lessons | Questions | Open |
+|---|---|---|---|---|
+| 1 | [Git: From Commits to Pull Requests](10-engineering-toolbox/01_git.ipynb) | 4 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/10-engineering-toolbox/01_git.ipynb) |
+| 2 | [Testing With pytest](10-engineering-toolbox/02_testing.ipynb) | 4 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/10-engineering-toolbox/02_testing.ipynb) |
+| 3 | [Code Quality, Linting & Type Hints](10-engineering-toolbox/03_code-quality.ipynb) | 4 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/10-engineering-toolbox/03_code-quality.ipynb) |
+| 4 | [Packages, Versions & Environments](10-engineering-toolbox/04_packaging.ipynb) | 4 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/10-engineering-toolbox/04_packaging.ipynb) |
+| 5 | [The Command Line & Linux](10-engineering-toolbox/05_cli-linux.ipynb) | 4 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/10-engineering-toolbox/05_cli-linux.ipynb) |
+| 6 | [Logging, Metrics & Errors in Production](10-engineering-toolbox/06_logging.ipynb) | 4 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/10-engineering-toolbox/06_logging.ipynb) |
+| 7 | [Docker & Containers](10-engineering-toolbox/07_docker.ipynb) | 4 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/10-engineering-toolbox/07_docker.ipynb) |
+| 8 | [CI/CD With GitHub Actions](10-engineering-toolbox/08_cicd.ipynb) | 4 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/10-engineering-toolbox/08_cicd.ipynb) |

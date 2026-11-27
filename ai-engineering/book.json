@@ -2,7 +2,7 @@
   "title": "AI Engineering",
   "url": "https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ai-engineering/",
   "unit": "practice questions with answers",
-  "summary": "MCP, multi-agent systems, context engineering and memory, reasoning models, LLM serving, observability and evals, fine-tuning with LoRA and DPO, multimodal AI, and shipping AI products · every idea is built from scratch in plain Python so you can see inside it, then written the efficient way, both shown running step by step.",
+  "summary": "MCP, multi-agent systems, context engineering and memory, reasoning models, LLM serving, observability and evals, fine-tuning with LoRA and DPO, multimodal AI, shipping AI products, and vector databases with LangChain and LlamaIndex · every idea is built from scratch in plain Python so you can see inside it, then written the efficient way, both shown running step by step.",
   "trace_brute": true,
   "plain": true,
   "prelude": "import math\nimport json\nimport numpy as np\n\n"

@@ -1,6 +1,6 @@
 # AI Engineering
 
-9 topics · theory with 54 theory questions · 47 lessons from basics to advanced · 180 practice questions with answers · MCP, multi-agent systems, context engineering and memory, reasoning models, LLM serving, observability and evals, fine-tuning with LoRA and DPO, multimodal AI, and shipping AI products · every idea is built from scratch in plain Python so you can see inside it, then written the efficient way, both shown running step by step.
+10 topics · theory with 60 theory questions · 51 lessons from basics to advanced · 200 practice questions with answers · MCP, multi-agent systems, context engineering and memory, reasoning models, LLM serving, observability and evals, fine-tuning with LoRA and DPO, multimodal AI, shipping AI products, and vector databases with LangChain and LlamaIndex · every idea is built from scratch in plain Python so you can see inside it, then written the efficient way, both shown running step by step.
 
 **Live site:** https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ai-engineering/
 
@@ -17,6 +17,7 @@ Every solution is run against its test cases by `build.py` before the site is ge
 - [Fine-Tuning in Practice: LoRA, QLoRA & DPO](#fine-tuning-in-practice-lora-qlora-dpo) — Adapt open models yourself: when to fine-tune, LoRA maths and merging, memory for full vs LoRA vs QLoRA, chat templates and loss masking, packing, cleaning and de-duplicating data, schedules and batch sizes, preference data and the DPO loss, early stopping and checking for forgetting.
 - [Multimodal AI: Images, Documents & Speech](#multimodal-ai-images-documents-speech) — Build with images, PDFs and audio: how images become tokens and what they cost, resizing and patches, sending images to an API, document AI (reading order, tables, field validation, page routing), speech (framing, chunking, WER, subtitles), CLIP-style zero-shot labels, voice-agent latency and video frames.
 - [Shipping AI Products: Streaming, Coding Agents & Guardrails](#shipping-ai-products-streaming-coding-agents-guardrails) — Turn a prototype into a product: streaming responses and tool input, structured output and repair, retries and fallbacks, coding-agent tools (edits, diffs, the test-fix loop), sandboxing and computer use, semantic caching, budgets, guardrails, prompt versioning and cost planning.
+- [Vector Databases & AI Frameworks](#vector-databases-ai-frameworks) — The infrastructure under RAG and agents: distance metrics, IVF, product and scalar quantization, HNSW graph search, post-filtering, upserts and deletes, memory sizing, sharded search, hybrid scoring, metadata filters, vector search in SQL, embedding and semantic caches, model migrations — and how LangChain-style frameworks compose chains, split text, template prompts and retrieve.
 
 ## MCP: Connecting AI to Tools and Data
 
@@ -242,6 +243,31 @@ Every solution is run against its test cases by `build.py` before the site is ge
 | 18 | [What Will This Feature Cost per Month?](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ai-engineering/#/q/shipping/what-will-this-feature-cost-per-month) | Easy | Planning |
 | 19 | [Ready to Launch?](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ai-engineering/#/q/shipping/ready-to-launch) | Easy | Release checklist |
 | 20 | [Send Chunks to the Browser](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ai-engineering/#/q/shipping/send-chunks-to-the-browser) | Easy | Server-side streaming |
+
+## Vector Databases & AI Frameworks
+
+| # | Question | Level | Concept |
+|---|---|---|---|
+| 1 | [Cosine, Dot or Euclidean?](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ai-engineering/#/q/vector-db/cosine-dot-or-euclidean) | Easy | Metrics rank differently |
+| 2 | [Search an IVF Index](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ai-engineering/#/q/vector-db/search-an-ivf-index) | Medium | Inverted file lists |
+| 3 | [Product Quantization](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ai-engineering/#/q/vector-db/product-quantization) | Hard | Compress vectors to a few bytes |
+| 4 | [Scalar Quantization to int8](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ai-engineering/#/q/vector-db/scalar-quantization-to-int8) | Medium | 4× smaller, tiny error |
+| 5 | [Greedy Search on an HNSW Graph](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ai-engineering/#/q/vector-db/greedy-search-on-an-hnsw-graph) | Medium | Walk towards the query |
+| 6 | [Post-Filtering Loses Results](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ai-engineering/#/q/vector-db/post-filtering-loses-results) | Easy | Filter before or after the search? |
+| 7 | [Upserts, Deletes and Compaction](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ai-engineering/#/q/vector-db/upserts-deletes-and-compaction) | Medium | Segments and tombstones |
+| 8 | [How Much Memory Will the Index Need?](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ai-engineering/#/q/vector-db/how-much-memory-will-the-index-need) | Easy | Size before you buy |
+| 9 | [Search Across Shards](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ai-engineering/#/q/vector-db/search-across-shards) | Medium | Scatter, then merge |
+| 10 | [Hybrid Search With a Weighted Blend](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ai-engineering/#/q/vector-db/hybrid-search-with-a-weighted-blend) | Medium | Keyword + vector scores |
+| 11 | [Evaluate Metadata Filters](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ai-engineering/#/q/vector-db/evaluate-metadata-filters) | Medium | Chroma/Qdrant-style where clauses |
+| 12 | [Vector Search in SQL](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ai-engineering/#/q/vector-db/vector-search-in-sql) | Medium | pgvector-style queries with DuckDB |
+| 13 | [Cache Embeddings](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ai-engineering/#/q/vector-db/cache-embeddings) | Easy | Never pay twice for the same text |
+| 14 | [Plan an Embedding Model Migration](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ai-engineering/#/q/vector-db/plan-an-embedding-model-migration) | Medium | Re-embed without downtime |
+| 15 | [Compose a Chain Like LangChain](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ai-engineering/#/q/vector-db/compose-a-chain-like-langchain) | Medium | prompt | llm | parser |
+| 16 | [Split Text Recursively](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ai-engineering/#/q/vector-db/split-text-recursively) | Medium | RecursiveCharacterTextSplitter |
+| 17 | [Fill a Prompt Template Safely](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ai-engineering/#/q/vector-db/fill-a-prompt-template-safely) | Easy | PromptTemplate variables |
+| 18 | [A Semantic Cache for LLM Answers](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ai-engineering/#/q/vector-db/a-semantic-cache-for-llm-answers) | Medium | Reuse answers to similar questions |
+| 19 | [Choose a Vector Store](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ai-engineering/#/q/vector-db/choose-a-vector-store) | Easy | Match the tool to the job |
+| 20 | [A Retriever With a Score Threshold](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ai-engineering/#/q/vector-db/a-retriever-with-a-score-threshold) | Easy | search_type='similarity_score_threshold' |
 
 ## Build
 

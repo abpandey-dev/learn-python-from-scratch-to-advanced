@@ -1,6 +1,6 @@
 # Notebooks: learn it, practise it, explain it
 
-**105 notebooks · 732 lessons · 2100 practice questions.**
+**106 notebooks · 736 lessons · 2120 practice questions.**
 
 Every course on the site as Jupyter notebooks, written the way a teacher would explain it. **[Start here](00_START_HERE.ipynb)** ([open in Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/00_START_HERE.ipynb)).
 
@@ -143,7 +143,7 @@ No installation is needed: open any notebook in Colab and run the first cell. Or
 
 ## AI Engineering
 
-9 notebooks · 47 lessons · 180 questions
+10 notebooks · 51 lessons · 200 questions
 
 | # | Topic | Lessons | Questions | Open |
 |---|---|---|---|---|
@@ -156,6 +156,7 @@ No installation is needed: open any notebook in Colab and run the first cell. Or
 | 7 | [Fine-Tuning in Practice: LoRA, QLoRA & DPO](08-ai-engineering/07_fine-tuning.ipynb) | 5 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/08-ai-engineering/07_fine-tuning.ipynb) |
 | 8 | [Multimodal AI: Images, Documents & Speech](08-ai-engineering/08_multimodal.ipynb) | 5 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/08-ai-engineering/08_multimodal.ipynb) |
 | 9 | [Shipping AI Products: Streaming, Coding Agents & Guardrails](08-ai-engineering/09_shipping.ipynb) | 5 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/08-ai-engineering/09_shipping.ipynb) |
+| 10 | [Vector Databases & AI Frameworks](08-ai-engineering/10_vector-db.ipynb) | 4 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/08-ai-engineering/10_vector-db.ipynb) |
 
 ## System Design
 

@@ -1,12 +1,12 @@
 # Learn Python: From Scratch to Advanced
 
-A complete, interactive path for learning Python: a beginner course from the first line of code, Python for data science (NumPy, pandas, Matplotlib, Seaborn, statistics, SQL, hypothesis testing, business KPIs, time series, Polars and DuckDB), the math behind data science and machine learning, machine learning from scratch, deep learning and LLMs, AI engineering (MCP, agents, context engineering, evals, fine-tuning, serving), system design (caching, sharding, queues, rate limiting, chat, feeds), an engineering toolbox (Git, pytest, linting and type hints, packaging, Linux, logging, Docker, CI/CD), interview prep, behavioural interview prep, a DSA interview handbook, teacher-style Jupyter notebooks, and an in-browser IDE. Every lesson and answer can be watched running line by line, with the data drawn as pictures and a plain-English explanation of each step.
+A complete, interactive path for learning Python: a beginner course from the first line of code, Python for data science (NumPy, pandas, Matplotlib, Seaborn, statistics, SQL, hypothesis testing, business KPIs, time series, Polars and DuckDB), the math behind data science and machine learning, machine learning from scratch, deep learning and LLMs, AI engineering (MCP, agents, context engineering, evals, fine-tuning, serving, vector databases, LangChain and LlamaIndex), system design (caching, sharding, queues, rate limiting, chat, feeds), an engineering toolbox (Git, pytest, linting and type hints, packaging, Linux, logging, Docker, CI/CD), interview prep, behavioural interview prep, a DSA interview handbook, teacher-style Jupyter notebooks, and an in-browser IDE. Every lesson and answer can be watched running line by line, with the data drawn as pictures and a plain-English explanation of each step.
 
 **Live site:** https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/
 
 **Companion course:** [Data Engineering from Scratch to Advanced](https://github.com/abpandey-dev/data-engineering-from-scratch-to-advanced) covers big data (Spark, Airflow, Kafka, lakehouses, dbt, cloud) and has a [SQL IDE](https://abpandey-dev.github.io/data-engineering-from-scratch-to-advanced/ide/sql.html) with automatically checked questions.
 
-## [Teacher's Notebooks](notebooks/) — 105 notebooks · 732 lessons · 2,100 questions
+## [Teacher's Notebooks](notebooks/) — 106 notebooks · 736 lessons · 2,120 questions
 
 Every course below as Jupyter notebooks, explained the way a teacher would. Open any of them in Google Colab with nothing to install. Each has lessons with worked numbers, practice cells that check your answer, hints and two answers hidden until you want them, advice on explaining each answer aloud, and interview questions to practise. **[Start here](notebooks/00_START_HERE.ipynb)**, or see the [full list](notebooks/README.md).
 
@@ -146,7 +146,7 @@ See inside modern AI by building it, then learn to build real products with it. 
 | 9 | RAG & Retrieval | chunking, BM25, vector search, approximate indexes, fusion, MMR, re-ranking, recall, MRR, nDCG |
 | 10 | Agents, Evals & Production | agent loops, guard rails, evaluation, fair comparison, latency, cost, safety, quantisation, LoRA, drift |
 
-## [AI Engineering](ai-engineering/) — 9 topics · 180 practice questions
+## [AI Engineering](ai-engineering/) — 10 topics · 200 practice questions
 
 The skills current AI Engineer roles ask for, built from scratch so nothing is a black box, with the matching real SDK and library code in every lesson. Each topic has a **Theory** tab, **lessons** and **20 practice questions**, answered step by step and again the efficient way. Model calls are simulated with small deterministic stand-ins, so everything runs in the browser with no API key.
 
@@ -163,6 +163,7 @@ The skills current AI Engineer roles ask for, built from scratch so nothing is a
 | 7 | Fine-Tuning in Practice: LoRA, QLoRA & DPO | LoRA maths and merging, training memory, chat templates and loss masking, packing, data cleaning, DPO, forgetting |
 | 8 | Multimodal AI: Images, Documents & Speech | image tokens and patches, image blocks, OCR reading order, invoice validation, WER, subtitles, CLIP-style labels, voice latency |
 | 9 | Shipping AI Products | streaming (SSE), structured output, retries and fallbacks, coding-agent edits and sandboxing, guardrails, budgets, launch checklist |
+| 10 | Vector Databases & AI Frameworks | metrics and normalisation, IVF, product and int8 quantization, HNSW search, post-filtering, segments, memory sizing, sharded and hybrid search, metadata filters, SQL vector search, embedding and semantic caches, model migration, LangChain-style chains, recursive splitting, prompt templates, retrievers |
 
 ## [System Design](system-design/) — 10 topics · 200 practice questions
 

@@ -102,6 +102,7 @@ NOTES = {
  "fine-tuning": ("LoRA is sticky notes on a textbook: the book stays the same, the notes change how you read it, and you can swap notes per student.", "When to fine-tune vs prompt vs RAG, LoRA maths and rank, QLoRA memory, loss masking, DPO, leakage and forgetting."),
  "multimodal": ("To a model, an image is a grid of word-like patches and audio is a strip of short frames — all of them end up as tokens.", "Image token cost, patches, document extraction and validation, WER, voice latency budgets and zero-shot labels."),
  "shipping": ("Shipping AI is building the guard rails, seat belts and dashboard around the engine — the model is only one part of the car.", "Streaming, retries and fallbacks, structured output, coding-agent edits and sandboxing, guardrails, budgets and launch checklists."),
+ "vector-db": ("A vector index is a library arranged by meaning: similar books sit on nearby shelves, so you only walk a few aisles instead of the whole building.", "Metrics and normalisation, HNSW, IVF and quantization trade-offs, filtering, sizing and sharding, pgvector vs dedicated stores, model migrations, and what LangChain or LlamaIndex do underneath."),
 },
 "system-design": {
  "estimation": ("Estimation is packing for a trip: you don't need the exact weight of every shirt, just enough to know whether it fits in one bag or needs a truck.", "Clarifying requirements, QPS and peak, storage and bandwidth, latency numbers, nines of availability, and what each number means for the design."),

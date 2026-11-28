@@ -1,6 +1,6 @@
 # Notebooks: learn it, practise it, explain it
 
-**106 notebooks · 736 lessons · 2120 practice questions.**
+**107 notebooks · 741 lessons · 2140 practice questions.**
 
 Every course on the site as Jupyter notebooks, written the way a teacher would explain it. **[Start here](00_START_HERE.ipynb)** ([open in Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/00_START_HERE.ipynb)).
 
@@ -73,7 +73,7 @@ No installation is needed: open any notebook in Colab and run the first cell. Or
 
 ## Machine Learning from Scratch
 
-13 notebooks · 119 lessons · 260 questions
+14 notebooks · 124 lessons · 280 questions
 
 | # | Topic | Lessons | Questions | Open |
 |---|---|---|---|---|
@@ -90,6 +90,7 @@ No installation is needed: open any notebook in Colab and run the first cell. Or
 | 11 | [Recommender Systems](04-machine-learning/11_recommenders.ipynb) | 6 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/04-machine-learning/11_recommenders.ipynb) |
 | 12 | [Explainability, Fairness & Imbalanced Data](04-machine-learning/12_explainability-fairness.ipynb) | 7 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/04-machine-learning/12_explainability-fairness.ipynb) |
 | 13 | [MLOps: Deploying & Monitoring Models](04-machine-learning/13_mlops.ipynb) | 6 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/04-machine-learning/13_mlops.ipynb) |
+| 14 | [Applied ML: Features, Anomalies, Text & Vision](04-machine-learning/14_applied-ml.ipynb) | 5 | 20 | [Colab](https://colab.research.google.com/github/abpandey-dev/learn-python-from-scratch-to-advanced/blob/main/notebooks/04-machine-learning/14_applied-ml.ipynb) |
 
 ## Deep Learning & LLMs
 

@@ -1,6 +1,6 @@
 # Machine Learning from Scratch
 
-13 topics · theory with 81 theory questions · 119 lessons from basics to advanced · 260 practice questions with answers · Data preparation, linear and logistic regression, model evaluation, k-NN, Naive Bayes and SVM, decision trees, ensembles, clustering, tuning and pipelines, neural networks, recommender systems, explainability and fairness, and MLOps · every algorithm is built from scratch in plain Python and NumPy, then done again with scikit-learn, both shown running step by step.
+14 topics · theory with 87 theory questions · 124 lessons from basics to advanced · 280 practice questions with answers · Data preparation, linear and logistic regression, model evaluation, k-NN, Naive Bayes and SVM, decision trees, ensembles, clustering, tuning and pipelines, neural networks, recommender systems, explainability and fairness, MLOps, and applied ML (feature engineering, anomaly detection, text and computer vision) · every algorithm is built from scratch in plain Python and NumPy, then done again with scikit-learn, both shown running step by step.
 
 **Live site:** https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/
 
@@ -21,6 +21,7 @@ Every solution is run against its test cases by `build.py` before the site is ge
 - [Recommender Systems](#recommender-systems) — Suggest what a user will like next: popularity baselines, similarity measures, user- and item-based collaborative filtering, content-based TF-IDF, matrix factorisation, market-basket rules, cold start, and the ranking metrics used to judge recommenders.
 - [Explainability, Fairness & Imbalanced Data](#explainability-fairness-imbalanced-data) — Open the black box and check it is fair: linear contributions and Shapley values, permutation importance, partial dependence, counterfactuals, fairness metrics across groups, calibration, thresholds and class weights for imbalanced data, and privacy basics.
 - [MLOps: Deploying & Monitoring Models](#mlops-deploying-monitoring-models) — Take a model from notebook to production: experiment tracking and a model registry, data validation gates, saving and serving models, request validation, batch scoring, canary and shadow releases, latency budgets, point-in-time features, drift detection (PSI, KS), monitoring and retraining triggers.
+- [Applied ML: Features, Anomalies, Text & Vision](#applied-ml-features-anomalies-text-vision) — The practical skills between textbook ML and real projects: one-hot and target encoding, date features, filtering redundant features, spotting leakage, four ways to find anomalies and how to score them, judging a t-SNE/UMAP picture, bag-of-words, Naive Bayes text classification, n-grams, entity tagging and scoring, and the core of object detection — IoU, non-max suppression, matching detections — plus what transfer learning actually trains.
 
 ## ML Basics & Data Preparation
 
@@ -346,6 +347,31 @@ Every solution is run against its test cases by `build.py` before the site is ge
 | 18 | [Pre-Deployment Checks](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/mlops/pre-deployment-checks) | Medium | CI for models |
 | 19 | [How Many Replicas?](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/mlops/how-many-replicas) | Medium | Capacity planning |
 | 20 | [Scale Serving Data With Training Statistics](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/mlops/scale-serving-data-with-training-statistics) | Easy | Fit once, reuse |
+
+## Applied ML: Features, Anomalies, Text & Vision
+
+| # | Question | Level | Concept |
+|---|---|---|---|
+| 1 | [One-Hot Encode Categories](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/applied-ml/one-hot-encode-categories) | Easy | Including unseen values |
+| 2 | [Smoothed Target Encoding](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/applied-ml/smoothed-target-encoding) | Medium | Turn categories into numbers carefully |
+| 3 | [Features From Dates](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/applied-ml/features-from-dates) | Easy | Day of week, month, weekend, recency |
+| 4 | [Drop Useless and Redundant Features](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/applied-ml/drop-useless-and-redundant-features) | Medium | Variance and correlation filters |
+| 5 | [Spot Leaky Features](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/applied-ml/spot-leaky-features) | Medium | Too good to be true |
+| 6 | [Z-Score Outliers](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/applied-ml/z-score-outliers) | Easy | Distance from the mean in standard deviations |
+| 7 | [Tukey's IQR Fences](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/applied-ml/tukeys-iqr-fences) | Easy | The box-plot rule |
+| 8 | [Robust Z-Scores With the MAD](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/applied-ml/robust-z-scores-with-the-mad) | Medium | Outliers that don't hide each other |
+| 9 | [Anomalies by Distance to Neighbours](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/applied-ml/anomalies-by-distance-to-neighbours) | Medium | k-NN anomaly scores |
+| 10 | [Score an Anomaly Detector](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/applied-ml/score-an-anomaly-detector) | Medium | Precision@k and average precision |
+| 11 | [Can You Trust That t-SNE Plot?](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/applied-ml/can-you-trust-that-t-sne-plot) | Hard | Trustworthiness of an embedding |
+| 12 | [Bag of Words](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/applied-ml/bag-of-words) | Easy | Text → a count matrix |
+| 13 | [Classify Text With Naive Bayes](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/applied-ml/classify-text-with-naive-bayes) | Medium | A strong, fast baseline |
+| 14 | [Most Common Bigrams](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/applied-ml/most-common-bigrams) | Easy | Two-word phrases |
+| 15 | [Tag Entities With BIO Labels](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/applied-ml/tag-entities-with-bio-labels) | Easy | How NER data is labelled |
+| 16 | [Score Entity Predictions](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/applied-ml/score-entity-predictions) | Medium | Exact-match precision, recall and F1 |
+| 17 | [Intersection over Union](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/applied-ml/intersection-over-union) | Easy | How much two boxes overlap |
+| 18 | [Non-Maximum Suppression](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/applied-ml/non-maximum-suppression) | Medium | One box per object |
+| 19 | [Match Detections to Ground Truth](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/applied-ml/match-detections-to-ground-truth) | Medium | TP, FP, FN for detection |
+| 20 | [Transfer Learning: What Gets Trained?](https://abpandey-dev.github.io/learn-python-from-scratch-to-advanced/ml/#/q/applied-ml/transfer-learning-what-gets-trained) | Easy | Freeze the backbone, train the head |
 
 ## Build
 

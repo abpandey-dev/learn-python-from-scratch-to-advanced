@@ -6,7 +6,7 @@ A complete, interactive path for learning Python: a beginner course from the fir
 
 **Companion course:** [Data Engineering from Scratch to Advanced](https://github.com/abpandey-dev/data-engineering-from-scratch-to-advanced) covers big data (Spark, Airflow, Kafka, lakehouses, dbt, cloud) and has a [SQL IDE](https://abpandey-dev.github.io/data-engineering-from-scratch-to-advanced/ide/sql.html) with automatically checked questions.
 
-## [Teacher's Notebooks](notebooks/) — 106 notebooks · 736 lessons · 2,120 questions
+## [Teacher's Notebooks](notebooks/) — 107 notebooks · 741 lessons · 2,140 questions
 
 Every course below as Jupyter notebooks, explained the way a teacher would. Open any of them in Google Colab with nothing to install. Each has lessons with worked numbers, practice cells that check your answer, hints and two answers hidden until you want them, advice on explaining each answer aloud, and interview questions to practise. **[Start here](notebooks/00_START_HERE.ipynb)**, or see the [full list](notebooks/README.md).
 
@@ -105,7 +105,7 @@ The math that data science and ML are built on, taught from zero for someone who
 | 9 | Probability | counting, conditional probability, Bayes, independence, expected value | reasoning under uncertainty, Naive Bayes |
 | 10 | Distributions & Information | binomial, Poisson, normal, CLT, entropy, cross-entropy, KL, softmax, log-loss, MLE | loss functions and probabilistic models |
 
-## [Machine Learning from Scratch](ml/) — 13 topics · 260 practice questions
+## [Machine Learning from Scratch](ml/) — 14 topics · 280 practice questions
 
 Learn how machine learning works by building every algorithm yourself, then using scikit-learn. Each topic has a **Theory** tab, **9–12 detailed lessons** that work real examples by hand, step by step, and **20 practice questions**. Each question is answered twice: **from scratch** in plain Python and NumPy, and **with scikit-learn** (or NumPy and SciPy where the library has no direct function). Both can be watched running line by line. Take the Math course first if vectors and derivatives are new.
 
@@ -126,6 +126,7 @@ Learn how machine learning works by building every algorithm yourself, then usin
 | 11 | Recommender Systems | popularity, cosine and Pearson similarity, user- and item-based CF, TF-IDF content, matrix factorisation, basket rules, cold start, NDCG |
 | 12 | Explainability, Fairness & Imbalanced Data | linear contributions, Shapley values, permutation importance, partial dependence, counterfactuals, fairness metrics, calibration, class weights, thresholds, privacy |
 | 13 | MLOps: Deploying & Monitoring Models | experiment tracking, model registry, data gates, serialisation, request validation, canary and shadow releases, latency, point-in-time joins, PSI and KS drift, retraining |
+| 14 | Applied ML: Features, Anomalies, Text & Vision | one-hot and target encoding, date features, feature filtering, leakage, z-score/IQR/MAD/k-NN anomalies and how to score them, t-SNE trustworthiness, bag of words, Naive Bayes text classification, bigrams, BIO tagging and entity F1, IoU, non-max suppression, detection matching, transfer learning |
 
 ## [Deep Learning & LLMs](deep-learning/) — 10 topics · 200 practice questions
 

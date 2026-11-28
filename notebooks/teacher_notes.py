@@ -56,6 +56,7 @@ NOTES = {
  "recommenders": ("A recommender is a well-read friend: it remembers what you liked, notices who has similar taste, and suggests what they enjoyed next.", "User- vs item-based CF, cold start, implicit feedback, matrix factorisation, two-stage retrieval and ranking, and ranking metrics like NDCG."),
  "explainability-fairness": ("Explaining a model is like a teacher showing the marking scheme: every point awarded can be traced, and the same rules apply to every student.", "Permutation importance vs SHAP, counterfactuals, fairness definitions and their trade-offs, proxies, calibration, and handling class imbalance."),
  "mlops": ("Shipping a model is like opening a restaurant: the recipe (model) is only the start; you need a kitchen that runs every day, health checks, and a way to change the menu safely.", "Batch vs real-time serving, training-serving skew, model registry and rollback, canary and shadow releases, drift detection, and when to retrain."),
+ "applied-ml": ("Textbook ML hands you clean numbers; real projects hand you messy columns, rare anomalies, raw text and images — this is the toolkit for turning them into something a model can use.", "Encoding and leakage, choosing an anomaly method and scoring it, reading t-SNE plots safely, text baselines vs transformers, NER scoring, IoU, NMS, mAP and transfer learning."),
 },
 "deep-learning": {
  "tensors": ("A tensor is a labelled stack of numbers. Most deep-learning bugs are shape bugs, so track the shape on every line.", "Shapes, broadcasting, parameter counts and activations."),
